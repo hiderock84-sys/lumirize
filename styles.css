@@ -965,6 +965,7 @@ a {
   box-shadow: var(--shadow-card);
 }
 
+.support-card h2,
 .support-card h3 {
   margin-top: 0;
   margin-bottom: 0.4rem;
