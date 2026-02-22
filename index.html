@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja" data-theme="luxury">
+<html lang="ja" data-theme="bright">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,7 +13,7 @@
       content="株式会社ルミライズ, LUMIRIZE, 依存症回復, 刑務所出所者支援, 住宅提供, ナイトケアハウス, 相模原ダルク"
     />
     <meta name="author" content="株式会社ルミライズ" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#15283a" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="株式会社ルミライズ - LUMIRIZE Inc." />
     <meta
@@ -112,10 +112,10 @@
     </header>
 
     <div class="theme-switcher" role="group" aria-label="デザインテーマ切替">
-      <button type="button" class="theme-chip" data-theme-option="bright" aria-pressed="false">
+      <button type="button" class="theme-chip" data-theme-option="bright" aria-pressed="true">
         Bright
       </button>
-      <button type="button" class="theme-chip" data-theme-option="luxury" aria-pressed="true">
+      <button type="button" class="theme-chip" data-theme-option="luxury" aria-pressed="false">
         Luxury
       </button>
     </div>
@@ -152,6 +152,18 @@
             <a href="#contact" class="btn btn-primary">無料相談を予約</a>
             <a href="#about" class="btn btn-secondary">私たちについて</a>
           </div>
+
+          <figure class="hero-photo-card reveal">
+            <img
+              src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1600&q=80"
+              alt="明るく清潔な集合住宅の外観イメージ"
+              width="1600"
+              height="900"
+              loading="eager"
+              decoding="async"
+            />
+            <figcaption>Housing First: まず安心できる住まいを確保し、回復と再出発を支えます。</figcaption>
+          </figure>
 
           <div class="stats-grid reveal" aria-label="支援実績ハイライト">
             <article class="stat-card">
@@ -202,6 +214,31 @@
                 再犯防止とは、人の尊厳を支え続けること。可能性を信じ、社会に戻れる場所を整えることです。私たちは、過去ではなく未来を見つめます。
               </p>
             </article>
+          </div>
+
+          <div class="photo-grid reveal" aria-label="支援現場のイメージ">
+            <figure class="photo-card">
+              <img
+                src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1400&q=80"
+                alt="スタッフが面談し生活相談を行うイメージ"
+                width="1400"
+                height="933"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>専門スタッフによる個別相談と伴走支援</figcaption>
+            </figure>
+            <figure class="photo-card">
+              <img
+                src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1400&q=80"
+                alt="新しい住まいで生活を整えるイメージ"
+                width="1400"
+                height="933"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>住まいの安定が就労・治療継続の土台になります</figcaption>
+            </figure>
           </div>
 
           <div class="info-grid reveal">
@@ -318,33 +355,33 @@
                   <tbody>
                     <tr>
                       <th scope="row">入居審査</th>
-                      <td>厳格な審査・保証人必須</td>
-                      <td>柔軟な対応・個別相談可能</td>
+                      <td data-label="一般的な賃貸">厳格な審査・保証人必須</td>
+                      <td data-label="ルミライズ">柔軟な対応・個別相談可能</td>
                     </tr>
                     <tr>
                       <th scope="row">生活サポート</th>
-                      <td>なし</td>
-                      <td>定期面談・24時間相談体制</td>
+                      <td data-label="一般的な賃貸">なし</td>
+                      <td data-label="ルミライズ">定期面談・24時間相談体制</td>
                     </tr>
                     <tr>
                       <th scope="row">関連機関連携</th>
-                      <td>なし</td>
-                      <td>医療・福祉・就労支援機関と連携</td>
+                      <td data-label="一般的な賃貸">なし</td>
+                      <td data-label="ルミライズ">医療・福祉・就労支援機関と連携</td>
                     </tr>
                     <tr>
                       <th scope="row">緊急時対応</th>
-                      <td>限定的</td>
-                      <td>24時間緊急連絡体制</td>
+                      <td data-label="一般的な賃貸">限定的</td>
+                      <td data-label="ルミライズ">24時間緊急連絡体制</td>
                     </tr>
                     <tr>
                       <th scope="row">プライバシー保護</th>
-                      <td>標準的</td>
-                      <td>厳格な情報管理・守秘義務</td>
+                      <td data-label="一般的な賃貸">標準的</td>
+                      <td data-label="ルミライズ">厳格な情報管理・守秘義務</td>
                     </tr>
                     <tr>
                       <th scope="row">長期的フォロー</th>
-                      <td>なし</td>
-                      <td>入居後も継続的にサポート</td>
+                      <td data-label="一般的な賃貸">なし</td>
+                      <td data-label="ルミライズ">入居後も継続的にサポート</td>
                     </tr>
                   </tbody>
                 </table>
@@ -414,6 +451,18 @@
             <h2 id="support-title">私たちの支援内容</h2>
             <p>住まいの提供だけでなく、尊厳を守りながら生活全般を支える包括的サポートを行います。</p>
           </header>
+
+          <figure class="support-visual reveal">
+            <img
+              src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1600&q=80"
+              alt="支援者と利用者が協力し再出発を目指すイメージ"
+              width="1600"
+              height="900"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>医療・福祉・就労支援機関と連携し、孤立を防ぎながら生活再建を進めます。</figcaption>
+          </figure>
 
           <div class="support-grid reveal">
             <article class="support-card">

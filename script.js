@@ -1,11 +1,11 @@
 (() => {
   const themeRoot = document.documentElement;
   const themeButtons = document.querySelectorAll("[data-theme-option]");
-  const THEME_STORAGE_KEY = "lumirize-theme";
+  const THEME_STORAGE_KEY = "lumirize-theme-v2";
   const AVAILABLE_THEMES = new Set(["bright", "luxury"]);
 
   const applyTheme = (requestedTheme) => {
-    const theme = AVAILABLE_THEMES.has(requestedTheme) ? requestedTheme : "luxury";
+    const theme = AVAILABLE_THEMES.has(requestedTheme) ? requestedTheme : "bright";
     themeRoot.setAttribute("data-theme", theme);
 
     themeButtons.forEach((button) => {
@@ -33,7 +33,7 @@
     }
   })();
 
-  applyTheme(queryTheme || savedTheme || "luxury");
+  applyTheme(queryTheme || savedTheme || "bright");
 
   themeButtons.forEach((button) => {
     button.addEventListener("click", () => {
