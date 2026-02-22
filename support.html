@@ -79,9 +79,17 @@
     <main id="main-content">
       <section class="section support" id="top" aria-labelledby="support-title">
         <div class="container">
-          <header class="section-heading support-heading-media reveal" aria-describedby="support-heading-copy">
+          <header class="section-heading reveal">
+            <p class="eyebrow">Support</p>
+            <h1 id="support-title">私たちの支援内容</h1>
+            <p>
+              住まいの提供だけでなく、尊厳を守りながら生活全般を支える包括的サポートを行います。依存症や出所後支援の知見を土台に、LGBTQ+、DV被害（特に母子）、外国人労働者支援まで視野に入れた実務運用を進めています。
+            </p>
+          </header>
+
+          <section class="support-grid-stage reveal" aria-label="支援内容の詳細">
             <img
-              class="support-heading-photo"
+              class="support-grid-photo"
               src="https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1800&q=80"
               alt="支援者と利用者が信頼関係を築き再出発を進めるイメージ"
               width="1600"
@@ -89,79 +97,73 @@
               loading="lazy"
               decoding="async"
             />
-            <div class="support-heading-overlay" aria-hidden="true"></div>
-            <div class="support-heading-content">
-              <p class="eyebrow">Support</p>
-              <h1 id="support-title">私たちの支援内容</h1>
-              <p id="support-heading-copy">
-                住まいの提供だけでなく、尊厳を守りながら生活全般を支える包括的サポートを行います。依存症や出所後支援の知見を土台に、LGBTQ+、DV被害（特に母子）、外国人労働者支援まで視野に入れた実務運用を進めています。
-              </p>
-              <p class="support-heading-subline">医療・福祉・就労支援に加え、司法・行政とも連携し、住まいを失わせない実務支援を継続します。</p>
-            </div>
-          </header>
+            <div class="support-grid-overlay" aria-hidden="true"></div>
 
-          <div class="support-grid reveal">
-            <article class="support-card">
-              <h2>住居確保・入居調整支援</h2>
-              <p>相談初期の段階で住まいの空白をつくらないことを最優先に、入居調整と生活基盤の確保を支援します。</p>
-              <ul class="check-list">
-                <li>緊急性を踏まえた住居選定</li>
-                <li>入居時の実務手続き支援</li>
-                <li>生活開始直後の定着支援</li>
-                <li>プログラム参加有無にかかわらない住居対応</li>
-              </ul>
-            </article>
-            <article class="support-card">
-              <h2>生活相談・回復伴走支援</h2>
-              <p>専門スタッフが定期面談を行い、生活課題・再発不安・孤立リスクの低減に伴走します。</p>
-              <ul class="check-list">
-                <li>定期的な個別面談</li>
-                <li>24時間緊急連絡体制</li>
-                <li>プライバシー保護と情報管理</li>
-                <li>生活再建計画の見直し支援</li>
-              </ul>
-            </article>
-            <article class="support-card">
-              <h2>就労支援・社会復帰サポート</h2>
-              <p>就労支援機関と連携し、仕事探しから就労後の定着まで継続的に支えます。</p>
-              <ul class="check-list">
-                <li>就労支援機関との連携</li>
-                <li>職業訓練情報の提供</li>
-                <li>履歴書・面接サポート</li>
-                <li>就労後のフォローアップ</li>
-              </ul>
-            </article>
-            <article class="support-card">
-              <h2>医療・福祉・司法・行政連携</h2>
-              <p>医療機関、福祉事務所、保護観察所、自治体窓口等と連携し、重複や空白のない支援設計を行います。</p>
-              <ul class="check-list">
-                <li>医療・福祉機関との連携調整</li>
-                <li>保護観察等の制度連携</li>
-                <li>生活保護申請サポート</li>
-                <li>行政手続きの同行支援</li>
-              </ul>
-            </article>
-            <article class="support-card">
-              <h2>緊急シェルター・安全確保支援</h2>
-              <p>DV被害や緊急避難が必要なケースでは、特に母親と子どもの安全を最優先に、住まいと生活再建を一体で支援します。</p>
-              <ul class="check-list">
-                <li>緊急避難先の確保</li>
-                <li>母子の安全確保支援</li>
-                <li>関係機関との迅速な連携</li>
-                <li>中長期の住居移行サポート</li>
-              </ul>
-            </article>
-            <article class="support-card">
-              <h2>多文化・多様性支援</h2>
-              <p>LGBTQ+当事者、外国人労働者・移民等の方々に対し、文化や制度の違いを踏まえた住居起点の支援を実施します。</p>
-              <ul class="check-list">
-                <li>多様な背景に配慮した住居対応</li>
-                <li>制度・法律情報のわかりやすい案内</li>
-                <li>言語・文化差を踏まえた相談支援</li>
-                <li>国際的サポート体制の整備</li>
-              </ul>
-            </article>
-          </div>
+            <div class="support-grid">
+              <article class="support-card">
+                <h2>住居確保・入居調整支援</h2>
+                <p>相談初期の段階で住まいの空白をつくらないことを最優先に、入居調整と生活基盤の確保を支援します。</p>
+                <ul class="check-list">
+                  <li>緊急性を踏まえた住居選定</li>
+                  <li>入居時の実務手続き支援</li>
+                  <li>生活開始直後の定着支援</li>
+                  <li>プログラム参加有無にかかわらない住居対応</li>
+                </ul>
+              </article>
+              <article class="support-card">
+                <h2>生活相談・回復伴走支援</h2>
+                <p>専門スタッフが定期面談を行い、生活課題・再発不安・孤立リスクの低減に伴走します。</p>
+                <ul class="check-list">
+                  <li>定期的な個別面談</li>
+                  <li>24時間緊急連絡体制</li>
+                  <li>プライバシー保護と情報管理</li>
+                  <li>生活再建計画の見直し支援</li>
+                </ul>
+              </article>
+              <article class="support-card">
+                <h2>就労支援・社会復帰サポート</h2>
+                <p>就労支援機関と連携し、仕事探しから就労後の定着まで継続的に支えます。</p>
+                <ul class="check-list">
+                  <li>就労支援機関との連携</li>
+                  <li>職業訓練情報の提供</li>
+                  <li>履歴書・面接サポート</li>
+                  <li>就労後のフォローアップ</li>
+                </ul>
+              </article>
+              <article class="support-card">
+                <h2>医療・福祉・司法・行政連携</h2>
+                <p>医療機関、福祉事務所、保護観察所、自治体窓口等と連携し、重複や空白のない支援設計を行います。</p>
+                <ul class="check-list">
+                  <li>医療・福祉機関との連携調整</li>
+                  <li>保護観察等の制度連携</li>
+                  <li>生活保護申請サポート</li>
+                  <li>行政手続きの同行支援</li>
+                </ul>
+              </article>
+              <article class="support-card">
+                <h2>緊急シェルター・安全確保支援</h2>
+                <p>DV被害や緊急避難が必要なケースでは、特に母親と子どもの安全を最優先に、住まいと生活再建を一体で支援します。</p>
+                <ul class="check-list">
+                  <li>緊急避難先の確保</li>
+                  <li>母子の安全確保支援</li>
+                  <li>関係機関との迅速な連携</li>
+                  <li>中長期の住居移行サポート</li>
+                </ul>
+              </article>
+              <article class="support-card">
+                <h2>多文化・多様性支援</h2>
+                <p>LGBTQ+当事者、外国人労働者・移民等の方々に対し、文化や制度の違いを踏まえた住居起点の支援を実施します。</p>
+                <ul class="check-list">
+                  <li>多様な背景に配慮した住居対応</li>
+                  <li>制度・法律情報のわかりやすい案内</li>
+                  <li>言語・文化差を踏まえた相談支援</li>
+                  <li>国際的サポート体制の整備</li>
+                </ul>
+              </article>
+            </div>
+
+            <p class="support-grid-caption">住居提供で終わらせず、医療・福祉・就労・司法・行政連携まで見据えた実務支援を継続します。</p>
+          </section>
         </div>
       </section>
 
