@@ -15,7 +15,7 @@
     if (mobileConsult) {
       const isMobileViewport = window.innerWidth <= 767;
       const menuOpen = globalNav ? globalNav.classList.contains("open") : false;
-      const showConsult = isMobileViewport && window.scrollY > 340 && !menuOpen;
+      const showConsult = isMobileViewport && window.scrollY > 720 && !menuOpen;
       mobileConsult.classList.toggle("visible", showConsult);
     }
   };
