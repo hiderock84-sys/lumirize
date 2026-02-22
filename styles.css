@@ -636,6 +636,7 @@ a {
   margin-bottom: 2rem;
 }
 
+.section-heading h1,
 .section-heading h2 {
   margin: 0.8rem 0 0.9rem;
   font-family: var(--font-brand);
@@ -647,6 +648,10 @@ a {
   margin: 0;
   color: var(--color-text-muted);
   max-width: 68ch;
+}
+
+.section-heading p + p {
+  margin-top: 0.68rem;
 }
 
 .about-narrative {
@@ -664,6 +669,7 @@ a {
   box-shadow: var(--shadow-card);
 }
 
+.about-block h2,
 .about-block h3 {
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -716,6 +722,7 @@ a {
   box-shadow: var(--shadow-card);
 }
 
+.message-card h2,
 .message-card h3 {
   margin-top: 0;
   margin-bottom: 0.28rem;
@@ -742,6 +749,56 @@ a {
 
 .message-card p {
   margin-bottom: 0;
+}
+
+.about-tagline {
+  margin: 0;
+  color: var(--color-primary-soft);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+}
+
+.about-divider {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin: 1.1rem 0;
+}
+
+.profile-banner {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 1rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--gradient-surface);
+  padding: 1rem 1.1rem;
+  text-decoration: none;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-banner:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-primary-soft);
+  box-shadow: var(--shadow-soft);
+}
+
+.profile-banner-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary-soft);
+  font-weight: 700;
+}
+
+.profile-banner strong {
+  font-size: 1.12rem;
+}
+
+.profile-banner span:last-child {
+  color: var(--color-text-muted);
+  font-size: 0.93rem;
 }
 
 .philosophy-grid {
