@@ -1009,9 +1009,13 @@ a {
 }
 
 .support-grid-stage .support-card {
-  background: linear-gradient(152deg, rgba(245, 248, 251, 0.76), rgba(236, 242, 247, 0.72));
+  background: linear-gradient(152deg, rgba(245, 248, 251, 0.68), rgba(236, 242, 247, 0.64));
   border-color: rgba(208, 216, 226, 0.62);
   backdrop-filter: blur(2px);
+}
+
+.support-grid-stage .support-card:nth-child(-n + 2) {
+  background: linear-gradient(152deg, rgba(245, 248, 251, 0.6), rgba(236, 242, 247, 0.56));
 }
 
 .support-card h2,
@@ -1033,7 +1037,7 @@ a {
 
 .support-grid-stage .support-card p,
 .support-grid-stage .support-card li {
-  color: rgba(70, 75, 84, 0.86);
+  color: rgba(70, 75, 84, 0.9);
 }
 
 .stories {
