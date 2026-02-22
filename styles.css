@@ -546,8 +546,15 @@ a {
 
 .message-card h3 {
   margin-top: 0;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.28rem;
   font-size: 1.35rem;
+}
+
+.message-theme {
+  margin: 0 0 0.35rem;
+  color: var(--color-primary-soft);
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 .leader-name {
