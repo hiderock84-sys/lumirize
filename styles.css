@@ -144,14 +144,15 @@ a {
   left: 0;
   right: 0;
   z-index: 100;
+  background: transparent;
   transition: background-color 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease;
   border-bottom: 1px solid transparent;
 }
 
 .site-header.scrolled {
-  background: var(--header-scrolled-bg);
-  border-color: var(--color-border-strong);
-  backdrop-filter: blur(14px);
+  background: transparent;
+  border-color: transparent;
+  backdrop-filter: none;
 }
 
 .header-inner {
