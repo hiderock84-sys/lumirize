@@ -1,4 +1,43 @@
 (() => {
+  const themeRoot = document.documentElement;
+  const themeButtons = document.querySelectorAll("[data-theme-option]");
+  const THEME_STORAGE_KEY = "lumirize-theme";
+  const AVAILABLE_THEMES = new Set(["bright", "luxury"]);
+
+  const applyTheme = (requestedTheme) => {
+    const theme = AVAILABLE_THEMES.has(requestedTheme) ? requestedTheme : "luxury";
+    themeRoot.setAttribute("data-theme", theme);
+
+    themeButtons.forEach((button) => {
+      const isActive = button.dataset.themeOption === theme;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+  };
+
+  const savedTheme = (() => {
+    try {
+      return window.localStorage.getItem(THEME_STORAGE_KEY);
+    } catch {
+      return null;
+    }
+  })();
+
+  applyTheme(savedTheme || "luxury");
+
+  themeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const selectedTheme = button.dataset.themeOption;
+      if (!selectedTheme) return;
+      applyTheme(selectedTheme);
+      try {
+        window.localStorage.setItem(THEME_STORAGE_KEY, selectedTheme);
+      } catch {
+        // Ignore storage errors in private mode.
+      }
+    });
+  });
+
   const header = document.getElementById("site-header");
   const menuToggle = document.getElementById("menu-toggle");
   const globalNav = document.getElementById("global-nav");
