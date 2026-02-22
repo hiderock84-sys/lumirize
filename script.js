@@ -23,7 +23,17 @@
     }
   })();
 
-  applyTheme(savedTheme || "luxury");
+  const queryTheme = (() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const candidate = params.get("theme");
+      return candidate && AVAILABLE_THEMES.has(candidate) ? candidate : null;
+    } catch {
+      return null;
+    }
+  })();
+
+  applyTheme(queryTheme || savedTheme || "luxury");
 
   themeButtons.forEach((button) => {
     button.addEventListener("click", () => {
