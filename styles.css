@@ -811,6 +811,11 @@ a {
   color: var(--color-text-muted);
 }
 
+.service-card > .btn {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
 .support {
   padding-top: 5rem;
 }

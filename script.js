@@ -51,7 +51,7 @@
   const header = document.getElementById("site-header");
   const menuToggle = document.getElementById("menu-toggle");
   const globalNav = document.getElementById("global-nav");
-  const navLinks = globalNav ? globalNav.querySelectorAll("a[href^='#']") : [];
+  const navLinks = globalNav ? globalNav.querySelectorAll("a") : [];
   const backToTop = document.getElementById("back-to-top");
   const mobileConsult = document.querySelector(".mobile-consult");
 
