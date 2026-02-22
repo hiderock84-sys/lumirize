@@ -22,6 +22,8 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -253,6 +255,7 @@ a {
   margin: 0 0 2rem;
   color: rgba(255, 255, 255, 0.84);
   font-size: clamp(0.98rem, 2vw, 1.1rem);
+  line-height: 1.82;
 }
 
 .hero-cta {
@@ -871,6 +874,7 @@ a {
   gap: 1rem;
   font: inherit;
   font-weight: 700;
+  line-height: 1.55;
 }
 
 .faq-plus {
@@ -1264,7 +1268,7 @@ textarea.invalid {
 .back-to-top {
   position: fixed;
   right: 1rem;
-  bottom: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom));
   width: 2.75rem;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -1291,8 +1295,8 @@ textarea.invalid {
 .mobile-consult {
   position: fixed;
   left: 50%;
-  bottom: 1rem;
-  transform: translateX(-50%);
+  bottom: calc(0.9rem + env(safe-area-inset-bottom));
+  transform: translate(-50%, 12px);
   z-index: 60;
   text-decoration: none;
   background: linear-gradient(135deg, var(--color-primary), var(--color-primary-soft));
@@ -1303,6 +1307,15 @@ textarea.invalid {
   font-weight: 700;
   box-shadow: 0 13px 25px rgba(0, 180, 182, 0.35);
   display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.mobile-consult.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
 }
 
 .reveal {
@@ -1370,8 +1383,12 @@ textarea.invalid {
 }
 
 @media (max-width: 767px) {
+  body {
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+  }
+
   .section {
-    padding: 5.2rem 0;
+    padding: 4.7rem 0;
   }
 
   .menu-toggle {
@@ -1394,6 +1411,8 @@ textarea.invalid {
     pointer-events: none;
     transform: translateY(-6px);
     transition: opacity 0.22s ease, transform 0.22s ease;
+    max-height: min(76vh, 540px);
+    overflow-y: auto;
   }
 
   .global-nav.open {
@@ -1419,8 +1438,60 @@ textarea.invalid {
 
   .hero {
     min-height: auto;
-    padding-top: 6.7rem;
-    padding-bottom: 4.4rem;
+    padding-top: 6rem;
+    padding-bottom: 3.3rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 10.8vw, 2.8rem);
+    line-height: 1.16;
+    text-wrap: balance;
+  }
+
+  .hero h1::after {
+    font-size: clamp(1.25rem, 7.2vw, 1.65rem);
+  }
+
+  .hero-lead {
+    font-size: 1rem;
+    line-height: 1.84;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.45rem;
+  }
+
+  .hero-cta {
+    gap: 0.6rem;
+  }
+
+  .hero-cta .btn {
+    min-height: 2.7rem;
+  }
+
+  .stats-grid {
+    margin-top: 1.25rem;
+    gap: 0.7rem;
+  }
+
+  .section-heading {
+    margin-bottom: 1.3rem;
+  }
+
+  .section-heading p {
+    line-height: 1.82;
+  }
+
+  .service-card > p,
+  .support-card p,
+  .story-card p,
+  .faq-answer p,
+  .process-item p {
+    line-height: 1.82;
+  }
+
+  .faq-question {
+    padding: 0.92rem;
+    align-items: flex-start;
+    font-size: 0.98rem;
   }
 
   .stats-grid,
@@ -1445,6 +1516,11 @@ textarea.invalid {
 
   .mobile-consult {
     display: inline-flex;
+  }
+
+  .back-to-top {
+    right: 0.8rem;
+    bottom: calc(4.8rem + env(safe-area-inset-bottom));
   }
 }
 

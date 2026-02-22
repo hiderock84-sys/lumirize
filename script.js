@@ -4,16 +4,25 @@
   const globalNav = document.getElementById("global-nav");
   const navLinks = globalNav ? globalNav.querySelectorAll("a[href^='#']") : [];
   const backToTop = document.getElementById("back-to-top");
+  const mobileConsult = document.querySelector(".mobile-consult");
 
   const updateHeaderState = () => {
     if (!header || !backToTop) return;
     const scrolled = window.scrollY > 24;
     header.classList.toggle("scrolled", scrolled);
     backToTop.classList.toggle("visible", window.scrollY > 500);
+
+    if (mobileConsult) {
+      const isMobileViewport = window.innerWidth <= 767;
+      const menuOpen = globalNav ? globalNav.classList.contains("open") : false;
+      const showConsult = isMobileViewport && window.scrollY > 340 && !menuOpen;
+      mobileConsult.classList.toggle("visible", showConsult);
+    }
   };
 
   updateHeaderState();
   window.addEventListener("scroll", updateHeaderState, { passive: true });
+  window.addEventListener("resize", updateHeaderState);
 
   if (menuToggle && globalNav) {
     menuToggle.addEventListener("click", () => {
@@ -21,6 +30,7 @@
       menuToggle.setAttribute("aria-expanded", String(!expanded));
       menuToggle.setAttribute("aria-label", expanded ? "メニューを開く" : "メニューを閉じる");
       globalNav.classList.toggle("open", !expanded);
+      updateHeaderState();
     });
 
     navLinks.forEach((link) => {
@@ -29,6 +39,7 @@
           menuToggle.setAttribute("aria-expanded", "false");
           menuToggle.setAttribute("aria-label", "メニューを開く");
           globalNav.classList.remove("open");
+          updateHeaderState();
         }
       });
     });
@@ -40,6 +51,7 @@
         menuToggle.setAttribute("aria-expanded", "false");
         menuToggle.setAttribute("aria-label", "メニューを開く");
         globalNav.classList.remove("open");
+        updateHeaderState();
       }
     });
   }
