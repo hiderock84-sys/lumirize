@@ -479,9 +479,12 @@ a {
   box-shadow: var(--shadow-card);
 }
 
+.chart-card h2,
 .chart-card h3,
+.compare-card h2,
 .compare-card h3 {
   margin: 0 0 0.7rem;
+  font-size: 1.05rem;
 }
 
 .bar-list {
@@ -558,6 +561,20 @@ a {
 .compare-table td {
   color: var(--color-text-muted);
   font-size: 0.92rem;
+}
+
+.compare-highlights {
+  margin-top: 0.75rem;
+}
+
+.compare-highlights li {
+  color: var(--color-text);
+  line-height: 1.62;
+}
+
+.compare-highlights strong {
+  color: var(--color-primary-soft);
+  font-weight: 700;
 }
 
 .photo-grid {
