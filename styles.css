@@ -24,8 +24,8 @@
   --hero-overlay-1: linear-gradient(180deg, rgba(58, 63, 72, 0.42) 0%, rgba(46, 51, 60, 0.74) 68%, rgba(37, 42, 50, 0.84) 100%);
   --hero-overlay-2: radial-gradient(circle at 84% 12%, rgba(0, 172, 179, 0.2), transparent 42%);
   --hero-overlay-3: radial-gradient(circle at 20% 80%, rgba(154, 156, 161, 0.17), transparent 46%);
-  --nav-link-color: rgba(244, 247, 250, 0.94);
-  --nav-link-hover: #9ce8eb;
+  --nav-link-color: rgba(70, 75, 84, 0.9);
+  --nav-link-hover: #009ca4;
   --menu-toggle-bg: rgba(221, 226, 231, 0.25);
   --menu-toggle-line: rgba(245, 248, 250, 0.96);
   --menu-panel-bg: linear-gradient(115deg, rgba(70, 75, 84, 0.97), rgba(86, 92, 103, 0.95));
@@ -64,8 +64,8 @@ html[data-theme="luxury"] {
   --hero-overlay-1: linear-gradient(180deg, rgba(58, 63, 72, 0.42) 0%, rgba(46, 51, 60, 0.74) 68%, rgba(37, 42, 50, 0.84) 100%);
   --hero-overlay-2: radial-gradient(circle at 84% 12%, rgba(0, 172, 179, 0.2), transparent 42%);
   --hero-overlay-3: radial-gradient(circle at 20% 80%, rgba(154, 156, 161, 0.17), transparent 46%);
-  --nav-link-color: rgba(244, 247, 250, 0.94);
-  --nav-link-hover: #9ce8eb;
+  --nav-link-color: rgba(70, 75, 84, 0.9);
+  --nav-link-hover: #009ca4;
   --menu-toggle-bg: rgba(221, 226, 231, 0.25);
   --menu-toggle-line: rgba(245, 248, 250, 0.96);
   --menu-panel-bg: linear-gradient(115deg, rgba(70, 75, 84, 0.97), rgba(86, 92, 103, 0.95));
@@ -98,6 +98,19 @@ body {
   min-height: 100vh;
   letter-spacing: 0.01em;
   overflow-x: clip;
+}
+
+body.home-page {
+  --nav-link-color: rgba(244, 247, 250, 0.94);
+  --nav-link-hover: #9ce8eb;
+}
+
+body.home-page .brand-text strong {
+  color: rgba(244, 247, 250, 0.95);
+}
+
+body.home-page .brand-text small {
+  color: rgba(221, 230, 240, 0.9);
 }
 
 img,
@@ -170,19 +183,20 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.9rem;
   background: transparent !important;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.62rem;
+  gap: 0.72rem;
+  flex-shrink: 0;
   text-decoration: none;
 }
 
 .brand-mark {
-  width: 2.65rem;
+  width: 2.9rem;
   height: auto;
   flex-shrink: 0;
   filter: drop-shadow(0 8px 16px var(--logo-glow));
@@ -197,27 +211,38 @@ a {
   display: block;
   line-height: 1.05;
   letter-spacing: 0.01em;
-  font-size: 0.82rem;
+  font-size: 0.74rem;
+  white-space: nowrap;
 }
 
 .brand-text small {
   color: var(--color-text-muted);
   font-family: var(--font-brand);
-  font-size: 0.64rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.015em;
 }
 
 .global-nav {
   display: inline-flex;
+  flex: 1;
+  min-width: 0;
   align-items: center;
-  gap: 0.9rem;
+  justify-content: flex-end;
+  gap: 0.65rem;
 }
 
 .global-nav ul {
   display: flex;
-  gap: 0.82rem;
+  align-items: center;
+  gap: 0.64rem;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.global-nav li {
+  flex: 0 0 auto;
 }
 
 .global-nav a {
@@ -227,7 +252,9 @@ a {
 .global-nav ul a {
   font-weight: 500;
   color: var(--nav-link-color);
-  font-size: 0.86rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
   transition: color 0.2s ease;
 }
 
@@ -1730,14 +1757,50 @@ textarea.invalid {
     display: none;
   }
 
+  .global-nav {
+    gap: 0.5rem;
+  }
+
+  .global-nav ul {
+    gap: 0.5rem;
+  }
+
+  .global-nav ul a {
+    font-size: 0.78rem;
+  }
+
   .footer-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 1023px) {
+  .header-inner {
+    gap: 0.72rem;
+  }
+
+  .brand-mark {
+    width: 2.72rem;
+  }
+
+  .brand-text strong {
+    font-size: 0.7rem;
+  }
+
+  .brand-text small {
+    font-size: 0.67rem;
+  }
+
+  .global-nav {
+    gap: 0.38rem;
+  }
+
   .global-nav ul {
-    gap: 0.95rem;
+    gap: 0.38rem;
+  }
+
+  .global-nav ul a {
+    font-size: 0.72rem;
   }
 
   .info-grid,
@@ -1784,6 +1847,18 @@ textarea.invalid {
 
   .menu-toggle {
     display: inline-block;
+  }
+
+  .brand-mark {
+    width: 2.4rem;
+  }
+
+  .brand-text strong {
+    font-size: 0.69rem;
+  }
+
+  .brand-text small {
+    font-size: 0.64rem;
   }
 
   .global-nav {
@@ -2052,15 +2127,15 @@ textarea.invalid {
   }
 
   .brand-mark {
-    width: 2.2rem;
+    width: 2.28rem;
   }
 
   .brand-text strong {
-    font-size: 0.76rem;
+    font-size: 0.66rem;
   }
 
   .brand-text small {
-    font-size: 0.58rem;
+    font-size: 0.6rem;
   }
 
   .hero h1::after {
