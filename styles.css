@@ -906,35 +906,6 @@ a {
   padding-top: 5rem;
 }
 
-.section-image-layer {
-  position: relative;
-  isolation: isolate;
-  overflow: clip;
-  margin: 0;
-  padding: 0;
-}
-
-.section-image-photo {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.section-image-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, rgba(10, 15, 22, 0.08) 0%, rgba(10, 15, 22, 0.26) 78%, rgba(10, 15, 22, 0.34) 100%),
-    radial-gradient(circle at 82% 16%, rgba(0, 172, 179, 0.14), transparent 42%);
-}
-
-.section-image-content {
-  position: relative;
-  z-index: 1;
-}
-
 .support-grid-stage {
   position: relative;
   overflow: clip;
