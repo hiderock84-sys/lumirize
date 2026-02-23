@@ -38,7 +38,6 @@
       if (en.isIntersecting) en.target.classList.add("is-in");
     });
   }, { threshold: 0.12 });
-
   document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
   // Cinematic scene switch
