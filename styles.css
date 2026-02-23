@@ -1,4 +1,4 @@
-:root{
+す:root{
   --bg:#07090c;
   --bg2:#0b0f16;
   --card:rgba(255,255,255,.06);
@@ -655,4 +655,15 @@ input:focus,select:focus,textarea:focus{
   .reveal{ transition:none; }
   .cinematic__img{ transition:none; }
   html:focus-within{ scroll-behavior: auto; }
+}
+/* Logo fine tuning */
+.brand__logo{
+  height: 30px;
+  width: auto;
+}
+
+.footer__logo{
+  height: 40px;
+  width: auto;
+  margin-bottom: 12px;
 }
