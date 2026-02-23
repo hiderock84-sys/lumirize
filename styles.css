@@ -675,3 +675,7 @@ input:focus,select:focus,textarea:focus{
 .kv__v{
   line-height: 1.8;
 }
+.header{
+  backdrop-filter: blur(18px);
+  background: rgba(7,9,12,.75);
+}
