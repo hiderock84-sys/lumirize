@@ -667,3 +667,11 @@ input:focus,select:focus,textarea:focus{
   width: auto;
   margin-bottom: 12px;
 }
+.kv__k{
+  font-weight: 700;
+  letter-spacing: .05em;
+}
+
+.kv__v{
+  line-height: 1.8;
+}
