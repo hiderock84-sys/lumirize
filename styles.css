@@ -7,15 +7,15 @@
   --color-primary-soft: #53c6cb;
   --color-text: #464b54;
   --color-text-muted: rgba(70, 75, 84, 0.75);
-  --color-border: rgba(134, 138, 142, 0.34);
-  --color-border-strong: rgba(134, 138, 142, 0.52);
+  --color-border: rgba(134, 138, 142, 0.26);
+  --color-border-strong: rgba(134, 138, 142, 0.44);
   --gradient-primary: linear-gradient(136deg, #00acb3 0%, #57ccd1 54%, #b2b6bc 120%);
   --gradient-surface:
     linear-gradient(146deg, rgba(255, 255, 255, 0.97) 0%, rgba(242, 245, 248, 0.95) 48%, rgba(228, 233, 238, 0.94) 100%);
   --gradient-surface-soft:
     linear-gradient(146deg, rgba(255, 255, 255, 0.94) 0%, rgba(242, 246, 249, 0.92) 56%, rgba(232, 236, 241, 0.9) 100%);
   --shadow-soft: 0 16px 36px rgba(0, 172, 179, 0.24);
-  --shadow-card: 0 10px 24px rgba(70, 75, 84, 0.14);
+  --shadow-card: 0 7px 18px rgba(70, 75, 84, 0.09);
   --bg-layer-1: radial-gradient(circle at 8% 10%, rgba(0, 172, 179, 0.13), transparent 36%);
   --bg-layer-2: radial-gradient(circle at 84% 6%, rgba(134, 138, 142, 0.15), transparent 34%);
   --bg-layer-3: radial-gradient(circle at 86% 82%, rgba(0, 172, 179, 0.09), transparent 40%);
@@ -47,15 +47,15 @@ html[data-theme="luxury"] {
   --color-primary-soft: #53c6cb;
   --color-text: #464b54;
   --color-text-muted: rgba(70, 75, 84, 0.75);
-  --color-border: rgba(134, 138, 142, 0.34);
-  --color-border-strong: rgba(134, 138, 142, 0.52);
+  --color-border: rgba(134, 138, 142, 0.26);
+  --color-border-strong: rgba(134, 138, 142, 0.44);
   --gradient-primary: linear-gradient(136deg, #00acb3 0%, #57ccd1 54%, #b2b6bc 120%);
   --gradient-surface:
     linear-gradient(146deg, rgba(255, 255, 255, 0.97) 0%, rgba(242, 245, 248, 0.95) 48%, rgba(228, 233, 238, 0.94) 100%);
   --gradient-surface-soft:
     linear-gradient(146deg, rgba(255, 255, 255, 0.94) 0%, rgba(242, 246, 249, 0.92) 56%, rgba(232, 236, 241, 0.9) 100%);
   --shadow-soft: 0 16px 36px rgba(0, 172, 179, 0.24);
-  --shadow-card: 0 10px 24px rgba(70, 75, 84, 0.14);
+  --shadow-card: 0 7px 18px rgba(70, 75, 84, 0.09);
   --bg-layer-1: radial-gradient(circle at 8% 10%, rgba(0, 172, 179, 0.13), transparent 36%);
   --bg-layer-2: radial-gradient(circle at 84% 6%, rgba(134, 138, 142, 0.15), transparent 34%);
   --bg-layer-3: radial-gradient(circle at 86% 82%, rgba(0, 172, 179, 0.09), transparent 40%);
@@ -855,6 +855,7 @@ a {
   font-size: 0.9rem;
 }
 
+.service-card h2,
 .service-card h3 {
   margin: 0.35rem 0 0.65rem;
 }
@@ -909,9 +910,9 @@ a {
 .support-grid-stage {
   position: relative;
   overflow: clip;
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(134, 138, 142, 0.2);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
+  box-shadow: 0 5px 14px rgba(70, 75, 84, 0.08);
   max-width: min(63rem, 100%);
   margin-top: 0.35rem;
   margin-bottom: 0.2rem;
