@@ -8,6 +8,7 @@
   <title>株式会社ルミライズ | Housing Firstで再出発の土台をつくる</title>
   <meta name="description" content="株式会社ルミライズは、刑務所出所後や依存症回復の途上にある方々へ、まず住まいを確保するHousing Firstの理念で、回復と再出発の基盤を整えます。" />
 
+  <!-- OGP -->
   <meta property="og:title" content="株式会社ルミライズ | Housing Firstで再出発の土台をつくる" />
   <meta property="og:description" content="帰る場所のない人に『立ち直れ』と言うことはできません。まず住まいを整え、回復と社会復帰へ。" />
   <meta property="og:type" content="website" />
@@ -20,6 +21,7 @@
 
   <link rel="stylesheet" href="styles.css" />
 
+  <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -43,6 +45,18 @@
 <body>
   <a class="skip-link" href="#main">本文へスキップ</a>
 
+  <!-- Sticky CTA（スマホで常に救う） -->
+  <div class="stickyCTA" role="region" aria-label="緊急・無料相談の導線">
+    <a class="stickyCTA__tel" href="tel:0427048308" aria-label="今すぐ電話 042-704-8308">
+      <span class="stickyCTA__k">緊急</span>
+      <span class="stickyCTA__v">電話</span>
+    </a>
+    <a class="stickyCTA__main" href="#contact" aria-label="無料相談を予約">
+      <span class="stickyCTA__k">無料</span>
+      <span class="stickyCTA__v">相談</span>
+    </a>
+  </div>
+
   <header class="header" id="top">
     <div class="container header__inner">
       <a class="brand" href="#top" aria-label="株式会社ルミライズ トップへ">
@@ -63,10 +77,11 @@
           <a class="nav__link" href="#about">私たちについて</a>
           <a class="nav__link" href="#impact">支援実績</a>
           <a class="nav__link" href="#services">サービス</a>
+          <a class="nav__link" href="#support">支援内容</a>
           <a class="nav__link" href="#process">入居までの流れ</a>
           <a class="nav__link" href="#faq">FAQ</a>
           <a class="nav__link" href="#contact">お問い合わせ</a>
-          <a class="nav__cta" href="#contact">無料相談</a>
+          <a class="nav__cta" href="#contact">無料相談を予約</a>
         </div>
       </nav>
     </div>
@@ -75,20 +90,39 @@
 
   <main id="main">
 
+    <!-- HERO -->
     <section class="hero">
       <div class="hero__bg" aria-hidden="true"></div>
       <div class="container hero__inner">
         <div class="hero__left reveal">
           <p class="badge">TRANSFORM SUPPORT, ILLUMINATE LIVES</p>
-          <h1 class="hero__title">誰もが光を見出せる<br>未来をつくる。</h1>
+          <h1 class="hero__title">
+            誰もが光を見出せる<br />
+            未来をつくる。
+          </h1>
           <p class="hero__lead">
             帰る場所のない人に、「立ち直れ」と言うことはできません。<br class="hide-sm" />
-            ルミライズは、まず住まいを確保するHousing Firstの理念で、回復と再出発の基盤を整えます。
+            株式会社ルミライズは、刑務所出所後や依存症回復の途上にある方々へ、まず住まいを確保するHousing Firstの理念で、回復と再出発の基盤を整えます。
           </p>
 
           <div class="hero__cta">
             <a class="btn btn-primary" href="#contact">無料相談を予約</a>
             <a class="btn btn-ghost" href="#story">物語から見る</a>
+          </div>
+
+          <div class="hero__trust">
+            <div class="trust">
+              <div class="trust__k">24h</div>
+              <div class="trust__v">緊急の相談導線</div>
+            </div>
+            <div class="trust">
+              <div class="trust__k">Housing First</div>
+              <div class="trust__v">住まいを先に整える</div>
+            </div>
+            <div class="trust">
+              <div class="trust__k">連携</div>
+              <div class="trust__v">医療・福祉・司法</div>
+            </div>
           </div>
         </div>
 
@@ -99,37 +133,63 @@
             <div class="heroCard__copy">
               <div class="heroCard__eyebrow">WELCOME HOME</div>
               <div class="heroCard__headline">住まいが整うと、人生が動き始める。</div>
-              <div class="heroCard__sub">相談は匿名でも構いません。状況を聞かせてください。</div>
+              <div class="heroCard__sub">相談は匿名でも構いません。まずは状況を聞かせてください。</div>
             </div>
           </div>
         </div>
       </div>
+
+      <div class="hero__quick">
+        <div class="container quick">
+          <a class="quick__item" href="tel:0427048308">
+            <span class="quick__label">今すぐ電話</span>
+            <span class="quick__value">042-704-8308</span>
+          </a>
+          <a class="quick__item" href="mailto:info@lumirize.com">
+            <span class="quick__label">メール</span>
+            <span class="quick__value">info@lumirize.com</span>
+          </a>
+          <a class="quick__item" href="#process">
+            <span class="quick__label">入居まで</span>
+            <span class="quick__value">5ステップ</span>
+          </a>
+        </div>
+      </div>
     </section>
 
-    <section class="cinematic" id="story">
+    <!-- CINEMATIC STORY -->
+    <section class="cinematic" id="story" aria-label="出所から住まいへ">
       <div class="container cinematic__inner">
         <div class="cinematic__media">
-          <img class="cinematic__img is-active" src="scene_gate.jpg" alt="刑務所の門を出た直後の情景" data-scene="1">
-          <img class="cinematic__img" src="scene_key.jpg" alt="新しい住まいの鍵を受け取る情景" data-scene="2">
+          <img class="cinematic__img is-active" src="scene_gate.jpg" alt="刑務所の門を出た直後の情景" data-scene="1" loading="eager">
+          <img class="cinematic__img" src="scene_key.jpg" alt="新しい住まいの鍵を受け取る情景" data-scene="2" loading="lazy">
           <div class="cinematic__shade" aria-hidden="true"></div>
+          <div class="cinematic__hint" aria-hidden="true">SCROLL</div>
         </div>
 
         <div class="cinematic__copy">
           <div class="cinematic__block is-active" data-scene="1">
             <p class="eyebrow">HOUSING FIRST / RESTART</p>
             <h2 class="h2">その門を出た瞬間、<br>いちばん怖いのは“今夜”です。</h2>
-            <p class="p">帰る場所がない。保証人がいない。手続きもわからない。<br>住まいを先に整えることで、再出発の土台をつくります。</p>
+            <p class="p">
+              帰る場所がない。保証人がいない。手続きもわからない。<br>
+              ルミライズは「住まいを先に整える」ことで、再出発の土台をつくります。
+            </p>
+            <p class="quote">“立ち直れ”の前に、“戻れる場所”を。</p>
           </div>
 
           <div class="cinematic__block" data-scene="2">
             <p class="eyebrow">WELCOME HOME</p>
             <h2 class="h2">鍵を受け取った日、<br>はじめて“ただいま”が言えた。</h2>
-            <p class="p">住まいが決まると、生活が整い、就労や医療・福祉・司法との連携も進みます。</p>
+            <p class="p">
+              住まいが決まると、生活が整い、就労や医療・福祉・司法との連携も進みます。<br>
+              回復の形は一つではありません。あなたに合う再出発を一緒に設計します。
+            </p>
             <div class="cinematic__cta">
-              <a class="btn btn-primary" href="#contact">無料相談</a>
-              <a class="btn btn-ghost" href="tel:0427048308">電話</a>
+              <a class="btn btn-primary" href="#contact">無料相談を予約</a>
+              <a class="btn btn-ghost" href="tel:0427048308">電話で相談</a>
             </div>
-            <p class="note">※写真はイメージです</p>
+            <p class="note">※写真はイメージです（プライバシー保護のため演出・加工を含みます）</p>
           </div>
         </div>
 
@@ -137,32 +197,358 @@
       </div>
     </section>
 
-    <section class="section" id="contact">
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="sectionHead reveal">
+          <p class="eyebrow">ABOUT US</p>
+          <h2 class="h2">私たちについて</h2>
+          <p class="p">
+            株式会社ルミライズは、住まいを起点に「立ち直り」と「再出発」を支える住宅提供サービスを展開しています。<br class="hide-sm" />
+            再犯防止を「罰の強化」ではなく「環境の整備」と捉え、住まいの空白をつくらない支援体制を整えています。
+          </p>
+        </div>
+
+        <div class="grid2">
+          <div class="card reveal">
+            <h3 class="h3">私たちの使命</h3>
+            <p class="p">
+              住まいがなければ就労は続かず、生活が安定しなければ回復も揺らぎます。孤立は不安を生み、その不安が再び過ちへとつながる可能性を高めます。<br>
+              だからこそ私たちは、住まいを「成果への報酬」ではなく「再出発の前提」として位置づけます。
+            </p>
+          </div>
+
+          <div class="card reveal">
+            <h3 class="h3">代表からのメッセージ</h3>
+            <p class="p">
+              帰る場所のない人に、「立ち直れ」と言うことはできません。<br>
+              刑務所出所後や依存症回復の途上で、まず直面するのは住まいの問題です。住まいが整えば、人は少しずつ前に進めます。<br>
+              私たちは、住まいからその未来を支えます。
+            </p>
+            <div class="mini">
+              <div class="mini__k">株式会社ルミライズ</div>
+              <div class="mini__v">代表取締役 田中 秀泰</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMPACT -->
+    <section class="section section--alt" id="impact">
+      <div class="container">
+        <div class="sectionHead reveal">
+          <p class="eyebrow">STATISTICS DASHBOARD</p>
+          <h2 class="h2">支援実績と成果</h2>
+          <p class="p">再犯防止と回復支援を住まいから支える実践を、わかりやすく可視化します。</p>
+        </div>
+
+        <div class="statsGrid reveal">
+          <div class="stat">
+            <div class="stat__k">再犯防止の中核</div>
+            <div class="stat__v">継続的居住・生活安定化</div>
+            <div class="stat__s">※公開する場合は集計条件を明記してください</div>
+          </div>
+          <div class="stat">
+            <div class="stat__k">Housing First 実践</div>
+            <div class="stat__v">住まいを再出発の前提に</div>
+            <div class="stat__s">回復・就労・社会復帰へ段階的に接続</div>
+          </div>
+          <div class="stat">
+            <div class="stat__k">総合満足度</div>
+            <div class="stat__v"><span class="big">90%</span></div>
+            <div class="stat__s">住まい・対応・相談等を統合（例示）</div>
+          </div>
+        </div>
+
+        <div class="tableCard reveal">
+          <h3 class="h3">ルミライズの特徴（一般的な賃貸住宅との比較）</h3>
+          <div class="tableWrap" role="region" aria-label="比較表">
+            <table>
+              <thead>
+                <tr>
+                  <th>項目</th>
+                  <th>一般的な賃貸</th>
+                  <th>ルミライズ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>入居審査</td><td>厳格・保証人必須</td><td>柔軟な対応・個別相談</td></tr>
+                <tr><td>生活サポート</td><td>なし</td><td>定期面談・相談導線</td></tr>
+                <tr><td>関連機関連携</td><td>なし</td><td>医療・福祉・就労・司法</td></tr>
+                <tr><td>緊急時対応</td><td>限定的</td><td>緊急連絡導線</td></tr>
+                <tr><td>プライバシー</td><td>標準</td><td>厳格な情報管理・守秘</td></tr>
+                <tr><td>長期フォロー</td><td>なし</td><td>入居後も継続支援</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">※数値・指標は表示例です。公開する場合は集計期間・母数など注記を付してください。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="sectionHead reveal">
+          <p class="eyebrow">SERVICES</p>
+          <h2 class="h2">私たちのサービス</h2>
+          <p class="p">住まいを失わせないことが、再出発の第一歩。Housing Firstの理念に沿って提供します。</p>
+        </div>
+
+        <div class="cards3">
+          <article class="svc reveal">
+            <div class="svc__no">01</div>
+            <h3 class="h3">依存症者向け 住宅提供</h3>
+            <p class="p">回復を目指す方が、安心して生活を整えられる住まいを提供します。</p>
+            <ul class="list">
+              <li>安定した住環境</li>
+              <li>プライバシーの尊重</li>
+              <li>再発不安への伴走</li>
+              <li>関連機関との連携</li>
+            </ul>
+          </article>
+
+          <article class="svc reveal">
+            <div class="svc__no">02</div>
+            <h3 class="h3">刑務所出所者向け 住宅提供</h3>
+            <p class="p">出所後の住居不安を早期に解消し、社会復帰の土台をつくります。</p>
+            <ul class="list">
+              <li>入居までの実務支援</li>
+              <li>生活再建の伴走</li>
+              <li>就労支援との連携</li>
+              <li>再犯防止の支援設計</li>
+            </ul>
+          </article>
+
+          <article class="svc reveal">
+            <div class="svc__no">03</div>
+            <h3 class="h3">ナイトケアハウス運営</h3>
+            <p class="p">夜間も安心して過ごせる環境を整え、生活リズムの安定を支えます。</p>
+            <ul class="list">
+              <li>夜間の安心できる居場所</li>
+              <li>生活リズムのサポート</li>
+              <li>プログラムとの連携</li>
+              <li>緊急時の導線</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="callout reveal">
+          <div class="callout__copy">
+            <h3 class="h3">まずは状況を聞かせてください</h3>
+            <p class="p">名前も、理由も、今は必要ありません。必要なのは“今夜”を越える設計です。</p>
+          </div>
+          <div class="callout__cta">
+            <a class="btn btn-primary" href="#contact">無料相談</a>
+            <a class="btn btn-ghost" href="tel:0427048308">電話</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUPPORT -->
+    <section class="section section--alt" id="support">
+      <div class="container">
+        <div class="sectionHead reveal">
+          <p class="eyebrow">SUPPORT</p>
+          <h2 class="h2">私たちの支援内容</h2>
+          <p class="p">住まいの提供だけでなく、尊厳を守りながら生活全般を支える包括的サポートを行います。</p>
+        </div>
+
+        <div class="supportGrid">
+          <div class="supportCard reveal">
+            <h3 class="h3">生活相談・カウンセリング</h3>
+            <p class="p">専門スタッフが定期面談を行い、生活上の困りごとや不安に伴走します。</p>
+            <ul class="list">
+              <li>個別面談</li>
+              <li>緊急導線</li>
+              <li>プライバシー保護</li>
+            </ul>
+          </div>
+
+          <div class="supportCard reveal">
+            <h3 class="h3">就労支援・社会復帰</h3>
+            <p class="p">就労支援機関と連携し、仕事探しから定着までを継続的に支えます。</p>
+            <ul class="list">
+              <li>仕事探しの情報提供</li>
+              <li>面接・書類サポート</li>
+              <li>就労後フォロー</li>
+            </ul>
+          </div>
+
+          <div class="supportCard reveal">
+            <h3 class="h3">医療・福祉・司法との連携</h3>
+            <p class="p">必要な制度・機関につなぎ、空白のない支援設計を行います。</p>
+            <ul class="list">
+              <li>福祉事務所との協力</li>
+              <li>医療機関との連携</li>
+              <li>制度申請の実務支援</li>
+            </ul>
+          </div>
+
+          <div class="supportCard reveal">
+            <h3 class="h3">生活スキル支援</h3>
+            <p class="p">自立した生活に必要な基本スキルを、実践ベースで整えます。</p>
+            <ul class="list">
+              <li>生活習慣の調整</li>
+              <li>家計・健康管理</li>
+              <li>コミュニケーション支援</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="section" id="process">
+      <div class="container">
+        <div class="sectionHead reveal">
+          <p class="eyebrow">PROCESS</p>
+          <h2 class="h2">入居までの流れ</h2>
+          <p class="p">住まいの空白をできるだけ短くし、孤立を防ぐためのステップをご案内します。</p>
+        </div>
+
+        <ol class="steps">
+          <li class="step reveal">
+            <div class="step__no">01</div>
+            <div class="step__body">
+              <h3 class="h3">初回相談（無料）</h3>
+              <p class="p">電話・メール・来所で相談可能。相談だけでも歓迎。匿名相談も可能です。</p>
+            </div>
+          </li>
+          <li class="step reveal">
+            <div class="step__no">02</div>
+            <div class="step__body">
+              <h3 class="h3">必要書類の準備</h3>
+              <p class="p">状況に応じて必要書類をご案内。取得が難しい場合もサポートします。</p>
+            </div>
+          </li>
+          <li class="step reveal">
+            <div class="step__no">03</div>
+            <div class="step__body">
+              <h3 class="h3">物件見学・面談</h3>
+              <p class="p">実際の環境を確認し、生活設計に合った住まいをご提案します。</p>
+            </div>
+          </li>
+          <li class="step reveal">
+            <div class="step__no">04</div>
+            <div class="step__body">
+              <h3 class="h3">入居審査・契約</h3>
+              <p class="p">審査後、契約内容を丁寧に説明。初期費用の相談も含め最適化します。</p>
+            </div>
+          </li>
+          <li class="step reveal">
+            <div class="step__no">05</div>
+            <div class="step__body">
+              <h3 class="h3">入居・生活開始</h3>
+              <p class="p">生活開始後も定期的に支援。困ったことがあれば相談できる導線を保ちます。</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="ctaBand reveal">
+          <div class="ctaBand__copy">
+            <h3 class="h3">最初の一歩は、相談だけでいい。</h3>
+            <p class="p">今夜からの生活を、いっしょに設計します。</p>
+          </div>
+          <div class="ctaBand__cta">
+            <a class="btn btn-primary" href="#contact">無料相談</a>
+            <a class="btn btn-ghost" href="tel:0427048308">電話</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="sectionHead reveal">
+          <p class="eyebrow">FAQ</p>
+          <h2 class="h2">よくある質問</h2>
+          <p class="p">理念（Policy）／実務（Operations）／安全・権利（Governance）に分けて整理しています。</p>
+        </div>
+
+        <div class="faq" data-accordion>
+          <details class="faq__item reveal">
+            <summary class="faq__q">なぜHousing Firstを採用しているのですか？</summary>
+            <div class="faq__a">
+              <p class="p">回復や更生を条件にするのではなく、まず住まいを確保し、その上で生活を立て直すほうが現実的で持続可能だからです。</p>
+            </div>
+          </details>
+
+          <details class="faq__item reveal">
+            <summary class="faq__q">保証人がいない場合でも相談できますか？</summary>
+            <div class="faq__a">
+              <p class="p">状況により対応方法をご提案します。まずは現状を伺い、必要な手続きや選択肢を整理します。</p>
+            </div>
+          </details>
+
+          <details class="faq__item reveal">
+            <summary class="faq__q">緊急時の運用体制はどうなっていますか？</summary>
+            <div class="faq__a">
+              <p class="p">緊急度に応じて優先的に対応します。まずは電話またはフォームから状況をお知らせください。</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section section--alt" id="contact">
       <div class="container">
         <div class="sectionHead reveal">
           <p class="eyebrow">CONTACT</p>
           <h2 class="h2">お問い合わせ・相談窓口</h2>
-          <p class="p">どんな小さなことでもお気軽にご相談ください。秘密は厳守します。</p>
+          <p class="p">住まいに関するお困りごと、入居相談など、どんな小さなことでもお気軽にご相談ください。秘密は厳守します。</p>
         </div>
 
         <div class="contactGrid">
           <div class="card reveal">
-            <h3 class="h3">会社概要</h3>
+            <h3 class="h3">連絡先</h3>
             <div class="kv">
-              <div class="kv__k">設立</div><div class="kv__v">2021年8月24日</div>
-              <div class="kv__k">代表</div><div class="kv__v">株式会社ルミライズ 代表取締役CEO 田中 秀泰</div>
-              <div class="kv__k">〒</div><div class="kv__v">252-0237</div>
-              <div class="kv__k">住所</div><div class="kv__v">神奈川県相模原市中央区千代田3-3-20</div>
-              <div class="kv__k">TEL</div><div class="kv__v"><a href="tel:0427048308">042-704-8308</a></div>
-              <div class="kv__k">FAX</div><div class="kv__v">042-707-0392</div>
-              <div class="kv__k">E-mail</div><div class="kv__v"><a href="mailto:info@lumirize.com">info@lumirize.com</a></div>
+              <div class="kv__k">TEL</div>
+              <div class="kv__v"><a href="tel:0427048308">042-704-8308</a></div>
+              <div class="kv__k">FAX</div>
+              <div class="kv__v">042-707-0392</div>
+              <div class="kv__k">E-mail</div>
+              <div class="kv__v"><a href="mailto:info@lumirize.com">info@lumirize.com</a></div>
+              <div class="kv__k">受付</div>
+              <div class="kv__v">9:00〜18:00（平日）</div>
+              <div class="kv__k">住所</div>
+              <div class="kv__v">〒252-0237 神奈川県相模原市中央区 千代田3-3-20</div>
             </div>
+
+            <div class="contactBtns">
+              <a class="btn btn-primary" href="tel:0427048308">今すぐ電話</a>
+              <a class="btn btn-ghost" href="mailto:info@lumirize.com">メール</a>
+            </div>
+
+            <p class="note">※個人情報は厳重に管理し、お問い合わせ対応以外の目的で使用しません。</p>
           </div>
 
           <div class="card reveal">
-            <h3 class="h3">相談フォーム（メール起動）</h3>
+            <h3 class="h3">お問い合わせフォーム（静的）</h3>
+            <p class="p">GitHub Pages（静的サイト）のため、送信ボタンはメール起動です（後でフォーム連携も可能）。</p>
+
             <form class="form" id="contactForm">
-              <label class="field"><span>相談内容（必須）</span>
+              <label class="field">
+                <span>お名前（任意）</span>
+                <input type="text" name="name" autocomplete="name" placeholder="例）田中 太郎">
+              </label>
+
+              <label class="field">
+                <span>メールアドレス（任意）</span>
+                <input type="email" name="email" autocomplete="email" placeholder="例）example@domain.com">
+              </label>
+
+              <label class="field">
+                <span>電話番号（任意）</span>
+                <input type="tel" name="tel" autocomplete="tel" placeholder="例）090-xxxx-xxxx">
+              </label>
+
+              <label class="field">
+                <span>相談内容（必須）</span>
                 <select name="type" required>
                   <option value="">選択してください</option>
                   <option>住宅提供サービスについて</option>
@@ -173,11 +559,18 @@
                 </select>
               </label>
 
-              <label class="field"><span>お問い合わせ内容（必須）</span>
-                <textarea name="message" rows="6" required placeholder="状況・希望（いつから住まいが必要か等）"></textarea>
+              <label class="field">
+                <span>お問い合わせ内容（必須）</span>
+                <textarea name="message" rows="6" required placeholder="状況・希望（いつから住まいが必要か等）をご記入ください。"></textarea>
+              </label>
+
+              <label class="agree">
+                <input type="checkbox" required>
+                <span>個人情報の取り扱いに同意します</span>
               </label>
 
               <button class="btn btn-primary" type="submit">送信する（メール起動）</button>
+              <p class="note">送信ボタンでメール作成画面が開きます。内容を確認して送信してください。</p>
             </form>
           </div>
         </div>
@@ -188,11 +581,42 @@
 
   <footer class="footer">
     <div class="container footer__inner">
+      <div class="footer__brand">
+        <div class="footer__name">LUMIRIZE</div>
+        <div class="footer__tag">再犯防止とHousing First。住まいを整え、回復と再出発へ。</div>
+      </div>
+
+      <div class="footer__links">
+        <div class="footerCol">
+          <div class="footerCol__t">情報</div>
+          <a href="#about">私たちについて</a>
+          <a href="#process">入居までの流れ</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">お問い合わせ</a>
+        </div>
+        <div class="footerCol">
+          <div class="footerCol__t">サービス</div>
+          <a href="#services">依存症者向け住宅提供</a>
+          <a href="#services">刑務所出所者向け住宅提供</a>
+          <a href="#services">ナイトケアハウス運営</a>
+        </div>
+        <div class="footerCol">
+          <div class="footerCol__t">連絡先</div>
+          <a href="tel:0427048308">TEL: 042-704-8308</a>
+          <a href="mailto:info@lumirize.com">info@lumirize.com</a>
+          <span class="muted">〒252-0237 神奈川県相模原市中央区 千代田3-3-20</span>
+        </div>
+      </div>
+
       <div class="footer__bottom">
         <span>© 2021 株式会社ルミライズ - LUMIRIZE Inc. All rights reserved.</span>
+        <span class="muted">—</span>
+        <span class="muted">TRANSFORM SUPPORT, ILLUMINATE LIVES</span>
       </div>
     </div>
   </footer>
+
+  <button class="toTop" type="button" aria-label="ページ上部へ">↑</button>
 
   <script src="script.js"></script>
 </body>
