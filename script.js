@@ -52,8 +52,29 @@
   const menuToggle = document.getElementById("menu-toggle");
   const globalNav = document.getElementById("global-nav");
   const navLinks = globalNav ? globalNav.querySelectorAll("a") : [];
+  const navPrimaryLinks = globalNav ? globalNav.querySelectorAll("ul a") : [];
   const backToTop = document.getElementById("back-to-top");
   const mobileConsult = document.querySelector(".mobile-consult");
+
+  const currentPath = (() => {
+    try {
+      const path = window.location.pathname.split("/").pop();
+      return path && path.length ? path : "index.html";
+    } catch {
+      return "index.html";
+    }
+  })();
+
+  navPrimaryLinks.forEach((link) => {
+    try {
+      const linkPath = new URL(link.href, window.location.href).pathname.split("/").pop() || "index.html";
+      if (linkPath === currentPath) {
+        link.setAttribute("aria-current", "page");
+      }
+    } catch {
+      // Ignore malformed URLs.
+    }
+  });
 
   const updateHeaderState = () => {
     if (!header || !backToTop) return;
@@ -74,21 +95,23 @@
   window.addEventListener("resize", updateHeaderState);
 
   if (menuToggle && globalNav) {
+    const setMenuOpen = (isOpen) => {
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "メニューを閉じる" : "メニューを開く");
+      globalNav.classList.toggle("open", isOpen);
+      document.body.classList.toggle("menu-open", isOpen);
+      updateHeaderState();
+    };
+
     menuToggle.addEventListener("click", () => {
       const expanded = menuToggle.getAttribute("aria-expanded") === "true";
-      menuToggle.setAttribute("aria-expanded", String(!expanded));
-      menuToggle.setAttribute("aria-label", expanded ? "メニューを開く" : "メニューを閉じる");
-      globalNav.classList.toggle("open", !expanded);
-      updateHeaderState();
+      setMenuOpen(!expanded);
     });
 
     navLinks.forEach((link) => {
       link.addEventListener("click", () => {
         if (window.innerWidth <= 767) {
-          menuToggle.setAttribute("aria-expanded", "false");
-          menuToggle.setAttribute("aria-label", "メニューを開く");
-          globalNav.classList.remove("open");
-          updateHeaderState();
+          setMenuOpen(false);
         }
       });
     });
@@ -97,10 +120,13 @@
       const clickedInsideNav = globalNav.contains(event.target);
       const clickedToggle = menuToggle.contains(event.target);
       if (!clickedInsideNav && !clickedToggle && globalNav.classList.contains("open")) {
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.setAttribute("aria-label", "メニューを開く");
-        globalNav.classList.remove("open");
-        updateHeaderState();
+        setMenuOpen(false);
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 767 && globalNav.classList.contains("open")) {
+        setMenuOpen(false);
       }
     });
   }
