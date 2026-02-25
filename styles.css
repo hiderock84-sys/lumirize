@@ -37,42 +37,6 @@
   --container: min(1200px, 92vw);
 }
 
-html[data-theme="bright"],
-html[data-theme="luxury"] {
-  --font-brand: "Montserrat", "M PLUS 1p", "Noto Sans JP", sans-serif;
-  --color-bg: #e8ebef;
-  --color-surface: #f5f7f9;
-  --color-surface-2: #edf1f4;
-  --color-primary: #00acb3;
-  --color-primary-soft: #53c6cb;
-  --color-text: #464b54;
-  --color-text-muted: rgba(70, 75, 84, 0.75);
-  --color-border: rgba(134, 138, 142, 0.26);
-  --color-border-strong: rgba(134, 138, 142, 0.44);
-  --gradient-primary: linear-gradient(136deg, #00acb3 0%, #57ccd1 54%, #b2b6bc 120%);
-  --gradient-surface:
-    linear-gradient(146deg, rgba(255, 255, 255, 0.97) 0%, rgba(242, 245, 248, 0.95) 48%, rgba(228, 233, 238, 0.94) 100%);
-  --gradient-surface-soft:
-    linear-gradient(146deg, rgba(255, 255, 255, 0.94) 0%, rgba(242, 246, 249, 0.92) 56%, rgba(232, 236, 241, 0.9) 100%);
-  --shadow-soft: 0 16px 36px rgba(0, 172, 179, 0.24);
-  --shadow-card: 0 7px 18px rgba(70, 75, 84, 0.09);
-  --bg-layer-1: radial-gradient(circle at 8% 10%, rgba(0, 172, 179, 0.13), transparent 36%);
-  --bg-layer-2: radial-gradient(circle at 84% 6%, rgba(134, 138, 142, 0.15), transparent 34%);
-  --bg-layer-3: radial-gradient(circle at 86% 82%, rgba(0, 172, 179, 0.09), transparent 40%);
-  --bg-layer-4: linear-gradient(180deg, #eff2f5 0%, #e7eaee 52%, #dde1e6 100%);
-  --header-scrolled-bg: linear-gradient(94deg, rgba(70, 75, 84, 0.94), rgba(82, 87, 97, 0.9));
-  --hero-overlay-1: linear-gradient(180deg, rgba(58, 63, 72, 0.42) 0%, rgba(46, 51, 60, 0.74) 68%, rgba(37, 42, 50, 0.84) 100%);
-  --hero-overlay-2: radial-gradient(circle at 84% 12%, rgba(0, 172, 179, 0.2), transparent 42%);
-  --hero-overlay-3: radial-gradient(circle at 20% 80%, rgba(154, 156, 161, 0.17), transparent 46%);
-  --nav-link-color: rgba(70, 75, 84, 0.9);
-  --nav-link-hover: #009ca4;
-  --menu-toggle-bg: rgba(221, 226, 231, 0.25);
-  --menu-toggle-line: rgba(245, 248, 250, 0.96);
-  --menu-panel-bg: linear-gradient(115deg, rgba(70, 75, 84, 0.97), rgba(86, 92, 103, 0.95));
-  --menu-item-hover-bg: rgba(255, 255, 255, 0.16);
-  --logo-glow: rgba(0, 172, 179, 0.3);
-}
-
 *,
 *::before,
 *::after {
@@ -308,47 +272,6 @@ body.home-page .global-nav ul a[aria-current="page"] {
 
 .menu-toggle[aria-expanded="true"] span:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
-}
-
-.theme-switcher {
-  position: fixed;
-  right: 0.9rem;
-  top: 5.35rem;
-  z-index: 95;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.35rem;
-  border-radius: 999px;
-  border: 1px solid var(--color-border);
-  background: var(--menu-panel-bg);
-  backdrop-filter: blur(10px);
-  box-shadow: var(--shadow-card);
-}
-
-.theme-chip {
-  border: 1px solid transparent;
-  background: transparent;
-  color: var(--color-text-muted);
-  border-radius: 999px;
-  padding: 0.4rem 0.72rem;
-  font-family: var(--font-brand);
-  font-weight: 700;
-  font-size: 0.74rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-
-.theme-chip:hover {
-  color: var(--color-text);
-}
-
-.theme-chip.active {
-  background: var(--gradient-primary);
-  color: #353d47;
-  border-color: var(--color-border-strong);
 }
 
 .hero {
@@ -1934,6 +1857,16 @@ textarea.invalid {
     color: rgba(242, 247, 251, 0.96);
     font-size: 0.9rem;
     font-weight: 600;
+    line-height: 1.46;
+    min-height: 3rem;
+  }
+
+  .global-nav ul a::after {
+    content: "›";
+    margin-left: auto;
+    color: rgba(188, 228, 231, 0.74);
+    font-size: 1.05rem;
+    line-height: 1;
   }
 
   .global-nav ul a[aria-current="page"] {
@@ -1941,6 +1874,10 @@ textarea.invalid {
     border-color: rgba(156, 223, 228, 0.58);
     background: linear-gradient(135deg, rgba(0, 172, 179, 0.28), rgba(122, 219, 225, 0.14));
     box-shadow: inset 0 0 0 1px rgba(168, 234, 238, 0.22);
+  }
+
+  .global-nav ul a[aria-current="page"]::after {
+    color: rgba(222, 252, 253, 0.95);
   }
 
   .global-nav ul a:hover {
@@ -1964,24 +1901,15 @@ textarea.invalid {
     overflow: hidden;
   }
 
-  body.menu-open .theme-switcher {
-    opacity: 0;
+  body.menu-open::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    background: rgba(6, 11, 17, 0.38);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
     pointer-events: none;
-    transform: translateY(-8px);
-  }
-
-  .theme-switcher {
-    right: 0.62rem;
-    left: auto;
-    top: 4.95rem;
-    transform: none;
-    padding: 0.28rem;
-    gap: 0.3rem;
-  }
-
-  .theme-chip {
-    font-size: 0.7rem;
-    padding: 0.34rem 0.62rem;
   }
 
   .hero {
@@ -2185,11 +2113,6 @@ textarea.invalid {
 }
 
 @media (max-width: 480px) {
-  .theme-switcher {
-    top: 4.55rem;
-    right: 0.5rem;
-  }
-
   .header-inner {
     min-height: 4.2rem;
   }
