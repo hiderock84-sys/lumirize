@@ -6,6 +6,16 @@
   const navPrimaryLinks = globalNav ? globalNav.querySelectorAll("ul a") : [];
   const backToTop = document.getElementById("back-to-top");
   const mobileConsult = document.querySelector(".mobile-consult");
+  const navLabelMap = {
+    "index.html": { jp: "トップ", en: "HOME" },
+    "about.html": { jp: "私たちについて", en: "ABOUT" },
+    "stats.html": { jp: "支援実績", en: "IMPACT" },
+    "services.html": { jp: "サービス", en: "SERVICES" },
+    "support.html": { jp: "支援内容", en: "SUPPORT" },
+    "process.html": { jp: "入居までの流れ", en: "PROCESS" },
+    "faq.html": { jp: "FAQ", en: "FAQ" },
+    "contact.html": { jp: "お問い合わせ", en: "CONTACT" }
+  };
 
   const currentPath = (() => {
     try {
@@ -19,6 +29,10 @@
   navPrimaryLinks.forEach((link) => {
     try {
       const linkPath = new URL(link.href, window.location.href).pathname.split("/").pop() || "index.html";
+      const labels = navLabelMap[linkPath];
+      if (labels && !link.querySelector(".nav-label-jp")) {
+        link.innerHTML = `<span class="nav-label-jp">${labels.jp}</span><span class="nav-label-en">${labels.en}</span>`;
+      }
       if (linkPath === currentPath) {
         link.setAttribute("aria-current", "page");
       }
@@ -26,6 +40,23 @@
       // Ignore malformed URLs.
     }
   });
+
+  if (globalNav && !globalNav.querySelector(".mobile-nav-cta")) {
+    const consultButton = globalNav.querySelector(".btn-nav");
+    if (consultButton) {
+      const ctaWrap = document.createElement("div");
+      ctaWrap.className = "mobile-nav-cta";
+
+      const telButton = document.createElement("a");
+      telButton.href = "tel:0427048308";
+      telButton.className = "btn btn-secondary btn-nav-tel";
+      telButton.setAttribute("aria-label", "電話で相談する 042-704-8308");
+      telButton.textContent = "TEL 042-704-8308";
+
+      ctaWrap.append(consultButton, telButton);
+      globalNav.append(ctaWrap);
+    }
+  }
 
   const updateHeaderState = () => {
     if (!header || !backToTop) return;
@@ -71,6 +102,19 @@
       const clickedInsideNav = globalNav.contains(event.target);
       const clickedToggle = menuToggle.contains(event.target);
       if (!clickedInsideNav && !clickedToggle && globalNav.classList.contains("open")) {
+        setMenuOpen(false);
+      }
+    });
+
+    globalNav.addEventListener("click", (event) => {
+      if (window.innerWidth > 767 || !globalNav.classList.contains("open")) return;
+      const tappedLink = event.target.closest("a");
+      if (tappedLink) {
+        setMenuOpen(false);
+        return;
+      }
+      const tappedContentArea = event.target.closest("ul, .mobile-nav-cta");
+      if (!tappedContentArea) {
         setMenuOpen(false);
       }
     });
