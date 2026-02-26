@@ -904,6 +904,17 @@ body.home-page .global-nav ul a[aria-current="page"] {
   pointer-events: none;
 }
 
+.guide-banner::after {
+  content: "";
+  position: absolute;
+  left: 0.9rem;
+  right: 0.9rem;
+  top: 0.62rem;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0, 172, 179, 0.18), rgba(108, 121, 139, 0.14));
+  pointer-events: none;
+}
+
 .guide-banner:hover {
   transform: translateY(-3px);
   border-color: rgba(0, 172, 179, 0.52);
@@ -1000,6 +1011,87 @@ body.home-page .global-nav ul a[aria-current="page"] {
   content: "›";
   font-size: 0.95rem;
   line-height: 1;
+}
+
+@media (min-width: 1024px) {
+  .page-guide {
+    padding-top: 2.35rem;
+    padding-bottom: 4.9rem;
+  }
+
+  .page-guide .container {
+    position: relative;
+  }
+
+  .page-guide .container::before {
+    content: "";
+    position: absolute;
+    inset: -1.2rem -0.8rem -1.35rem;
+    z-index: -1;
+    border-radius: 1.2rem;
+    background:
+      linear-gradient(145deg, rgba(240, 245, 249, 0.6), rgba(229, 236, 242, 0.38)),
+      radial-gradient(circle at 10% 12%, rgba(78, 194, 202, 0.12), transparent 36%);
+    border: 1px solid rgba(176, 188, 201, 0.22);
+  }
+
+  .guide-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .guide-banner {
+    grid-column: span 3;
+    min-height: 11rem;
+    padding: 1.08rem 1.1rem 1.02rem;
+    border-color: rgba(138, 152, 169, 0.34);
+    box-shadow:
+      0 18px 30px rgba(67, 77, 89, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  }
+
+  .guide-banner:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 172, 179, 0.54);
+    box-shadow:
+      0 20px 36px rgba(0, 172, 179, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  }
+
+  .guide-banner-lead {
+    grid-column: span 6;
+    min-height: 11.4rem;
+  }
+
+  .guide-banner:nth-child(4),
+  .guide-banner:nth-child(5),
+  .guide-banner:nth-child(6) {
+    grid-column: span 4;
+  }
+
+  .guide-banner-wide {
+    grid-column: span 12;
+    min-height: 9.1rem;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "number jp link"
+      "en en link"
+      "desc desc desc";
+    column-gap: 0.95rem;
+  }
+
+  .guide-title-jp {
+    font-size: 1.08rem;
+  }
+
+  .guide-title-en {
+    font-size: 0.62rem;
+  }
+
+  .guide-desc {
+    margin-top: 0.34rem;
+    max-width: 43ch;
+  }
 }
 
 .service-card {
