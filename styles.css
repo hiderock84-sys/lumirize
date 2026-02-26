@@ -850,13 +850,18 @@ body.home-page .global-nav ul a[aria-current="page"] {
 }
 
 .page-guide {
-  padding-top: 5.3rem;
+  padding-top: 2.1rem;
+  padding-bottom: 4.2rem;
 }
 
 .guide-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   gap: 0.95rem;
+}
+
+.page-guide .guide-grid {
+  margin-top: 0;
 }
 
 .guide-banner {
@@ -1980,6 +1985,11 @@ textarea.invalid {
 
   .section {
     padding: 4.7rem 0;
+  }
+
+  .page-guide {
+    padding-top: 1.45rem;
+    padding-bottom: 2.75rem;
   }
 
   .menu-toggle {
