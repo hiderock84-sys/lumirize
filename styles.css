@@ -77,6 +77,14 @@ body.home-page .brand-text small {
   color: rgba(221, 230, 240, 0.9);
 }
 
+body.home-page .brand {
+  gap: 0;
+}
+
+body.home-page .header-logo {
+  width: min(100%, 11rem);
+}
+
 img,
 svg,
 video {
@@ -1906,6 +1914,10 @@ textarea.invalid {
     font-size: 0.64rem;
   }
 
+  body.home-page .header-logo {
+    width: min(100%, 9.5rem);
+  }
+
   .global-nav {
     position: fixed;
     inset: 0;
@@ -2378,6 +2390,10 @@ textarea.invalid {
 
   .brand-text small {
     font-size: 0.6rem;
+  }
+
+  body.home-page .header-logo {
+    width: min(100%, 8.8rem);
   }
 
   .hero h1::after {
