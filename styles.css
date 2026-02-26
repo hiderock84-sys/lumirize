@@ -829,6 +829,82 @@ body.home-page .global-nav ul a[aria-current="page"] {
   gap: 1rem;
 }
 
+.page-guide {
+  padding-top: 5.3rem;
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.guide-banner {
+  min-height: 7.6rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--gradient-surface-soft);
+  box-shadow: var(--shadow-card);
+  padding: 1rem 1rem 0.95rem;
+  text-decoration: none;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "number arrow"
+    "jp arrow"
+    "en arrow";
+  row-gap: 0.22rem;
+  align-items: center;
+  transition:
+    transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.guide-banner::after {
+  content: "›";
+  grid-area: arrow;
+  justify-self: end;
+  align-self: center;
+  font-size: 1.25rem;
+  color: rgba(0, 172, 179, 0.72);
+}
+
+.guide-banner:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 172, 179, 0.56);
+  box-shadow: var(--shadow-soft);
+  background: linear-gradient(146deg, rgba(255, 255, 255, 0.97) 0%, rgba(237, 244, 248, 0.95) 55%, rgba(220, 232, 238, 0.93) 100%);
+}
+
+.guide-number {
+  grid-area: number;
+  margin: 0;
+  color: var(--color-primary);
+  font-family: var(--font-brand);
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+}
+
+.guide-title-jp {
+  grid-area: jp;
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--color-text);
+}
+
+.guide-title-en {
+  grid-area: en;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: rgba(70, 75, 84, 0.66);
+  text-transform: uppercase;
+}
+
 .service-card {
   display: flex;
   flex-direction: column;
@@ -1783,6 +1859,10 @@ textarea.invalid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .guide-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .standards-grid {
     grid-template-columns: 1fr;
   }
@@ -2225,6 +2305,7 @@ textarea.invalid {
   .photo-grid,
   .stats-summary-grid,
   .stats-dashboard,
+  .guide-grid,
   .service-grid,
   .support-grid,
   .story-grid,
@@ -2238,6 +2319,19 @@ textarea.invalid {
   .process-cta {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .guide-banner {
+    min-height: 6.7rem;
+    padding: 0.88rem 0.9rem 0.82rem;
+  }
+
+  .guide-title-jp {
+    font-size: 0.96rem;
+  }
+
+  .guide-title-en {
+    font-size: 0.58rem;
   }
 
   .footer-logo {
