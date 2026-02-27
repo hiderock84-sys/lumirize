@@ -351,7 +351,7 @@ body.home-page .global-nav ul a[aria-current="page"] {
 .hero-content {
   position: relative;
   z-index: 1;
-  max-width: 55rem;
+  max-width: 58rem;
   color: rgba(243, 247, 251, 0.97);
 }
 
@@ -367,33 +367,51 @@ body.home-page .global-nav ul a[aria-current="page"] {
 }
 
 .hero h1 {
-  margin: 0.95rem 0 0.9rem;
+  margin: 0.95rem 0 0.78rem;
   font-family: var(--font-brand);
-  font-size: clamp(2rem, 6.3vw, 4.4rem);
-  line-height: 1.13;
+  font-size: clamp(1.94rem, 5.2vw, 3.5rem);
+  line-height: 1.18;
   letter-spacing: 0.01em;
   text-shadow: 0 8px 22px rgba(6, 11, 18, 0.36);
 }
 
 .hero h1::after {
-  content: "Light for Every Life";
-  display: block;
-  margin-top: 0.75rem;
-  font-family: var(--font-brand);
-  font-style: normal;
-  font-weight: 500;
-  font-size: clamp(1.3rem, 3vw, 2.1rem);
-  letter-spacing: 0.02em;
-  color: rgba(207, 215, 224, 0.92);
-  text-shadow: 0 8px 18px rgba(6, 11, 18, 0.28);
+  content: none;
+}
+
+.hero-subhead {
+  margin: 0 0 0.58rem;
+  color: rgba(233, 240, 247, 0.95);
+  font-size: clamp(1.08rem, 2.6vw, 1.6rem);
+  font-weight: 600;
+  line-height: 1.5;
+  text-shadow: 0 6px 16px rgba(6, 11, 18, 0.26);
+}
+
+.hero-keywords {
+  margin: 0 0 0.78rem;
+  color: rgba(154, 224, 229, 0.9);
+  font-size: clamp(0.88rem, 1.95vw, 1.05rem);
+  letter-spacing: 0.08em;
+  line-height: 1.45;
+  text-shadow: 0 4px 14px rgba(6, 11, 18, 0.26);
 }
 
 .hero-lead {
-  max-width: 46rem;
-  margin: 0 0 1.45rem;
-  color: rgba(224, 231, 241, 0.88);
-  font-size: clamp(0.98rem, 2vw, 1.1rem);
-  line-height: 1.74;
+  max-width: 47rem;
+  margin: 0 0 0.68rem;
+  color: rgba(226, 233, 242, 0.9);
+  font-size: clamp(0.94rem, 1.9vw, 1.04rem);
+  line-height: 1.7;
+  text-shadow: 0 5px 16px rgba(6, 11, 18, 0.3);
+}
+
+.hero-signoff {
+  margin: 0.48rem 0 0;
+  color: rgba(241, 246, 251, 0.95);
+  font-size: clamp(0.92rem, 1.9vw, 1rem);
+  line-height: 1.7;
+  font-weight: 600;
   text-shadow: 0 5px 16px rgba(6, 11, 18, 0.3);
 }
 
@@ -2313,24 +2331,39 @@ textarea.invalid {
 
   .hero h1 {
     margin-top: 0.85rem;
-    margin-bottom: 0.8rem;
-    font-size: clamp(1.72rem, 8.8vw, 2.32rem);
+    margin-bottom: 0.62rem;
+    font-size: clamp(1.62rem, 8.2vw, 2.2rem);
     line-height: 1.16;
     text-wrap: balance;
     overflow-wrap: anywhere;
     word-break: break-word;
   }
 
-  .hero h1::after {
-    font-size: clamp(1.25rem, 7.2vw, 1.65rem);
+  .hero-subhead {
+    margin-bottom: 0.46rem;
+    font-size: clamp(1rem, 5.3vw, 1.25rem);
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-keywords {
+    margin-bottom: 0.66rem;
+    font-size: 0.84rem;
+    letter-spacing: 0.06em;
   }
 
   .hero-lead {
-    font-size: 0.95rem;
-    line-height: 1.74;
-    color: rgba(229, 235, 244, 0.92);
-    margin-bottom: 1.15rem;
+    font-size: 0.9rem;
+    line-height: 1.68;
+    color: rgba(229, 236, 244, 0.92);
+    margin-bottom: 0.56rem;
     overflow-wrap: anywhere;
+  }
+
+  .hero-signoff {
+    margin-top: 0.4rem;
+    font-size: 0.88rem;
+    line-height: 1.62;
   }
 
   .hero-cta {
