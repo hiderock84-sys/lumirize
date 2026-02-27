@@ -366,7 +366,7 @@ body.home-page .global-nav ul a[aria-current="page"] {
   display: inline-block;
   font-family: var(--font-brand);
   font-weight: 600;
-  font-size: 0.74rem;
+  font-size: 0.76rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: rgba(168, 226, 232, 0.9);
@@ -376,7 +376,7 @@ body.home-page .global-nav ul a[aria-current="page"] {
 .hero h1 {
   margin: 0.9rem 0 0.68rem;
   font-family: var(--font-brand);
-  font-size: clamp(1.82rem, 4.7vw, 3.1rem);
+  font-size: clamp(1.92rem, 4.95vw, 3.28rem);
   line-height: 1.2;
   letter-spacing: 0.015em;
   font-weight: 600;
@@ -390,7 +390,7 @@ body.home-page .global-nav ul a[aria-current="page"] {
 .hero-subhead {
   margin: 0 0 0.54rem;
   color: rgba(234, 241, 248, 0.9);
-  font-size: clamp(1.02rem, 2.2vw, 1.4rem);
+  font-size: clamp(1.08rem, 2.35vw, 1.5rem);
   font-weight: 500;
   line-height: 1.54;
   text-shadow: 0 4px 12px rgba(6, 11, 18, 0.22);
@@ -399,7 +399,7 @@ body.home-page .global-nav ul a[aria-current="page"] {
 .hero-keywords {
   margin: 0 0 0.7rem;
   color: rgba(193, 225, 232, 0.84);
-  font-size: clamp(0.84rem, 1.7vw, 0.98rem);
+  font-size: clamp(0.88rem, 1.85vw, 1.02rem);
   letter-spacing: 0.06em;
   line-height: 1.5;
   text-shadow: 0 3px 10px rgba(6, 11, 18, 0.2);
@@ -409,7 +409,7 @@ body.home-page .global-nav ul a[aria-current="page"] {
   max-width: 45rem;
   margin: 0 0 0.62rem;
   color: rgba(229, 236, 244, 0.89);
-  font-size: clamp(0.9rem, 1.75vw, 1rem);
+  font-size: clamp(0.96rem, 1.86vw, 1.06rem);
   line-height: 1.76;
   text-shadow: 0 4px 12px rgba(6, 11, 18, 0.24);
 }
@@ -417,7 +417,7 @@ body.home-page .global-nav ul a[aria-current="page"] {
 .hero-signoff {
   margin: 0.58rem 0 0;
   color: rgba(242, 247, 251, 0.94);
-  font-size: clamp(0.89rem, 1.7vw, 0.97rem);
+  font-size: clamp(0.93rem, 1.8vw, 1.02rem);
   line-height: 1.72;
   font-weight: 500;
   text-shadow: 0 4px 12px rgba(6, 11, 18, 0.24);
@@ -2348,7 +2348,7 @@ textarea.invalid {
   .hero h1 {
     margin-top: 0.8rem;
     margin-bottom: 0.56rem;
-    font-size: clamp(1.5rem, 7.6vw, 2.04rem);
+    font-size: clamp(1.58rem, 7.9vw, 2.12rem);
     line-height: 1.2;
     text-wrap: balance;
     overflow-wrap: anywhere;
@@ -2357,19 +2357,19 @@ textarea.invalid {
 
   .hero-subhead {
     margin-bottom: 0.42rem;
-    font-size: clamp(0.94rem, 4.9vw, 1.14rem);
+    font-size: clamp(0.98rem, 5.1vw, 1.2rem);
     line-height: 1.54;
     overflow-wrap: anywhere;
   }
 
   .hero-keywords {
     margin-bottom: 0.58rem;
-    font-size: 0.78rem;
+    font-size: 0.82rem;
     letter-spacing: 0.05em;
   }
 
   .hero-lead {
-    font-size: 0.86rem;
+    font-size: 0.9rem;
     line-height: 1.74;
     color: rgba(229, 236, 244, 0.92);
     margin-bottom: 0.5rem;
@@ -2378,7 +2378,7 @@ textarea.invalid {
 
   .hero-signoff {
     margin-top: 0.36rem;
-    font-size: 0.84rem;
+    font-size: 0.88rem;
     line-height: 1.66;
   }
 
