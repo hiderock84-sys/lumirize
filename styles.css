@@ -376,8 +376,9 @@ body.home-page .global-nav ul a[aria-current="page"] {
 .hero h1 {
   margin: 0.9rem 0 0.68rem;
   font-family: var(--font-brand);
-  font-size: clamp(1.92rem, 4.95vw, 3.28rem);
-  line-height: 1.2;
+  font-size: clamp(1.76rem, 4.45vw, 2.94rem);
+  line-height: 1.24;
+  max-width: 20ch;
   letter-spacing: 0.015em;
   font-weight: 600;
   text-shadow: 0 6px 16px rgba(6, 11, 18, 0.28);
@@ -390,7 +391,7 @@ body.home-page .global-nav ul a[aria-current="page"] {
 .hero-subhead {
   margin: 0 0 0.54rem;
   color: rgba(234, 241, 248, 0.9);
-  font-size: clamp(1.08rem, 2.35vw, 1.5rem);
+  font-size: clamp(1rem, 2.05vw, 1.32rem);
   font-weight: 500;
   line-height: 1.54;
   text-shadow: 0 4px 12px rgba(6, 11, 18, 0.22);
@@ -2348,8 +2349,8 @@ textarea.invalid {
   .hero h1 {
     margin-top: 0.8rem;
     margin-bottom: 0.56rem;
-    font-size: clamp(1.58rem, 7.9vw, 2.12rem);
-    line-height: 1.2;
+    font-size: clamp(1.46rem, 7.3vw, 1.98rem);
+    line-height: 1.24;
     text-wrap: balance;
     overflow-wrap: anywhere;
     word-break: break-word;
@@ -2357,7 +2358,7 @@ textarea.invalid {
 
   .hero-subhead {
     margin-bottom: 0.42rem;
-    font-size: clamp(0.98rem, 5.1vw, 1.2rem);
+    font-size: clamp(0.94rem, 4.6vw, 1.1rem);
     line-height: 1.54;
     overflow-wrap: anywhere;
   }
