@@ -1141,6 +1141,151 @@ body.home-page .global-nav ul a[aria-current="page"] {
   align-self: flex-start;
 }
 
+.institution-safety {
+  padding-top: 5rem;
+  background:
+    linear-gradient(180deg, rgba(8, 13, 20, 0.95) 0%, rgba(10, 16, 24, 0.94) 58%, rgba(12, 19, 28, 0.96) 100%),
+    radial-gradient(circle at 14% 10%, rgba(0, 172, 179, 0.18), transparent 38%);
+  color: rgba(236, 243, 249, 0.94);
+}
+
+.institution-safety .section-heading h2 {
+  color: rgba(244, 249, 253, 0.96);
+}
+
+.institution-safety .section-heading p {
+  color: rgba(208, 220, 231, 0.82);
+}
+
+.institution-safety .eyebrow {
+  color: rgba(157, 225, 232, 0.94);
+}
+
+.institutional-intro {
+  margin-top: 0.35rem;
+  border-color: rgba(157, 225, 232, 0.28);
+  background: linear-gradient(152deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+  box-shadow: 0 10px 24px rgba(3, 7, 12, 0.26);
+}
+
+.institutional-intro .message-theme {
+  color: rgba(157, 225, 232, 0.96);
+}
+
+.institutional-intro p {
+  color: rgba(219, 230, 239, 0.9);
+}
+
+.institution-pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11.2rem, 1fr));
+  gap: 0.9rem;
+  margin-top: 1rem;
+}
+
+.institution-pillar {
+  border: 1px solid rgba(157, 225, 232, 0.22);
+  border-radius: var(--radius-md);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  padding: 1rem;
+  box-shadow: 0 10px 24px rgba(3, 7, 12, 0.26);
+}
+
+.institution-pillar h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+  color: rgba(236, 244, 251, 0.97);
+}
+
+.institution-pillar p {
+  margin: 0;
+  color: rgba(210, 223, 234, 0.84);
+  font-size: 0.92rem;
+  line-height: 1.62;
+}
+
+.institution-steps {
+  margin-top: 1.1rem;
+  border: 1px solid rgba(157, 225, 232, 0.24);
+  border-radius: var(--radius-md);
+  background: linear-gradient(152deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  padding: 1rem;
+  box-shadow: 0 10px 24px rgba(3, 7, 12, 0.24);
+}
+
+.institution-steps > h3 {
+  margin: 0 0 0.72rem;
+  color: rgba(243, 248, 252, 0.97);
+  font-size: 1.08rem;
+}
+
+.institution-steps .process-item {
+  border-color: rgba(183, 227, 233, 0.2);
+  background: linear-gradient(152deg, rgba(245, 248, 251, 0.1), rgba(236, 242, 247, 0.05));
+}
+
+.institution-steps .process-item h4 {
+  margin: 0;
+  font-size: 1.03rem;
+  color: rgba(240, 247, 252, 0.96);
+}
+
+.institution-steps .process-item p,
+.institution-steps .process-item li {
+  color: rgba(211, 224, 235, 0.86);
+}
+
+.institution-assurance {
+  margin-top: 1.1rem;
+  border: 1px solid rgba(157, 225, 232, 0.22);
+  border-radius: var(--radius-md);
+  background: linear-gradient(152deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  padding: 1rem;
+}
+
+.institution-assurance > h3 {
+  margin: 0 0 0.7rem;
+  font-size: 1.08rem;
+  color: rgba(243, 248, 252, 0.97);
+}
+
+.assurance-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.assurance-card {
+  border: 1px solid rgba(170, 220, 227, 0.2);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.95rem;
+}
+
+.assurance-card h4 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+  color: rgba(236, 244, 251, 0.97);
+}
+
+.assurance-card p {
+  margin: 0;
+  color: rgba(210, 223, 234, 0.84);
+  font-size: 0.92rem;
+  line-height: 1.66;
+}
+
+.institution-safety .process-cta {
+  margin-top: 1rem;
+  border-color: rgba(157, 225, 232, 0.28);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+  box-shadow: 0 10px 24px rgba(3, 7, 12, 0.24);
+}
+
+.institution-safety .process-cta p {
+  color: rgba(217, 229, 239, 0.9);
+}
+
 .support {
   padding-top: 5rem;
 }
@@ -2059,6 +2204,10 @@ textarea.invalid {
     padding: 4.7rem 0;
   }
 
+  .institution-safety {
+    padding-top: 4.4rem;
+  }
+
   .page-guide {
     padding-top: 1.45rem;
     padding-bottom: 2.75rem;
@@ -2509,6 +2658,7 @@ textarea.invalid {
   .photo-grid,
   .stats-summary-grid,
   .stats-dashboard,
+  .assurance-grid,
   .guide-grid,
   .service-grid,
   .support-grid,
