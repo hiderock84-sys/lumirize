@@ -5,8 +5,8 @@
   --color-surface-2: #c9d4e1;
   --color-primary: #00acb3;
   --color-primary-soft: #43cfd5;
-  --color-text: #273240;
-  --color-text-muted: rgba(39, 50, 64, 0.88);
+  --color-text: #223042;
+  --color-text-muted: rgba(34, 48, 66, 0.92);
   --color-border: rgba(88, 106, 128, 0.36);
   --color-border-strong: rgba(88, 106, 128, 0.54);
   --gradient-primary: linear-gradient(132deg, #008d9b 0%, #24ada9 46%, #6ea8d8 100%);
@@ -24,7 +24,7 @@
   --hero-overlay-1: linear-gradient(180deg, rgba(44, 49, 58, 0.52) 0%, rgba(34, 40, 49, 0.8) 68%, rgba(26, 31, 39, 0.9) 100%);
   --hero-overlay-2: radial-gradient(circle at 84% 12%, rgba(0, 172, 179, 0.2), transparent 42%);
   --hero-overlay-3: radial-gradient(circle at 20% 80%, rgba(154, 156, 161, 0.17), transparent 46%);
-  --nav-link-color: rgba(54, 62, 73, 0.95);
+  --nav-link-color: rgba(40, 49, 62, 0.98);
   --nav-link-hover: #009ca4;
   --menu-toggle-bg: rgba(221, 226, 231, 0.25);
   --menu-toggle-line: rgba(245, 248, 250, 0.96);
@@ -65,7 +65,7 @@ body {
 }
 
 body.home-page {
-  --nav-link-color: rgba(234, 242, 249, 0.95);
+  --nav-link-color: rgba(242, 248, 253, 0.98);
   --nav-link-hover: #79c2cc;
 }
 
@@ -280,7 +280,7 @@ main::after {
 }
 
 .global-nav ul a {
-  font-weight: 500;
+  font-weight: 600;
   color: var(--nav-link-color);
   font-size: 0.82rem;
   letter-spacing: 0.01em;
@@ -1251,7 +1251,7 @@ body.home-page .global-nav ul a[aria-current="page"] {
   font-size: 0.6rem;
   font-weight: 600;
   letter-spacing: 0.17em;
-  color: rgba(var(--guide-slate-rgb), 0.72);
+  color: rgba(var(--guide-slate-rgb), 0.82);
   text-transform: uppercase;
 }
 
@@ -3200,7 +3200,7 @@ textarea.invalid {
     font-weight: 500;
     letter-spacing: 0.17em;
     text-transform: uppercase;
-    color: rgba(190, 225, 230, 0.66);
+    color: rgba(210, 237, 241, 0.82);
   }
 
   .global-nav ul a::after {
@@ -3208,7 +3208,7 @@ textarea.invalid {
     grid-area: arrow;
     align-self: center;
     justify-self: end;
-    color: rgba(188, 228, 231, 0.74);
+    color: rgba(210, 242, 245, 0.86);
     font-size: 1.18rem;
     line-height: 1;
   }
