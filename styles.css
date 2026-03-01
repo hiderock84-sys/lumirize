@@ -1203,6 +1203,10 @@ body.home-page .global-nav ul a[aria-current="page"] {
 }
 
 .guide-banner:nth-child(7)::before {
+  background-image: url("https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=90");
+}
+
+.guide-banner:nth-child(8)::before {
   background-image: url("https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=90");
 }
 
@@ -1579,6 +1583,56 @@ body.home-page .global-nav ul a[aria-current="page"] {
   color: rgba(219, 230, 239, 0.9);
 }
 
+.policy-benefit-grid {
+  margin-top: 1rem;
+  border: 1px solid rgba(167, 231, 236, 0.3);
+  border-radius: var(--radius-md);
+  background: linear-gradient(152deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+  padding: 1rem;
+  box-shadow: 0 12px 28px rgba(3, 7, 12, 0.22);
+}
+
+.policy-benefit-grid > h3 {
+  margin: 0 0 0.75rem;
+  color: rgba(242, 248, 252, 0.98);
+  font-size: 1.12rem;
+}
+
+.policy-benefit-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.policy-benefit-card {
+  border: 1px solid rgba(172, 233, 237, 0.24);
+  border-radius: var(--radius-sm);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)),
+    radial-gradient(circle at 88% -12%, rgba(255, 201, 130, 0.18), transparent 42%);
+  padding: 0.9rem 0.95rem;
+}
+
+.policy-benefit-card h4 {
+  margin: 0 0 0.42rem;
+  font-size: 1rem;
+  color: rgba(239, 247, 252, 0.98);
+}
+
+.policy-benefit-card li {
+  color: rgba(214, 226, 236, 0.9);
+}
+
+.policy-map {
+  margin-top: 1rem;
+}
+
+.policy-map > h3 {
+  margin: 0 0 0.72rem;
+  color: rgba(242, 248, 252, 0.98);
+  font-size: 1.1rem;
+}
+
 .institution-pillar-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(11.2rem, 1fr));
@@ -1594,7 +1648,8 @@ body.home-page .global-nav ul a[aria-current="page"] {
   box-shadow: 0 10px 24px rgba(3, 7, 12, 0.26);
 }
 
-.institution-pillar h3 {
+.institution-pillar h3,
+.institution-pillar h4 {
   margin: 0 0 0.35rem;
   font-size: 1rem;
   color: rgba(236, 244, 251, 0.97);
@@ -1654,6 +1709,252 @@ body.home-page .global-nav ul a[aria-current="page"] {
 .institution-steps .process-item p,
 .institution-steps .process-item li {
   color: rgba(211, 224, 235, 0.86);
+}
+
+.policy-graph-board {
+  margin-top: 1rem;
+  border: 1px solid rgba(167, 231, 236, 0.3);
+  border-radius: var(--radius-md);
+  background: linear-gradient(152deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.03));
+  padding: 1rem;
+  box-shadow: 0 10px 24px rgba(3, 7, 12, 0.24);
+}
+
+.policy-graph-board > h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+  color: rgba(242, 248, 252, 0.98);
+}
+
+.policy-graph-board .muted {
+  color: rgba(207, 224, 236, 0.86);
+}
+
+.policy-graph-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.3fr;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.policy-ring-wrap {
+  border: 1px solid rgba(172, 233, 237, 0.24);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.85rem;
+}
+
+.policy-ring-label {
+  margin: 0 0 0.6rem;
+  font-size: 0.88rem;
+  color: rgba(214, 226, 236, 0.9);
+}
+
+.policy-ring {
+  width: min(12.5rem, 100%);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  margin-inline: auto;
+  background:
+    radial-gradient(circle at center, rgba(15, 22, 33, 0.9) 0 38%, transparent 39% 100%),
+    conic-gradient(
+      rgba(0, 201, 219, 0.95) 0 40%,
+      rgba(130, 226, 241, 0.9) 40% 75%,
+      rgba(255, 204, 140, 0.92) 75% 100%
+    );
+  box-shadow: inset 0 0 0 1px rgba(188, 237, 242, 0.34);
+}
+
+.policy-ring-legend {
+  list-style: none;
+  margin: 0.72rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.32rem;
+}
+
+.policy-ring-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  font-size: 0.84rem;
+  color: rgba(214, 226, 236, 0.9);
+}
+
+.dot {
+  width: 0.62rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-home {
+  background: rgba(0, 201, 219, 0.95);
+}
+
+.dot-work {
+  background: rgba(130, 226, 241, 0.9);
+}
+
+.dot-stay {
+  background: rgba(255, 204, 140, 0.92);
+}
+
+.policy-bars {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.62rem;
+}
+
+.policy-bars li {
+  border: 1px solid rgba(172, 233, 237, 0.22);
+  border-radius: 0.78rem;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.72rem 0.74rem;
+}
+
+.policy-bar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.62rem;
+  color: rgba(236, 245, 251, 0.95);
+  font-size: 0.88rem;
+}
+
+.policy-bar-head strong {
+  color: rgba(255, 216, 163, 0.95);
+  font-size: 0.86rem;
+}
+
+.policy-track {
+  display: block;
+  margin-top: 0.34rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: rgba(194, 227, 236, 0.2);
+  overflow: hidden;
+}
+
+.policy-track > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgba(0, 201, 219, 0.95), rgba(255, 204, 140, 0.9));
+}
+
+.policy-bars p {
+  margin: 0.45rem 0 0;
+  font-size: 0.86rem;
+  line-height: 1.56;
+  color: rgba(214, 226, 236, 0.9);
+}
+
+.policy-compare {
+  margin-top: 1rem;
+}
+
+.policy-compare > h3 {
+  margin: 0 0 0.68rem;
+  font-size: 1.1rem;
+  color: rgba(242, 248, 252, 0.98);
+}
+
+.policy-compare-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.policy-compare-card {
+  border: 1px solid rgba(172, 233, 237, 0.24);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.92rem;
+}
+
+.policy-compare-card h4 {
+  margin: 0 0 0.48rem;
+  font-size: 1rem;
+  color: rgba(239, 247, 252, 0.98);
+}
+
+.policy-compare-card ul {
+  margin: 0;
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.28rem;
+}
+
+.policy-compare-card li {
+  color: rgba(214, 226, 236, 0.9);
+  line-height: 1.56;
+}
+
+.policy-compare-strong {
+  border-color: rgba(188, 236, 241, 0.46);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)),
+    radial-gradient(circle at 90% -10%, rgba(255, 205, 141, 0.16), transparent 42%);
+}
+
+.policy-flow-map {
+  margin-top: 1rem;
+  border: 1px solid rgba(172, 233, 237, 0.26);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 1rem;
+}
+
+.policy-flow-map > h3 {
+  margin: 0 0 0.72rem;
+  font-size: 1.08rem;
+  color: rgba(242, 248, 252, 0.98);
+}
+
+.policy-flow-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.76rem;
+}
+
+.policy-flow-step {
+  border: 1px solid rgba(183, 227, 233, 0.24);
+  border-radius: 0.78rem;
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+  padding: 0.74rem 0.72rem;
+  position: relative;
+}
+
+.policy-flow-step h4 {
+  margin: 0 0 0.32rem;
+  font-size: 0.96rem;
+  color: rgba(239, 247, 252, 0.98);
+}
+
+.policy-flow-step p {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.54;
+  color: rgba(214, 226, 236, 0.9);
+}
+
+.policy-flow-num {
+  display: inline-grid;
+  place-items: center;
+  width: 1.86rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  margin-bottom: 0.4rem;
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #203749;
+  background: linear-gradient(135deg, rgba(126, 232, 240, 0.95), rgba(255, 203, 136, 0.92));
 }
 
 .institution-assurance {
@@ -2635,10 +2936,20 @@ textarea.invalid {
   .about-narrative,
   .stats-summary-grid,
   .stats-dashboard,
+  .policy-benefit-cards,
   .philosophy-grid,
   .contact-grid,
   .support-grid,
   .story-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .policy-graph-layout,
+  .policy-compare-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .policy-flow-steps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -3153,6 +3464,10 @@ textarea.invalid {
   .photo-grid,
   .stats-summary-grid,
   .stats-dashboard,
+  .policy-benefit-cards,
+  .policy-graph-layout,
+  .policy-compare-grid,
+  .policy-flow-steps,
   .assurance-grid,
   .guide-grid,
   .service-grid,
