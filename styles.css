@@ -2393,6 +2393,14 @@ body.home-page .global-nav ul a[aria-current="page"] {
   padding: 0 1rem 1rem;
 }
 
+.faq-benefit-list {
+  margin: 0;
+  padding: 0 1rem 1rem 2.2rem;
+  color: var(--color-text-muted);
+  display: grid;
+  gap: 0.4rem;
+}
+
 .faq-cta {
   margin-top: 1.3rem;
   display: flex;
