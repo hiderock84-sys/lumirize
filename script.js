@@ -26,6 +26,13 @@
       return "index.html";
     }
   })();
+  const currentHash = (() => {
+    try {
+      return window.location.hash || "";
+    } catch {
+      return "";
+    }
+  })();
 
   navPrimaryLinks.forEach((link) => {
     try {
@@ -36,7 +43,7 @@
       if (labels && !link.querySelector(".nav-label-jp")) {
         link.innerHTML = `<span class="nav-label-jp">${labels.jp}</span><span class="nav-label-en">${labels.en}</span>`;
       }
-      if (linkPath === currentPath && !linkHash) {
+      if (linkPath === currentPath && (!linkHash || linkHash === currentHash)) {
         link.setAttribute("aria-current", "page");
       } else {
         link.removeAttribute("aria-current");
@@ -198,6 +205,27 @@
       form.querySelector("#privacy")
     ].filter(Boolean);
 
+    const createMailtoUrl = (formData) => {
+      const name = (formData.get("name") || "").toString().trim();
+      const email = (formData.get("email") || "").toString().trim();
+      const phone = (formData.get("phone") || "").toString().trim();
+      const topic = (formData.get("topic") || "").toString().trim();
+      const message = (formData.get("message") || "").toString().trim();
+      const subject = encodeURIComponent(`【株式会社ルミライズ】${topic || "お問い合わせ"}`);
+      const body = encodeURIComponent(
+        [
+          `お名前: ${name || "未入力"}`,
+          `メールアドレス: ${email || "未入力"}`,
+          `電話番号: ${phone || "未入力"}`,
+          `お問い合わせ種別: ${topic || "未入力"}`,
+          "",
+          "お問い合わせ内容:",
+          message || "未入力"
+        ].join("\n")
+      );
+      return `mailto:info@lumirize.com?subject=${subject}&body=${body}`;
+    };
+
     const resetFieldError = (field) => {
       field.classList.remove("invalid");
       if (field.type === "checkbox") {
@@ -217,7 +245,7 @@
       field.addEventListener("change", () => resetFieldError(field));
     });
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
       formStatus.textContent = "";
       formStatus.className = "form-status";
@@ -252,14 +280,45 @@
 
       const submitButton = form.querySelector("button[type='submit']");
       if (submitButton) submitButton.disabled = true;
+      formStatus.textContent = "送信中です。しばらくお待ちください。";
+      formStatus.classList.add("pending");
 
-      window.setTimeout(() => {
+      const formData = new FormData(form);
+      const topic = (formData.get("topic") || "お問い合わせ").toString().trim() || "お問い合わせ";
+      formData.set("_subject", `【株式会社ルミライズ】${topic}`);
+      formData.set("_template", "table");
+      formData.set("_captcha", "false");
+
+      try {
+        const endpoint = form.getAttribute("action")?.trim();
+        if (!endpoint) {
+          throw new Error("Submit endpoint is not configured.");
+        }
+
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            Accept: "application/json"
+          },
+          body: formData
+        });
+
+        if (!response.ok) {
+          throw new Error(`Submit failed with status ${response.status}`);
+        }
+
         form.reset();
-        if (submitButton) submitButton.disabled = false;
         formStatus.textContent =
-          "お問い合わせありがとうございます。担当者より2営業日以内にご連絡いたします。";
+          "送信が完了しました。担当者より2営業日以内にご連絡いたします。";
         formStatus.classList.add("success");
-      }, 700);
+      } catch {
+        window.location.href = createMailtoUrl(formData);
+        formStatus.textContent =
+          "フォーム送信に接続できなかったため、メールアプリを起動しました。本文をご確認のうえ送信してください。";
+        formStatus.classList.add("error");
+      } finally {
+        if (submitButton) submitButton.disabled = false;
+      }
     });
   }
 })();
