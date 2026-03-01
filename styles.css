@@ -1,25 +1,25 @@
 :root {
   --font-brand: "Montserrat", "M PLUS 1p", "Noto Sans JP", sans-serif;
-  --color-bg: #d6dfea;
-  --color-surface: #dee7f0;
-  --color-surface-2: #c9d4e1;
+  --color-bg: #e1e8f2;
+  --color-surface: #e8eef7;
+  --color-surface-2: #d3dde9;
   --color-primary: #00acb3;
   --color-primary-soft: #43cfd5;
-  --color-text: #223042;
-  --color-text-muted: rgba(34, 48, 66, 0.92);
+  --color-text: #1f2d3f;
+  --color-text-muted: rgba(31, 45, 63, 0.9);
   --color-border: rgba(88, 106, 128, 0.36);
   --color-border-strong: rgba(88, 106, 128, 0.54);
   --gradient-primary: linear-gradient(132deg, #008d9b 0%, #24ada9 46%, #6ea8d8 100%);
   --gradient-surface:
-    linear-gradient(146deg, rgba(241, 247, 252, 0.93) 0%, rgba(224, 234, 244, 0.9) 52%, rgba(204, 216, 231, 0.88) 100%);
+    linear-gradient(146deg, rgba(248, 252, 255, 0.94) 0%, rgba(232, 240, 248, 0.92) 52%, rgba(214, 224, 236, 0.9) 100%);
   --gradient-surface-soft:
-    linear-gradient(146deg, rgba(236, 244, 251, 0.91) 0%, rgba(218, 228, 239, 0.89) 56%, rgba(197, 211, 227, 0.86) 100%);
-  --shadow-soft: 0 24px 48px rgba(8, 34, 59, 0.3);
-  --shadow-card: 0 16px 34px rgba(19, 31, 46, 0.22);
-  --bg-layer-1: radial-gradient(circle at 10% -8%, rgba(0, 139, 160, 0.2), transparent 42%);
-  --bg-layer-2: radial-gradient(circle at 88% 8%, rgba(178, 139, 95, 0.2), transparent 36%);
-  --bg-layer-3: radial-gradient(circle at 80% 88%, rgba(70, 119, 166, 0.18), transparent 44%);
-  --bg-layer-4: linear-gradient(180deg, #e4ebf4 0%, #ced9e6 54%, #bbc8d7 100%);
+    linear-gradient(146deg, rgba(244, 250, 255, 0.93) 0%, rgba(226, 236, 246, 0.91) 56%, rgba(208, 221, 235, 0.89) 100%);
+  --shadow-soft: 0 22px 44px rgba(8, 34, 59, 0.26);
+  --shadow-card: 0 14px 30px rgba(19, 31, 46, 0.18);
+  --bg-layer-1: radial-gradient(circle at 10% -8%, rgba(0, 139, 160, 0.16), transparent 42%);
+  --bg-layer-2: radial-gradient(circle at 88% 8%, rgba(178, 139, 95, 0.16), transparent 36%);
+  --bg-layer-3: radial-gradient(circle at 80% 88%, rgba(70, 119, 166, 0.14), transparent 44%);
+  --bg-layer-4: linear-gradient(180deg, #edf2f8 0%, #dbe4ef 54%, #cbd8e7 100%);
   --header-scrolled-bg: linear-gradient(94deg, rgba(35, 42, 53, 0.96), rgba(48, 56, 69, 0.94));
   --hero-overlay-1: linear-gradient(180deg, rgba(44, 49, 58, 0.52) 0%, rgba(34, 40, 49, 0.8) 68%, rgba(26, 31, 39, 0.9) 100%);
   --hero-overlay-2: radial-gradient(circle at 84% 12%, rgba(0, 172, 179, 0.2), transparent 42%);
@@ -134,16 +134,16 @@ main::before {
   pointer-events: none;
   z-index: -1;
   background:
-    linear-gradient(112deg, rgba(255, 255, 255, 0) 0%, rgba(0, 136, 154, 0.12) 40%, rgba(166, 130, 90, 0.15) 100%),
+    linear-gradient(112deg, rgba(255, 255, 255, 0) 0%, rgba(0, 136, 154, 0.1) 40%, rgba(166, 130, 90, 0.12) 100%),
     repeating-linear-gradient(
       90deg,
       rgba(255, 255, 255, 0) 0,
       rgba(255, 255, 255, 0) 5.4rem,
-      rgba(55, 86, 118, 0.14) 5.4rem,
-      rgba(55, 86, 118, 0.14) 5.56rem
+      rgba(55, 86, 118, 0.1) 5.4rem,
+      rgba(55, 86, 118, 0.1) 5.56rem
     );
   mix-blend-mode: soft-light;
-  opacity: 0.34;
+  opacity: 0.24;
 }
 
 main::after {
@@ -157,10 +157,10 @@ main::after {
   pointer-events: none;
   z-index: -1;
   background:
-    radial-gradient(circle at center, rgba(228, 238, 247, 0.54) 0 18%, transparent 19% 100%),
-    conic-gradient(from 90deg, rgba(0, 140, 158, 0.34), rgba(176, 139, 92, 0.26), rgba(0, 140, 158, 0.34));
-  filter: blur(1px);
-  opacity: 0.48;
+    radial-gradient(circle at center, rgba(236, 245, 252, 0.5) 0 18%, transparent 19% 100%),
+    conic-gradient(from 90deg, rgba(0, 140, 158, 0.28), rgba(176, 139, 92, 0.2), rgba(0, 140, 158, 0.28));
+  filter: blur(0.9px);
+  opacity: 0.32;
 }
 
 .skip-link {
@@ -469,7 +469,7 @@ body.home-page .global-nav ul a[aria-current="page"] {
 
 .hero-subhead {
   margin: 0 0 0.38rem;
-  color: rgba(234, 241, 248, 0.9);
+  color: rgba(238, 244, 250, 0.95);
   font-size: clamp(0.98rem, 1.95vw, 1.24rem);
   font-weight: 500;
   line-height: 1.54;
@@ -478,7 +478,7 @@ body.home-page .global-nav ul a[aria-current="page"] {
 
 .hero-keywords {
   margin: 0 0 0.7rem;
-  color: rgba(193, 225, 232, 0.84);
+  color: rgba(204, 232, 238, 0.92);
   font-size: clamp(0.88rem, 1.85vw, 1.02rem);
   letter-spacing: 0.06em;
   line-height: 1.5;
@@ -488,7 +488,7 @@ body.home-page .global-nav ul a[aria-current="page"] {
 .hero-lead {
   max-width: 45rem;
   margin: 0 0 0.62rem;
-  color: rgba(229, 236, 244, 0.89);
+  color: rgba(236, 242, 248, 0.95);
   font-size: clamp(0.96rem, 1.86vw, 1.06rem);
   line-height: 1.76;
   text-shadow: 0 4px 12px rgba(6, 11, 18, 0.24);
@@ -1385,7 +1385,7 @@ body.home-page .global-nav ul a[aria-current="page"] {
   background:
     linear-gradient(126deg, rgba(233, 241, 248, 0.24), transparent 42%),
     radial-gradient(circle at 88% -10%, rgba(0, 160, 180, 0.12), transparent 36%);
-  opacity: 0.42;
+  opacity: 0.26;
 }
 
 .message-card::after,
