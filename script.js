@@ -8,6 +8,7 @@
   const mobileConsult = document.querySelector(".mobile-consult");
   const navLabelMap = {
     "index.html": { jp: "トップ", en: "HOME" },
+    "index.html#policy-strategy": { jp: "制度活用戦略", en: "POLICY" },
     "about.html": { jp: "私たちについて", en: "ABOUT" },
     "stats.html": { jp: "支援実績", en: "IMPACT" },
     "services.html": { jp: "サービス", en: "SERVICES" },
@@ -28,13 +29,17 @@
 
   navPrimaryLinks.forEach((link) => {
     try {
-      const linkPath = new URL(link.href, window.location.href).pathname.split("/").pop() || "index.html";
-      const labels = navLabelMap[linkPath];
+      const linkUrl = new URL(link.href, window.location.href);
+      const linkPath = linkUrl.pathname.split("/").pop() || "index.html";
+      const linkHash = linkUrl.hash || "";
+      const labels = navLabelMap[`${linkPath}${linkHash}`] || navLabelMap[linkPath];
       if (labels && !link.querySelector(".nav-label-jp")) {
         link.innerHTML = `<span class="nav-label-jp">${labels.jp}</span><span class="nav-label-en">${labels.en}</span>`;
       }
-      if (linkPath === currentPath) {
+      if (linkPath === currentPath && !linkHash) {
         link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
       }
     } catch {
       // Ignore malformed URLs.
