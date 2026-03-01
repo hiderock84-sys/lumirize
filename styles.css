@@ -5,8 +5,8 @@
   --color-surface-2: #c9d4e1;
   --color-primary: #00acb3;
   --color-primary-soft: #43cfd5;
-  --color-text: #2f3743;
-  --color-text-muted: rgba(47, 55, 67, 0.82);
+  --color-text: #273240;
+  --color-text-muted: rgba(39, 50, 64, 0.88);
   --color-border: rgba(88, 106, 128, 0.36);
   --color-border-strong: rgba(88, 106, 128, 0.54);
   --gradient-primary: linear-gradient(132deg, #008d9b 0%, #24ada9 46%, #6ea8d8 100%);
@@ -24,7 +24,7 @@
   --hero-overlay-1: linear-gradient(180deg, rgba(44, 49, 58, 0.52) 0%, rgba(34, 40, 49, 0.8) 68%, rgba(26, 31, 39, 0.9) 100%);
   --hero-overlay-2: radial-gradient(circle at 84% 12%, rgba(0, 172, 179, 0.2), transparent 42%);
   --hero-overlay-3: radial-gradient(circle at 20% 80%, rgba(154, 156, 161, 0.17), transparent 46%);
-  --nav-link-color: rgba(70, 75, 84, 0.9);
+  --nav-link-color: rgba(54, 62, 73, 0.95);
   --nav-link-hover: #009ca4;
   --menu-toggle-bg: rgba(221, 226, 231, 0.25);
   --menu-toggle-line: rgba(245, 248, 250, 0.96);
@@ -65,7 +65,7 @@ body {
 }
 
 body.home-page {
-  --nav-link-color: rgba(218, 228, 238, 0.92);
+  --nav-link-color: rgba(234, 242, 249, 0.95);
   --nav-link-hover: #79c2cc;
 }
 
@@ -74,7 +74,7 @@ body.home-page .brand-text strong {
 }
 
 body.home-page .brand-text small {
-  color: rgba(221, 230, 240, 0.9);
+  color: rgba(232, 239, 247, 0.96);
 }
 
 body.home-page .brand {
@@ -1251,7 +1251,7 @@ body.home-page .global-nav ul a[aria-current="page"] {
   font-size: 0.6rem;
   font-weight: 600;
   letter-spacing: 0.17em;
-  color: rgba(var(--guide-slate-rgb), 0.6);
+  color: rgba(var(--guide-slate-rgb), 0.72);
   text-transform: uppercase;
 }
 
