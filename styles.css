@@ -1,26 +1,26 @@
 :root {
   --font-brand: "Montserrat", "M PLUS 1p", "Noto Sans JP", sans-serif;
-  --color-bg: #f4f8ff;
-  --color-surface: #f8fbff;
-  --color-surface-2: #eef4fb;
+  --color-bg: #eaf0f7;
+  --color-surface: #f1f5fb;
+  --color-surface-2: #e3eaf3;
   --color-primary: #00acb3;
   --color-primary-soft: #43cfd5;
-  --color-text: #464b54;
-  --color-text-muted: rgba(70, 75, 84, 0.75);
-  --color-border: rgba(132, 160, 182, 0.26);
-  --color-border-strong: rgba(132, 160, 182, 0.42);
-  --gradient-primary: linear-gradient(132deg, #00b8c7 0%, #33d4c9 44%, #86d3ff 100%);
+  --color-text: #3f4650;
+  --color-text-muted: rgba(63, 70, 80, 0.78);
+  --color-border: rgba(108, 128, 151, 0.31);
+  --color-border-strong: rgba(108, 128, 151, 0.48);
+  --gradient-primary: linear-gradient(132deg, #009fae 0%, #2cbeb8 46%, #77b9ef 100%);
   --gradient-surface:
-    linear-gradient(146deg, rgba(255, 255, 255, 0.98) 0%, rgba(246, 251, 255, 0.96) 48%, rgba(233, 242, 250, 0.95) 100%);
+    linear-gradient(146deg, rgba(252, 254, 255, 0.95) 0%, rgba(239, 246, 253, 0.92) 52%, rgba(224, 234, 245, 0.9) 100%);
   --gradient-surface-soft:
-    linear-gradient(146deg, rgba(255, 255, 255, 0.96) 0%, rgba(244, 249, 255, 0.94) 56%, rgba(236, 244, 252, 0.92) 100%);
-  --shadow-soft: 0 20px 42px rgba(0, 174, 198, 0.3);
-  --shadow-card: 0 10px 24px rgba(52, 79, 105, 0.11);
-  --bg-layer-1: radial-gradient(circle at 8% -10%, rgba(0, 184, 204, 0.26), transparent 42%);
-  --bg-layer-2: radial-gradient(circle at 86% 8%, rgba(255, 192, 128, 0.24), transparent 36%);
-  --bg-layer-3: radial-gradient(circle at 82% 86%, rgba(122, 208, 255, 0.2), transparent 44%);
-  --bg-layer-4: linear-gradient(180deg, #f8fbff 0%, #eef4fb 54%, #e3edf8 100%);
-  --header-scrolled-bg: linear-gradient(94deg, rgba(70, 75, 84, 0.94), rgba(82, 87, 97, 0.9));
+    linear-gradient(146deg, rgba(250, 253, 255, 0.93) 0%, rgba(236, 243, 250, 0.9) 56%, rgba(220, 231, 243, 0.88) 100%);
+  --shadow-soft: 0 24px 48px rgba(18, 60, 92, 0.26);
+  --shadow-card: 0 14px 30px rgba(33, 50, 72, 0.16);
+  --bg-layer-1: radial-gradient(circle at 10% -8%, rgba(0, 165, 186, 0.23), transparent 42%);
+  --bg-layer-2: radial-gradient(circle at 88% 8%, rgba(210, 164, 106, 0.18), transparent 36%);
+  --bg-layer-3: radial-gradient(circle at 80% 88%, rgba(91, 150, 205, 0.16), transparent 44%);
+  --bg-layer-4: linear-gradient(180deg, #f1f6fc 0%, #e3ebf4 54%, #d5dfeb 100%);
+  --header-scrolled-bg: linear-gradient(94deg, rgba(47, 54, 64, 0.95), rgba(63, 71, 82, 0.92));
   --hero-overlay-1: linear-gradient(180deg, rgba(58, 63, 72, 0.42) 0%, rgba(46, 51, 60, 0.74) 68%, rgba(37, 42, 50, 0.84) 100%);
   --hero-overlay-2: radial-gradient(circle at 84% 12%, rgba(0, 172, 179, 0.2), transparent 42%);
   --hero-overlay-3: radial-gradient(circle at 20% 80%, rgba(154, 156, 161, 0.17), transparent 46%);
@@ -65,8 +65,8 @@ body {
 }
 
 body.home-page {
-  --nav-link-color: rgba(244, 247, 250, 0.94);
-  --nav-link-hover: #9ce8eb;
+  --nav-link-color: rgba(232, 238, 245, 0.92);
+  --nav-link-hover: #86d2da;
 }
 
 body.home-page .brand-text strong {
@@ -134,16 +134,16 @@ main::before {
   pointer-events: none;
   z-index: -1;
   background:
-    linear-gradient(112deg, rgba(255, 255, 255, 0) 0%, rgba(0, 188, 208, 0.08) 38%, rgba(255, 203, 134, 0.1) 100%),
+    linear-gradient(112deg, rgba(255, 255, 255, 0) 0%, rgba(0, 160, 182, 0.1) 40%, rgba(184, 145, 100, 0.12) 100%),
     repeating-linear-gradient(
       90deg,
       rgba(255, 255, 255, 0) 0,
-      rgba(255, 255, 255, 0) 5.6rem,
-      rgba(123, 196, 255, 0.07) 5.6rem,
-      rgba(123, 196, 255, 0.07) 5.76rem
+      rgba(255, 255, 255, 0) 5.4rem,
+      rgba(78, 120, 162, 0.1) 5.4rem,
+      rgba(78, 120, 162, 0.1) 5.56rem
     );
-  mix-blend-mode: screen;
-  opacity: 0.55;
+  mix-blend-mode: soft-light;
+  opacity: 0.42;
 }
 
 main::after {
@@ -157,10 +157,10 @@ main::after {
   pointer-events: none;
   z-index: -1;
   background:
-    radial-gradient(circle at center, rgba(255, 255, 255, 0.78) 0 18%, transparent 19% 100%),
-    conic-gradient(from 90deg, rgba(0, 184, 204, 0.28), rgba(255, 197, 122, 0.2), rgba(0, 184, 204, 0.28));
-  filter: blur(0.5px);
-  opacity: 0.7;
+    radial-gradient(circle at center, rgba(246, 250, 255, 0.64) 0 18%, transparent 19% 100%),
+    conic-gradient(from 90deg, rgba(0, 166, 186, 0.34), rgba(207, 166, 112, 0.24), rgba(0, 166, 186, 0.34));
+  filter: blur(0.8px);
+  opacity: 0.62;
 }
 
 .skip-link {
@@ -1523,9 +1523,9 @@ body.home-page .global-nav ul a[aria-current="page"] {
 .institution-safety {
   padding-top: 5rem;
   background:
-    linear-gradient(180deg, rgba(248, 252, 255, 0.92) 0%, rgba(238, 246, 253, 0.9) 54%, rgba(229, 240, 250, 0.92) 100%),
-    radial-gradient(circle at 12% 0%, rgba(0, 186, 205, 0.16), transparent 44%),
-    radial-gradient(circle at 88% 8%, rgba(255, 198, 126, 0.14), transparent 36%);
+    linear-gradient(180deg, rgba(244, 249, 254, 0.9) 0%, rgba(232, 240, 248, 0.88) 54%, rgba(220, 230, 241, 0.9) 100%),
+    radial-gradient(circle at 12% 0%, rgba(0, 176, 196, 0.13), transparent 44%),
+    radial-gradient(circle at 88% 8%, rgba(208, 167, 115, 0.12), transparent 36%);
   color: var(--color-text);
 }
 
@@ -1534,7 +1534,7 @@ body.home-page .global-nav ul a[aria-current="page"] {
   position: absolute;
   inset: 0;
   background: url("https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=2400&q=90") center / cover no-repeat;
-  opacity: 0.15;
+  opacity: 0.12;
   mix-blend-mode: soft-light;
   pointer-events: none;
   z-index: 0;
@@ -1548,10 +1548,10 @@ body.home-page .global-nav ul a[aria-current="page"] {
   width: clamp(7rem, 14vw, 9rem);
   aspect-ratio: 1;
   border-radius: 50%;
-  border: 1px dashed rgba(121, 199, 208, 0.42);
+  border: 1px dashed rgba(106, 170, 184, 0.4);
   box-shadow:
-    0 0 0 0.55rem rgba(141, 219, 228, 0.15),
-    0 0 0 1.15rem rgba(255, 204, 142, 0.12);
+    0 0 0 0.55rem rgba(121, 184, 200, 0.14),
+    0 0 0 1.15rem rgba(198, 158, 108, 0.11);
   pointer-events: none;
   z-index: 0;
 }
@@ -2012,31 +2012,24 @@ body.home-page .global-nav ul a[aria-current="page"] {
 
 .support-grid-stage {
   position: relative;
-  overflow: clip;
-  border: 1px solid rgba(134, 138, 142, 0.2);
+  overflow: visible;
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  box-shadow: 0 5px 14px rgba(70, 75, 84, 0.08);
+  box-shadow: var(--shadow-card);
+  background: var(--gradient-surface);
   max-width: min(63rem, 100%);
   margin-top: 0.35rem;
   margin-bottom: 0.2rem;
   padding: clamp(1rem, 2.6vw, 1.85rem);
-  min-height: clamp(15rem, 34vw, 22.8rem);
+  min-height: 0;
 }
 
 .support-grid-photo {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  display: none;
 }
 
 .support-grid-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, rgba(8, 13, 19, 0.2) 0%, rgba(6, 11, 17, 0.52) 74%, rgba(6, 11, 17, 0.64) 100%),
-    radial-gradient(circle at 80% 20%, rgba(0, 172, 179, 0.2), transparent 44%);
+  display: none;
 }
 
 .support-grid-stage .support-grid {
@@ -2049,7 +2042,7 @@ body.home-page .global-nav ul a[aria-current="page"] {
   z-index: 1;
   margin: 0.85rem 0 0;
   font-weight: 600;
-  color: rgba(231, 239, 247, 0.9);
+  color: var(--color-text-muted);
   line-height: 1.6;
 }
 
@@ -2113,13 +2106,13 @@ body.home-page .global-nav ul a[aria-current="page"] {
 }
 
 .support-grid-stage .support-card {
-  background: linear-gradient(152deg, rgba(245, 248, 251, 0.68), rgba(236, 242, 247, 0.64));
-  border-color: rgba(208, 216, 226, 0.62);
-  backdrop-filter: blur(2px);
+  background: var(--gradient-surface-soft);
+  border-color: var(--color-border);
+  backdrop-filter: none;
 }
 
 .support-grid-stage .support-card:nth-child(-n + 2) {
-  background: linear-gradient(152deg, rgba(245, 248, 251, 0.6), rgba(236, 242, 247, 0.56));
+  background: var(--gradient-surface-soft);
 }
 
 .support-card h2,
@@ -2130,7 +2123,7 @@ body.home-page .global-nav ul a[aria-current="page"] {
 
 .support-grid-stage .support-card h2,
 .support-grid-stage .support-card h3 {
-  color: rgba(46, 52, 61, 0.94);
+  color: var(--color-text);
 }
 
 .support-card p {
@@ -2141,7 +2134,7 @@ body.home-page .global-nav ul a[aria-current="page"] {
 
 .support-grid-stage .support-card p,
 .support-grid-stage .support-card li {
-  color: rgba(70, 75, 84, 0.9);
+  color: var(--color-text-muted);
 }
 
 .stories {
