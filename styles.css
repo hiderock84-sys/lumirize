@@ -207,6 +207,21 @@ main::after {
   -webkit-backdrop-filter: blur(8px) saturate(122%) !important;
 }
 
+/* iOS Safari対策:
+   スクロール後のbackdrop-filterがあると、fixedなモバイルメニューが
+   ヘッダー高さでクリップされる場合があるため、メニュー展開中は無効化 */
+body.menu-open .site-header,
+body.menu-open .site-header.scrolled {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
 .header-inner {
   min-height: 4.7rem;
   display: flex;
