@@ -65,8 +65,10 @@ body {
 }
 
 body.home-page {
-  --nav-link-color: rgba(242, 248, 253, 0.98);
-  --nav-link-hover: #79c2cc;
+  --nav-link-color: rgba(55, 67, 84, 0.96);
+  --nav-link-hover: #00adb5;
+  --menu-toggle-bg: rgba(233, 241, 248, 0.32);
+  --menu-toggle-line: rgba(55, 67, 84, 0.94);
 }
 
 body.home-page .brand-text strong {
@@ -92,17 +94,11 @@ body.home-page .header-logo {
   border-radius: 0 !important;
   padding: 0 !important;
   box-shadow: none !important;
-  filter: drop-shadow(0 6px 14px rgba(5, 10, 18, 0.32));
-  opacity: 0.96;
-  transition: filter 0.25s ease, opacity 0.25s ease;
-}
-
-body.home-page .site-header.scrolled .header-logo {
   filter:
-    brightness(0) invert(1)
-    drop-shadow(0 0 1px rgba(224, 242, 252, 0.54))
-    drop-shadow(0 8px 20px rgba(4, 9, 16, 0.52));
+    drop-shadow(0 0 1px rgba(233, 243, 252, 0.62))
+    drop-shadow(0 6px 14px rgba(6, 12, 20, 0.34));
   opacity: 1;
+  transition: filter 0.25s ease, opacity 0.25s ease;
 }
 
 img,
@@ -207,14 +203,14 @@ main::after {
 }
 
 .site-header.scrolled {
-  background: var(--header-scrolled-bg) !important;
-  background-color: rgba(45, 53, 65, 0.84) !important;
+  background: transparent !important;
+  background-color: transparent !important;
   background-image: none !important;
-  border-color: rgba(196, 218, 234, 0.34) !important;
-  border-bottom: 1px solid rgba(196, 218, 234, 0.34) !important;
-  box-shadow: 0 10px 24px rgba(5, 10, 18, 0.2) !important;
-  backdrop-filter: blur(8px) saturate(122%) !important;
-  -webkit-backdrop-filter: blur(8px) saturate(122%) !important;
+  border-color: transparent !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 /* iOS Safari対策:
@@ -329,7 +325,12 @@ body.menu-open .site-header.scrolled {
 }
 
 body.home-page .global-nav ul a[aria-current="page"] {
-  color: rgba(232, 248, 252, 0.96);
+  color: var(--color-primary);
+}
+
+body.home-page .global-nav ul a {
+  color: var(--nav-link-color);
+  text-shadow: 0 1px 8px rgba(239, 246, 252, 0.72);
 }
 
 .nav-label-jp {
