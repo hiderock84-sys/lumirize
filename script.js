@@ -273,7 +273,7 @@
           message || "未入力"
         ].join("\n")
       );
-      return `mailto:info@lumiraiz.com?subject=${subject}&body=${body}`;
+      return `mailto:info@lumirize.com?subject=${subject}&body=${body}`;
     };
 
     const resetFieldError = (field) => {

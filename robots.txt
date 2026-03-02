@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lumiraiz.com/sitemap.xml
+Sitemap: https://lumirize.com/sitemap.xml
