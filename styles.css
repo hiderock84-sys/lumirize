@@ -3114,8 +3114,8 @@ textarea.invalid {
   }
 
   .page-guide {
-    padding-top: 1.05rem;
-    padding-bottom: 1.95rem;
+    padding-top: 0.82rem;
+    padding-bottom: 1.45rem;
   }
 
   .page-guide .guide-grid {
@@ -3576,7 +3576,6 @@ textarea.invalid {
   .policy-compare-grid,
   .policy-flow-steps,
   .assurance-grid,
-  .guide-grid,
   .service-grid,
   .support-grid,
   .story-grid,
@@ -3586,6 +3585,11 @@ textarea.invalid {
     grid-template-columns: 1fr;
   }
 
+  .page-guide .guide-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.42rem;
+  }
+
   .faq-cta,
   .process-cta {
     flex-direction: column;
@@ -3593,57 +3597,58 @@ textarea.invalid {
   }
 
   .guide-banner {
-    min-height: 4.82rem;
-    padding: 0.62rem 0.7rem 0.58rem;
-    border-radius: 0.82rem;
+    min-height: 3.92rem;
+    padding: 0.46rem 0.52rem 0.44rem;
+    border-radius: 0.72rem;
     grid-template-columns: auto minmax(0, 1fr) auto;
     grid-template-areas:
       "number jp link"
       "number en link";
-    column-gap: 0.5rem;
-    row-gap: 0.06rem;
+    column-gap: 0.38rem;
+    row-gap: 0.03rem;
     align-content: center;
   }
 
   .guide-banner-wide {
-    min-height: 4.82rem;
+    min-height: 3.92rem;
   }
 
   .guide-banner::before {
-    opacity: 0.17;
+    opacity: 0.32;
+    transform: scale(1.02);
   }
 
   .guide-banner::after {
     background:
-      linear-gradient(145deg, rgba(236, 244, 252, 0.82), rgba(220, 232, 244, 0.82) 45%, rgba(204, 219, 233, 0.86) 100%),
-      linear-gradient(90deg, rgba(var(--guide-teal-rgb), 0.08), rgba(188, 150, 108, 0.1));
+      linear-gradient(145deg, rgba(238, 246, 253, 0.56), rgba(223, 234, 245, 0.52) 45%, rgba(209, 224, 238, 0.56) 100%),
+      linear-gradient(90deg, rgba(var(--guide-teal-rgb), 0.06), rgba(188, 150, 108, 0.08));
   }
 
   .guide-number {
-    font-size: 0.74rem;
-    letter-spacing: 0.11em;
+    font-size: 0.67rem;
+    letter-spacing: 0.09em;
     align-self: start;
   }
 
   .guide-title-jp {
-    font-size: 0.95rem;
-    line-height: 1.24;
+    font-size: 0.79rem;
+    line-height: 1.18;
   }
 
   .guide-title-en {
-    font-size: 0.48rem;
-    letter-spacing: 0.15em;
+    font-size: 0.43rem;
+    letter-spacing: 0.12em;
   }
 
   .guide-link {
-    font-size: 0.53rem;
-    letter-spacing: 0.02em;
+    font-size: 0.46rem;
+    letter-spacing: 0.01em;
     white-space: nowrap;
     align-self: center;
-    padding: 0.2rem 0.42rem;
-    border: 1px solid rgba(var(--guide-teal-rgb), 0.22);
+    padding: 0.14rem 0.3rem;
+    border: 1px solid rgba(var(--guide-teal-rgb), 0.2);
     border-radius: 999px;
-    background: rgba(235, 244, 252, 0.78);
+    background: rgba(236, 245, 252, 0.62);
   }
 
   .guide-link::after {
@@ -3722,22 +3727,27 @@ textarea.invalid {
   }
 
   .guide-banner {
-    min-height: 4.5rem;
-    padding: 0.56rem 0.6rem;
-    column-gap: 0.5rem;
+    min-height: 3.7rem;
+    padding: 0.42rem 0.46rem;
+    column-gap: 0.34rem;
+  }
+
+  .page-guide .guide-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.36rem;
   }
 
   .guide-title-jp {
-    font-size: 0.88rem;
+    font-size: 0.74rem;
   }
 
   .guide-title-en {
-    font-size: 0.46rem;
+    font-size: 0.4rem;
   }
 
   .guide-link {
-    font-size: 0.5rem;
-    padding: 0.18rem 0.36rem;
+    font-size: 0.42rem;
+    padding: 0.12rem 0.26rem;
   }
 
   .service-card,
