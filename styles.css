@@ -93,6 +93,16 @@ body.home-page .header-logo {
   padding: 0 !important;
   box-shadow: none !important;
   filter: drop-shadow(0 6px 14px rgba(5, 10, 18, 0.32));
+  opacity: 0.96;
+  transition: filter 0.25s ease, opacity 0.25s ease;
+}
+
+body.home-page .site-header.scrolled .header-logo {
+  filter:
+    brightness(0) invert(1)
+    drop-shadow(0 0 1px rgba(224, 242, 252, 0.54))
+    drop-shadow(0 8px 20px rgba(4, 9, 16, 0.52));
+  opacity: 1;
 }
 
 img,
