@@ -34,6 +34,59 @@
     }
   })();
 
+  const setMenuOpenState = (isOpen) => {
+    if (!menuToggle || !globalNav) return;
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute("aria-label", isOpen ? "メニューを閉じる" : "メニューを開く");
+    globalNav.classList.toggle("open", isOpen);
+    document.body.classList.toggle("menu-open", isOpen);
+    updateHeaderState();
+  };
+
+  const smoothScrollToHash = (hash) => {
+    if (!hash) return false;
+    const target = document.querySelector(hash);
+    if (!target) return false;
+    const offset = header ? header.offsetHeight + 10 : 0;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: "smooth" });
+    return true;
+  };
+
+  const handleReliableMobileLink = (event, link) => {
+    if (window.innerWidth > 767) return;
+    if (event.defaultPrevented) return;
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+    try {
+      const linkUrl = new URL(link.href, window.location.href);
+      const linkPath = linkUrl.pathname.split("/").pop() || "index.html";
+      const linkHash = linkUrl.hash || "";
+      const samePath = linkPath === currentPath;
+
+      if (linkHash && samePath) {
+        const didScroll = smoothScrollToHash(linkHash);
+        if (didScroll) {
+          event.preventDefault();
+          window.history.replaceState(null, "", `${window.location.pathname}${linkHash}`);
+          setMenuOpenState(false);
+        }
+        return;
+      }
+
+      if (!linkHash && samePath) {
+        setMenuOpenState(false);
+        return;
+      }
+
+      event.preventDefault();
+      setMenuOpenState(false);
+      window.location.assign(linkUrl.href);
+    } catch {
+      // Ignore malformed URLs.
+    }
+  };
+
   navPrimaryLinks.forEach((link) => {
     try {
       const linkUrl = new URL(link.href, window.location.href);
@@ -51,6 +104,11 @@
     } catch {
       // Ignore malformed URLs.
     }
+  });
+
+  const reliableLinks = document.querySelectorAll(".global-nav ul a, .guide-banner");
+  reliableLinks.forEach((link) => {
+    link.addEventListener("click", (event) => handleReliableMobileLink(event, link));
   });
 
   if (globalNav && !globalNav.querySelector(".mobile-nav-cta")) {
@@ -89,23 +147,15 @@
   window.addEventListener("resize", updateHeaderState);
 
   if (menuToggle && globalNav) {
-    const setMenuOpen = (isOpen) => {
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.setAttribute("aria-label", isOpen ? "メニューを閉じる" : "メニューを開く");
-      globalNav.classList.toggle("open", isOpen);
-      document.body.classList.toggle("menu-open", isOpen);
-      updateHeaderState();
-    };
-
     menuToggle.addEventListener("click", () => {
       const expanded = menuToggle.getAttribute("aria-expanded") === "true";
-      setMenuOpen(!expanded);
+      setMenuOpenState(!expanded);
     });
 
     navLinks.forEach((link) => {
       link.addEventListener("click", () => {
         if (window.innerWidth <= 767) {
-          setMenuOpen(false);
+          setMenuOpenState(false);
         }
       });
     });
@@ -114,7 +164,7 @@
       const clickedInsideNav = globalNav.contains(event.target);
       const clickedToggle = menuToggle.contains(event.target);
       if (!clickedInsideNav && !clickedToggle && globalNav.classList.contains("open")) {
-        setMenuOpen(false);
+        setMenuOpenState(false);
       }
     });
 
@@ -122,25 +172,25 @@
       if (window.innerWidth > 767 || !globalNav.classList.contains("open")) return;
       const tappedLink = event.target.closest("a");
       if (tappedLink) {
-        setMenuOpen(false);
+        setMenuOpenState(false);
         return;
       }
       const tappedContentArea = event.target.closest("ul, .mobile-nav-cta");
       if (!tappedContentArea) {
-        setMenuOpen(false);
+        setMenuOpenState(false);
       }
     });
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && globalNav.classList.contains("open")) {
-        setMenuOpen(false);
+        setMenuOpenState(false);
         menuToggle.focus();
       }
     });
 
     window.addEventListener("resize", () => {
       if (window.innerWidth > 767 && globalNav.classList.contains("open")) {
-        setMenuOpen(false);
+        setMenuOpenState(false);
       }
     });
   }
