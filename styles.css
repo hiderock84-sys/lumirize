@@ -1,27 +1,27 @@
 :root {
   --font-brand: "Montserrat", "M PLUS 1p", "Noto Sans JP", sans-serif;
-  --color-bg: #e1e8f2;
-  --color-surface: #e8eef7;
-  --color-surface-2: #d3dde9;
+  --color-bg: #e8eef6;
+  --color-surface: #eff4fb;
+  --color-surface-2: #dee7f2;
   --color-primary: #00acb3;
   --color-primary-soft: #43cfd5;
-  --color-text: #1f2d3f;
-  --color-text-muted: rgba(31, 45, 63, 0.9);
-  --color-border: rgba(88, 106, 128, 0.36);
-  --color-border-strong: rgba(88, 106, 128, 0.54);
+  --color-text: #1d2a3a;
+  --color-text-muted: rgba(29, 42, 58, 0.86);
+  --color-border: rgba(105, 126, 150, 0.32);
+  --color-border-strong: rgba(105, 126, 150, 0.48);
   --gradient-primary: linear-gradient(132deg, #008d9b 0%, #24ada9 46%, #6ea8d8 100%);
   --gradient-surface:
-    linear-gradient(146deg, rgba(248, 252, 255, 0.94) 0%, rgba(232, 240, 248, 0.92) 52%, rgba(214, 224, 236, 0.9) 100%);
+    linear-gradient(146deg, rgba(252, 255, 255, 0.95) 0%, rgba(239, 246, 252, 0.93) 52%, rgba(223, 233, 244, 0.91) 100%);
   --gradient-surface-soft:
-    linear-gradient(146deg, rgba(244, 250, 255, 0.93) 0%, rgba(226, 236, 246, 0.91) 56%, rgba(208, 221, 235, 0.89) 100%);
-  --shadow-soft: 0 22px 44px rgba(8, 34, 59, 0.26);
-  --shadow-card: 0 14px 30px rgba(19, 31, 46, 0.18);
-  --bg-layer-1: radial-gradient(circle at 10% -8%, rgba(0, 139, 160, 0.16), transparent 42%);
-  --bg-layer-2: radial-gradient(circle at 88% 8%, rgba(178, 139, 95, 0.16), transparent 36%);
-  --bg-layer-3: radial-gradient(circle at 80% 88%, rgba(70, 119, 166, 0.14), transparent 44%);
-  --bg-layer-4: linear-gradient(180deg, #edf2f8 0%, #dbe4ef 54%, #cbd8e7 100%);
-  --header-scrolled-bg: linear-gradient(94deg, rgba(35, 42, 53, 0.96), rgba(48, 56, 69, 0.94));
-  --hero-overlay-1: linear-gradient(180deg, rgba(44, 49, 58, 0.52) 0%, rgba(34, 40, 49, 0.8) 68%, rgba(26, 31, 39, 0.9) 100%);
+    linear-gradient(146deg, rgba(248, 253, 255, 0.94) 0%, rgba(234, 243, 251, 0.92) 56%, rgba(217, 229, 241, 0.9) 100%);
+  --shadow-soft: 0 20px 40px rgba(8, 34, 59, 0.22);
+  --shadow-card: 0 12px 26px rgba(19, 31, 46, 0.15);
+  --bg-layer-1: radial-gradient(circle at 10% -8%, rgba(0, 139, 160, 0.13), transparent 42%);
+  --bg-layer-2: radial-gradient(circle at 88% 8%, rgba(178, 139, 95, 0.13), transparent 36%);
+  --bg-layer-3: radial-gradient(circle at 80% 88%, rgba(70, 119, 166, 0.11), transparent 44%);
+  --bg-layer-4: linear-gradient(180deg, #f3f7fc 0%, #e5edf6 54%, #d8e3f0 100%);
+  --header-scrolled-bg: linear-gradient(94deg, rgba(45, 53, 65, 0.86), rgba(57, 66, 80, 0.84));
+  --hero-overlay-1: linear-gradient(180deg, rgba(44, 49, 58, 0.42) 0%, rgba(34, 40, 49, 0.66) 68%, rgba(26, 31, 39, 0.76) 100%);
   --hero-overlay-2: radial-gradient(circle at 84% 12%, rgba(0, 172, 179, 0.2), transparent 42%);
   --hero-overlay-3: radial-gradient(circle at 20% 80%, rgba(154, 156, 161, 0.17), transparent 46%);
   --nav-link-color: rgba(40, 49, 62, 0.98);
@@ -197,14 +197,14 @@ main::after {
 }
 
 .site-header.scrolled {
-  background: rgba(16, 24, 35, 0.58) !important;
-  background-color: rgba(16, 24, 35, 0.58) !important;
+  background: var(--header-scrolled-bg) !important;
+  background-color: rgba(45, 53, 65, 0.84) !important;
   background-image: none !important;
-  border-color: rgba(180, 208, 228, 0.24) !important;
-  border-bottom: 1px solid rgba(180, 208, 228, 0.24) !important;
-  box-shadow: 0 10px 28px rgba(5, 10, 18, 0.28) !important;
-  backdrop-filter: blur(10px) saturate(130%) !important;
-  -webkit-backdrop-filter: blur(10px) saturate(130%) !important;
+  border-color: rgba(196, 218, 234, 0.34) !important;
+  border-bottom: 1px solid rgba(196, 218, 234, 0.34) !important;
+  box-shadow: 0 10px 24px rgba(5, 10, 18, 0.2) !important;
+  backdrop-filter: blur(8px) saturate(122%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(122%) !important;
 }
 
 .header-inner {
@@ -2980,11 +2980,11 @@ textarea.invalid {
 
 @media (max-width: 767px) {
   main::before {
-    opacity: 0.32;
+    opacity: 0.2;
   }
 
   main::after {
-    opacity: 0.48;
+    opacity: 0.3;
   }
 
   .container {
@@ -3022,7 +3022,7 @@ textarea.invalid {
   }
 
   .page-guide .guide-grid {
-    gap: 0.56rem;
+    gap: 0.5rem;
   }
 
   .menu-toggle {
@@ -3057,8 +3057,8 @@ textarea.invalid {
     margin: 0;
     width: 100%;
     background:
-      linear-gradient(160deg, rgba(39, 45, 56, 0.78), rgba(28, 33, 43, 0.82)),
-      radial-gradient(circle at 86% 8%, rgba(95, 210, 216, 0.16), transparent 42%);
+      linear-gradient(160deg, rgba(52, 60, 72, 0.72), rgba(40, 47, 58, 0.76)),
+      radial-gradient(circle at 86% 8%, rgba(95, 210, 216, 0.14), transparent 42%);
     backdrop-filter: blur(18px) saturate(115%);
     -webkit-backdrop-filter: blur(18px) saturate(115%);
     border: 0;
@@ -3177,8 +3177,8 @@ textarea.invalid {
     row-gap: 0.08rem;
     padding: 0.84rem 0.92rem;
     border-radius: 0.86rem;
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(238, 246, 252, 0.26);
+    background: linear-gradient(135deg, rgba(244, 250, 255, 0.2), rgba(232, 242, 251, 0.08));
     color: rgba(242, 247, 251, 0.96);
     min-height: 3.18rem;
     box-shadow: 0 12px 24px rgba(7, 11, 18, 0.2);
@@ -3306,9 +3306,9 @@ textarea.invalid {
   .hero-content {
     padding: 0.74rem 0.74rem 0.82rem;
     border-radius: 0.86rem;
-    border-color: rgba(186, 226, 232, 0.2);
-    background: linear-gradient(138deg, rgba(8, 13, 20, 0.28), rgba(8, 13, 20, 0.14));
-    box-shadow: 0 10px 20px rgba(5, 10, 16, 0.14);
+    border-color: rgba(192, 230, 236, 0.3);
+    background: linear-gradient(138deg, rgba(8, 13, 20, 0.2), rgba(8, 13, 20, 0.08));
+    box-shadow: 0 9px 18px rgba(5, 10, 16, 0.11);
   }
 
   .hero h1 {
@@ -3439,7 +3439,7 @@ textarea.invalid {
     padding: 0.78rem;
     border: 1px solid var(--color-border);
     border-radius: 0.9rem;
-    background: rgba(10, 17, 27, 0.26);
+    background: rgba(232, 241, 249, 0.74);
   }
 
   .compare-table th,
@@ -3496,20 +3496,20 @@ textarea.invalid {
   }
 
   .guide-banner {
-    min-height: 5.05rem;
-    padding: 0.68rem 0.76rem 0.64rem;
+    min-height: 4.82rem;
+    padding: 0.62rem 0.7rem 0.58rem;
     border-radius: 0.82rem;
     grid-template-columns: auto minmax(0, 1fr) auto;
     grid-template-areas:
       "number jp link"
       "number en link";
-    column-gap: 0.56rem;
+    column-gap: 0.5rem;
     row-gap: 0.06rem;
     align-content: center;
   }
 
   .guide-banner-wide {
-    min-height: 5.05rem;
+    min-height: 4.82rem;
   }
 
   .guide-banner::before {
@@ -3529,21 +3529,21 @@ textarea.invalid {
   }
 
   .guide-title-jp {
-    font-size: 0.98rem;
+    font-size: 0.95rem;
     line-height: 1.24;
   }
 
   .guide-title-en {
-    font-size: 0.5rem;
+    font-size: 0.48rem;
     letter-spacing: 0.15em;
   }
 
   .guide-link {
-    font-size: 0.55rem;
+    font-size: 0.53rem;
     letter-spacing: 0.02em;
     white-space: nowrap;
     align-self: center;
-    padding: 0.24rem 0.46rem;
+    padding: 0.2rem 0.42rem;
     border: 1px solid rgba(var(--guide-teal-rgb), 0.22);
     border-radius: 999px;
     background: rgba(235, 244, 252, 0.78);
@@ -3625,22 +3625,22 @@ textarea.invalid {
   }
 
   .guide-banner {
-    min-height: 4.72rem;
-    padding: 0.62rem 0.68rem;
+    min-height: 4.5rem;
+    padding: 0.56rem 0.6rem;
     column-gap: 0.5rem;
   }
 
   .guide-title-jp {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
   }
 
   .guide-title-en {
-    font-size: 0.48rem;
+    font-size: 0.46rem;
   }
 
   .guide-link {
-    font-size: 0.52rem;
-    padding: 0.2rem 0.4rem;
+    font-size: 0.5rem;
+    padding: 0.18rem 0.36rem;
   }
 
   .service-card,
