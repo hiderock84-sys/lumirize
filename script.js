@@ -8,7 +8,7 @@
   const mobileConsult = document.querySelector(".mobile-consult");
   const navLabelMap = {
     "index.html": { jp: "トップ", en: "HOME" },
-    "index.html#policy-strategy": { jp: "制度活用戦略", en: "POLICY" },
+    "policy.html": { jp: "公的支援プラン", en: "PLAN" },
     "about.html": { jp: "私たちについて", en: "ABOUT" },
     "stats.html": { jp: "支援実績", en: "IMPACT" },
     "services.html": { jp: "サービス", en: "SERVICES" },
