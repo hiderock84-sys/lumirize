@@ -94,13 +94,13 @@ a {
 }
 
 .section {
-  padding: 7rem 0;
+  padding: 5.9rem 0;
   position: relative;
   isolation: isolate;
 }
 
 body:not(.home-page):not(.legal-page) main > .section:first-child {
-  padding-top: 5rem;
+  padding-top: 4.2rem;
 }
 
 .section > .container {
@@ -640,7 +640,7 @@ body.home-page .btn-nav-tel {
 }
 
 .stats-section {
-  padding-top: 4.8rem;
+  padding-top: 4.15rem;
 }
 
 .stats-summary-grid {
@@ -1191,8 +1191,8 @@ body.home-page .btn-nav-tel {
   --guide-slate-rgb: 70, 75, 84;
   position: relative;
   isolation: isolate;
-  padding-top: 1.46rem;
-  padding-bottom: 1.95rem;
+  padding-top: 0.9rem;
+  padding-bottom: 0.8rem;
 }
 
 .page-guide::before {
@@ -1390,8 +1390,8 @@ body.home-page .btn-nav-tel {
 
 @media (min-width: 1024px) {
   .page-guide {
-    padding-top: 1.32rem;
-    padding-bottom: 1.88rem;
+    padding-top: 0.68rem;
+    padding-bottom: 0.95rem;
   }
 
   .page-guide .container::before {
@@ -1453,7 +1453,7 @@ body.home-page .btn-nav-tel {
 }
 
 body.home-page #about.section {
-  padding-top: 4.25rem;
+  padding-top: 2.8rem;
 }
 
 .message-card,
@@ -1627,7 +1627,7 @@ body.home-page #about.section {
 }
 
 .institution-safety {
-  padding-top: 5rem;
+  padding-top: 4.2rem;
   background:
     linear-gradient(180deg, rgba(230, 239, 248, 0.9) 0%, rgba(213, 225, 237, 0.88) 54%, rgba(194, 208, 223, 0.9) 100%),
     radial-gradient(circle at 12% 0%, rgba(0, 152, 172, 0.12), transparent 44%),
@@ -2113,7 +2113,7 @@ body.home-page #about.section {
 }
 
 .support {
-  padding-top: 5rem;
+  padding-top: 4.2rem;
 }
 
 .support-grid-stage {
@@ -2244,7 +2244,7 @@ body.home-page #about.section {
 }
 
 .stories {
-  padding-top: 5rem;
+  padding-top: 4.2rem;
 }
 
 .story-grid {
@@ -2329,7 +2329,7 @@ body.home-page #about.section {
 }
 
 .standards {
-  padding-top: 4.8rem;
+  padding-top: 4.05rem;
 }
 
 .standards-grid {
@@ -2518,7 +2518,7 @@ body.home-page #about.section {
 }
 
 .emergency {
-  padding-top: 3rem;
+  padding-top: 2.4rem;
 }
 
 .emergency-inner {
@@ -3106,11 +3106,11 @@ textarea.invalid {
   }
 
   .section {
-    padding: 4.7rem 0;
+    padding: 3.7rem 0;
   }
 
   body:not(.home-page):not(.legal-page) main > .section:first-child {
-    padding-top: 4rem;
+    padding-top: 3.2rem;
   }
 
   .about::before,
@@ -3127,12 +3127,12 @@ textarea.invalid {
   }
 
   .institution-safety {
-    padding-top: 4.4rem;
+    padding-top: 3.6rem;
   }
 
   .page-guide {
-    padding-top: 0.7rem;
-    padding-bottom: 1.12rem;
+    padding-top: 0.34rem;
+    padding-bottom: 0.5rem;
   }
 
   .page-guide .guide-grid {
@@ -3673,7 +3673,7 @@ textarea.invalid {
   }
 
   body.home-page #about.section {
-    padding-top: 3.6rem;
+    padding-top: 2.4rem;
   }
 
   .footer-logo {
