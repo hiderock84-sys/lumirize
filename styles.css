@@ -534,7 +534,7 @@ body.home-page .btn-nav-tel {
 @media (min-width: 1024px) {
   .hero-content {
     width: fit-content;
-    max-width: min(51rem, calc(100vw - 7.2rem));
+    max-width: min(61rem, calc(100vw - 6.4rem));
     padding: clamp(0.64rem, 1.25vw, 0.94rem) clamp(0.8rem, 1.45vw, 1.12rem) clamp(0.72rem, 1.3vw, 1.02rem);
   }
 
