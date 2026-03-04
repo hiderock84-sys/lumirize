@@ -533,8 +533,34 @@ body.home-page .btn-nav-tel {
 
 @media (min-width: 1024px) {
   .hero-content {
-    max-width: min(60rem, calc(100vw - 6.4rem));
-    padding-right: clamp(1.05rem, 2.1vw, 1.7rem);
+    width: fit-content;
+    max-width: min(51rem, calc(100vw - 7.2rem));
+    padding: clamp(0.64rem, 1.25vw, 0.94rem) clamp(0.8rem, 1.45vw, 1.12rem) clamp(0.72rem, 1.3vw, 1.02rem);
+  }
+
+  .hero h1 {
+    font-size: clamp(1.34rem, 2.5vw, 2.32rem);
+    margin-bottom: 0.48rem;
+    letter-spacing: 0.01em;
+  }
+
+  .hero-subhead {
+    font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+    margin-bottom: 0.24rem;
+    line-height: 1.45;
+  }
+
+  .hero-lead {
+    max-width: 38rem;
+    font-size: clamp(0.86rem, 1.02vw, 0.97rem);
+    line-height: 1.64;
+    margin-bottom: 0.44rem;
+  }
+
+  .hero-signoff {
+    font-size: clamp(0.84rem, 1vw, 0.94rem);
+    margin-top: 0.42rem;
+    line-height: 1.6;
   }
 }
 
