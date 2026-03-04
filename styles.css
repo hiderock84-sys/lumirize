@@ -503,17 +503,20 @@ body.home-page .btn-nav-tel {
   border: 1px solid rgba(186, 235, 239, 0.38);
   background:
     linear-gradient(138deg, rgba(8, 13, 20, 0.4), rgba(8, 13, 20, 0.2)),
-    radial-gradient(circle at 95% 10%, rgba(255, 202, 132, 0.26), transparent 38%);
+    radial-gradient(circle at 88% 12%, rgba(255, 202, 132, 0.16), transparent 36%);
   backdrop-filter: blur(2px) saturate(112%);
   -webkit-backdrop-filter: blur(2px) saturate(112%);
   box-shadow: 0 22px 44px rgba(5, 10, 16, 0.24);
   color: rgba(243, 247, 251, 0.97);
+  overflow: hidden;
+  isolation: isolate;
+  transform: translateZ(0);
 }
 
 .hero-content::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: 1px;
   border-radius: inherit;
   background:
     linear-gradient(90deg, rgba(132, 226, 232, 0.22), transparent 42%, rgba(255, 209, 145, 0.2)),
@@ -524,7 +527,7 @@ body.home-page .btn-nav-tel {
       rgba(173, 234, 239, 0.12) 2.4rem,
       rgba(173, 234, 239, 0.12) 2.48rem
     );
-  opacity: 0.42;
+  opacity: 0.3;
   pointer-events: none;
 }
 
