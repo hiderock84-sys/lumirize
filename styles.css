@@ -539,26 +539,26 @@ body.home-page .btn-nav-tel {
   }
 
   .hero h1 {
-    font-size: clamp(1.34rem, 2.5vw, 2.32rem);
+    font-size: clamp(1.42rem, 2.65vw, 2.46rem);
     margin-bottom: 0.48rem;
     letter-spacing: 0.01em;
   }
 
   .hero-subhead {
-    font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+    font-size: clamp(0.96rem, 1.38vw, 1.12rem);
     margin-bottom: 0.24rem;
     line-height: 1.45;
   }
 
   .hero-lead {
     max-width: 38rem;
-    font-size: clamp(0.86rem, 1.02vw, 0.97rem);
+    font-size: clamp(0.91rem, 1.08vw, 1.03rem);
     line-height: 1.64;
     margin-bottom: 0.44rem;
   }
 
   .hero-signoff {
-    font-size: clamp(0.84rem, 1vw, 0.94rem);
+    font-size: clamp(0.89rem, 1.06vw, 1rem);
     margin-top: 0.42rem;
     line-height: 1.6;
   }
