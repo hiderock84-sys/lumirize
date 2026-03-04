@@ -533,8 +533,8 @@ body.home-page .btn-nav-tel {
 
 @media (min-width: 1024px) {
   .hero-content {
-    max-width: min(68rem, calc(100vw - 5rem));
-    padding-right: clamp(1.4rem, 2.8vw, 2.2rem);
+    max-width: min(60rem, calc(100vw - 6.4rem));
+    padding-right: clamp(1.05rem, 2.1vw, 1.7rem);
   }
 }
 
