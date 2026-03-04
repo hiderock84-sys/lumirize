@@ -40,6 +40,66 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <style>
+      .about-anchor-nav {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+      }
+
+      .about-anchor-nav .btn {
+        min-height: 2.42rem;
+        padding-inline: 0.9rem;
+      }
+
+      .about-details {
+        margin-top: 1rem;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        background: var(--gradient-surface-soft);
+        overflow: clip;
+      }
+
+      .about-details summary {
+        cursor: pointer;
+        list-style: none;
+        padding: 0.88rem 1rem;
+        font-weight: 700;
+        color: var(--color-text);
+      }
+
+      .about-details summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .about-details summary::after {
+        content: "+";
+        float: right;
+        color: var(--color-primary-soft);
+        font-weight: 700;
+      }
+
+      .about-details[open] summary::after {
+        content: "-";
+      }
+
+      .about-details-body {
+        border-top: 1px solid var(--color-border);
+        padding: 0.92rem 1rem 1rem;
+        display: grid;
+        gap: 0.72rem;
+      }
+
+      .about-details-body p {
+        margin: 0;
+        color: var(--color-text-muted);
+      }
+
+      .about-details-note {
+        font-size: 0.9rem;
+      }
+    </style>
   </head>
   <body>
     <a class="skip-link" href="#main-content">本文へスキップ</a>
