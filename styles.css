@@ -531,6 +531,13 @@ body.home-page .btn-nav-tel {
   pointer-events: none;
 }
 
+@media (min-width: 1024px) {
+  .hero-content {
+    max-width: min(68rem, calc(100vw - 5rem));
+    padding-right: clamp(1.4rem, 2.8vw, 2.2rem);
+  }
+}
+
 .eyebrow {
   display: inline-block;
   font-family: var(--font-brand);
