@@ -468,20 +468,33 @@ body.home-page .btn-nav-tel {
     top: calc(100% + 1.18rem);
     display: inline-flex;
     align-items: center;
-    gap: 0.36rem;
-    padding: 0.28rem;
-    border-radius: 999px;
-    border: 1px solid rgba(161, 209, 216, 0.52);
-    background: linear-gradient(135deg, rgba(236, 245, 251, 0.94), rgba(221, 233, 244, 0.92));
-    box-shadow: 0 12px 22px rgba(11, 24, 39, 0.18);
+    gap: 0.9rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
     z-index: 130;
   }
 
   .global-nav .mobile-nav-cta .btn-nav,
   .global-nav .mobile-nav-cta .btn-nav-tel {
-    min-height: 2.1rem;
-    padding: 0.46rem 0.76rem;
-    font-size: 0.78rem;
+    min-height: auto;
+    padding: 0;
+    font-size: 0.83rem;
+    border: 0 !important;
+    border-radius: 0;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .global-nav .mobile-nav-cta .btn-nav {
+    color: rgba(74, 227, 236, 0.98);
+    text-shadow: 0 1px 8px rgba(11, 30, 44, 0.38);
+  }
+
+  .global-nav .mobile-nav-cta .btn-nav-tel {
+    color: rgba(236, 246, 255, 0.97);
+    text-shadow: 0 1px 8px rgba(8, 20, 34, 0.34);
   }
 }
 
