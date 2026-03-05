@@ -3252,6 +3252,11 @@ textarea.invalid {
     width: 94vw;
   }
 
+  .footer-grid > section:last-child ul li:nth-child(-n + 5) {
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+
   body {
     padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
   }
