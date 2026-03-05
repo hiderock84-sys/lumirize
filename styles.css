@@ -442,7 +442,7 @@ body.home-page .btn-nav-tel {
   }
 
   .brand {
-    margin-left: calc(clamp(-0.65rem, -0.9vw, -0.35rem) - 4px);
+    margin-left: calc(clamp(-0.65rem, -0.9vw, -0.35rem) - 6px);
   }
 
   .global-nav ul li {
