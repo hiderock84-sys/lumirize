@@ -411,6 +411,60 @@ body.home-page .btn-nav-tel {
   border-color: rgba(118, 153, 187, 0.42);
 }
 
+@media (min-width: 1024px) {
+  .site-header,
+  .header-inner,
+  .global-nav {
+    overflow: visible;
+  }
+
+  .header-inner {
+    position: relative;
+  }
+
+  .global-nav {
+    position: relative;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+
+  .global-nav ul {
+    gap: 0.72rem;
+  }
+
+  .global-nav ul a {
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.012em;
+  }
+
+  .global-nav > .btn-nav {
+    display: none !important;
+  }
+
+  .global-nav .mobile-nav-cta {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.35rem);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.36rem;
+    padding: 0.28rem;
+    border-radius: 999px;
+    border: 1px solid rgba(161, 209, 216, 0.52);
+    background: linear-gradient(135deg, rgba(236, 245, 251, 0.94), rgba(221, 233, 244, 0.92));
+    box-shadow: 0 12px 22px rgba(11, 24, 39, 0.18);
+    z-index: 130;
+  }
+
+  .global-nav .mobile-nav-cta .btn-nav,
+  .global-nav .mobile-nav-cta .btn-nav-tel {
+    min-height: 2.1rem;
+    padding: 0.46rem 0.76rem;
+    font-size: 0.78rem;
+  }
+}
+
 .menu-toggle {
   display: none;
   width: 2.75rem;
@@ -3037,14 +3091,6 @@ textarea.invalid {
     max-width: none;
   }
 
-  .btn-nav {
-    display: none;
-  }
-
-  .mobile-nav-cta {
-    display: none;
-  }
-
   .global-nav {
     gap: 0.5rem;
   }
@@ -3054,7 +3100,7 @@ textarea.invalid {
   }
 
   .global-nav ul a {
-    font-size: 0.78rem;
+    font-size: 0.88rem;
   }
 
   .footer-grid {
