@@ -2894,10 +2894,11 @@ textarea.invalid {
   line-height: 1.6;
 }
 
+.footer-grid > section:last-child ul li:nth-child(2),
 .footer-grid > section:last-child ul li:nth-child(3),
 .footer-grid > section:last-child ul li:nth-child(4) {
   white-space: nowrap;
-  font-size: clamp(0.82rem, 2.3vw, 0.9rem);
+  font-size: clamp(0.78rem, 2.1vw, 0.95rem);
 }
 
 @media (min-width: 1024px) {
