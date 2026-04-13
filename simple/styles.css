@@ -22,6 +22,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
+  font-size: 16px;
   font-family:
     "Hiragino Kaku Gothic ProN",
     "Yu Gothic",
@@ -76,12 +77,13 @@ a:hover {
   padding: 0.72rem 0;
 }
 
-.brand {
-  display: inline-block;
+.brand-logo {
+  display: block;
+  width: min(280px, 68vw);
 }
 
-.brand-logo {
-  width: min(240px, 56vw);
+.brand-logo img {
+  width: 100%;
   height: auto;
   display: block;
 }
@@ -95,7 +97,7 @@ a:hover {
 .top-nav a {
   text-decoration: none;
   font-weight: 700;
-  font-size: 0.93rem;
+  font-size: 1rem;
 }
 
 .hero {
@@ -159,7 +161,8 @@ h3 {
 .hero-copy {
   margin: 0;
   max-width: 42ch;
-  font-size: 1rem;
+  font-size: clamp(1rem, 3.9vw, 1.12rem);
+  line-height: 1.6;
 }
 
 .hero-kpi {
@@ -529,6 +532,18 @@ h3 {
 .site-footer p {
   margin: 0;
   color: var(--muted);
+}
+
+.footer-logo {
+  display: block;
+  width: min(280px, 70vw);
+  margin-bottom: 0.55rem;
+}
+
+.footer-logo img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 @media (min-width: 760px) {
