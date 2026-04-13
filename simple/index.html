@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>株式会社ルミライズ | シンプル版</title>
+    <title>株式会社ルミライズ | シンプル版ホームページ</title>
     <meta
       name="description"
-      content="株式会社ルミライズ公式サイトの全内容を維持したまま、短文要約で見やすく再構成したシンプル版ホームページ。"
+      content="株式会社ルミライズ公式サイトの内容を保ったまま、短文・図解・画像中心で見やすく再構成したモバイル優先版ホームページ。"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -15,77 +15,264 @@
 
     <header class="site-header">
       <div class="container header-inner">
-        <p class="brand">株式会社ルミライズ | シンプル版</p>
-        <nav class="top-nav" aria-label="主要導線">
-          <a href="#summary">要約</a>
-          <a href="#full-content">全文</a>
-          <a href="../contact.html">相談する</a>
+        <p class="brand">LUMIRIZE シンプル版</p>
+        <nav class="top-nav" aria-label="ページ内ナビ">
+          <a href="#overview">概要</a>
+          <a href="#services">サービス</a>
+          <a href="#process">流れ</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">相談</a>
         </nav>
       </div>
     </header>
 
     <main id="main">
-      <section class="hero">
-        <div class="container">
-          <p class="eyebrow">Simple Full-Content Version</p>
-          <h1>内容はそのまま、読みやすさを最優先に。</h1>
+      <section class="hero" id="top">
+        <img
+          class="hero-image"
+          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1800&q=80"
+          alt="街の景色。再出発のイメージ"
+          width="1800"
+          height="1200"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+          <p class="eyebrow">Simple / Mobile First</p>
+          <h1>住まいから、やり直せる社会へ。</h1>
           <p>
-            このページは、既存サイトの情報を削らずに、短い文章・整理された導線で見やすくした「簡素化ホーム」です。
-            詳細は各リンク先で全文確認できます。
+            ルミライズは「まず住まい」を起点に、制度活用・就労支援・定着支援をつなげます。<br />
+            既存完成版の内容を保ちながら、短く・見やすくまとめました。
           </p>
           <div class="cta-row">
-            <a class="btn btn-primary" href="../contact.html">無料相談を予約</a>
-            <a class="btn btn-secondary" href="../index.html">現行公式サイトを見る</a>
+            <a class="btn btn-primary" href="../contact.html">無料相談する</a>
+            <a class="btn btn-secondary" href="../index.html">公式版を見る</a>
           </div>
         </div>
       </section>
 
-      <section class="section" id="summary">
+      <section class="section" id="overview">
         <div class="container">
-          <h2>短く読める要約</h2>
+          <h2>ひと目でわかる全体図</h2>
+          <p class="muted">Housing Firstを軸に、4つを一体で進めます。</p>
+          <ol class="flow-visual" aria-label="支援全体フロー">
+            <li><span>1</span>住まい確保</li>
+            <li><span>2</span>制度接続</li>
+            <li><span>3</span>就労接続</li>
+            <li><span>4</span>3ヶ月/6ヶ月定着</li>
+          </ol>
+
+          <div class="promise-grid">
+            <article class="card promise-card">
+              <p class="icon" aria-hidden="true">🏠</p>
+              <h3>住まいは条件ではなく前提</h3>
+              <p>回復や更生の前に、まず安心して暮らせる場所を確保します。</p>
+            </article>
+            <article class="card promise-card">
+              <p class="icon" aria-hidden="true">🤝</p>
+              <h3>仲間とつながる</h3>
+              <p>孤立を防ぎ、家族・支援機関・地域と連携した支援を行います。</p>
+            </article>
+            <article class="card promise-card">
+              <p class="icon" aria-hidden="true">🌱</p>
+              <h3>人はやり直せる</h3>
+              <p>短期対応で終わらせず、就労と生活の継続まで伴走します。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt">
+        <div class="container">
+          <h2>支援対象（多様な背景に対応）</h2>
+          <ul class="target-list">
+            <li>依存症からの回復を目指す方</li>
+            <li>刑務所出所後の住まいが必要な方</li>
+            <li>DV被害を受けた母子</li>
+            <li>LGBTQ+当事者</li>
+            <li>外国人労働者・移民の方</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section image-section">
+        <div class="container split">
+          <img
+            src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80"
+            alt="サポートを相談する人々"
+            width="1200"
+            height="800"
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <h2>公的支援プラン（図解）</h2>
+            <p>制度を説明だけで終わらせず、使える形まで実装します。</p>
+            <div class="ratio-graph" role="img" aria-label="住まい安定化40%、就労接続35%、定着支援25%">
+              <div class="ring"></div>
+              <ul>
+                <li><span class="dot dot-a"></span>住まい安定化 40%</li>
+                <li><span class="dot dot-b"></span>就労接続 35%</li>
+                <li><span class="dot dot-c"></span>定着支援 25%</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="services">
+        <div class="container">
+          <h2>サービス一覧（短文版）</h2>
           <div class="card-grid">
             <article class="card">
-              <h3>私たちについて</h3>
-              <p>住まいを起点に、孤立を防ぎ、回復と社会参加へつなげます。</p>
-              <a href="#full-about">全文を読む</a>
+              <h3>01 依存症者向け</h3>
+              <p>住まい確保 + 回復継続 + 就労接続を一体支援。</p>
             </article>
             <article class="card">
-              <h3>公的支援プラン</h3>
-              <p>制度活用・就労接続・定着支援を一体運用し、継続可能な暮らしを作ります。</p>
-              <a href="#full-policy">全文を読む</a>
+              <h3>02 出所者向け</h3>
+              <p>出所直後の住居確保と制度接続で社会復帰を支援。</p>
             </article>
             <article class="card">
-              <h3>支援実績</h3>
-              <p>定着率・相談対応・支援継続など、実務ベースの実績を公開しています。</p>
-              <a href="#full-stats">全文を読む</a>
+              <h3>03 ナイトケアハウス</h3>
+              <p>相模原ダルク利用者向けに夜間の安心環境を提供。</p>
             </article>
             <article class="card">
-              <h3>サービス</h3>
-              <p>依存症者、出所者、DV被害者、外国人など多様な背景に対応します。</p>
-              <a href="#full-services">全文を読む</a>
+              <h3>04 LGBTQ+支援</h3>
+              <p>尊厳とプライバシーを守る住居調整と継続支援。</p>
             </article>
             <article class="card">
-              <h3>支援内容・流れ</h3>
-              <p>初回相談から入居、3ヶ月・6ヶ月の定着まで伴走します。</p>
-              <a href="#full-support">支援内容の全文</a>
-              <a href="#full-process">流れの全文</a>
+              <h3>05 DV母子支援</h3>
+              <p>緊急避難から中長期の生活再建まで伴走。</p>
             </article>
             <article class="card">
-              <h3>代表メッセージ</h3>
-              <p>差別・孤立・回復の経験から、住まいを前提にした支援思想を語ります。</p>
-              <a href="#full-representative">全文を読む</a>
+              <h3>06 外国人支援</h3>
+              <p>言語・制度・文化差を踏まえて住まいと就労を支援。</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section section-alt" id="full-content">
+      <section class="section section-alt">
         <div class="container">
-          <h2>全内容をそのまま移行（原本リンク）</h2>
-          <p class="muted">
-            下記は既存ページ（全文）のリンクです。内容の削除・省略は行わず、そのまま閲覧できます。
+          <h2>実績ハイライト</h2>
+          <ul class="bar-list">
+            <li>
+              <p><span>住まいの質・環境</span><strong>92%</strong></p>
+              <span class="track"><span style="width: 92%"></span></span>
+            </li>
+            <li>
+              <p><span>スタッフ対応</span><strong>95%</strong></p>
+              <span class="track"><span style="width: 95%"></span></span>
+            </li>
+            <li>
+              <p><span>生活相談</span><strong>88%</strong></p>
+              <span class="track"><span style="width: 88%"></span></span>
+            </li>
+            <li>
+              <p><span>就労・定着支援</span><strong>85%</strong></p>
+              <span class="track"><span style="width: 85%"></span></span>
+            </li>
+          </ul>
+          <p class="muted small">※公式実績ページの公開数値を短く表示</p>
+        </div>
+      </section>
+
+      <section class="section image-section" id="process">
+        <div class="container split reverse">
+          <img
+            src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80"
+            alt="手順を確認するノートとペン"
+            width="1200"
+            height="800"
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <h2>入居までの5ステップ</h2>
+            <ol class="step-list">
+              <li><span>1</span>初回相談（無料）</li>
+              <li><span>2</span>制度確認・書類準備</li>
+              <li><span>3</span>物件見学・生活設計</li>
+              <li><span>4</span>審査・契約・就労接続</li>
+              <li><span>5</span>入居・定着支援</li>
+            </ol>
+            <p class="muted">標準目安: 相談から入居まで3〜7営業日（緊急時は優先対応）</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="faq">
+        <div class="container">
+          <h2>よくある質問（短文）</h2>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>誰が相談できますか？</summary>
+              <p>依存症、出所者、DV母子、LGBTQ+、外国人労働者など住まいに不安がある方が対象です。</p>
+            </details>
+            <details class="faq-item">
+              <summary>当日相談はできますか？</summary>
+              <p>可能です。緊急時は安全確保を最優先に初動対応します。</p>
+            </details>
+            <details class="faq-item">
+              <summary>制度相談はいつから可能？</summary>
+              <p>初回相談から可能です。住居確保給付金等の活用可否を整理します。</p>
+            </details>
+            <details class="faq-item">
+              <summary>入居後のフォローは？</summary>
+              <p>定期面談に加え、3ヶ月・6ヶ月で定着面談を行います。</p>
+            </details>
+            <details class="faq-item">
+              <summary>どのくらい家計改善できますか？</summary>
+              <p>制度要件により変動しますが、上限モデルで最大約294万円規模の改善余地があります。</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt">
+        <div class="container quote-card">
+          <h2>代表メッセージ（要約）</h2>
+          <blockquote>
+            「住まいは条件ではなく前提。制度を実務でつなぎ、孤立を防ぎ、仲間と回復できる環境をつくる」
+          </blockquote>
+          <p>
+            代表の実体験（差別・孤立・回復）を土台に、依存症者・出所者だけでなく、DV母子、LGBTQ+、外国人労働者にも支援を広げています。
           </p>
-          <ul class="link-list">
+          <a href="../representative.html">代表メッセージ全文を見る</a>
+        </div>
+      </section>
+
+      <section class="section image-section" id="contact">
+        <div class="container split">
+          <img
+            src="https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=1200&q=80"
+            alt="相談窓口で話すスタッフ"
+            width="1200"
+            height="800"
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <h2>お問い合わせ</h2>
+            <p>電話・メール・フォームで無料相談できます。</p>
+            <ul class="contact-list">
+              <li>電話: <a href="tel:0427048308">042-704-8308</a></li>
+              <li>メール: <a href="mailto:info@lumirize.com">info@lumirize.com</a></li>
+              <li>所在地: 神奈川県相模原市中央区千代田3-3-20</li>
+            </ul>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="../contact.html">お問い合わせページへ</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section full-links">
+        <div class="container">
+          <h2>内容を完全に確認する（原文リンク）</h2>
+          <p class="muted">以下は既存完成版の全文ページです。内容はそのまま残しています。</p>
+          <ul class="link-grid">
             <li><a href="../index.html">トップ（全文）</a></li>
             <li><a href="../about.html">私たちについて（全文）</a></li>
             <li><a href="../policy.html">公的支援プラン（全文）</a></li>
@@ -94,70 +281,18 @@
             <li><a href="../support.html">支援内容（全文）</a></li>
             <li><a href="../process.html">入居までの流れ（全文）</a></li>
             <li><a href="../faq.html">FAQ（全文）</a></li>
-            <li><a href="../representative.html">代表の経歴とメッセージ（全文）</a></li>
+            <li><a href="../representative.html">代表メッセージ（全文）</a></li>
             <li><a href="../contact.html">お問い合わせ（全文）</a></li>
             <li><a href="../privacy.html">プライバシーポリシー（全文）</a></li>
             <li><a href="../terms.html">利用規約（全文）</a></li>
           </ul>
-
-          <h3 class="full-view-title">このページ内で全文を読む</h3>
-          <p class="muted">各セクションを開くと、原本ページをそのまま表示します（内容は一切省略していません）。</p>
-
-          <details class="full-panel" id="full-top">
-            <summary>トップ（全文）</summary>
-            <iframe src="../index.html" title="トップ全文"></iframe>
-          </details>
-          <details class="full-panel" id="full-about">
-            <summary>私たちについて（全文）</summary>
-            <iframe src="../about.html" title="私たちについて全文"></iframe>
-          </details>
-          <details class="full-panel" id="full-policy">
-            <summary>公的支援プラン（全文）</summary>
-            <iframe src="../policy.html" title="公的支援プラン全文"></iframe>
-          </details>
-          <details class="full-panel" id="full-stats">
-            <summary>支援実績（全文）</summary>
-            <iframe src="../stats.html" title="支援実績全文"></iframe>
-          </details>
-          <details class="full-panel" id="full-services">
-            <summary>サービス（全文）</summary>
-            <iframe src="../services.html" title="サービス全文"></iframe>
-          </details>
-          <details class="full-panel" id="full-support">
-            <summary>支援内容（全文）</summary>
-            <iframe src="../support.html" title="支援内容全文"></iframe>
-          </details>
-          <details class="full-panel" id="full-process">
-            <summary>入居までの流れ（全文）</summary>
-            <iframe src="../process.html" title="入居までの流れ全文"></iframe>
-          </details>
-          <details class="full-panel" id="full-faq">
-            <summary>FAQ（全文）</summary>
-            <iframe src="../faq.html" title="FAQ全文"></iframe>
-          </details>
-          <details class="full-panel" id="full-representative">
-            <summary>代表の経歴とメッセージ（全文）</summary>
-            <iframe src="../representative.html" title="代表メッセージ全文"></iframe>
-          </details>
-          <details class="full-panel" id="full-contact">
-            <summary>お問い合わせ（全文）</summary>
-            <iframe src="../contact.html" title="お問い合わせ全文"></iframe>
-          </details>
-          <details class="full-panel" id="full-privacy">
-            <summary>プライバシーポリシー（全文）</summary>
-            <iframe src="../privacy.html" title="プライバシーポリシー全文"></iframe>
-          </details>
-          <details class="full-panel" id="full-terms">
-            <summary>利用規約（全文）</summary>
-            <iframe src="../terms.html" title="利用規約全文"></iframe>
-          </details>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
       <div class="container">
-        <p>© 株式会社ルミライズ（シンプル版）</p>
+        <p>© 株式会社ルミライズ（simple版）</p>
       </div>
     </footer>
   </body>
