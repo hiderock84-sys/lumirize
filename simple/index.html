@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>株式会社ルミライズ | 住まい支援・制度実装・社会統合</title>
+    <title>株式会社ルミライズ | 住まい支援・社会統合</title>
     <meta
       name="description"
-      content="株式会社ルミライズは、住まい支援・制度実装・就労接続・定着支援を一体運用し、孤立のない社会統合を実現します。日本全土および東アジア圏に向け、外国人移民支援を含む包括的支援を提供しています。"
+      content="株式会社ルミライズの住まい支援サイト。短文・高画質画像・図解中心で、支援内容を直感的に伝える構成です。"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -15,14 +15,21 @@
 
     <header class="site-header">
       <div class="container header-inner">
-        <p class="brand">株式会社ルミライズ</p>
+        <a href="#top" class="brand-logo" aria-label="株式会社ルミライズ トップへ">
+          <img
+            src="../assets/lumirize-logo-horizontal.png"
+            alt="LUMIRIZE 株式会社ルミライズ ロゴ"
+            width="1286"
+            height="245"
+            loading="eager"
+            decoding="async"
+          />
+        </a>
         <nav class="top-nav" aria-label="主要ナビゲーション">
-          <a href="#policy">支援方針</a>
-          <a href="#services">サービス</a>
-          <a href="#global">国際支援</a>
-          <a href="#impact">実績</a>
-          <a href="#faq">FAQ</a>
-          <a href="#contact">お問い合わせ</a>
+          <a href="#services">支援</a>
+          <a href="#migrant">移民支援</a>
+          <a href="#flow">流れ</a>
+          <a href="#contact">相談</a>
         </nav>
       </div>
     </header>
@@ -31,229 +38,156 @@
       <section class="hero" id="top">
         <img
           class="hero-image"
-          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2200&q=90"
-          alt="都市景観。再出発を支える社会インフラのイメージ"
-          width="2200"
-          height="1467"
+          src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=2600&q=92"
+          alt="都市の高層ビル群"
+          width="2600"
+          height="1460"
           loading="eager"
           decoding="async"
         />
         <div class="hero-overlay"></div>
         <div class="container hero-content">
-          <p class="eyebrow">Housing First / Dignity First</p>
-          <h1>住まいを基盤に、回復と社会参加を持続させる。</h1>
-          <p class="hero-copy">
-            当社は、住居確保・制度接続・就労支援・3ヶ月/6ヶ月定着支援を統合し、
-            依存症者、刑務所出所者、DV被害母子、LGBTQ+当事者、外国人移民を含む多様な方の再出発を実装します。
-          </p>
+          <p class="eyebrow">Housing First</p>
+          <h1>まず住まい。だから、前に進める。</h1>
+          <p class="hero-copy">住まい + 制度 + 就労 + 定着。4つを同時に支えます。</p>
           <div class="hero-kpi" aria-label="主要指標">
-            <article>
-              <strong>95%</strong>
-              <span>支援対応満足度</span>
-            </article>
-            <article>
-              <strong>3〜7営業日</strong>
-              <span>相談から入居の目安</span>
-            </article>
-            <article>
-              <strong>24時間</strong>
-              <span>緊急連絡体制</span>
-            </article>
-            <article>
-              <strong>3ヶ月/6ヶ月</strong>
-              <span>定着面談運用</span>
-            </article>
+            <article><strong>95%</strong><span>満足度</span></article>
+            <article><strong>3〜7日</strong><span>入居目安</span></article>
+            <article><strong>24時間</strong><span>緊急連絡</span></article>
+            <article><strong>3/6ヶ月</strong><span>定着面談</span></article>
           </div>
           <div class="cta-row">
-            <a class="btn btn-primary" href="../contact.html">無料相談を予約</a>
-            <a class="btn btn-secondary" href="#global">外国人移民支援を見る</a>
+            <a class="btn btn-primary" href="#contact">今すぐ相談</a>
+            <a class="btn btn-secondary" href="#migrant">移民支援を見る</a>
           </div>
         </div>
       </section>
 
-      <section class="section" id="policy">
+      <section class="section image-grid-section">
         <div class="container">
-          <header class="section-head">
-            <h2>支援方針</h2>
-            <p class="section-kicker">理念を運用に落とし込む、実装型支援モデル</p>
-          </header>
-          <div class="policy-grid">
-            <article class="card">
-              <h3>住まいは条件ではなく前提</h3>
-              <p>回復や更生の達成を待たず、まず生活基盤として住まいを確保します。</p>
-            </article>
-            <article class="card">
-              <h3>制度活用を説明で終わらせない</h3>
-              <p>家賃補助、住宅扶助、就労制度を実際の暮らしで機能する形まで伴走します。</p>
-            </article>
-            <article class="card">
-              <h3>孤立を防ぎ社会統合へ接続</h3>
-              <p>本人・家族・オーナー・関係機関が同じ見通しを持つ運用を設計します。</p>
-            </article>
+          <h2>ひと目でわかる支援</h2>
+          <div class="image-grid">
+            <figure>
+              <img
+                src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1400&q=88"
+                alt="相談する人々"
+                width="1400"
+                height="900"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>相談</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1400&q=88"
+                alt="書類とペン"
+                width="1400"
+                height="900"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>制度手続き</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="https://images.unsplash.com/photo-1462899006636-339e08d1844e?auto=format&fit=crop&w=1400&q=88"
+                alt="夜の住宅街"
+                width="1400"
+                height="900"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>住まい確保</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=88"
+                alt="チームで話し合う人々"
+                width="1400"
+                height="900"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>就労支援</figcaption>
+            </figure>
           </div>
-
-          <h3 class="sub-title">Dignity First Model</h3>
-          <ol class="flow-visual" aria-label="ディグニティファーストモデル">
-            <li><span>1</span>Housing（住まい）</li>
-            <li><span>2</span>Security（安心）</li>
-            <li><span>3</span>Community（つながり）</li>
-            <li><span>4</span>Recovery（回復）</li>
-            <li><span>5</span>Social Integration（社会参加）</li>
-          </ol>
         </div>
       </section>
 
-      <section class="section section-alt image-section">
+      <section class="section section-alt" id="services">
+        <div class="container">
+          <h2>支援メニュー</h2>
+          <div class="service-grid">
+            <article class="card">
+              <h3>依存症者支援</h3>
+              <p>住まい確保。回復継続。</p>
+            </article>
+            <article class="card">
+              <h3>出所者支援</h3>
+              <p>社会復帰を最短で。</p>
+            </article>
+            <article class="card">
+              <h3>DV母子支援</h3>
+              <p>安全最優先で保護。</p>
+            </article>
+            <article class="card">
+              <h3>LGBTQ+支援</h3>
+              <p>尊厳を守る住居調整。</p>
+            </article>
+            <article class="card">
+              <h3>外国人移民支援</h3>
+              <p>言語と制度の壁を解消。</p>
+            </article>
+            <article class="card">
+              <h3>定着支援</h3>
+              <p>3ヶ月・6ヶ月で見守る。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section image-feature" id="migrant">
         <div class="container split">
           <img
-            src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1500&q=85"
-            alt="支援者と利用者が相談する様子"
-            width="1500"
-            height="1000"
+            src="https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=1700&q=90"
+            alt="多国籍の人々が対話する様子"
+            width="1700"
+            height="1100"
             loading="lazy"
             decoding="async"
           />
           <div>
-            <h2>対象者と支援領域</h2>
-            <p>背景の違いに関係なく、住まいを必要とする方の再出発を支えます。</p>
-            <ul class="target-list">
-              <li>依存症からの回復を目指す方</li>
-              <li>刑務所出所後の住居が必要な方</li>
-              <li>DV被害を受けた母子（緊急避難含む）</li>
-              <li>LGBTQ+当事者</li>
-              <li>外国人労働者・移民の方</li>
+            <h2>外国人移民支援が、私たちの強み</h2>
+            <p class="strong-copy">差別や偏見のない支援を、現場で実装。</p>
+            <ul class="point-list">
+              <li>住まい契約をわかりやすく説明</li>
+              <li>制度・行政手続きを一緒に整理</li>
+              <li>就労と生活を同時に安定化</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <section class="section" id="services">
+      <section class="section section-alt" id="flow">
         <div class="container">
-          <header class="section-head">
-            <h2>サービス体系</h2>
-            <p class="section-kicker">6領域を横断する統合支援</p>
-          </header>
-          <div class="service-grid">
-            <article class="card">
-              <h3>01 依存症者向け住まい再建</h3>
-              <ul>
-                <li>安定住居の確保</li>
-                <li>家賃補助制度の整理</li>
-                <li>回復継続と就労導線</li>
-              </ul>
-            </article>
-            <article class="card">
-              <h3>02 出所者向け社会復帰支援</h3>
-              <ul>
-                <li>出所直後の住居導線</li>
-                <li>住宅セーフティネット接続</li>
-                <li>再犯防止の定着支援</li>
-              </ul>
-            </article>
-            <article class="card">
-              <h3>03 ナイトケアハウス運営</h3>
-              <ul>
-                <li>相模原ダルク利用者向け</li>
-                <li>夜間の安心環境</li>
-                <li>生活リズム再建支援</li>
-              </ul>
-            </article>
-            <article class="card">
-              <h3>04 LGBTQ+向け住居支援</h3>
-              <ul>
-                <li>尊厳とプライバシー配慮</li>
-                <li>差別リスクを踏まえた調整</li>
-                <li>継続居住の伴走</li>
-              </ul>
-            </article>
-            <article class="card">
-              <h3>05 DV母子向け緊急支援</h3>
-              <ul>
-                <li>緊急避難先の確保</li>
-                <li>関係機関連携</li>
-                <li>中長期の生活再建</li>
-              </ul>
-            </article>
-            <article class="card">
-              <h3>06 外国人移民向け住居支援</h3>
-              <ul>
-                <li>言語・制度障壁の解消支援</li>
-                <li>住居契約と生活情報の整理</li>
-                <li>就労継続と地域定着支援</li>
-              </ul>
-            </article>
-          </div>
+          <h2>入居までの流れ</h2>
+          <ol class="step-list">
+            <li><span>1</span>無料相談</li>
+            <li><span>2</span>制度確認</li>
+            <li><span>3</span>物件案内</li>
+            <li><span>4</span>契約・就労接続</li>
+            <li><span>5</span>入居・定着支援</li>
+          </ol>
         </div>
       </section>
 
-      <section class="section section-alt" id="global">
-        <div class="container split reverse">
-          <img
-            src="https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=1500&q=85"
-            alt="多文化背景の人々が対話する様子"
-            width="1500"
-            height="1000"
-            loading="lazy"
-            decoding="async"
-          />
-          <div>
-            <h2>外国人移民支援の中核価値</h2>
-            <p>
-              日本語・制度・文化差を理由に住居を失うリスクへ、住まい起点で対応します。
-              差別や偏見を排し、当事者を「支援対象」ではなく「社会をともに支える仲間」として捉えることが当社の強みです。
-            </p>
-            <div class="global-points">
-              <article>
-                <h3>差別・偏見のない実務運用</h3>
-                <p>尊厳を最優先に、契約・相談・定着の各段階で公平な対応を徹底します。</p>
-              </article>
-              <article>
-                <h3>言語と制度の橋渡し</h3>
-                <p>住居契約、行政手続き、生活ルールを理解できる導線を整えます。</p>
-              </article>
-              <article>
-                <h3>就労と生活の同時安定化</h3>
-                <p>就労支援接続と住居安定を同時に設計し、孤立・不安定化を予防します。</p>
-              </article>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="plan">
+      <section class="section impact-section">
         <div class="container">
-          <header class="section-head">
-            <h2>公的支援プラン</h2>
-            <p class="section-kicker">住まい・就労・定着を分断しない比重設計</p>
-          </header>
-          <div class="plan-layout">
-            <div class="ratio-graph" role="img" aria-label="住まい安定化40%、就労接続35%、定着支援25%">
-              <div class="ring"></div>
-              <ul>
-                <li><span class="dot dot-a"></span>住まい安定化 40%</li>
-                <li><span class="dot dot-b"></span>就労接続 35%</li>
-                <li><span class="dot dot-c"></span>定着支援 25%</li>
-              </ul>
-            </div>
-            <ol class="step-list">
-              <li><span>1</span>制度診断（活用可否・優先順位整理）</li>
-              <li><span>2</span>住居確保（家賃補助・住宅扶助整合）</li>
-              <li><span>3</span>就労接続（ハローワーク等）</li>
-              <li><span>4</span>定着支援（3ヶ月・6ヶ月面談）</li>
-            </ol>
-          </div>
-        </div>
-      </section>
-
-      <section class="section section-alt" id="impact">
-        <div class="container">
-          <header class="section-head">
-            <h2>実績と信頼指標</h2>
-            <p class="section-kicker">支援品質を可視化した主要データ</p>
-          </header>
+          <h2>成果</h2>
           <ul class="bar-list">
             <li>
-              <p><span>住まいの質・環境</span><strong>92%</strong></p>
+              <p><span>住まい満足</span><strong>92%</strong></p>
               <span class="track"><span style="width: 92%"></span></span>
             </li>
             <li>
@@ -261,111 +195,76 @@
               <span class="track"><span style="width: 95%"></span></span>
             </li>
             <li>
-              <p><span>生活相談</span><strong>88%</strong></p>
-              <span class="track"><span style="width: 88%"></span></span>
-            </li>
-            <li>
-              <p><span>就労・定着支援</span><strong>85%</strong></p>
+              <p><span>就労・定着</span><strong>85%</strong></p>
               <span class="track"><span style="width: 85%"></span></span>
             </li>
-            <li>
-              <p><span>総合満足度</span><strong>90%</strong></p>
-              <span class="track"><span style="width: 90%"></span></span>
-            </li>
           </ul>
-
-          <div class="case-grid">
-            <article class="card">
-              <h3>Aさん</h3>
-              <p>住居確保と制度活用により回復を継続。「住まいがあることで心が安定した」</p>
-            </article>
-            <article class="card">
-              <h3>Bさん</h3>
-              <p>出所後の住居不安を解消し就労開始。「信じてくれる人がいると前に進める」</p>
-            </article>
-            <article class="card">
-              <h3>Eさん（外国人労働者）</h3>
-              <p>言語・制度不安を整理し住居と就労を安定化。「安心して働き続けられる」</p>
-            </article>
-          </div>
         </div>
       </section>
 
-      <section class="section" id="faq">
+      <section class="section image-grid-section">
         <div class="container">
-          <header class="section-head">
-            <h2>FAQ</h2>
-            <p class="section-kicker">実務で多い質問に簡潔に回答</p>
-          </header>
-          <div class="faq-list">
-            <details class="faq-item">
-              <summary>誰が相談できますか？</summary>
-              <p>住まいに不安のある方が対象です。依存症者、出所者、DV母子、LGBTQ+、外国人移民などに対応します。</p>
-            </details>
-            <details class="faq-item">
-              <summary>緊急で住まいが必要な場合は？</summary>
-              <p>当日相談可能です。安全確保を最優先に初動対応します。</p>
-            </details>
-            <details class="faq-item">
-              <summary>相談から入居までの目安は？</summary>
-              <p>通常は3〜7営業日です。緊急性が高い場合は優先対応します。</p>
-            </details>
-            <details class="faq-item">
-              <summary>制度相談はいつから可能ですか？</summary>
-              <p>初回相談から可能です。住居確保給付金、住宅扶助整合、就労制度接続を整理します。</p>
-            </details>
-            <details class="faq-item">
-              <summary>外国人移民支援の特徴は？</summary>
-              <p>差別や偏見のない運用、言語・制度の橋渡し、就労と住居の同時安定化を一体で実装します。</p>
-            </details>
+          <h2>現場のリアル</h2>
+          <div class="image-grid image-grid-large">
+            <figure>
+              <img
+                src="https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=1700&q=90"
+                alt="面談の様子"
+                width="1700"
+                height="1100"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>丁寧な面談</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1700&q=90"
+                alt="多文化コミュニティの交流"
+                width="1700"
+                height="1100"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>多文化共生</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1700&q=90"
+                alt="街で働く人の後ろ姿"
+                width="1700"
+                height="1100"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>就労と自立</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1700&q=90"
+                alt="笑顔で歩く人々"
+                width="1700"
+                height="1100"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>未来への一歩</figcaption>
+            </figure>
           </div>
         </div>
       </section>
 
-      <section class="section section-alt">
-        <div class="container governance">
-          <article class="quote-card">
-            <h2>代表メッセージ（要約）</h2>
-            <blockquote>「住まいは条件ではなく前提。制度をつなぎ、孤立を防ぎ、仲間として支える。」</blockquote>
-            <p>当社は、差別・孤立・回復の現場経験を土台に、持続可能な社会統合支援を実装します。</p>
-            <a href="../representative.html">代表メッセージ全文へ</a>
-          </article>
-          <article class="legal-card">
-            <h2>安全管理・ガバナンス</h2>
-            <ul>
-              <li>個人情報は法令に基づき適切に保護</li>
-              <li>本人同意のない第三者提供は行いません（法令除く）</li>
-              <li>緊急時は24時間連絡体制で対応</li>
-            </ul>
-            <div class="mini-links">
-              <a href="../privacy.html">プライバシーポリシー</a>
-              <a href="../terms.html">利用規約</a>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section image-section" id="contact">
-        <div class="container split">
-          <img
-            src="https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=1500&q=85"
-            alt="相談窓口での対話の様子"
-            width="1500"
-            height="1000"
-            loading="lazy"
-            decoding="async"
-          />
-          <div>
-            <h2>お問い合わせ・無料相談</h2>
-            <p>入居希望者、ご家族、オーナー、自治体担当者それぞれの立場に応じてご案内します。</p>
-            <ul class="contact-list">
-              <li>電話: <a href="tel:0427048308">042-704-8308</a>（平日 9:00-18:00）</li>
-              <li>メール: <a href="mailto:info@lumirize.com">info@lumirize.com</a></li>
-              <li>所在地: 神奈川県相模原市中央区千代田3-3-20</li>
-            </ul>
-            <div class="cta-row">
-              <a class="btn btn-primary" href="../contact.html">お問い合わせページへ</a>
-            </div>
+      <section class="section section-alt" id="contact">
+        <div class="container contact-block">
+          <h2>お問い合わせ</h2>
+          <p>住まいの不安は、今日ご相談ください。</p>
+          <ul class="contact-list">
+            <li>電話: <a href="tel:0427048308">042-704-8308</a></li>
+            <li>メール: <a href="mailto:info@lumirize.com">info@lumirize.com</a></li>
+            <li>神奈川県相模原市中央区千代田3-3-20</li>
+          </ul>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="../contact.html">お問い合わせページへ</a>
           </div>
         </div>
       </section>
@@ -373,6 +272,16 @@
 
     <footer class="site-footer">
       <div class="container">
+        <a class="footer-logo" href="#top" aria-label="株式会社ルミライズ トップへ">
+          <img
+            src="../assets/lumirize-logo-horizontal.png"
+            alt="LUMIRIZE 株式会社ルミライズ ロゴ"
+            width="1286"
+            height="245"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
         <p>© 株式会社ルミライズ</p>
       </div>
     </footer>
