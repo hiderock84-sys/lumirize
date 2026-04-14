@@ -169,6 +169,7 @@ h3 {
 .hero-copy {
   margin: 0;
   max-width: 52ch;
+  text-wrap: pretty;
 }
 
 .hero-kpi {
@@ -199,6 +200,7 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 0.56rem;
+  align-items: center;
 }
 
 .btn {
@@ -240,6 +242,10 @@ h3 {
   margin-bottom: 0.64rem;
 }
 
+.section-head h2 {
+  margin-bottom: 0.3rem;
+}
+
 .section-kicker {
   margin: 0;
   color: var(--muted);
@@ -250,12 +256,14 @@ h3 {
   margin: 0;
   color: var(--muted);
   max-width: 64ch;
+  text-wrap: pretty;
 }
 
 .lead {
   margin: 0;
   color: var(--muted);
   max-width: 50ch;
+  text-wrap: pretty;
 }
 
 .split {
@@ -302,6 +310,7 @@ h3 {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 0.94rem;
+  min-height: 100%;
 }
 
 .card p {
@@ -527,6 +536,7 @@ h3 {
   border-radius: 12px;
   padding: 0.82rem;
   color: #314d70;
+  line-height: 1.66;
 }
 
 .bullet-list {
@@ -552,6 +562,7 @@ h3 {
 .site-footer p {
   margin: 0;
   color: var(--muted);
+  font-size: 0.92rem;
 }
 
 .hero-short {
@@ -624,6 +635,10 @@ h3 {
   .card-grid,
   .cards-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .global-cards,
