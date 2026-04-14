@@ -13,7 +13,7 @@
   --radius: 16px;
   --shadow: 0 12px 28px rgba(10, 33, 63, 0.1);
   --container-max: 1120px;
-  --gutter: 14px;
+  --gutter: 12px;
 }
 
 *,
@@ -80,7 +80,7 @@ a:hover {
   grid-template-columns: 1fr;
   align-items: flex-start;
   gap: 0.58rem;
-  padding: 0.62rem 0 0.66rem;
+  padding: 0.56rem 0 0.58rem;
 }
 
 .brand-logo,
@@ -99,10 +99,10 @@ a:hover {
 .top-nav {
   display: flex;
   flex-wrap: nowrap;
-  gap: 0.46rem;
+  gap: 0.4rem;
   width: 100%;
   overflow-x: auto;
-  padding-bottom: 0.14rem;
+  padding-bottom: 0.1rem;
   scrollbar-width: thin;
   scrollbar-color: #b7cae4 transparent;
 }
@@ -117,7 +117,7 @@ a:hover {
   border: 1px solid #c9d9ef;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.92);
-  padding: 0.44rem 0.76rem;
+  padding: 0.4rem 0.72rem;
 }
 
 .top-nav a:hover,
@@ -226,7 +226,7 @@ a:hover {
   position: relative;
   z-index: 1;
   color: #fff;
-  padding-block: 2.6rem 2.2rem;
+  padding-block: 2.15rem 1.8rem;
 }
 
 .eyebrow {
@@ -291,22 +291,47 @@ h3 {
 }
 
 .cta-row {
-  margin-top: 1rem;
+  margin-top: 0.86rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.58rem;
+  gap: 0.52rem;
   align-items: center;
+}
+
+.hero-action-panel {
+  margin-top: 0.84rem;
+  padding: 0.58rem;
+  border-radius: 14px;
+  background: rgba(8, 24, 45, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(4px);
+}
+
+.cta-row-hero {
+  margin-top: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.48rem;
+}
+
+.cta-row-hero .btn {
+  width: 100%;
+  justify-content: flex-start;
+  padding-inline: 0.92rem;
+  min-height: 2.54rem;
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 2.52rem;
+  min-height: 2.38rem;
   border-radius: 999px;
-  padding: 0.45rem 0.98rem;
+  padding: 0.42rem 0.9rem;
   text-decoration: none;
   font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 .btn-primary {
@@ -326,7 +351,7 @@ h3 {
 }
 
 .section {
-  padding: clamp(1.5rem, 5vw, 2.7rem) 0;
+  padding: clamp(1.2rem, 4.2vw, 2.2rem) 0;
 }
 
 .section-alt {
@@ -728,6 +753,24 @@ h3 {
     padding: 0.38rem 0.64rem;
   }
 
+  .hero-action-panel {
+    max-width: 540px;
+    padding: 0.5rem;
+  }
+
+  .cta-row-hero {
+    grid-template-columns: auto auto;
+    gap: 0.46rem;
+    width: auto;
+  }
+
+  .cta-row-hero .btn {
+    width: auto;
+    justify-content: center;
+    min-height: 2.42rem;
+    padding-inline: 0.92rem;
+  }
+
   .hero-kpi {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
@@ -814,5 +857,55 @@ h3 {
 
   .service-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --gutter: 10px;
+  }
+
+  .hero-content,
+  .page-hero-content {
+    padding-block: 1.5rem 1.25rem;
+  }
+
+  .hero-kpi {
+    gap: 0.42rem;
+  }
+
+  .hero-kpi article {
+    padding: 0.5rem 0.56rem;
+  }
+
+  .cta-row {
+    margin-top: 0.72rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.44rem;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .cta-row .btn {
+    width: 100%;
+    min-height: 2.25rem;
+    padding: 0.36rem 0.78rem;
+    font-size: 0.98rem;
+    justify-content: center;
+    box-shadow: 0 8px 16px rgba(8, 28, 57, 0.2);
+  }
+
+  .section {
+    padding: clamp(1.1rem, 4.4vw, 1.65rem) 0;
+  }
+
+  .section-head {
+    margin-bottom: 0.58rem;
+  }
+
+  .section-kicker {
+    font-size: 0.92rem;
+    line-height: 1.54;
   }
 }
