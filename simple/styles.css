@@ -468,18 +468,27 @@ h3 {
   box-shadow: var(--shadow);
 }
 
-.image-strip {
+.evidence-grid {
+  margin-top: 0.8rem;
   display: grid;
-  gap: 0.72rem;
+  gap: 0.7rem;
 }
 
-.image-strip img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-radius: var(--radius);
+.evidence-item {
+  background: var(--surface);
   border: 1px solid var(--border);
+  border-radius: var(--radius);
   box-shadow: var(--shadow);
+  padding: 0.9rem;
+}
+
+.evidence-item h3 {
+  margin-bottom: 0.28rem;
+}
+
+.evidence-item p {
+  margin: 0;
+  color: var(--muted);
 }
 
 .faq-list {
@@ -663,7 +672,7 @@ h3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .image-strip {
+  .evidence-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
