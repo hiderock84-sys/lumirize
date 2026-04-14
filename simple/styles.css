@@ -66,7 +66,7 @@ a:hover {
 }
 
 .site-header {
-  position: sticky;
+  position: static;
   top: 0;
   z-index: 100;
   backdrop-filter: blur(8px);
@@ -80,7 +80,7 @@ a:hover {
   grid-template-columns: 1fr;
   align-items: flex-start;
   gap: 0.58rem;
-  padding: 0.64rem 0 0.7rem;
+  padding: 0.62rem 0 0.66rem;
 }
 
 .brand-logo,
@@ -109,15 +109,15 @@ a:hover {
 
 .top-nav a {
   text-decoration: none;
-  font-size: 0.86rem;
-  font-weight: 700;
+  font-size: 0.84rem;
+  font-weight: 680;
   line-height: 1.2;
   color: var(--text);
   white-space: nowrap;
   border: 1px solid #c9d9ef;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.92);
-  padding: 0.42rem 0.72rem;
+  padding: 0.44rem 0.76rem;
 }
 
 .top-nav a:hover,
