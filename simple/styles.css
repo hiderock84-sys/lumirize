@@ -13,6 +13,7 @@
   --radius: 16px;
   --shadow: 0 12px 28px rgba(10, 33, 63, 0.1);
   --container-max: 1120px;
+  --content-max: 760px;
   --gutter: 12px;
 }
 
@@ -37,12 +38,35 @@ body {
   overflow-x: hidden;
 }
 
+main {
+  display: block;
+}
+
+img {
+  max-width: 100%;
+}
+
+p {
+  margin: 0;
+  line-height: 1.78;
+}
+
+p + p {
+  margin-top: 0.68rem;
+}
+
 a {
   color: var(--primary);
 }
 
 a:hover {
   color: var(--primary-strong);
+}
+
+a:focus-visible {
+  outline: 2px solid #5c8fd9;
+  outline-offset: 2px;
+  border-radius: 6px;
 }
 
 .container {
@@ -125,6 +149,13 @@ a:hover {
   color: var(--primary);
   border-color: #9cb9dd;
   background: #fff;
+}
+
+.top-nav a[aria-current="page"] {
+  color: var(--primary);
+  border-color: #8fb0db;
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(18, 56, 110, 0.16);
 }
 
 .top-nav::-webkit-scrollbar {
@@ -261,8 +292,7 @@ h3 {
 .hero-copy,
 .section-lead,
 .lead {
-  margin: 0;
-  max-width: 62ch;
+  max-width: min(62ch, var(--content-max));
   text-wrap: pretty;
   font-size: 1.02rem;
 }
@@ -350,7 +380,7 @@ h3 {
 }
 
 .section-head {
-  margin-bottom: 0.8rem;
+  margin-bottom: clamp(0.62rem, 1.8vw, 0.9rem);
 }
 
 .section-head h2 {
@@ -358,10 +388,10 @@ h3 {
 }
 
 .section-kicker {
-  margin: 0;
   color: var(--muted);
   font-size: 0.95rem;
   line-height: 1.64;
+  max-width: min(70ch, var(--content-max));
 }
 
 .split {
@@ -436,7 +466,6 @@ h3 {
 }
 
 .card p {
-  margin: 0;
   color: var(--muted);
   font-size: 0.97rem;
 }
