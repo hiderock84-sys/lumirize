@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageDraw
 from pptx import Presentation
 from pptx.dml.color import RGBColor
 from pptx.enum.shapes import MSO_SHAPE
@@ -9,56 +9,55 @@ from pptx.util import Cm, Pt
 
 
 ROOT = Path(__file__).resolve().parent
-OUT_DIR = ROOT / "artifacts" / "output"
 ASSET_DIR = ROOT / "artifacts" / "official"
+OUT_DIR = ROOT / "artifacts" / "output"
+PREVIEW_DIR = ROOT / "artifacts" / "generated"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
-
+PREVIEW_DIR.mkdir(parents=True, exist_ok=True)
 
 W = Cm(33.867)
 H = Cm(19.05)
 
-NAVY = RGBColor(9, 28, 50)
-NAVY_2 = RGBColor(13, 47, 80)
-TEAL = RGBColor(0, 149, 158)
-TEAL_2 = RGBColor(32, 181, 184)
-GREEN = RGBColor(20, 122, 92)
-GOLD = RGBColor(225, 169, 74)
+NAVY = RGBColor(13, 34, 58)
+NAVY_2 = RGBColor(21, 58, 94)
+BG = RGBColor(241, 246, 250)
 WHITE = RGBColor(255, 255, 255)
-OFFWHITE = RGBColor(247, 250, 249)
-MIST = RGBColor(232, 241, 239)
-TEXT = RGBColor(28, 38, 47)
-MUTED = RGBColor(83, 96, 109)
-LINE = RGBColor(205, 219, 219)
-RED = RGBColor(196, 72, 64)
+TEXT = RGBColor(31, 44, 57)
+MUTED = RGBColor(91, 107, 124)
+LINE = RGBColor(215, 225, 232)
+BLUE = RGBColor(45, 122, 255)
+CYAN = RGBColor(22, 176, 205)
+GREEN = RGBColor(23, 188, 139)
+ORANGE = RGBColor(245, 164, 35)
+RED = RGBColor(238, 87, 91)
+PURPLE = RGBColor(133, 99, 255)
+PINK = RGBColor(236, 88, 143)
+DARK_CARD = RGBColor(18, 47, 75)
 
 FONT = "Noto Sans JP"
-FONT_EN = "Aptos"
+FONT_EN = "Aptos Display"
 
 
-def cm(value):
-    return Cm(value)
+def cm(v):
+    return Cm(v)
 
 
-def add_bg(slide, color=OFFWHITE):
-    shape = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, W, H)
-    shape.fill.solid()
-    shape.fill.fore_color.rgb = color
-    shape.line.fill.background()
-    return shape
-
-
-def add_textbox(slide, x, y, w, h, text, size=18, color=TEXT, bold=False,
-                align=PP_ALIGN.LEFT, font=FONT, line_spacing=1.0):
+def text(slide, x, y, w, h, value, size=12, color=TEXT, bold=False,
+         align=PP_ALIGN.LEFT, font=FONT, leading=1.08):
     box = slide.shapes.add_textbox(cm(x), cm(y), cm(w), cm(h))
     tf = box.text_frame
     tf.clear()
     tf.word_wrap = True
     tf.auto_size = MSO_AUTO_SIZE.NONE
+    tf.margin_left = cm(0.05)
+    tf.margin_right = cm(0.05)
+    tf.margin_top = cm(0.02)
+    tf.margin_bottom = cm(0.02)
     p = tf.paragraphs[0]
     p.alignment = align
-    p.line_spacing = line_spacing
+    p.line_spacing = leading
     run = p.add_run()
-    run.text = text
+    run.text = value
     run.font.name = font
     run.font.size = Pt(size)
     run.font.bold = bold
@@ -66,352 +65,411 @@ def add_textbox(slide, x, y, w, h, text, size=18, color=TEXT, bold=False,
     return box
 
 
-def add_multiline(slide, x, y, w, h, lines, size=17, color=TEXT, bullet=False,
-                  gap=0, bold_first=False):
+def multiline(slide, x, y, w, h, lines, size=10.5, color=MUTED, bullet=False):
     box = slide.shapes.add_textbox(cm(x), cm(y), cm(w), cm(h))
     tf = box.text_frame
     tf.clear()
     tf.word_wrap = True
     tf.margin_left = cm(0.05)
     tf.margin_right = cm(0.05)
-    tf.margin_top = cm(0.03)
-    tf.margin_bottom = cm(0.03)
+    tf.margin_top = cm(0.02)
+    tf.margin_bottom = cm(0.02)
     for i, line in enumerate(lines):
         p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = line
-        p.level = 0
-        p.space_after = Pt(gap)
-        if bullet:
-            p.text = f"・{line}"
+        p.text = f"• {line}" if bullet else line
         p.font.name = FONT
         p.font.size = Pt(size)
         p.font.color.rgb = color
-        p.font.bold = bold_first and i == 0
-        p.line_spacing = 1.13
+        p.space_after = Pt(3)
+        p.line_spacing = 1.08
     return box
 
 
-def add_pill(slide, x, y, w, h, text, fill=TEAL, color=WHITE, size=12):
-    shape = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cm(x), cm(y), cm(w), cm(h))
-    shape.fill.solid()
-    shape.fill.fore_color.rgb = fill
-    shape.line.fill.background()
-    tf = shape.text_frame
+def rect(slide, x, y, w, h, fill, line=None, radius=False, transparency=0):
+    shape_type = MSO_SHAPE.ROUNDED_RECTANGLE if radius else MSO_SHAPE.RECTANGLE
+    shp = slide.shapes.add_shape(shape_type, cm(x), cm(y), cm(w), cm(h))
+    shp.fill.solid()
+    shp.fill.fore_color.rgb = fill
+    shp.fill.transparency = transparency
+    if line is None:
+        shp.line.fill.background()
+    else:
+        shp.line.color.rgb = line
+        shp.line.width = Pt(0.7)
+    return shp
+
+
+def pill(slide, x, y, w, h, value, fill=BLUE, color=WHITE, size=9.5):
+    shp = rect(slide, x, y, w, h, fill, radius=True)
+    tf = shp.text_frame
     tf.clear()
-    tf.margin_left = cm(0.25)
-    tf.margin_right = cm(0.25)
+    tf.margin_left = cm(0.15)
+    tf.margin_right = cm(0.15)
     p = tf.paragraphs[0]
     p.alignment = PP_ALIGN.CENTER
     run = p.add_run()
-    run.text = text
-    run.font.name = FONT_EN
+    run.text = value
+    run.font.name = FONT
     run.font.size = Pt(size)
     run.font.bold = True
     run.font.color.rgb = color
-    return shape
+    return shp
 
 
-def add_title(slide, title, subtitle=None, section="SAGAMIHARA DARC"):
-    add_textbox(slide, 1.55, 1.0, 16.2, 0.55, section, 10.5, TEAL, True, font=FONT_EN)
-    add_textbox(slide, 1.5, 1.55, 20.8, 1.55, title, 30, NAVY, True)
-    if subtitle:
-        add_textbox(slide, 1.55, 3.12, 20.8, 0.9, subtitle, 12.5, MUTED)
-    line = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, cm(1.55), cm(4.22), cm(5.0), cm(0.06))
-    line.fill.solid()
-    line.fill.fore_color.rgb = TEAL
-    line.line.fill.background()
-
-
-def add_footer(slide, num):
-    add_textbox(slide, 1.5, 18.05, 6, 0.35, "相模原ダルク｜回復支援施設", 8.5, MUTED)
-    add_textbox(slide, 30.5, 18.05, 1.5, 0.35, f"{num:02d}", 8.5, MUTED, align=PP_ALIGN.RIGHT, font=FONT_EN)
-
-
-def image_cover(slide, path, x, y, w, h, transparency_overlay=None):
-    src = Image.open(path)
-    sw, sh = src.size
-    box_ratio = w / h
-    img_ratio = sw / sh
-    if img_ratio > box_ratio:
-        new_h = h
-        new_w = h * img_ratio
+def image_cover(slide, path, x, y, w, h, overlay=None):
+    if not Path(path).exists():
+        return None
+    im = Image.open(path)
+    iw, ih = im.size
+    box = w / h
+    ratio = iw / ih
+    if ratio > box:
+        nh = h
+        nw = h * ratio
     else:
-        new_w = w
-        new_h = w / img_ratio
-    left = x - (new_w - w) / 2
-    top = y - (new_h - h) / 2
-    pic = slide.shapes.add_picture(str(path), cm(left), cm(top), width=cm(new_w), height=cm(new_h))
-    crop_l = max(0, (x - left) / new_w)
-    crop_t = max(0, (y - top) / new_h)
-    crop_r = max(0, (left + new_w - (x + w)) / new_w)
-    crop_b = max(0, (top + new_h - (y + h)) / new_h)
-    pic.crop_left = crop_l
-    pic.crop_top = crop_t
-    pic.crop_right = crop_r
-    pic.crop_bottom = crop_b
-    if transparency_overlay is not None:
-        overlay = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, cm(x), cm(y), cm(w), cm(h))
-        overlay.fill.solid()
-        overlay.fill.fore_color.rgb = transparency_overlay[0]
-        overlay.fill.transparency = transparency_overlay[1]
-        overlay.line.fill.background()
+        nw = w
+        nh = w / ratio
+    left = x - (nw - w) / 2
+    top = y - (nh - h) / 2
+    pic = slide.shapes.add_picture(str(path), cm(left), cm(top), width=cm(nw), height=cm(nh))
+    pic.crop_left = max(0, (x - left) / nw)
+    pic.crop_top = max(0, (y - top) / nh)
+    pic.crop_right = max(0, (left + nw - (x + w)) / nw)
+    pic.crop_bottom = max(0, (top + nh - (y + h)) / nh)
+    if overlay:
+        color, trans = overlay
+        rect(slide, x, y, w, h, color, transparency=trans)
     return pic
 
 
-def add_card(slide, x, y, w, h, title, body=None, accent=TEAL, title_size=18):
-    card = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cm(x), cm(y), cm(w), cm(h))
-    card.fill.solid()
-    card.fill.fore_color.rgb = WHITE
-    card.line.color.rgb = LINE
-    card.line.width = Pt(0.7)
-    bar = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, cm(x), cm(y), cm(0.12), cm(h))
-    bar.fill.solid()
-    bar.fill.fore_color.rgb = accent
-    bar.line.fill.background()
-    add_textbox(slide, x + 0.45, y + 0.35, w - 0.8, 0.55, title, title_size, NAVY, True)
+def header(slide, title, subtitle="", tag="", icon="▣"):
+    rect(slide, 0, 0, 33.867, 2.03, NAVY)
+    pill(slide, 0.75, 0.45, 0.72, 0.72, icon, NAVY_2, WHITE, 10)
+    text(slide, 1.72, 0.35, 20.5, 0.62, title, 20, WHITE, True)
+    if subtitle:
+        text(slide, 1.75, 1.1, 22, 0.42, subtitle, 8.8, RGBColor(190, 211, 226))
+    if tag:
+        pill(slide, 26.4, 0.55, 5.9, 0.58, tag, RGBColor(237, 243, 248), NAVY, 8.5)
+
+
+def footer(slide, n, total=18):
+    text(slide, 0.75, 18.3, 16, 0.35, "相模原ダルク｜依存症からの回復を全力で支えます", 7.2, MUTED)
+    text(slide, 27.95, 18.24, 1.5, 0.35, f"{n}/{total}", 7.8, NAVY, True, PP_ALIGN.RIGHT, FONT_EN)
+    rect(slide, 29.65, 18.36, 3.0, 0.08, LINE, radius=True)
+    rect(slide, 29.65, 18.36, 3.0 * n / total, 0.08, GREEN if n == total else CYAN, radius=True)
+
+
+def card(slide, x, y, w, h, title="", body=None, accent=BLUE, title_size=12.5):
+    rect(slide, x, y, w, h, WHITE, LINE, radius=True)
+    rect(slide, x, y, 0.08, h, accent)
+    if title:
+        text(slide, x + 0.35, y + 0.28, w - 0.7, 0.45, title, title_size, NAVY, True)
+    if isinstance(body, list):
+        multiline(slide, x + 0.35, y + 0.92, w - 0.7, h - 1.05, body, 8.8, MUTED, True)
+    elif body:
+        text(slide, x + 0.35, y + 0.92, w - 0.7, h - 1.0, body, 9.5, MUTED)
+
+
+def kpi_card(slide, x, y, w, h, label, value, note, color=BLUE):
+    rect(slide, x, y, w, h, DARK_CARD, RGBColor(35, 80, 118), radius=True)
+    rect(slide, x, y, w, 0.1, color)
+    text(slide, x + 0.35, y + 0.35, w - 0.7, 0.35, label, 7.6, RGBColor(184, 210, 226), True)
+    text(slide, x + 0.35, y + 0.86, w - 0.7, 0.72, value, 19, WHITE, True, font=FONT_EN)
+    text(slide, x + 0.35, y + 1.58, w - 0.7, 0.32, note, 6.8, RGBColor(184, 210, 226))
+
+
+def mini_item(slide, x, y, color, title, body=""):
+    pill(slide, x, y, 0.7, 0.7, "", color)
+    text(slide, x + 0.95, y + 0.02, 5.5, 0.36, title, 9.8, NAVY, True)
     if body:
-        if isinstance(body, list):
-            add_multiline(slide, x + 0.45, y + 1.12, w - 0.8, h - 1.35, body, 12.2, MUTED, bullet=True, gap=3)
-        else:
-            add_textbox(slide, x + 0.45, y + 1.12, w - 0.8, h - 1.35, body, 12.2, MUTED)
-    return card
+        text(slide, x + 0.95, y + 0.47, 5.8, 0.42, body, 7.7, MUTED)
 
 
-def add_metric(slide, x, y, label, value, note, color=TEAL):
-    add_textbox(slide, x, y, 5.0, 0.45, label, 10.5, MUTED, True)
-    add_textbox(slide, x, y + 0.45, 5.7, 1.0, value, 30, color, True, font=FONT_EN)
-    add_textbox(slide, x, y + 1.42, 5.9, 0.65, note, 10.8, MUTED)
+def donut_png(path):
+    im = Image.new("RGBA", (420, 420), (255, 255, 255, 0))
+    d = ImageDraw.Draw(im)
+    bbox = (35, 35, 385, 385)
+    start = -90
+    parts = [(45.5, (45, 122, 255)), (45.1, (238, 87, 91)), (9.4, (23, 188, 139))]
+    for pct, color in parts:
+        d.arc(bbox, start, start + pct * 3.6, fill=color, width=72)
+        start += pct * 3.6
+    d.ellipse((135, 135, 285, 285), fill=(255, 255, 255, 255))
+    im.save(path)
 
 
-def create_deck():
+def bg(slide):
+    rect(slide, 0, 0, 33.867, 19.05, BG)
+
+
+def add_logo(slide, x=0.82, y=0.55, dark=False):
+    logo = ASSET_DIR / "logo03.png"
+    if logo.exists():
+        slide.shapes.add_picture(str(logo), cm(x), cm(y), height=cm(0.62))
+    else:
+        text(slide, x, y, 4, 0.4, "DARC", 12, WHITE if dark else NAVY, True, font=FONT_EN)
+
+
+def build():
     prs = Presentation()
     prs.slide_width = W
     prs.slide_height = H
     blank = prs.slide_layouts[6]
+    slides = [prs.slides.add_slide(blank) for _ in range(18)]
 
-    slides = []
-    for _ in range(12):
-        slides.append(prs.slides.add_slide(blank))
-
-    # 01 Cover
+    # 1 cover
     s = slides[0]
-    add_bg(s, NAVY)
-    image_cover(s, ASSET_DIR / "facility_main.jpg", 16.0, 0, 17.9, 19.05, (NAVY, 0.15))
-    grad = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, cm(19.0), H)
-    grad.fill.solid()
-    grad.fill.fore_color.rgb = NAVY
-    grad.fill.transparency = 0.02
-    grad.line.fill.background()
-    if (ASSET_DIR / "logo03.png").exists():
-        s.shapes.add_picture(str(ASSET_DIR / "logo03.png"), cm(1.55), cm(1.15), height=cm(1.3))
-    add_pill(s, 1.55, 4.15, 5.2, 0.65, "RECOVERY SUPPORT / 2026", TEAL)
-    add_textbox(s, 1.5, 5.25, 16.2, 2.2, "生き直す力で、\n依存症からの回復を。", 34, WHITE, True)
-    add_textbox(s, 1.58, 8.05, 13.7, 1.2, "人としての尊厳を大切に、安心して自分を表現できる共同の場をつくります。", 15, MIST)
-    add_textbox(s, 1.55, 16.55, 9.0, 0.5, "一般社団法人 相模原ダルク", 13.5, WHITE, True)
-    add_textbox(s, 1.55, 17.15, 12.8, 0.45, "アルコール依存症・薬物依存症・ギャンブル依存症の回復支援施設", 9.5, MIST)
-    add_footer(s, 1)
+    rect(s, 0, 0, 33.867, 19.05, RGBColor(7, 25, 45))
+    rect(s, 17.0, 0, 16.867, 19.05, RGBColor(16, 131, 134), transparency=0.12)
+    image_cover(s, ASSET_DIR / "facility_main.jpg", 20.2, 0, 13.7, 19.05, (RGBColor(7, 25, 45), 0.55))
+    add_logo(s, 1.25, 0.9, True)
+    pill(s, 20.9, 0.72, 10.1, 0.72, "2026年4月25日  横浜ひまわり家族会採用", RGBColor(21, 58, 94), WHITE, 9.2)
+    text(s, 3.7, 3.2, 12.5, 1.0, "CHANGE", 28, WHITE, True, font=FONT_EN)
+    text(s, 3.7, 4.3, 12.5, 1.0, "YOUR LIFE!", 28, GREEN, True, font=FONT_EN)
+    text(s, 16.0, 3.05, 18, 3.0, "DARC", 88, RGBColor(220, 242, 240), True, font=FONT_EN)
+    text(s, 3.7, 6.6, 13.2, 0.8, "依存症からの回復支援施設・施設紹介 2026", 14.5, WHITE, True)
+    text(s, 3.7, 8.0, 14.2, 1.2, "変われる。変わった仲間がいる。\n安心できる共同の場と誠実な対話を通じて、当事者の生き直す力を呼び起こします。", 10.5, RGBColor(214, 229, 238))
+    metrics = [("回復支援実績", "400+", "名以上", BLUE), ("卒業継続率", "90+", "%以上", GREEN), ("安心の見守り", "24h", "体制", ORANGE), ("連携ネットワーク", "7", "拠点", PURPLE)]
+    for i, m in enumerate(metrics):
+        kpi_card(s, 1.45 + i * 7.75, 14.2, 7.1, 2.35, *m)
+    text(s, 1.45, 17.6, 12, 0.35, "〒252-0237 神奈川県相模原市中央区千代田3-3-20", 6.8, RGBColor(162, 187, 202))
+    text(s, 28.3, 17.6, 3.5, 0.35, "042-707-0391", 6.8, RGBColor(162, 187, 202), False, PP_ALIGN.RIGHT)
 
-    # 02 Executive message
-    s = slides[1]
-    add_bg(s)
-    add_title(s, "この資料で伝えること", "相模原ダルクの支援価値を、紹介・相談・連携の場面でそのまま使える形に整理。")
-    items = [
-        ("01", "依存症は「意思の弱さ」ではなく、正しい理解と継続的支援が必要な病気です。"),
-        ("02", "相模原ダルクは、安心できる共同の場と専門プログラムで回復を支えます。"),
-        ("03", "本人・家族・医療・行政・司法・地域がつながることで、回復の可能性は広がります。"),
+    # 2 agenda
+    s = slides[1]; bg(s); header(s, "本日のご説明内容｜本日のテーマ", "依存症からの回復支援体制、5ステージ制プログラム、実績、連携ネットワークについて", "予定時間：約60分", "▣")
+    agenda = [
+        ("01", "日本の依存症情勢（2024-2025）", "最新の薬物事犯検挙と若年層の依存症傾向分析", BLUE),
+        ("02", "予防の3段階と当施設の役割", "第一次・第二次予防のフレームワークと実践", GREEN),
+        ("03", "組織概要・理念と実績", "2014年設立、400名以上の支援実績", ORANGE),
+        ("04", "相模原ダルクの8つの強み", "回復支援の核心となる8つの競争優位性", RED),
+        ("05", "5ステージ制回復プログラム", "段階的な目標設定と役割付与による自立支援", PURPLE),
+        ("06", "施設・サービスの全体像", "5つの拠点と支援機能のネットワーク", BLUE),
+        ("07", "回復プログラム詳細", "デイ・ナイト・個別の包括的アプローチ", GREEN),
+        ("08", "依存症の理解（7つの特徴）", "科学的理解に基づく回復支援の前提条件", ORANGE),
+        ("09", "家族支援・連携ネットワーク", "CRAFTプログラムと地域連携体制", RED),
+        ("10", "お問い合わせ", "初回相談無料・秘密厳守", PURPLE),
     ]
-    for i, (n, text) in enumerate(items):
-        y = 5.15 + i * 3.1
-        add_textbox(s, 2.0, y, 1.6, 0.7, n, 20, TEAL, True, font=FONT_EN)
-        add_textbox(s, 3.85, y - 0.05, 24.0, 1.0, text, 21, NAVY, True)
-        line = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, cm(3.85), cm(y + 1.1), cm(22.5), cm(0.03))
-        line.fill.solid()
-        line.fill.fore_color.rgb = LINE
-        line.line.fill.background()
-    add_footer(s, 2)
+    for i, (n, title, sub, color) in enumerate(agenda):
+        col = 0 if i < 5 else 1
+        row = i if i < 5 else i - 5
+        x, y = 1.5 + col * 15.8, 3.25 + row * 2.6
+        rect(s, x, y, 14.5, 1.95, WHITE, LINE, True)
+        pill(s, x + 0.35, y + 0.43, 1.28, 1.05, n, color, WHITE, 11)
+        text(s, x + 1.95, y + 0.38, 11.6, 0.42, title, 11.6, NAVY, True)
+        text(s, x + 1.95, y + 0.95, 11.6, 0.4, sub, 7.8, MUTED)
+    footer(s, 2)
 
-    # 03 Philosophy
-    s = slides[2]
-    add_bg(s)
-    image_cover(s, ASSET_DIR / "outline01.jpg", 22.2, 0, 11.7, 19.05, (NAVY, 0.35))
-    add_title(s, "理念と使命", "公式サイト掲載の理念・使命を、支援現場で伝わる言葉に再編集。")
-    add_card(s, 1.55, 5.1, 9.8, 5.0, "理念", [
-        "人としての尊厳を大切にする",
-        "安心して自分を表現できる共同の場をつくる",
-        "誠実な関わりと対話で、生き直す力を育てる",
-    ], TEAL)
-    add_card(s, 12.0, 5.1, 9.8, 5.0, "使命", [
-        "依存症からの回復支援を通じて社会に貢献する",
-        "恐れや圧力ではなく、安心できる環境を整える",
-        "地域・社会の中に共同の場をつくり続ける",
-    ], GREEN)
-    add_textbox(s, 2.1, 12.05, 18.8, 1.4, "依存症は困難な病気です。\nそれでも、私たちは回復をあきらめません。", 25, NAVY, True)
-    add_footer(s, 3)
+    # 3 trend
+    s = slides[2]; bg(s); header(s, "日本の依存症情勢 2024-2025最新", "薬物・アルコール・ギャンブル依存が複合化するなか、早期相談と地域支援が重要に", "2024-2025", "▤")
+    card(s, 1.25, 3.05, 14.4, 4.2, "2024年 薬物事犯 検挙人員", None, BLUE)
+    text(s, 2.1, 4.22, 7.0, 1.1, "13,462", 33, NAVY, True, font=FONT_EN)
+    text(s, 9.5, 4.15, 4.5, 0.45, "前年比 +13,462人", 8.5, GREEN, True)
+    text(s, 2.1, 5.75, 10.8, 0.42, "覚醒剤 45.5%　　大麻 45.1%", 10, MUTED, True)
+    donut = PREVIEW_DIR / "donut.png"; donut_png(donut)
+    card(s, 1.25, 8.0, 14.4, 7.4, "薬物事犯の内訳", None, NAVY)
+    s.shapes.add_picture(str(donut), cm(5.2), cm(9.0), height=cm(4.9))
+    mini_item(s, 2.1, 13.2, RED, "覚醒剤", "45.5%")
+    mini_item(s, 7.0, 13.2, BLUE, "大麻", "45.1%")
+    mini_item(s, 11.2, 13.2, GREEN, "その他", "9.4%")
+    card(s, 17.0, 3.05, 14.9, 7.4, "注目トピック（2024-25）", None, NAVY)
+    for i, item in enumerate([("大麻類似法改正", "2024年12月施行", CYAN), ("SNS売買急増", "若年層で急増", BLUE), ("暴力団関与", "覚醒剤事犯約50%", GREEN)]):
+        x = 17.8 + i * 4.55
+        rect(s, x, 5.0, 3.7, 3.6, RGBColor(249, 252, 255), LINE, True)
+        pill(s, x + 1.45, 5.55, 0.8, 0.8, "", item[2])
+        text(s, x + 0.35, 6.65, 3.0, 0.5, item[0], 9.3, NAVY, True, PP_ALIGN.CENTER)
+        text(s, x + 0.35, 7.35, 3.0, 0.45, item[1], 7.5, MUTED, False, PP_ALIGN.CENTER)
+    card(s, 17.0, 11.05, 14.9, 3.0, "重要なポイント", "2024年12月に大麻取締法が改正され、SNSを介した若年層の薬物売買が増加しています。暴力団は覚醒剤事犯に関与し続けています。", ORANGE)
+    footer(s, 3)
 
-    # 04 Problem framing
-    s = slides[3]
-    add_bg(s, RGBColor(250, 252, 252))
-    add_title(s, "依存症を取り巻く課題", "本人だけでなく、家族・職場・地域にも影響が広がるため、孤立させない支援が必要です。")
-    problems = [
-        ("コントロール困難", "飲酒・薬物・ギャンブル等をやめようとしても繰り返してしまう"),
-        ("生活バランスの崩れ", "仕事・家庭・健康よりも依存対象が優先され、孤立が進む"),
-        ("家族・周囲への影響", "会話の減少、口論、経済問題、関係悪化が重なっていく"),
-        ("再発リスク", "離脱症状や強い欲求により、ひとりでは継続が難しい"),
+    # 4 prevention role
+    s = slides[3]; bg(s); header(s, "3段階予防と相模原ダルクの役割", "第一次：啓発／第二次：早期介入／第三次：リハビリ・社会復帰", "予防から回復まで", "●")
+    text(s, 1.4, 2.55, 25, 0.5, "相模原ダルクは、予防から社会復帰まで切れ目ない支援を提供します。第一次予防、第二次予防、第三次予防（回復・社会復帰）の3段階で、依存症の予防と回復を実現します。", 10.5, MUTED)
+    text(s, 29.0, 2.55, 3.0, 0.8, "400+", 20, NAVY, True, font=FONT_EN)
+    stages = [
+        ("第一次予防（啓発）", ["講演・研修による乱用防止啓発", "学校・地域イベントでのエイサー演舞", "学校への薬物乱用防止教室", "ニュースレター発行"], BLUE),
+        ("第二次予防（介入）", ["医療・行政・司法と連携した早期発見", "個別相談と初期カウンセリング", "家族からの相談対応", "弁護士・専門職との連携"], ORANGE),
+        ("第三次予防（回復）", ["入寮・通所による集中的な回復プログラム", "24時間体制の見守りサポート", "アフターケアと地域連携の継続", "社会復帰支援"], GREEN),
     ]
-    for i, (title, body) in enumerate(problems):
-        x = 1.65 + (i % 2) * 15.3
-        y = 5.0 + (i // 2) * 4.25
-        add_card(s, x, y, 13.8, 3.25, title, body, [RED, GOLD, TEAL, GREEN][i], 17)
-    add_pill(s, 10.6, 14.35, 12.6, 0.75, "必要なのは、正しい理解と専門的な治療・支援", NAVY, WHITE, 13)
-    add_footer(s, 4)
+    for i, (title, rows, color) in enumerate(stages):
+        x = 1.25 + i * 10.75
+        card(s, x, 4.05, 10.05, 11.7, title, rows, color, 13.0)
+    footer(s, 4)
 
-    # 05 Recovery model
-    s = slides[4]
-    add_bg(s)
-    add_title(s, "相模原ダルクの回復支援モデル", "安全な環境、仲間との関わり、専門機関連携を組み合わせて、回復の継続を支えます。")
-    steps = [
-        ("相談", "本人・家族・周囲の方から状況を丁寧に聴く"),
-        ("安心できる場", "共同生活・日中活動を通じて孤立をほどく"),
-        ("プログラム", "回復段階に応じて生活訓練・就労支援を行う"),
-        ("社会参加", "医療・福祉・司法・地域とつながり直す"),
+    # 5 philosophy
+    s = slides[4]; bg(s); header(s, "組織概要・理念｜PHILOSOPHY & MISSION", "人としての尊厳を大切に、生き直す力を支える", "設立 2014年", "▣")
+    card(s, 1.4, 3.2, 7.0, 11.6, "相模原ダルク", ["設立：2014年3月3日", "代表理事：田中 秀泰", "所在地：神奈川県相模原市", "支援実績：延べ400名以上"], BLUE)
+    card(s, 9.4, 3.2, 22.1, 4.6, "PHILOSOPHY｜理念", "「人としての尊厳を大切に、生き直す力を支える」全員が一人ひとりを尊重する関係性を大切にし、安心して自分を表現できる共同の場をつくります。", BLUE)
+    card(s, 9.4, 8.45, 22.1, 5.8, "MISSION｜使命", "「生き直す力で依存症からの回復を」依存症からの回復には、人が本来持つ生き直す力を呼び起こし、育てることが必要不可欠です。恐れや圧力ではなく、安心できる環境、誠実な人との関わりや対話によって育てます。", GREEN)
+    footer(s, 5)
+
+    # 6 highlight
+    s = slides[5]; bg(s); header(s, "実績ハイライト｜データで見る相模原ダルク", "開設以来400名以上の依存症当事者を支援し、再使用率低減と卒業後継続率を追求", "400名以上の支援実績", "▣")
+    text(s, 1.4, 2.65, 23.5, 0.62, "相模原ダルクは、創設以来400名以上の依存症当事者を支援し、5%以下の再使用率、90%以上の卒業後継続率を達成しています。", 12.2, NAVY, True)
+    highlights = [("400", "名以上", "回復支援実績", "多様な依存対象・背景を持つ当事者を継続的に支援", BLUE), ("5", "%以下", "入所中の再使用率", "徹底した見守りとプログラムによりリスクを低減", RED), ("90", "%以上", "卒業後の継続率", "医療・所属先・地域と接続して定着を支援", GREEN), ("70", "名程度", "受け入れ体制", "大型寮と個室寮で段階的な自立をサポート", PURPLE)]
+    for i, (v, unit, title, body, color) in enumerate(highlights):
+        x = 1.35 + i * 8.05
+        card(s, x, 5.0, 7.25, 9.45, "", None, color)
+        pill(s, x + 2.9, 5.7, 1.2, 1.2, "", color)
+        text(s, x + 0.5, 7.1, 4.2, 1.25, v, 30, NAVY, True, PP_ALIGN.RIGHT, FONT_EN)
+        text(s, x + 4.85, 7.75, 1.6, 0.45, unit, 12, MUTED, True)
+        text(s, x + 0.6, 9.0, 6.05, 0.55, title, 13, NAVY, True, PP_ALIGN.CENTER)
+        text(s, x + 0.7, 10.1, 5.85, 1.25, body, 9.0, MUTED, False, PP_ALIGN.CENTER)
+        rect(s, x + 0.75, 13.05, 5.7, 0.12, LINE, radius=True)
+        rect(s, x + 0.75, 13.05, 4.7 if i != 1 else 0.7, 0.12, color, radius=True)
+    footer(s, 6)
+
+    # 7-9 strengths
+    strength_sets = [
+        ("相模原ダルクの強み（1/3）", "実質的な実績／最新プログラム／24時間見守り／5段階ステージ制", "400+", [
+            ("実質的な実績", ["テーマで寄り添った回復支援", "支援実績400名以上", "継続率90%以上"], BLUE),
+            ("最新プログラム", ["科学的知見と実践経験を融合", "MATRIX/CBTベースの再発予防", "12ステッププログラム"], ORANGE),
+            ("24時間見守り", ["初期回復の安全・安心を担保", "夜間スタッフ体制", "緊急リスクを軽減"], GREEN),
+            ("5段階ステージ制", ["回復の見える化と段階的自立", "役割・目標を明確化", "本人の主体性を育てる"], PURPLE),
+        ]),
+        ("相模原ダルクの強み（2/3）", "関東圏最大規模の設備／当事者スタッフ／経験豊富な理事陣／就労継続支援B型", "70名", [
+            ("関東圏最大規模の設備", ["大型寮で70名程度を受け入れ", "大空間デイケア＋個室寮", "専用車での送迎支援あり"], CYAN),
+            ("当事者スタッフ多数在籍", ["経験者だからできる寄り添い", "深い共感と実践的助言", "ピア支援で回復を後押し"], ORANGE),
+            ("経験豊富な理事陣", ["法務・福祉・司法と連携する知見", "開設から10年以上の安定運営", "組織全体で回復にコミット"], GREEN),
+            ("就労継続支援B型", ["自立に向けた就労のステップ", "短時間から開始可能", "一般就労へのステップとして機能"], PURPLE),
+        ]),
+        ("相模原ダルクの強み（3/3）", "医療・行政・司法連携／地域社会への参加／家族支援／相談窓口を常設", "24h", [
+            ("医療・行政・司法連携", ["KRPP/FLOW/TANARPP等への協力", "保護観察所との連携", "医療機関との情報共有"], BLUE),
+            ("地域社会への参加", ["地域イベントでの演舞参加", "清掃ボランティアの実施", "学校・地域での啓発活動"], ORANGE),
+            ("家族支援を継続", ["毎週の家族相談を実施", "月1回の家族会・学習ミーティング", "CRAFT等を活用"], GREEN),
+            ("相談窓口を常設", ["初回相談無料・秘密厳守", "本人・家族・周囲の方でも対応", "平日9:00-17:00／土祝9:00-14:00"], PURPLE),
+        ]),
     ]
-    for i, (title, body) in enumerate(steps):
-        x = 1.8 + i * 7.8
-        add_pill(s, x, 5.2, 1.25, 1.25, f"{i+1}", TEAL if i < 3 else GREEN, WHITE, 20)
-        add_textbox(s, x, 6.8, 6.5, 0.55, title, 18, NAVY, True)
-        add_textbox(s, x, 7.55, 6.5, 1.4, body, 12.5, MUTED)
-        if i < 3:
-            arrow = s.shapes.add_shape(MSO_SHAPE.RIGHT_ARROW, cm(x + 5.9), cm(5.55), cm(1.2), cm(0.55))
-            arrow.fill.solid()
-            arrow.fill.fore_color.rgb = LINE
-            arrow.line.fill.background()
-    add_textbox(s, 2.0, 12.25, 28.5, 1.0, "「一人でやめ続ける」から、「仲間と支援につながり続ける」へ。", 26, NAVY, True, align=PP_ALIGN.CENTER)
-    add_footer(s, 5)
+    for idx, (title, sub, tag, rows) in enumerate(strength_sets, start=7):
+        s = slides[idx - 1]; bg(s); header(s, title, sub, f"{tag} の中核能力", "★")
+        text(s, 1.35, 2.65, 25.0, 0.7, "相模原ダルクは、依存症からの回復を全力で支えます。医療・行政・司法・地域・家族をつなぎ、包括的な回復支援を提供します。", 11.6, NAVY, True)
+        for i, (ttl, bullets, color) in enumerate(rows):
+            x = 1.25 + (i % 2) * 15.8
+            y = 4.3 + (i // 2) * 5.3
+            card(s, x, y, 14.6, 4.4, ttl, bullets, color, 12.5)
+        footer(s, idx)
 
-    # 06 Services
-    s = slides[5]
-    add_bg(s)
-    add_title(s, "事業内容", "障害福祉サービス、入寮、相談、連携、予防啓発を一体的に展開。")
-    services = [
-        ("01", "障害福祉サービス", "自立訓練（生活訓練）／就労継続支援B型"),
-        ("02", "入寮事業", "依存症治療専用ナイトケアハウスを運営"),
-        ("03", "相談事業", "本人・家族・周囲の方など、どなたでも相談可能"),
-        ("04", "連携・協力事業", "医療機関・行政機関・地域団体とネットワーク形成"),
-        ("05", "予防・啓発事業", "講演活動や地域イベントを通じた啓発"),
-    ]
-    for i, (n, title, body) in enumerate(services):
-        x = 1.55 + (i % 3) * 10.45
-        y = 5.05 + (i // 3) * 4.45
-        w = 9.35 if i < 3 else 14.25
-        if i >= 3:
-            x = 4.25 + (i - 3) * 15.1
-        add_card(s, x, y, w, 3.45, f"{n}  {title}", body, TEAL if i % 2 == 0 else GREEN, 15.5)
-    add_footer(s, 6)
+    # 10 five stages
+    s = slides[9]; bg(s); header(s, "5ステージ制 回復プログラム", "段階的な目標設定と具体的な治療プログラムによる回復ロードマップ", "5段階のステップ", "▦")
+    stages = [("MEMBER", "0-3ヶ月", BLUE, ["基礎知識の学習", "共同生活への適応", "生活習慣の再構築"]), ("SUPPORT", "3-6ヶ月", ORANGE, ["掃除・調理など役割付与", "プログラム参加継続", "振り返りの習慣化"]), ("TRAINEE", "6-12ヶ月", GREEN, ["リーダーシップの練習", "他者支援への参加", "外部活動への接続"]), ("CHIEF", "12-18ヶ月", PURPLE, ["後輩への声かけ", "面談・相談の補助", "自立準備の具体化"]), ("MANAGER", "18ヶ月-", PINK, ["運営補助", "社会参加・就労準備", "再発予防計画の完成"])]
+    for i, (name, period, color, bullets) in enumerate(stages):
+        x = 1.0 + i * 6.55
+        card(s, x, 4.0, 6.0, 10.6, "", None, color)
+        pill(s, x + 0.35, 4.35, 5.3, 0.85, f"{name}\n{period}", color, WHITE, 8.5)
+        multiline(s, x + 0.45, 5.7, 5.1, 3.0, bullets, 7.8, MUTED, True)
+        text(s, x + 0.45, 13.1, 5.1, 0.8, "達成基準\n次段階の役割へ移行", 7.5, color, True)
+    footer(s, 10)
 
-    # 07 Supported addictions
-    s = slides[6]
-    add_bg(s, RGBColor(249, 252, 251))
-    add_title(s, "対応できる依存症・関連課題", "公式サイト掲載の主要領域を、相談時に見渡せる一覧に。")
-    cols = [
-        ("主要領域", ["アルコール依存症", "薬物依存症", "ギャンブル依存症"]),
-        ("広がる相談領域", ["ゲーム・ネット・スマホ依存", "処方薬・市販薬依存", "大麻・危険ドラッグ依存"]),
-        ("関連課題", ["窃盗依存（クレプトマニア）", "性依存・性嗜好障害", "共依存"]),
-    ]
-    for i, (title, rows) in enumerate(cols):
-        add_card(s, 1.75 + i * 10.35, 5.0, 9.2, 7.2, title, rows, [TEAL, GREEN, GOLD][i], 17)
-    add_textbox(s, 2.0, 13.5, 28.9, 1.2, "初期段階の相談から、入所・生活再建・家族支援・司法/債務課題まで、状況に応じてつなげます。", 18, NAVY, True, align=PP_ALIGN.CENTER)
-    add_footer(s, 7)
+    # 11 facilities
+    s = slides[10]; bg(s); header(s, "相模原ダルクグループ", "5つの拠点と依存症支援を支える包括的ネットワーク", "全体像の説明", "▦")
+    image_cover(s, ASSET_DIR / "facility_main.jpg", 1.2, 3.2, 9.0, 5.0, None)
+    card(s, 10.6, 3.2, 9.8, 5.0, "相模原ダルク デイケアセンター", ["各種依存症の総合相談窓口", "日中活動・プログラム提供", "医療・行政連携の中心"], BLUE)
+    image_cover(s, ASSET_DIR / "business01.jpg", 21.0, 3.2, 9.0, 5.0, None)
+    card(s, 1.2, 9.0, 6.9, 3.3, "大和PCC", "プライマリーケア機能／生活再建と共同生活支援", GREEN)
+    card(s, 8.7, 9.0, 6.9, 3.3, "町田RC", "リカバリーセンター／段階的な自立準備", ORANGE)
+    card(s, 16.2, 9.0, 6.9, 3.3, "愛川TC", "トリートメントセンター／集中回復環境", PURPLE)
+    card(s, 23.7, 9.0, 6.9, 3.3, "上溝HRC", "ヒーリングセンター／生活改善と回復支援", BLUE)
+    card(s, 1.2, 13.0, 14.4, 2.6, "相模原WPH", "就労準備ホーム。自立に集中できる住環境を提供。", GREEN)
+    card(s, 16.2, 13.0, 14.4, 2.6, "相模原DTC", "オキュペーショントレーニングセンター。作業訓練・社会参加を支援。", ORANGE)
+    footer(s, 11)
 
-    # 08 Facility and living support
-    s = slides[7]
-    add_bg(s)
-    image_cover(s, ASSET_DIR / "business02.jpg", 0, 0, 14.5, 19.05, (NAVY, 0.28))
-    add_textbox(s, 15.4, 1.25, 14.8, 0.55, "RESIDENTIAL CARE", 10.5, TEAL, True, font=FONT_EN)
-    add_textbox(s, 15.35, 1.8, 15.8, 1.45, "入寮事業と安心できる住環境", 28, NAVY, True)
-    add_textbox(s, 15.45, 3.5, 15.0, 1.0, "依存症治療専用ナイトケアハウス（寮）を運営。集団療法の効果を高める大型寮と、自立準備のための個室寮を用意しています。", 13.5, MUTED)
-    add_metric(s, 15.55, 5.35, "大型寮", "5", "集団療法の効果を最大化", TEAL)
-    add_metric(s, 22.4, 5.35, "個室寮", "9", "自立に向けた練習環境", GREEN)
-    add_metric(s, 15.55, 8.25, "費用", "176,000円", "月額・税込／生活保護の方は相談可", GOLD)
-    add_card(s, 15.55, 11.7, 14.7, 3.35, "大切にしていること", [
-        "安全で安心して暮らせること",
-        "回復初期から中期・後期まで段階に応じて支えること",
-        "日々の生活そのものを回復の土台にすること",
-    ], TEAL)
-    add_footer(s, 8)
+    # 12 programs
+    s = slides[11]; bg(s); header(s, "回復プログラム（デイ・ナイト・個別）", "デイケア、ナイトケア、個別サポートの3つのプログラムを組み合わせて包括支援", "3つの支援プログラム", "▦")
+    text(s, 1.35, 2.55, 25.0, 0.55, "回復プログラムは、デイケア（通所）、ナイトケア（寮）、個別サポートの3つのプログラムを統合した包括的な支援体制です。", 11.5, NAVY, True)
+    programs = [("デイケア（通所）", "仲間と学ぶ・話し合う", ["ミーティング／プログラム", "12ステッププログラム", "SAGARP（再発予防CBT）", "ワークショップ・アート"], BLUE), ("ナイトケア（寮）", "生活の基盤づくりと習慣化", ["生活習慣の改善", "金銭・食事の管理", "入寮生活の安定", "24時間体制"], ORANGE), ("個別サポート", "状況に合わせた個別支援", ["個別面談", "債務・司法相談", "家族支援", "就労準備"], GREEN)]
+    for i, (ttl, sub, rows, color) in enumerate(programs):
+        x = 1.35 + i * 10.55
+        card(s, x, 5.0, 9.5, 9.9, ttl, rows, color, 13)
+        text(s, x + 0.5, 6.0, 8.0, 0.35, sub, 8.4, color, True)
+    footer(s, 12)
 
-    # 09 Consultation
-    s = slides[8]
-    add_bg(s)
-    add_title(s, "相談から支援につながるまで", "本人・家族・友人知人・関係機関など、どなたでも相談可能です。秘密は守られます。")
-    flow = [
-        ("1", "問い合わせ", "電話・Webフォームから相談"),
-        ("2", "状況整理", "依存対象、生活、家族、医療・司法課題を確認"),
-        ("3", "見学・面談", "本人の意向と安全を確認し、支援方針を検討"),
-        ("4", "利用開始", "相談・通所・入寮・連携支援へ接続"),
-    ]
-    for i, (n, title, body) in enumerate(flow):
-        y = 5.0 + i * 2.55
-        add_pill(s, 2.0, y, 1.3, 1.3, n, TEAL, WHITE, 18)
-        add_textbox(s, 3.7, y + 0.03, 7.0, 0.55, title, 17.5, NAVY, True)
-        add_textbox(s, 10.0, y + 0.03, 18.8, 0.8, body, 14.5, MUTED)
-    add_card(s, 2.0, 15.0, 27.8, 1.55, "相談費用", "初回無料／2回目以降 3,000円（税込）", GREEN, 17)
-    add_footer(s, 9)
+    # 13 seven features
+    s = slides[12]; bg(s); header(s, "依存症の理解（7つの特徴）", "科学的理解に基づく回復支援の前提条件", "7つの特徴", "◆")
+    text(s, 1.3, 2.5, 26, 0.62, "依存症は、7つの特徴を持つ複雑な病気です。これらを正しく理解することで、適切な治療アプローチを選択し、回復への道筋を確立できます。", 11.4, NAVY, True)
+    features = [("一次性の病気", "原因は依存症そのもの。意思や性格の問題ではありません。", BLUE), ("慢性の病気", "完治ではなく、やめ続けるためのケアが必要です。", GREEN), ("進行性の病気", "放置すれば失うものが大きくなります。", ORANGE), ("死亡率が高い", "事故・自殺・オーバードーズ等のリスクがあります。", RED), ("性格が変化する", "病気の進行に伴い、人間関係が崩れます。", PURPLE), ("依存対象が他へ移行", "交差依存により、対象が移ることがあります。", PINK), ("人を巻き込む病気", "家族・周囲への影響と支援が重要です。", CYAN)]
+    for i, (ttl, body, color) in enumerate(features):
+        x = 1.1 + (i % 4) * 8.0
+        y = 4.2 + (i // 4) * 4.6
+        card(s, x, y, 7.3, 3.8, ttl, body, color, 11)
+    rect(s, 1.3, 15.05, 30.9, 0.9, NAVY, radius=True)
+    text(s, 1.7, 15.28, 29.5, 0.38, "「意志の弱さ」ではなく治療が必要な病気としての理解が、回復への第一歩です", 10.8, WHITE, True, PP_ALIGN.CENTER)
+    footer(s, 13)
 
-    # 10 Partnership
-    s = slides[9]
-    add_bg(s)
-    image_cover(s, ASSET_DIR / "business01.jpg", 22.6, 0, 11.3, 19.05, (NAVY, 0.38))
-    add_title(s, "連携で回復の可能性を広げる", "医療・福祉・行政・司法・地域団体とつながり、本人と家族を孤立させない。")
-    partners = [
-        ("医療機関", "解毒入院、薬物療法、精神科・身体面の治療と連携"),
-        ("行政・福祉", "障害福祉サービス、生活保護、地域生活支援につなぐ"),
-        ("司法・専門職", "刑事裁判支援、債務整理支援などを弁護士・司法書士と連携"),
-        ("地域・教育", "予防啓発、講演、イベント参加を通じて理解を広げる"),
-    ]
-    for i, (title, body) in enumerate(partners):
-        add_card(s, 1.65 + (i % 2) * 10.3, 5.0 + (i // 2) * 4.15, 9.3, 3.25, title, body, [TEAL, GREEN, GOLD, TEAL_2][i], 16)
-    add_footer(s, 10)
+    # 14 cross addiction
+    s = slides[13]; bg(s); header(s, "交差依存（クロスアディクション）", "「本命を止めても他の依存へ移り、最終的にスリップする悪循環」", "注意：悪循環を止める", "↻")
+    text(s, 1.3, 2.6, 26.4, 0.55, "交差依存は、本命の依存をやめても他の依存へ移行し、最終的にスリップする構造です。適切な対策を取ることで、依存の対象が変化しながら依存症が継続します。", 10.8, NAVY, True)
+    center_x, center_y = 16.2, 9.8
+    rect(s, center_x - 2.3, center_y - 1.4, 4.6, 2.8, BLUE, radius=True)
+    text(s, center_x - 1.4, center_y - 0.55, 2.8, 0.5, "本命へ戻る", 14, WHITE, True, PP_ALIGN.CENTER)
+    for i, (ttl, desc, color, x, y) in enumerate([
+        ("第一の依存をやめる", "覚醒剤・酒など", BLUE, 14.0, 4.1),
+        ("本命へ戻る", "スリップ・再使用", PURPLE, 14.0, 13.2),
+        ("他の依存へ移行", "処方薬・ギャンブル", GREEN, 8.0, 9.0),
+        ("苦しみが増える", "不安・渇望", ORANGE, 23.2, 9.0),
+        ("本命の依存をやめる", "治療開始", RED, 3.2, 6.0),
+    ]):
+        card(s, x, y, 7.2, 2.6, ttl, desc, color, 10.5)
+    card(s, 26.0, 4.2, 5.8, 4.2, "悪循環の流れ", ["本命の依存をやめる", "苦しみが増える", "他の依存へ移行", "本命へ戻る"], ORANGE)
+    card(s, 26.0, 9.2, 5.8, 3.8, "予防策", ["早期介入", "包括的な再発予防", "ピア支援・12ステップ"], GREEN)
+    footer(s, 14)
 
-    # 11 Credibility / outline
-    s = slides[10]
-    add_bg(s, RGBColor(250, 252, 252))
-    add_title(s, "施設概要", "相談先として必要な基本情報を1枚に集約。")
-    rows = [
-        ("事業者", "一般社団法人 相模原ダルク"),
-        ("代表理事", "田中 秀泰"),
-        ("設立", "2014年3月3日"),
-        ("所在地", "〒252-0237 神奈川県相模原市中央区千代田3-3-20"),
-        ("TEL / FAX", "TEL 042-707-0391 / FAX 042-707-0392"),
-        ("営業時間", "平日 9:00-17:00／土・祝 9:00-14:00（日曜定休）"),
-    ]
-    y = 5.0
-    for k, v in rows:
-        add_textbox(s, 2.0, y, 5.0, 0.5, k, 12.2, TEAL, True)
-        add_textbox(s, 7.2, y, 20.5, 0.6, v, 15, NAVY, True if k in ["事業者", "TEL / FAX"] else False)
-        line = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, cm(2.0), cm(y + 0.78), cm(26.5), cm(0.025))
-        line.fill.solid()
-        line.fill.fore_color.rgb = LINE
-        line.line.fill.background()
-        y += 1.55
-    add_textbox(s, 2.0, 15.3, 26.5, 0.7, "※ 事前予約によりデイケア横の駐車スペースが利用可能。", 11.5, MUTED)
-    add_footer(s, 11)
+    # 15 PAWS
+    s = slides[14]; bg(s); header(s, "長期離脱症状（PAWS）の理解", "治療後に現れる長期離脱症状を理解し、波を乗り返しながら徐々に回復します", "12-24ヶ月の期間", "◆")
+    text(s, 1.4, 2.55, 22.5, 0.55, "PAWSは、治療後に現れる長期離脱症状です。「波を乗り返しながら徐々に回復します。」", 12, NAVY, True)
+    text(s, 25.5, 2.45, 2.5, 0.7, "3-6", 20, NAVY, True, font=FONT_EN)
+    text(s, 28.8, 2.45, 2.8, 0.7, "12-24", 20, NAVY, True, font=FONT_EN)
+    symptoms = [("睡眠障害", "不眠・過眠・中途覚醒", BLUE), ("ストレス過敏", "音・視線・人混みへの過敏", ORANGE), ("記憶障害", "覚えられない・忘れる", GREEN), ("感情障害", "怒りっぽい・情緒不安定", RED), ("身体バランス", "疲れやすい・めまい", PURPLE), ("思考障害", "集中力低下・判断ミス", PINK)]
+    for i, (ttl, body, color) in enumerate(symptoms):
+        x = 1.25 + (i % 3) * 10.75
+        y = 4.6 + (i // 3) * 4.25
+        card(s, x, y, 9.8, 3.4, ttl, body, color, 12)
+    rect(s, 2.0, 15.2, 22.5, 0.22, LINE, radius=True)
+    rect(s, 2.0, 15.2, 6.0, 0.22, BLUE, radius=True)
+    rect(s, 8.0, 15.2, 8.5, 0.22, ORANGE, radius=True)
+    rect(s, 16.5, 15.2, 8.0, 0.22, GREEN, radius=True)
+    text(s, 2.0, 15.7, 22.5, 0.4, "回復のプロセス：「波を乗り返しながら、徐々に回復に向かいます」", 9.0, MUTED)
+    rect(s, 11.6, 16.6, 17.0, 0.6, RGBColor(255, 231, 233), RGBColor(255, 190, 196), True)
+    text(s, 12.0, 16.75, 16.0, 0.3, "この時期のスリップに注意。一人で抱えずチームで支援", 8.5, RED, True, PP_ALIGN.CENTER)
+    footer(s, 15)
 
-    # 12 Closing
-    s = slides[11]
-    add_bg(s, NAVY)
-    image_cover(s, ASSET_DIR / "activity.jpg", 18.7, 0, 15.2, 19.05, (NAVY, 0.24))
-    add_pill(s, 1.55, 2.0, 4.8, 0.65, "CONTACT", TEAL)
-    add_textbox(s, 1.55, 3.2, 15.9, 1.9, "まず一歩、\nご相談ください。", 36, WHITE, True)
-    add_textbox(s, 1.65, 6.25, 14.0, 1.0, "同じ悩みを抱える方々から、多数ご相談をいただいています。本人・ご家族・関係者、どなたでもご相談ください。", 14.5, MIST)
-    add_card(s, 1.65, 9.0, 13.8, 4.8, "お問い合わせ", [
-        "TEL：042-707-0391",
-        "Web：https://s-darc.com/contact/",
-        "営業時間：平日 9:00-17:00／土・祝 9:00-14:00",
-        "定休日：日曜日",
-    ], TEAL)
-    add_textbox(s, 1.65, 15.7, 12.8, 0.5, "CHANGE YOUR LIFE!", 20, TEAL_2, True, font=FONT_EN)
-    add_textbox(s, 1.65, 16.35, 15.0, 0.55, "変われる。変われた仲間がいる。共に変わろう。共に進もう。", 13.2, WHITE, True)
-    add_footer(s, 12)
+    # 16 CRAFT
+    s = slides[15]; bg(s); header(s, "家族支援プログラム（CRAFT／家族会）", "家族は回復の重要パートナー。ポジティブな関わりが変化を生む", "家族支援", "♣")
+    text(s, 1.35, 2.55, 25, 0.62, "家族支援プログラムは、CRAFT（Community Reinforcement and Family Training）を基盤とし、家族が依存症者を支援するための実践的なスキルと知識を提供します。", 11.2, NAVY, True)
+    steps = [("1", "理解・学ぶ", "依存症の正しい知識とCRAFTの基本"), ("2", "相談・家族会", "仲間との分かち合い"), ("3", "関わりを変える", "効果的な対話と境界線設定"), ("4", "パターンを断つ", "巻き込まれを減らす"), ("5", "継続と強化", "回復行動を支える")]
+    for i, (n, ttl, body) in enumerate(steps):
+        x = 1.3 + i * 4.45
+        card(s, x, 5.1, 4.0, 5.0, "", None, BLUE)
+        pill(s, x + 1.45, 5.65, 1.0, 1.0, n, BLUE, WHITE, 12)
+        text(s, x + 0.35, 7.1, 3.3, 0.5, ttl, 10.2, NAVY, True, PP_ALIGN.CENTER)
+        text(s, x + 0.35, 8.0, 3.3, 0.9, body, 7.5, MUTED, False, PP_ALIGN.CENTER)
+    card(s, 24.2, 5.1, 7.4, 8.4, "援助の質を高める5つのポイント", ["原因を探さない", "責めない・さばかない", "知っておくべきこと", "タイミングがすべて", "ネイティブな言葉を避ける"], GREEN)
+    card(s, 1.3, 11.2, 22.0, 2.7, "援助の質を高めるポイント", "家族は回復の重要パートナーです。ポジティブな関わりが依存症者の変化を生み出します。", ORANGE)
+    footer(s, 16)
+
+    # 17 network
+    s = slides[16]; bg(s); header(s, "連携機関とネットワーク", "医療・行政・司法・地域と連携し、予防から社会復帰までを支援", "計4つの連携分野", "▦")
+    text(s, 1.35, 2.55, 25.5, 0.62, "相模原ダルクは、2026年1月時点の最新情報を反映しています。協定書・覚書に基づく正式連携および実績ベースの協力関係を含み、包括的な支援ネットワークを構築しています。", 10.6, NAVY, True)
+    nets = [("医療（MEDICAL PARTNERS）", ["北里大学病院", "相模湖病院", "高尾厚生病院"], BLUE), ("行政（PUBLIC SECTOR）", ["相模原市精神保健福祉センター", "東京都多摩総合精神保健福祉センター"], GREEN), ("司法（JUSTICE）", ["横浜保護観察所", "府中刑務所", "八王子少年鑑別所"], ORANGE), ("地域（COMMUNITY）", ["地域行政", "専門病院", "学校", "企業"], PURPLE)]
+    for i, (ttl, rows, color) in enumerate(nets):
+        x = 1.25 + (i % 2) * 15.8
+        y = 4.35 + (i // 2) * 5.35
+        card(s, x, y, 14.6, 4.35, ttl, rows, color, 12.4)
+    footer(s, 17)
+
+    # 18 contact
+    s = slides[17]; bg(s); header(s, "お問い合わせ｜CHANGE YOUR LIFE!", "依存症からの回復を全力で支えます", "初回相談無料", "♪")
+    text(s, 7.2, 3.0, 19.5, 0.95, "CHANGE YOUR LIFE!", 29, NAVY, True, PP_ALIGN.CENTER, FONT_EN)
+    text(s, 8.1, 4.15, 17.8, 0.55, "変われる。変われた仲間がいる。相模原ダルクは、依存症からの回復を全力で支えます。", 11.2, MUTED, True, PP_ALIGN.CENTER)
+    card(s, 1.4, 6.0, 8.2, 3.0, "電話でのご相談", ["042-707-0391", "平日 9:00-17:00／土祝 9:00-14:00"], BLUE)
+    card(s, 10.2, 6.0, 8.2, 3.0, "お問い合わせフォーム", ["https://s-darc.com", "24時間受付可能"], GREEN)
+    card(s, 19.0, 6.0, 8.2, 3.0, "所在地", ["〒252-0237", "相模原市中央区千代田3-3-20"], ORANGE)
+    rect(s, 20.6, 10.1, 10.8, 4.4, BLUE, radius=True)
+    text(s, 21.3, 10.55, 9.6, 0.55, "お電話でのご相談", 13, WHITE, True, PP_ALIGN.CENTER)
+    text(s, 21.3, 11.45, 9.6, 1.2, "042-707-\n0391", 27, WHITE, True, PP_ALIGN.CENTER, FONT_EN)
+    text(s, 21.3, 13.1, 9.6, 0.4, "受付：平日9:00-17:00／土祝9:00-14:00", 8.2, RGBColor(215, 230, 255), False, PP_ALIGN.CENTER)
+    rect(s, 20.6, 15.0, 10.8, 0.8, RGBColor(255, 232, 235), RGBColor(255, 187, 195), True)
+    text(s, 21.0, 15.18, 10.0, 0.35, "初回相談無料・秘密厳守", 11.2, RED, True, PP_ALIGN.CENTER)
+    card(s, 10.2, 10.1, 8.2, 4.4, "運営情報", ["一般社団法人 相模原ダルク", "代表理事：田中 秀泰", "日曜定休"], PURPLE)
+    footer(s, 18)
 
     for slide in prs.slides:
         for shape in slide.shapes:
@@ -423,9 +481,11 @@ def create_deck():
 
     out = OUT_DIR / "sagamihara_darc_professional_presentation_2026.pptx"
     prs.save(out)
-    return out
+    root_copy = ROOT / "Sagamihara_DARC_Professional_2026.pptx"
+    prs.save(root_copy)
+    print(out)
+    print(root_copy)
 
 
 if __name__ == "__main__":
-    path = create_deck()
-    print(path)
+    build()
