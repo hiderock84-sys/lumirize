@@ -440,36 +440,55 @@ def slide_stages() -> Image.Image:
 
 def slide_facilities() -> Image.Image:
     img = make_slide(11)
-    header(img, "相模原ダルクグループ", "複数拠点と依存症支援サービスを組み合わせる包括的ネットワーク", "全体像", 11)
-    paste_cover(img, ASSET_DIR / "facility_main.jpg", (55, 155, 520, 300), (0, 0, 0, 15))
-    paste_cover(img, ASSET_DIR / "business01.jpg", (610, 155, 520, 300), (0, 0, 0, 15))
-    paste_cover(img, ASSET_DIR / "business02.jpg", (1165, 155, 700, 300), (0, 0, 0, 30))
-    rows = [
-        ("デイケアセンター", ["総合相談窓口", "日中プログラム", "医療・行政連携"], BLUE),
-        ("OTC", ["作業訓練", "社会参加", "就労準備"], GREEN),
-        ("大和PCC", ["共同生活", "生活再建", "初期回復支援"], ORANGE),
-        ("町田RC", ["自立準備", "段階的支援", "地域移行"], PURPLE),
-        ("愛川TC", ["集中回復", "生活訓練", "環境調整"], CYAN),
-        ("上溝HRC", ["ヒーリング", "生活改善", "安定化"], RED),
+    header(img, "相模原ダルクグループ", "公式サイト掲載の施設写真を網羅。複数拠点を組み合わせ、相談・生活訓練・就労準備・地域移行を一体支援", "全拠点写真", 11)
+    d = ImageDraw.Draw(img)
+    section_label(img, 55, 144, "公式ホームページ掲載写真で見る拠点ネットワーク", BLUE)
+
+    photos = [
+        ("デイケアセンター", "facility_main.jpg", BLUE, "総合相談・日中プログラム"),
+        ("障害福祉サービス", "business01.jpg", GREEN, "自立訓練／就労継続B型"),
+        ("入寮事業", "business02.jpg", ORANGE, "ナイトケアハウス"),
+        ("相模原DARC", "base01.jpg", PURPLE, "回復支援の中核拠点"),
+        ("相模原OTC", "base02.jpg", CYAN, "作業訓練・社会参加"),
+        ("大和PCC", "base03.jpg", RED, "生活再建・共同生活"),
+        ("町田RC", "base04.jpg", BLUE, "段階的な自立準備"),
+        ("愛川TC", "base05.jpg", GREEN, "集中回復環境"),
+        ("上溝HRC", "base06.jpg", ORANGE, "生活改善・安定化"),
+        ("西門アフターケア", "base07.jpg", PURPLE, "卒業後・地域定着"),
+        ("WPH", "base08.jpg", CYAN, "就労準備ホーム"),
+        ("施設外観・導線", "outline03.jpg", RED, "安心して通える環境"),
     ]
-    for i, (ttl, lines, col) in enumerate(rows):
-        x = 55 + (i % 3) * 610
-        y = 500 + (i // 3) * 180
-        card(img, x, y, 560, 140, ttl, lines, col, 24, 18)
-    executive_footer(img, "複数拠点を連動させることで、相談・生活訓練・就労準備・地域移行までを一体的に支援します。", BLUE)
+    tile_w, tile_h = 435, 205
+    start_x, start_y = 55, 215
+    gap_x, gap_y = 25, 28
+    for i, (name, filename, color, desc) in enumerate(photos):
+        x = start_x + (i % 4) * (tile_w + gap_x)
+        y = start_y + (i // 4) * (tile_h + gap_y)
+        shadow_box(img, (x, y, tile_w, tile_h), 18, WHITE, LINE, True)
+        paste_cover(img, ASSET_DIR / filename, (x + 8, y + 8, tile_w - 16, tile_h - 62), (0, 0, 0, 18))
+        d.rounded_rectangle((x + 8, y + 8, x + tile_w - 8, y + 50), 12, fill=(7, 25, 45, 190))
+        d.rounded_rectangle((x + 20, y + 22, x + 42, y + 36), 5, fill=color)
+        draw_text(d, (x + 52, y + 17), name, 21, WHITE, True, width=330)
+        d.rounded_rectangle((x + 8, y + tile_h - 50, x + tile_w - 8, y + tile_h - 8), 12, fill=(245, 249, 252))
+        draw_text(d, (x + 22, y + tile_h - 41), desc, 18, TEXT, True, width=390)
+
+    executive_footer(img, "公式写真を全面に配置し、相模原ダルクグループが複数拠点で相談・生活訓練・入寮・就労準備・アフターケアまで担うことを一目で伝えます。", BLUE)
     return img
 
 
 def slide_programs() -> Image.Image:
     img = make_slide(12)
     header(img, "回復プログラム（デイ・ナイト・個別）", "通所・入寮・個別サポートを組み合わせ、生活全体を回復環境に変える", "3つの支援", 12)
+    paste_cover(img, ASSET_DIR / "business01.jpg", (60, 735, 570, 150), (9, 30, 54, 80))
+    paste_cover(img, ASSET_DIR / "business02.jpg", (675, 735, 570, 150), (9, 30, 54, 80))
+    paste_cover(img, ASSET_DIR / "base05.jpg", (1290, 735, 570, 150), (9, 30, 54, 80))
     programs = [
         ("デイケア（通所）", ["ミーティング／プログラム", "12ステップ", "SAGARP（再発予防CBT）", "ワークショップ・アート", "感情・行動の振り返り", "生活課題の共有"], BLUE),
         ("ナイトケア（寮）", ["生活習慣の改善", "金銭・食事の管理", "夜間の不安への対応", "24時間体制", "共同生活", "孤立をつくらない"], ORANGE),
         ("個別サポート", ["個別面談", "債務・司法相談", "家族支援", "就労準備", "医療・福祉接続", "退所後計画"], GREEN),
     ]
     for i, (ttl, lines, col) in enumerate(programs):
-        card(img, 60 + i * 620, 165, 570, 650, ttl, lines, col, 31, 23)
+        card(img, 60 + i * 620, 165, 570, 540, ttl, lines, col, 31, 23)
     executive_footer(img, "デイ・ナイト・個別支援を組み合わせることで、日中活動だけでは拾えない生活・家族・司法/債務課題まで支援できます。", GREEN)
     return img
 
