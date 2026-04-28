@@ -27,11 +27,12 @@ RED = (239, 82, 88)
 PURPLE = (126, 91, 255)
 PINK = (238, 82, 145)
 YELLOW = (255, 217, 74)
-BG = (233, 240, 247)
+BG = (229, 238, 247)
 WHITE = (255, 255, 255)
 TEXT = (28, 42, 58)
 MUTED = (88, 105, 124)
 LINE = (204, 218, 230)
+INK = (5, 18, 35)
 
 FONT_REG = "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"
 FONT_BOLD = "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc"
@@ -149,6 +150,54 @@ def bottom_strip(img, y, title, items, accent=BLUE):
         x += 280
 
 
+def section_label(img, x, y, label, color=CYAN):
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle((x, y, x + 15, y + 52), 7, fill=color)
+    draw_text(d, (x + 26, y + 9), label, 25, NAVY, True)
+
+
+def executive_note(img, x, y, w, title, body, accent=CYAN):
+    d = ImageDraw.Draw(img)
+    shadow_box(img, (x, y, w, 118), 18, (246, 251, 253), LINE, True)
+    d.rectangle((x, y, x + 12, y + 118), fill=accent)
+    draw_text(d, (x + 34, y + 18), title, 24, NAVY, True)
+    draw_text(d, (x + 34, y + 58), body, 20, TEXT, width=w - 68, line_gap=6)
+
+
+def matrix_card(img, x, y, w, h, title, cols, rows, accent=BLUE):
+    d = ImageDraw.Draw(img)
+    shadow_box(img, (x, y, w, h), 18, WHITE, LINE, True)
+    d.rectangle((x, y, x + w, y + 12), fill=accent)
+    draw_text(d, (x + 28, y + 24), title, 26, NAVY, True)
+    top = y + 82
+    col_w = (w - 56) // len(cols)
+    for i, col in enumerate(cols):
+        d.rounded_rectangle((x + 28 + i * col_w, top, x + 20 + (i + 1) * col_w, top + 48), 10, fill=(235, 243, 249))
+        d.text((x + 24 + i * col_w + col_w // 2, top + 24), col, font=font(18, True), fill=accent, anchor="mm")
+    yy = top + 66
+    for row in rows:
+        for i, item in enumerate(row):
+            d.rounded_rectangle((x + 28 + i * col_w, yy, x + 20 + (i + 1) * col_w, yy + 52), 10, fill=(248, 251, 253), outline=(222, 232, 240))
+            draw_text(d, (x + 42 + i * col_w, yy + 13), item, 16, TEXT, True, width=col_w - 34)
+        yy += 62
+
+
+def executive_footer(img, message, accent=CYAN):
+    d = ImageDraw.Draw(img)
+    shadow_box(img, (55, 900, 1810, 82), 18, NAVY, (42, 84, 116), True)
+    d.rounded_rectangle((78, 923, 118, 963), 10, fill=accent)
+    d.text((98, 943), "✓", font=font(24, True), fill=WHITE, anchor="mm")
+    draw_text(d, (140, 922), message, 25, WHITE, True, width=1620)
+
+
+def mini_kpi_light(img, x, y, label, value, accent=BLUE):
+    d = ImageDraw.Draw(img)
+    shadow_box(img, (x, y, 250, 112), 16, WHITE, LINE, True)
+    d.rounded_rectangle((x + 18, y + 18, x + 56, y + 56), 10, fill=accent)
+    draw_text(d, (x + 74, y + 14), label, 17, MUTED, True, width=150)
+    draw_text(d, (x + 74, y + 46), value, 34, NAVY, True)
+
+
 def draw_bar_chart(img, x, y, w, h, labels, values, colors):
     d = ImageDraw.Draw(img)
     max_v = max(values)
@@ -178,9 +227,21 @@ def draw_donut(img, cx, cy, r, parts, labels):
         ly += 44
 
 
-def make_slide(n: int) -> Image.Image:
+def premium_background() -> Image.Image:
     img = Image.new("RGBA", (W, H), BG + (255,))
+    d = ImageDraw.Draw(img)
+    for y in range(118, H, 44):
+        d.line((0, y, W, y), fill=(214, 225, 236, 62), width=1)
+    for x in range(0, W, 64):
+        d.line((x, 118, x, H), fill=(214, 225, 236, 45), width=1)
+    d.polygon([(0, 118), (520, 118), (0, 420)], fill=(219, 232, 244, 135))
+    d.polygon([(W, 118), (W, 460), (1450, 118)], fill=(219, 232, 244, 125))
+    d.rectangle((0, H - 44, W, H), fill=(244, 248, 252, 230))
     return img
+
+
+def make_slide(n: int) -> Image.Image:
+    return premium_background()
 
 
 def slide_cover() -> Image.Image:
@@ -197,10 +258,23 @@ def slide_cover() -> Image.Image:
     draw_text(d, (690, 168), "DARC", 188, (230, 248, 245), True, serif=True)
     draw_text(d, (116, 430), "依存症からの回復支援施設・施設紹介 2026", 33, WHITE, True)
     draw_text(d, (116, 504), "変われる。変わった仲間がいる。\n安心できる共同の場と誠実な対話を通じて、\n当事者の生き直す力を呼び起こします。", 26, (222, 238, 248), width=760, line_gap=12)
+    d.rounded_rectangle((115, 590, 945, 628), 18, fill=(19, 82, 117))
+    draw_text(d, (145, 598), "FOR FAMILY / MEDICAL / WELFARE / JUSTICE PARTNERS", 19, (216, 241, 245), True)
     # Dense message board
     shadow_box(img, (115, 645, 830, 122), 18, (241, 248, 252), (77, 135, 168), True)
     draw_text(d, (145, 670), "本資料で伝える核心", 25, NAVY, True)
     draw_text(d, (145, 714), "依存症は孤立の病です。相模原ダルクは、共同生活・日中活動・家族支援・地域連携を一体化し、回復の継続を支えます。", 21, TEXT, width=760, line_gap=7)
+    for i, label in enumerate(["本人相談", "家族相談", "関係機関連携"]):
+        pill(d, 1018 + i * 260, 650, 220, 46, label, [BLUE, GREEN, ORANGE][i], WHITE, 20)
+    for i, (label, value, col) in enumerate([
+        ("対象", "本人・家族・関係機関", BLUE),
+        ("目的", "相談から回復支援までの全体理解", GREEN),
+        ("形式", "説明会・家族会・連携提案", ORANGE),
+    ]):
+        x = 118 + i * 276
+        d.rounded_rectangle((x, 782, x + 245, 810), 14, fill=col)
+        d.text((x + 122, 796), label, font=font(15, True), fill=WHITE, anchor="mm")
+        draw_text(d, (x, 818), value, 17, (222, 238, 248), True, width=250)
     metrics = [("回復支援実績", "400+", "名以上", BLUE), ("卒業継続率", "90+", "%以上", GREEN), ("安心の見守り", "24h", "体制", ORANGE), ("連携ネットワーク", "7", "拠点", PURPLE)]
     for i, m in enumerate(metrics):
         kpi(img, 95 + i * 438, 825, 402, 165, *m)
@@ -235,7 +309,7 @@ def slide_agenda() -> Image.Image:
         draw_text(d, (x + 125, y + 66), sub, 19, MUTED, width=620)
         d.rounded_rectangle((x + 720, y + 36, x + 792, y + 80), 20, fill=(235, 243, 249))
         d.text((x + 756, y + 58), "▶", font=font(22, True), fill=col, anchor="mm")
-    bottom_strip(img, 965, "読み手に残すゴール", ["全体像を掴む", "相談の入口を知る", "回復プロセスを理解", "家族・連携の役割を確認", "次アクションへ進む"], BLUE)
+    executive_footer(img, "本資料は、依存症支援の全体像・回復プロセス・家族/地域連携を一枚ずつ理解できるよう設計しています。", BLUE)
     return img
 
 
@@ -254,7 +328,7 @@ def slide_trend() -> Image.Image:
     draw_text(d, (90, 465), "相談現場で見える変化", 28, NAVY, True)
     draw_bar_chart(img, 115, 545, 780, 170, ["薬物", "酒", "ギャンブル", "処方薬", "ネット"], [85, 72, 68, 44, 52], [BLUE, ORANGE, GREEN, PURPLE, CYAN])
     card(img, 980, 435, 870, 330, "重要なポイント", ["依存症は本人の意思だけで解決できる問題ではありません", "発覚直後は家族も混乱し、責める・隠す・抱え込む行動が起きやすい", "早期相談により、医療・福祉・司法・生活支援へつなぐ選択肢が広がります", "相模原ダルクは本人・家族・関係者のいずれからの相談にも対応します"], RED, 28, 22)
-    bottom_strip(img, 830, "支援設計の視点", ["孤立を止める", "安全を確保", "生活を整える", "専門機関へつなぐ", "継続を支える"], ORANGE)
+    executive_footer(img, "依存症支援では、発覚直後の孤立を止め、医療・福祉・司法・生活支援へ早期に接続することが重要です。", ORANGE)
     return img
 
 
@@ -274,7 +348,7 @@ def slide_prevention() -> Image.Image:
     shadow_box(img, (55, 750, 1810, 142), 20, NAVY, (38, 76, 110), True)
     draw_text(d, (95, 780), "相模原ダルクが担う価値", 30, WHITE, True)
     draw_text(d, (95, 828), "「啓発で入口を減らす」「相談で孤立を止める」「入寮・通所で生活を整える」「地域連携で定着させる」までを一つの支援線として設計します。", 25, (220, 238, 248), width=1600)
-    bottom_strip(img, 925, "切れ目のない支援", ["発見", "相談", "入所/通所", "役割獲得", "社会参加"], GREEN)
+    executive_footer(img, "啓発・相談・入所/通所・社会参加を分断せず、一つの支援線として設計することが回復継続の鍵です。", GREEN)
     return img
 
 
@@ -291,7 +365,7 @@ def slide_philosophy() -> Image.Image:
         shadow_box(img, (x0 + (i % 2) * 635, y0 + (i // 2) * 95, 600, 70), 14, WHITE, LINE, True)
         draw_text(d, (x0 + (i % 2) * 635 + 24, y0 + (i // 2) * 95 + 18), k, 18, BLUE, True)
         draw_text(d, (x0 + (i % 2) * 635 + 150, y0 + (i // 2) * 95 + 18), v, 20, NAVY, True, width=420)
-    bottom_strip(img, 925, "理念を実務に落とす姿勢", ["尊厳を守る", "安心をつくる", "対話を重ねる", "仲間で支える", "回復をあきらめない"], BLUE)
+    executive_footer(img, "理念はスローガンではなく、安心できる場・誠実な対話・仲間との関係を日々の支援に落とし込むための判断軸です。", BLUE)
     return img
 
 
@@ -318,7 +392,7 @@ def slide_highlight() -> Image.Image:
         if i < 4:
             d.line((x + 250, 812, x + 318, 812), fill=LINE, width=5)
             d.polygon([(x + 318, 812), (x + 300, 800), (x + 300, 824)], fill=LINE)
-    bottom_strip(img, 925, "数字の読み方", ["実績", "安全性", "継続率", "受入規模", "支援ネットワーク"], GREEN)
+    executive_footer(img, "支援実績・安全性・継続率・受入規模を組み合わせて、回復を支える運営基盤の強さを示します。", GREEN)
     return img
 
 
@@ -332,7 +406,7 @@ def slide_strength(n: int, title: str, tag: str, rows, badge_color) -> Image.Ima
         card(img, x, y, 860, 315, ttl, lines, col, 29, 21)
     shadow_box(img, (60, 890, 1770, 70), 18, NAVY, (42, 84, 116), True)
     draw_text(d, (95, 907), "強みは単独ではなく、相談・生活・プログラム・家族・連携が同時に動くことで効果を発揮します。", 25, WHITE, True, width=1600)
-    bottom_strip(img, 980, "運用原則", ["当事者性", "24時間の安心", "段階的な役割", "専門職連携", "家族支援"], badge_color)
+    executive_footer(img, "強みは単独の制度ではなく、当事者性・24時間の安心・段階的役割・専門職連携が同時に機能することで価値になります。", badge_color)
     return img
 
 
@@ -360,7 +434,7 @@ def slide_stages() -> Image.Image:
             yy += 70
         d.rounded_rectangle((x + 28, 780, x + 314, 825), 12, fill=(238, 246, 250))
         d.text((x + 171, 803), "達成基準 → 次段階へ", font=font(18, True), fill=col, anchor="mm")
-    bottom_strip(img, 925, "ステージ制の狙い", ["回復を可視化", "小さな成功体験", "役割で自己効力感", "再発予防", "社会参加"], PURPLE)
+    executive_footer(img, "ステージ制は、回復を可視化し、小さな成功体験を積み上げながら社会参加へ進むためのロードマップです。", PURPLE)
     return img
 
 
@@ -382,7 +456,7 @@ def slide_facilities() -> Image.Image:
         x = 55 + (i % 3) * 610
         y = 500 + (i // 3) * 180
         card(img, x, y, 560, 140, ttl, lines, col, 24, 18)
-    bottom_strip(img, 925, "施設群の役割", ["相談", "生活訓練", "就労準備", "個室寮", "地域移行"], BLUE)
+    executive_footer(img, "複数拠点を連動させることで、相談・生活訓練・就労準備・地域移行までを一体的に支援します。", BLUE)
     return img
 
 
@@ -396,7 +470,7 @@ def slide_programs() -> Image.Image:
     ]
     for i, (ttl, lines, col) in enumerate(programs):
         card(img, 60 + i * 620, 165, 570, 650, ttl, lines, col, 31, 23)
-    bottom_strip(img, 925, "組み合わせる理由", ["日中活動", "夜間の安全", "個別課題", "家族対応", "司法・債務"], GREEN)
+    executive_footer(img, "デイ・ナイト・個別支援を組み合わせることで、日中活動だけでは拾えない生活・家族・司法/債務課題まで支援できます。", GREEN)
     return img
 
 
@@ -419,7 +493,7 @@ def slide_features() -> Image.Image:
     d = ImageDraw.Draw(img)
     shadow_box(img, (60, 735, 1770, 145), 20, NAVY, (45, 84, 118), True)
     draw_text(d, (100, 770), "「意志の弱さ」ではなく治療が必要な病気として理解することが、本人・家族・支援者の第一歩です。", 30, WHITE, True, width=1650)
-    bottom_strip(img, 925, "理解が変わると支援が変わる", ["責めない", "孤立させない", "専門支援へ", "家族も支える", "継続前提"], RED)
+    executive_footer(img, "依存症を病気として理解することが、本人を責めず、家族も支え、専門支援につなぐ第一歩になります。", RED)
     return img
 
 
@@ -438,7 +512,7 @@ def slide_cross() -> Image.Image:
     d.text((960, 520), "交差依存\nサイクル", font=font(31, True), fill=WHITE, anchor="mm")
     card(img, 60, 170, 390, 620, "依存のタイプ", ["物質依存：アルコール・薬物", "プロセス依存：ギャンブル・ネット", "関係依存：共依存など", "対象が変わっても病気は続く"], RED, 28, 21)
     card(img, 1470, 170, 390, 620, "予防策", ["早期介入", "包括的な再発予防", "12ステップとピア支援", "家族・専門職と共有", "生活全体の再設計"], GREEN, 28, 21)
-    bottom_strip(img, 925, "対応の原則", ["対象ではなく病気を見る", "生活全体を整える", "代替行動を設計", "早期共有", "孤立防止"], ORANGE)
+    executive_footer(img, "交差依存では対象だけを止めるのではなく、生活全体を再設計し、代替行動と支援チームを作ることが必要です。", ORANGE)
     return img
 
 
@@ -460,7 +534,7 @@ def slide_paws() -> Image.Image:
     draw_text(d, (405, 825), "急性期", 20, BLUE, True)
     draw_text(d, (760, 825), "波が出る時期", 20, ORANGE, True)
     draw_text(d, (1180, 825), "安定化", 20, GREEN, True)
-    bottom_strip(img, 925, "支援者の対応", ["睡眠", "食事", "予定", "相談", "チーム共有"], BLUE)
+    executive_footer(img, "PAWSの時期は症状の波を前提に、睡眠・食事・予定・相談を整え、一人で抱え込ませない体制が重要です。", BLUE)
     return img
 
 
@@ -477,7 +551,7 @@ def slide_family() -> Image.Image:
         draw_text(d, (x + 35, 385), "本人を責めるのではなく、家族自身の安全と関わり方を整えます。", 19, MUTED, width=230)
     card(img, 60, 540, 860, 300, "援助の質を高めるポイント", ["原因探しをしすぎない", "責めない・さばかない", "回復行動を強化する", "タイミングを見て伝える", "家族だけで抱え込まない"], ORANGE, 28, 21)
     card(img, 960, 540, 870, 300, "家族会で扱うテーマ", ["依存症の正しい理解", "本人との距離の取り方", "境界線と安全確保", "相談・入所・治療へのつなぎ方", "家族自身の回復"], GREEN, 28, 21)
-    bottom_strip(img, 925, "家族支援で目指す変化", ["知識を得る", "巻き込まれを減らす", "対話を変える", "安全を守る", "支援へつなぐ"], GREEN)
+    executive_footer(img, "家族支援は、本人を動かすためだけでなく、家族自身の安全・理解・関わり方を再構築する支援です。", GREEN)
     return img
 
 
@@ -494,7 +568,7 @@ def slide_network() -> Image.Image:
         x = 60 + (i % 2) * 910
         y = 160 + (i // 2) * 355
         card(img, x, y, 860, 305, ttl, lines, col, 30, 22)
-    bottom_strip(img, 925, "ネットワーク活用の場面", ["医療受診", "福祉サービス", "刑事裁判", "債務整理", "地域定着"], PURPLE)
+    executive_footer(img, "回復支援は施設内で完結しません。医療・福祉・司法・地域とつながることで、生活再建の選択肢が広がります。", PURPLE)
     return img
 
 
@@ -512,7 +586,7 @@ def slide_contact() -> Image.Image:
     draw_text(d, (1208, 715), "042-707-0391", 54, WHITE, True)
     draw_text(d, (1208, 795), "初回相談無料・秘密厳守", 27, (231, 245, 255), True)
     card(img, 70, 640, 1030, 210, "相談時に確認すること", ["本人・家族・関係者のどなたからの相談か", "依存対象、生活状況、緊急性、入所・見学希望", "電話またはフォームで連絡可能な時間帯"], PURPLE, 28, 22)
-    bottom_strip(img, 925, "次の一歩", ["電話", "フォーム", "見学", "面談", "支援開始"], BLUE)
+    executive_footer(img, "まずは相談から。本人・家族・関係者のどなたからでも、状況整理と次の一歩を一緒に考えます。", BLUE)
     return img
 
 
