@@ -111,12 +111,13 @@ def pill(d: ImageDraw.ImageDraw, x: int, y: int, w: int, h: int, label: str,
 def base_slide(n: int, title: str, subtitle: str, section: str, accent=CYAN, total=24) -> Image.Image:
     img = Image.new("RGBA", (W, H), BG + (255,))
     d = ImageDraw.Draw(img)
-    # Regular 12-column grid. Visible enough to make any remaining negative space intentional.
-    margin, gutter = 54, 18
-    col_w = (W - margin * 2 - gutter * 11) // 12
-    for i in range(12):
-        x = margin + i * (col_w + gutter)
-        d.rectangle((x, 120, x + col_w, H - 62), fill=(255, 255, 255, 32))
+    # Clean corporate background: no visible vertical grid lines.
+    # Use broad, low-contrast surfaces so empty space looks intentional and calm.
+    d.polygon([(0, 126), (620, 126), (0, 520)], fill=(224, 235, 245, 190))
+    d.polygon([(W, 126), (W, 510), (1390, 126)], fill=(225, 237, 246, 165))
+    d.ellipse((-190, 620, 260, 1070), fill=(225, 238, 245, 120))
+    d.ellipse((1560, 620, 2050, 1110), fill=(226, 239, 246, 135))
+    d.line((70, 872, 1850, 872), fill=(214, 226, 236, 150), width=2)
     d.rectangle((0, 0, W, 120), fill=NAVY)
     d.rectangle((0, 120, W, 126), fill=accent)
     d.rounded_rectangle((54, 30, 106, 82), 14, fill=(18, 58, 92))
