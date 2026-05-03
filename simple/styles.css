@@ -228,6 +228,10 @@ h3 {
   font-size: 1rem;
 }
 
+.hero .hero-copy {
+  max-width: 100%;
+}
+
 .hero-kpi {
   margin-top: 0.9rem;
   display: grid;
@@ -655,5 +659,10 @@ h3 {
   .section-kicker {
     font-size: 0.92rem;
     line-height: 1.56;
+  }
+
+  .hero .hero-copy {
+    text-wrap: normal;
+    line-height: 1.68;
   }
 }
