@@ -235,10 +235,14 @@ h3 {
 
 .hero .hero-copy,
 .page-hero .hero-copy {
-  max-width: min(47ch, 100%);
+  width: 100%;
+  max-width: 100%;
   margin-top: 0.22rem;
   font-size: clamp(0.98rem, 1.9vw, 1.08rem);
   line-height: 1.72;
+  text-align: justify;
+  text-justify: inter-character;
+  text-align-last: left;
 }
 
 .hero-kpi {
@@ -686,9 +690,13 @@ h3 {
   .hero .hero-copy,
   .page-hero .hero-copy {
     max-width: 100%;
+    width: 100%;
     text-wrap: normal;
-    font-size: 0.99rem;
-    line-height: 1.64;
+    font-size: 1.01rem;
+    line-height: 1.68;
     margin-top: 0.1rem;
+    text-align: justify;
+    text-justify: inter-character;
+    text-align-last: left;
   }
 }
