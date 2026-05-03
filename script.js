@@ -213,6 +213,42 @@
     revealNodes.forEach((node) => node.classList.add("is-visible"));
   }
 
+  const execBars = document.querySelectorAll(".exec-bar-fill");
+  if ("IntersectionObserver" in window && execBars.length > 0) {
+    const barObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const bar = entry.target;
+          const width = bar.getAttribute("data-width");
+          if (width) {
+            bar.style.width = `${width}%`;
+          }
+          barObserver.unobserve(bar);
+        });
+      },
+      { threshold: 0.35 }
+    );
+    execBars.forEach((bar) => barObserver.observe(bar));
+  } else if (execBars.length > 0) {
+    execBars.forEach((bar) => {
+      const width = bar.getAttribute("data-width");
+      if (width) {
+        bar.style.width = `${width}%`;
+      }
+    });
+  }
+
+  document.querySelectorAll(".exec-panel-jump").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const href = link.getAttribute("href");
+      if (!href || !href.startsWith("#")) return;
+      const panel = document.querySelector(href);
+      if (!panel) return;
+      panel.setAttribute("open", "open");
+    });
+  });
+
   const faqItems = document.querySelectorAll(".faq-item");
   faqItems.forEach((item, index) => {
     const button = item.querySelector(".faq-question");
