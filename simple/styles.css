@@ -187,7 +187,7 @@ a:hover {
   position: relative;
   z-index: 1;
   color: #fff;
-  padding-block: 2.1rem 1.7rem;
+  padding-block: 1.86rem 1.42rem;
 }
 
 .eyebrow {
@@ -252,10 +252,10 @@ h3 {
 }
 
 .cta-row {
-  margin-top: 0.84rem;
+  margin-top: 0.72rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.52rem;
+  gap: 0.44rem;
   align-items: center;
 }
 
@@ -312,7 +312,7 @@ h3 {
 }
 
 .section {
-  padding: clamp(1.2rem, 4.2vw, 2.16rem) 0;
+  padding: clamp(1.02rem, 3.5vw, 1.72rem) 0;
 }
 
 .section-alt {
@@ -320,7 +320,7 @@ h3 {
 }
 
 .section-head {
-  margin-bottom: 0.72rem;
+  margin-bottom: 0.52rem;
 }
 
 .section-head h2 {
@@ -360,15 +360,15 @@ h3 {
 .policy-cards,
 .impact-grid,
 .case-grid {
-  margin-top: 0.8rem;
+  margin-top: 0.62rem;
   display: grid;
-  gap: 0.74rem;
+  gap: 0.56rem;
 }
 
 .card-grid-3 {
-  margin-top: 0.8rem;
+  margin-top: 0.62rem;
   display: grid;
-  gap: 0.74rem;
+  gap: 0.56rem;
 }
 
 .three,
@@ -381,7 +381,7 @@ h3 {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 0.94rem;
+  padding: 0.82rem;
   min-height: 100%;
 }
 
@@ -395,7 +395,7 @@ h3 {
 .bullet-list,
 .contact-list,
 .card ul {
-  margin: 0.44rem 0 0;
+  margin: 0.36rem 0 0;
   padding-left: 1.04rem;
 }
 
@@ -488,7 +488,7 @@ h3 {
 .faq-item summary {
   cursor: pointer;
   list-style: none;
-  padding: 0.82rem 0.88rem;
+  padding: 0.7rem 0.8rem;
   font-weight: 700;
 }
 
@@ -509,7 +509,7 @@ h3 {
 .faq-item p {
   margin: 0;
   border-top: 1px solid var(--border);
-  padding: 0.76rem 0.88rem;
+  padding: 0.66rem 0.8rem;
   color: var(--muted);
 }
 
@@ -518,9 +518,9 @@ h3 {
   border: 1px solid #c6d7ee;
   background: #edf5ff;
   border-radius: 12px;
-  padding: 0.84rem;
+  padding: 0.72rem;
   color: #304d72;
-  line-height: 1.68;
+  line-height: 1.6;
 }
 
 .footer-inner {
@@ -531,8 +531,8 @@ h3 {
 
 .site-footer {
   border-top: 1px solid var(--border);
-  margin-top: 1.2rem;
-  padding: 1rem 0 1.34rem;
+  margin-top: 0.86rem;
+  padding: 0.82rem 0 1.08rem;
 }
 
 .site-footer p {
@@ -621,7 +621,7 @@ h3 {
 
   .hero-content,
   .page-hero-content {
-    padding-block: 1.56rem 1.28rem;
+    padding-block: 1.3rem 1.04rem;
   }
 
   .hero-kpi {
@@ -633,7 +633,7 @@ h3 {
   }
 
   .cta-row {
-    margin-top: 0.72rem;
+    margin-top: 0.62rem;
     width: 100%;
   }
 
@@ -645,11 +645,11 @@ h3 {
   }
 
   .section {
-    padding: clamp(1.1rem, 4.4vw, 1.66rem) 0;
+    padding: clamp(0.94rem, 3.9vw, 1.38rem) 0;
   }
 
   .section-head {
-    margin-bottom: 0.58rem;
+    margin-bottom: 0.42rem;
   }
 
   .section-kicker {
