@@ -70,6 +70,23 @@ def nav_href_signature(text: str) -> tuple[str, ...] | None:
     return hrefs
 
 
+def extract_meta_description(text: str) -> str | None:
+    meta_match = re.search(
+        r'<meta\s+name="description"\s+content="([^"]*)"\s*/?>',
+        text,
+        flags=re.IGNORECASE,
+    )
+    return meta_match.group(1).strip() if meta_match else None
+
+
+def image_tags(text: str) -> list[str]:
+    return re.findall(r"<img\b[^>]*>", text, flags=re.IGNORECASE)
+
+
+def h1_count(text: str) -> int:
+    return len(re.findall(r"<h1[\s>][\s\S]*?</h1>", text, flags=re.IGNORECASE))
+
+
 def main() -> int:
     errors: list[str] = []
     warnings: list[str] = []
@@ -95,14 +112,37 @@ def main() -> int:
 
         if "<!doctype html>" not in text.lower():
             errors.append(f"{short}: missing doctype declaration.")
+        if 'lang="ja"' not in text.lower():
+            errors.append(f"{short}: missing lang=\"ja\" on html element.")
         if not re.search(r"<title>[\s\S]*?</title>", text, flags=re.IGNORECASE):
             errors.append(f"{short}: missing <title>.")
-        if not re.search(r"<h1>[\s\S]*?</h1>", text, flags=re.IGNORECASE):
+        h1_total = h1_count(text)
+        if h1_total == 0:
             errors.append(f"{short}: missing <h1>.")
+        elif h1_total > 1:
+            errors.append(f"{short}: multiple <h1> tags found ({h1_total}).")
         if 'class="top-nav"' not in text:
             errors.append(f"{short}: missing top navigation.")
         if 'class="site-footer"' not in text:
             errors.append(f"{short}: missing site footer.")
+
+        meta_description = extract_meta_description(text)
+        if not meta_description:
+            errors.append(f"{short}: missing meta description.")
+        elif len(meta_description) < 40:
+            warnings.append(
+                f"{short}: meta description is short ({len(meta_description)} chars)."
+            )
+
+        imgs = image_tags(text)
+        if not imgs:
+            warnings.append(f"{short}: no <img> tags found.")
+        for img_tag in imgs:
+            alt_match = re.search(r'alt="([^"]*)"', img_tag, flags=re.IGNORECASE)
+            if alt_match is None:
+                errors.append(f"{short}: image missing alt attribute.")
+            elif not alt_match.group(1).strip():
+                errors.append(f"{short}: image has empty alt attribute.")
 
         current_nav = nav_href_signature(text)
         if current_nav is None:
@@ -116,6 +156,8 @@ def main() -> int:
             if href.startswith(("mailto:", "tel:", "#", "javascript:")):
                 continue
             if is_external(href):
+                if href.startswith("http://"):
+                    warnings.append(f"{short}: non-HTTPS external link -> {href}")
                 continue
             target_path = strip_fragment_and_query(href)
             if not target_path:

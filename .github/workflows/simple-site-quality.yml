@@ -5,11 +5,13 @@ on:
     paths:
       - "simple/**"
       - "tools/validate_simple_site.py"
+      - ".lighthouserc.json"
       - ".github/workflows/simple-site-quality.yml"
   pull_request:
     paths:
       - "simple/**"
       - "tools/validate_simple_site.py"
+      - ".lighthouserc.json"
       - ".github/workflows/simple-site-quality.yml"
   workflow_dispatch:
 
@@ -35,6 +37,24 @@ jobs:
           for page in simple/*.html; do
             curl -fsS "http://127.0.0.1:4173/$page" >/dev/null
           done
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Lighthouse CI audit
+        run: |
+          python -m http.server 4173 --directory . >/tmp/simple-server-lhci.log 2>&1 &
+          sleep 2
+          npx --yes @lhci/cli autorun --config=.lighthouserc.json
+
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci
 
       - name: Upload simple artifact
         uses: actions/upload-artifact@v4
