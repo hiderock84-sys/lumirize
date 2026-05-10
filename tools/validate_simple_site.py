@@ -179,7 +179,16 @@ def main() -> int:
                 errors.append(f"{short}: missing image/source -> {src}")
 
     css_text = STYLESHEET.read_text(encoding="utf-8") if STYLESHEET.exists() else ""
-    uses_image_band = any("image-band" in p.read_text(encoding="utf-8") for p in html_files)
+    uses_image_band = False
+    for html_file in html_files:
+        text = html_file.read_text(encoding="utf-8")
+        for class_value in extract_attr_values(text, "class"):
+            class_tokens = class_value.split()
+            if "image-band" in class_tokens:
+                uses_image_band = True
+                break
+        if uses_image_band:
+            break
     if uses_image_band:
         for selector in [
             ".section-alt.image-band",
