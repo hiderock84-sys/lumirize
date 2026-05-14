@@ -3983,6 +3983,15 @@ body.home-page .site-header.scrolled {
   background: linear-gradient(180deg, rgba(13, 22, 34, 0.9), rgba(13, 22, 34, 0.7)) !important;
 }
 
+body.home-page.menu-open .site-header,
+body.home-page.menu-open .site-header.scrolled {
+  background: transparent !important;
+  border-bottom-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
 body.home-page .global-nav ul a {
   color: rgba(238, 247, 255, 0.96);
   text-shadow: 0 1px 10px rgba(6, 14, 22, 0.38);
@@ -3995,8 +4004,8 @@ body.home-page .global-nav ul a[aria-current="page"] {
 
 body.home-page .hero-overlay {
   background:
-    linear-gradient(180deg, rgba(6, 11, 18, 0.42) 0%, rgba(6, 11, 18, 0.62) 54%, rgba(6, 11, 18, 0.82) 100%),
-    radial-gradient(circle at 85% 16%, rgba(106, 198, 210, 0.2), transparent 38%);
+    linear-gradient(180deg, rgba(6, 11, 18, 0.24) 0%, rgba(6, 11, 18, 0.4) 54%, rgba(6, 11, 18, 0.56) 100%),
+    radial-gradient(circle at 85% 16%, rgba(120, 212, 222, 0.24), transparent 40%);
 }
 
 body.home-page .hero-content {
@@ -4004,9 +4013,9 @@ body.home-page .hero-content {
   padding: clamp(1rem, 2.3vw, 1.7rem) clamp(1rem, 2.3vw, 1.8rem) clamp(1.05rem, 2.4vw, 1.8rem);
   border: 1px solid rgba(172, 217, 229, 0.38);
   background:
-    linear-gradient(150deg, rgba(6, 11, 18, 0.64), rgba(6, 11, 18, 0.46)),
-    radial-gradient(circle at 88% 10%, rgba(92, 185, 199, 0.16), transparent 40%);
-  box-shadow: 0 28px 58px rgba(5, 10, 16, 0.3);
+    linear-gradient(150deg, rgba(8, 14, 22, 0.44), rgba(8, 14, 22, 0.26)),
+    radial-gradient(circle at 88% 10%, rgba(110, 201, 215, 0.22), transparent 42%);
+  box-shadow: 0 24px 48px rgba(5, 10, 16, 0.24);
 }
 
 body.home-page .hero-content::before {
@@ -4022,7 +4031,7 @@ body.home-page .hero h1 {
 
 body.home-page .hero-subhead {
   font-size: clamp(1rem, 2vw, 1.22rem);
-  color: rgba(188, 231, 238, 0.96);
+  color: rgba(206, 240, 245, 0.98);
 }
 
 body.home-page .hero-keywords {
@@ -4030,10 +4039,14 @@ body.home-page .hero-keywords {
 }
 
 body.home-page .hero-lead {
-  max-width: 52rem;
+  max-width: 47rem;
   font-size: clamp(1rem, 1.65vw, 1.14rem);
-  line-height: 1.78;
+  line-height: 1.88;
   color: rgba(236, 244, 251, 0.96);
+}
+
+body.home-page .hero-lead + .hero-lead {
+  margin-top: 0.62rem;
 }
 
 body.home-page .hero-signoff {
@@ -4089,6 +4102,10 @@ body.home-page .guide-link {
 }
 
 @media (max-width: 767px) {
+  body.home-page .global-nav {
+    z-index: 130;
+  }
+
   body.home-page .hero {
     padding-top: 6.1rem;
     padding-bottom: 1.4rem;
@@ -4096,6 +4113,9 @@ body.home-page .guide-link {
 
   body.home-page .hero-content {
     padding: 0.92rem;
+    background:
+      linear-gradient(148deg, rgba(8, 14, 22, 0.4), rgba(8, 14, 22, 0.24)),
+      radial-gradient(circle at 88% 10%, rgba(116, 208, 219, 0.2), transparent 44%);
   }
 
   body.home-page .hero h1 {
@@ -4107,8 +4127,8 @@ body.home-page .guide-link {
   }
 
   body.home-page .hero-lead {
-    font-size: 0.95rem;
-    line-height: 1.72;
+    font-size: 0.93rem;
+    line-height: 1.8;
   }
 
   body.home-page .page-guide .guide-grid {
