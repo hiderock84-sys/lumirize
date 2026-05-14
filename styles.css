@@ -6,7 +6,7 @@
   --color-primary: #00acb3;
   --color-primary-soft: #43cfd5;
   --color-text: #1d2a3a;
-  --color-text-muted: rgba(29, 42, 58, 0.86);
+  --color-text-muted: rgba(24, 39, 58, 0.9);
   --color-border: rgba(105, 126, 150, 0.32);
   --color-border-strong: rgba(105, 126, 150, 0.48);
   --gradient-primary: linear-gradient(132deg, #008d9b 0%, #24ada9 46%, #6ea8d8 100%);
@@ -24,10 +24,10 @@
   --hero-overlay-1: linear-gradient(180deg, rgba(44, 49, 58, 0.42) 0%, rgba(34, 40, 49, 0.66) 68%, rgba(26, 31, 39, 0.76) 100%);
   --hero-overlay-2: radial-gradient(circle at 84% 12%, rgba(0, 172, 179, 0.2), transparent 42%);
   --hero-overlay-3: radial-gradient(circle at 20% 80%, rgba(154, 156, 161, 0.17), transparent 46%);
-  --nav-link-color: rgba(40, 49, 62, 0.98);
-  --nav-link-hover: #009ca4;
-  --menu-toggle-bg: rgba(221, 226, 231, 0.25);
-  --menu-toggle-line: rgba(245, 248, 250, 0.96);
+  --nav-link-color: rgba(234, 244, 252, 0.97);
+  --nav-link-hover: #7be3ec;
+  --menu-toggle-bg: rgba(10, 22, 35, 0.42);
+  --menu-toggle-line: rgba(234, 244, 252, 0.96);
   --menu-panel-bg: linear-gradient(115deg, rgba(70, 75, 84, 0.97), rgba(86, 92, 103, 0.95));
   --menu-item-hover-bg: rgba(255, 255, 255, 0.16);
   --logo-glow: rgba(0, 172, 179, 0.3);
@@ -65,16 +65,17 @@ body {
 }
 
 body.home-page {
-  --nav-link-color: rgba(55, 67, 84, 0.96);
-  --nav-link-hover: #00adb5;
-  --menu-toggle-bg: rgba(233, 241, 248, 0.32);
-  --menu-toggle-line: rgba(55, 67, 84, 0.94);
+  --nav-link-color: rgba(234, 244, 252, 0.97);
+  --nav-link-hover: #7be3ec;
+  --menu-toggle-bg: rgba(10, 22, 35, 0.42);
+  --menu-toggle-line: rgba(234, 244, 252, 0.96);
 }
 
 body.home-page .header-logo {
   filter:
-    drop-shadow(0 0 1px rgba(233, 243, 252, 0.62))
-    drop-shadow(0 6px 14px rgba(6, 12, 20, 0.34));
+    drop-shadow(0 0 1px rgba(255, 255, 255, 0.82))
+    drop-shadow(0 2px 10px rgba(4, 12, 20, 0.72))
+    drop-shadow(0 10px 22px rgba(3, 9, 16, 0.48));
 }
 
 img,
@@ -179,25 +180,25 @@ main::after {
   left: 0;
   right: 0;
   z-index: 100;
-  background: transparent !important;
-  background-color: transparent !important;
+  background: linear-gradient(180deg, rgba(10, 22, 35, 0.78), rgba(10, 22, 35, 0.56)) !important;
+  background-color: rgba(10, 22, 35, 0.72) !important;
   background-image: none !important;
   transition: background-color 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease;
-  border-bottom: 0 !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+  border-bottom: 1px solid rgba(172, 207, 235, 0.28) !important;
+  box-shadow: 0 12px 30px rgba(5, 13, 22, 0.2) !important;
+  backdrop-filter: blur(8px) saturate(116%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(116%) !important;
 }
 
 .site-header.scrolled {
-  background: transparent !important;
-  background-color: transparent !important;
+  background: linear-gradient(180deg, rgba(9, 18, 29, 0.9), rgba(9, 18, 29, 0.75)) !important;
+  background-color: rgba(9, 18, 29, 0.86) !important;
   background-image: none !important;
-  border-color: transparent !important;
-  border-bottom: 0 !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+  border-color: rgba(164, 201, 231, 0.34) !important;
+  border-bottom: 1px solid rgba(164, 201, 231, 0.34) !important;
+  box-shadow: 0 14px 30px rgba(4, 10, 18, 0.24) !important;
+  backdrop-filter: blur(10px) saturate(118%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(118%) !important;
 }
 
 /* iOS Safari対策:
@@ -244,8 +245,9 @@ body.menu-open .site-header.scrolled {
   padding: 0 !important;
   box-shadow: none !important;
   filter:
-    drop-shadow(0 0 1px rgba(233, 243, 252, 0.48))
-    drop-shadow(0 6px 14px rgba(8, 18, 30, 0.28));
+    drop-shadow(0 0 1px rgba(255, 255, 255, 0.74))
+    drop-shadow(0 2px 10px rgba(4, 12, 20, 0.66))
+    drop-shadow(0 8px 18px rgba(3, 9, 16, 0.44));
   opacity: 1;
   transition: filter 0.25s ease, opacity 0.25s ease;
 }
@@ -310,6 +312,7 @@ body.menu-open .site-header.scrolled {
   font-size: 0.82rem;
   letter-spacing: 0.01em;
   white-space: nowrap;
+  text-shadow: 0 1px 8px rgba(4, 12, 20, 0.5);
   touch-action: manipulation;
   -webkit-tap-highlight-color: rgba(0, 172, 179, 0.18);
   transition:
@@ -334,7 +337,7 @@ body.home-page .global-nav ul a[aria-current="page"] {
 
 body.home-page .global-nav ul a {
   color: var(--nav-link-color);
-  text-shadow: 0 1px 8px rgba(239, 246, 252, 0.72);
+  text-shadow: 0 1px 8px rgba(4, 12, 20, 0.56);
 }
 
 .nav-label-jp {
@@ -1000,8 +1003,9 @@ body.home-page .btn-nav-tel {
 
 .section-heading p {
   margin: 0;
-  color: var(--color-text-muted);
+  color: rgba(24, 39, 58, 0.92);
   max-width: 68ch;
+  line-height: 1.84;
 }
 
 .section-heading p + p {
@@ -1127,6 +1131,8 @@ body.home-page .btn-nav-tel {
 
 .message-card p {
   margin-bottom: 0;
+  color: rgba(24, 39, 58, 0.92);
+  line-height: 1.84;
 }
 
 .about-tagline {
@@ -3972,15 +3978,15 @@ textarea.invalid {
 
 /* Final corporate polish for homepage readability */
 body.home-page .site-header {
-  background: linear-gradient(180deg, rgba(16, 27, 40, 0.64), rgba(16, 27, 40, 0.28)) !important;
-  border-bottom: 1px solid rgba(186, 211, 236, 0.28) !important;
-  box-shadow: 0 12px 30px rgba(6, 14, 22, 0.14) !important;
-  backdrop-filter: blur(8px) saturate(115%) !important;
-  -webkit-backdrop-filter: blur(8px) saturate(115%) !important;
+  background: linear-gradient(180deg, rgba(10, 22, 35, 0.82), rgba(10, 22, 35, 0.6)) !important;
+  border-bottom: 1px solid rgba(186, 211, 236, 0.34) !important;
+  box-shadow: 0 12px 30px rgba(6, 14, 22, 0.22) !important;
+  backdrop-filter: blur(9px) saturate(116%) !important;
+  -webkit-backdrop-filter: blur(9px) saturate(116%) !important;
 }
 
 body.home-page .site-header.scrolled {
-  background: linear-gradient(180deg, rgba(13, 22, 34, 0.9), rgba(13, 22, 34, 0.7)) !important;
+  background: linear-gradient(180deg, rgba(8, 17, 28, 0.94), rgba(8, 17, 28, 0.78)) !important;
 }
 
 body.home-page.menu-open .site-header,
