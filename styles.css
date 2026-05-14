@@ -58,7 +58,7 @@ body {
     var(--bg-layer-2),
     var(--bg-layer-3),
     var(--bg-layer-4);
-  line-height: 1.7;
+  line-height: 1.78;
   min-height: 100vh;
   letter-spacing: 0.01em;
   overflow-x: clip;
@@ -98,6 +98,14 @@ a {
   padding: 5.9rem 0;
   position: relative;
   isolation: isolate;
+}
+
+.section p {
+  line-height: 1.88;
+}
+
+.section li {
+  line-height: 1.72;
 }
 
 body:not(.home-page):not(.legal-page) main > .section:first-child {
@@ -1009,7 +1017,7 @@ body.home-page .btn-nav-tel {
 }
 
 .section-heading p + p {
-  margin-top: 0.68rem;
+  margin-top: 0.82rem;
 }
 
 .about-narrative {
@@ -1133,6 +1141,10 @@ body.home-page .btn-nav-tel {
   margin-bottom: 0;
   color: rgba(24, 39, 58, 0.92);
   line-height: 1.84;
+}
+
+.message-card p + p {
+  margin-top: 0.72rem;
 }
 
 .about-tagline {
