@@ -64,6 +64,16 @@ body {
   overflow-x: clip;
 }
 
+body[data-tone="warm"] {
+  --color-text: #223347;
+  --color-text-muted: rgba(34, 51, 71, 0.9);
+}
+
+body[data-tone="sharp"] {
+  --color-text: #162636;
+  --color-text-muted: rgba(22, 38, 54, 0.9);
+}
+
 body.home-page {
   --nav-link-color: rgba(234, 244, 252, 0.97);
   --nav-link-hover: #7be3ec;
@@ -106,6 +116,21 @@ a {
 
 .section li {
   line-height: 1.72;
+}
+
+body[data-tone="warm"] .section p {
+  line-height: 1.96;
+  letter-spacing: 0.012em;
+}
+
+body[data-tone="sharp"] .section p {
+  line-height: 1.8;
+  letter-spacing: 0.006em;
+}
+
+body[data-tone="sharp"] .section-heading h1,
+body[data-tone="sharp"] .section-heading h2 {
+  letter-spacing: 0.008em;
 }
 
 body:not(.home-page):not(.legal-page) main > .section:first-child {
@@ -3104,6 +3129,65 @@ textarea.invalid {
   transform: translateY(10px);
   transition: opacity 0.2s ease, transform 0.2s ease;
   z-index: 70;
+}
+
+.tone-switch {
+  position: fixed;
+  right: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  z-index: 85;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  padding: 0.44rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(143, 184, 216, 0.38);
+  background: linear-gradient(140deg, rgba(10, 22, 35, 0.88), rgba(21, 38, 56, 0.82));
+  box-shadow: 0 10px 24px rgba(5, 12, 20, 0.24);
+}
+
+.tone-switch-label {
+  color: rgba(222, 238, 250, 0.92);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding-inline: 0.2rem;
+}
+
+.tone-switch button {
+  border: 1px solid rgba(151, 195, 226, 0.42);
+  background: rgba(240, 248, 255, 0.14);
+  color: rgba(237, 247, 254, 0.94);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.34rem 0.56rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.tone-switch button[aria-pressed="true"] {
+  background: linear-gradient(135deg, rgba(91, 209, 219, 0.92), rgba(136, 214, 248, 0.88));
+  border-color: rgba(186, 237, 242, 0.9);
+  color: #112537;
+}
+
+@media (max-width: 767px) {
+  .tone-switch {
+    right: 0.72rem;
+    bottom: calc(6.2rem + env(safe-area-inset-bottom));
+    padding: 0.4rem 0.46rem;
+    gap: 0.32rem;
+  }
+
+  .tone-switch-label {
+    font-size: 0.6rem;
+  }
+
+  .tone-switch button {
+    font-size: 0.66rem;
+    padding: 0.3rem 0.48rem;
+  }
 }
 
 .back-to-top.visible {
