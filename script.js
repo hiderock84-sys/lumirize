@@ -65,6 +65,15 @@
     });
   };
 
+  const applyToneCopy = (activeTone) => {
+    const copyTargets = document.querySelectorAll("[data-tone-warm][data-tone-sharp]");
+    copyTargets.forEach((node) => {
+      const nextText = activeTone === "sharp" ? node.getAttribute("data-tone-sharp") : node.getAttribute("data-tone-warm");
+      if (!nextText) return;
+      node.textContent = nextText;
+    });
+  };
+
   const applyTone = (tone) => {
     const nextTone = toneValues.has(tone) ? tone : "warm";
     document.body.setAttribute("data-tone", nextTone);
@@ -73,6 +82,7 @@
     } catch {
       // Ignore storage errors.
     }
+    applyToneCopy(nextTone);
     updateToneButtons(nextTone);
   };
 
