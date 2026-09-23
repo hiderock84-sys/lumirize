@@ -34,7 +34,7 @@
   --radius-lg: 1.5rem;
   --radius-md: 1rem;
   --radius-sm: 0.7rem;
-  --container: min(1200px, 92vw);
+  --container: min(1160px, 90vw);
 }
 
 *,
@@ -94,13 +94,13 @@ a {
 }
 
 .section {
-  padding: 5.9rem 0;
+  padding: clamp(3.9rem, 6.4vw, 5.6rem) 0;
   position: relative;
   isolation: isolate;
 }
 
 body:not(.home-page):not(.legal-page) main > .section:first-child {
-  padding-top: 4.2rem;
+  padding-top: 4.6rem;
 }
 
 .section > .container {
@@ -1271,43 +1271,43 @@ body.home-page .btn-nav-tel {
 }
 
 .about::before {
-  background-image: url("https://images.unsplash.com/photo-1494522358652-f30e61a60313?auto=format&fit=crop&w=2200&q=90");
+  background-image: url("https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=3200&q=96");
 }
 
 .services::before {
-  background-image: url("https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=2200&q=90");
+  background-image: url("https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=3200&q=96");
 }
 
 .stats-section::before {
-  background-image: url("https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=2200&q=90");
+  background-image: url("https://images.unsplash.com/photo-1494522358652-f30e61a60313?auto=format&fit=crop&w=3200&q=96");
 }
 
 .support::before {
-  background-image: url("https://images.unsplash.com/photo-1465447142348-e9952c393450?auto=format&fit=crop&w=2200&q=90");
+  background-image: url("https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=3200&q=96");
 }
 
 .stories::before {
-  background-image: url("https://images.unsplash.com/photo-1460472178825-e5240623afd5?auto=format&fit=crop&w=2200&q=90");
+  background-image: url("https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=3200&q=96");
 }
 
 .process::before {
-  background-image: url("https://images.unsplash.com/photo-1471039497385-b6d6ba609f9c?auto=format&fit=crop&w=2200&q=90");
+  background-image: url("https://images.unsplash.com/photo-1465447142348-e9952c393450?auto=format&fit=crop&w=3200&q=96");
 }
 
 .faq::before {
-  background-image: url("https://images.unsplash.com/photo-1499092346589-b9b6be3e94b2?auto=format&fit=crop&w=2200&q=90");
+  background-image: url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=3200&q=96");
 }
 
 .contact::before {
-  background-image: url("https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=2200&q=90");
+  background-image: url("https://images.unsplash.com/photo-1462899006636-339e08d1844e?auto=format&fit=crop&w=3200&q=96");
 }
 
 .emergency::before {
-  background-image: url("https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=2200&q=90");
+  background-image: url("https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=3200&q=96");
 }
 
 .standards::before {
-  background-image: url("https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=2200&q=90");
+  background-image: url("https://images.unsplash.com/photo-1460472178825-e5240623afd5?auto=format&fit=crop&w=3200&q=96");
 }
 
 .service-grid {
@@ -1406,42 +1406,42 @@ body.home-page .btn-nav-tel {
 }
 
 .guide-banner:nth-child(1)::before {
-  background-image: url("https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=90");
+  background-image: url("https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=2000&q=96");
   background-position: 52% 35%;
 }
 
 .guide-banner:nth-child(2)::before {
-  background-image: url("https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=90");
+  background-image: url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=96");
   background-position: 54% 42%;
 }
 
 .guide-banner:nth-child(3)::before {
-  background-image: url("https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=90");
+  background-image: url("https://images.unsplash.com/photo-1494522358652-f30e61a60313?auto=format&fit=crop&w=2000&q=96");
   background-position: 50% 38%;
 }
 
 .guide-banner:nth-child(4)::before {
-  background-image: url("https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1600&q=90");
+  background-image: url("https://images.unsplash.com/photo-1462899006636-339e08d1844e?auto=format&fit=crop&w=2000&q=96");
   background-position: 52% 34%;
 }
 
 .guide-banner:nth-child(5)::before {
-  background-image: url("https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=90");
+  background-image: url("https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=2000&q=96");
   background-position: 48% 42%;
 }
 
 .guide-banner:nth-child(6)::before {
-  background-image: url("https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1600&q=90");
+  background-image: url("https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=2000&q=96");
   background-position: 52% 38%;
 }
 
 .guide-banner:nth-child(7)::before {
-  background-image: url("https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=90");
+  background-image: url("https://images.unsplash.com/photo-1465447142348-e9952c393450?auto=format&fit=crop&w=2000&q=96");
   background-position: 56% 36%;
 }
 
 .guide-banner:nth-child(8)::before {
-  background-image: url("https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1600&q=90");
+  background-image: url("https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=2000&q=96");
   background-position: 52% 40%;
 }
 
@@ -1757,7 +1757,7 @@ body.home-page #about.section {
 }
 
 .institution-safety {
-  padding-top: 4.2rem;
+  padding-top: 4.6rem;
   background:
     linear-gradient(180deg, rgba(230, 239, 248, 0.9) 0%, rgba(213, 225, 237, 0.88) 54%, rgba(194, 208, 223, 0.9) 100%),
     radial-gradient(circle at 12% 0%, rgba(0, 152, 172, 0.12), transparent 44%),
@@ -2243,7 +2243,7 @@ body.home-page #about.section {
 }
 
 .support {
-  padding-top: 4.2rem;
+  padding-top: 4.6rem;
 }
 
 .support-grid-stage {
@@ -2374,7 +2374,7 @@ body.home-page #about.section {
 }
 
 .stories {
-  padding-top: 4.2rem;
+  padding-top: 4.6rem;
 }
 
 .story-grid {
@@ -3947,6 +3947,104 @@ textarea.invalid {
 
   .section-heading h2 {
     font-size: 1.45rem;
+  }
+}
+
+
+/* === Layout Balance Refinement (2026-09) === */
+.section-heading {
+  margin-bottom: clamp(1.5rem, 2.8vw, 2.2rem);
+}
+
+.section-heading p {
+  line-height: 1.78;
+}
+
+.about-narrative,
+.info-grid,
+.service-grid,
+.support-grid,
+.story-grid,
+.stats-summary-grid,
+.stats-dashboard,
+.policy-benefit-cards,
+.policy-compare-grid,
+.assurance-grid,
+.contact-grid,
+.standards-grid {
+  gap: clamp(0.9rem, 1.8vw, 1.25rem);
+}
+
+.message-card,
+.about-block,
+.info-item,
+.service-card,
+.support-card,
+.story-card,
+.process-item,
+.faq-item,
+.contact-card,
+.standard-card,
+.summary-card,
+.chart-card,
+.compare-card {
+  padding: clamp(1.05rem, 2.4vw, 1.38rem);
+}
+
+.process-cta,
+.faq-cta,
+.policy-flow-map,
+.policy-graph-board,
+.policy-benefit-grid,
+.institution-assurance,
+.institution-steps {
+  padding: clamp(1rem, 2.3vw, 1.32rem);
+}
+
+.hero-content {
+  max-width: min(58rem, calc(100vw - 5.2rem));
+}
+
+.hero h1 {
+  letter-spacing: 0.012em;
+  line-height: 1.28;
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: clamp(2.65rem, 8.2vw, 3.45rem) 0;
+  }
+
+  body:not(.home-page):not(.legal-page) main > .section:first-child {
+    padding-top: clamp(2.6rem, 7.2vw, 3.2rem);
+  }
+
+  .hero {
+    min-height: calc(100svh - 0.2rem);
+    padding-top: 5.65rem;
+    padding-bottom: 2rem;
+  }
+
+  .hero-content {
+    padding: 0.98rem 0.98rem 1.02rem;
+    border-radius: 0.92rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.22rem, 5.6vw, 1.58rem);
+    line-height: 1.34;
+    margin-bottom: 0.62rem;
+    white-space: normal;
+  }
+
+  .hero-subhead {
+    font-size: clamp(0.9rem, 3.8vw, 1.04rem);
+  }
+
+  .hero-lead,
+  .hero-signoff {
+    font-size: 0.94rem;
+    line-height: 1.72;
   }
 }
 
