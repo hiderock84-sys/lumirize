@@ -10,7 +10,7 @@
   --accent: #2f76df;
   --radius: 16px;
   --shadow: 0 14px 32px rgba(9, 28, 53, 0.12);
-  --container-max: 1180px;
+  --container-max: 1140px;
   --gutter: 12px;
 }
 
@@ -767,5 +767,79 @@ h3 {
   .visual-lead {
     font-size: 0.94rem;
     line-height: 1.56;
+  }
+}
+
+
+/* === Visual Rhythm Rebalance (2026-09) === */
+.section {
+  padding: clamp(1.2rem, 3.9vw, 2.05rem) 0;
+}
+
+.section-head {
+  margin-bottom: 0.68rem;
+}
+
+.section-kicker,
+.hero-copy,
+.card p,
+.point-list li,
+.list-tight li,
+.bullet-list li {
+  line-height: 1.74;
+}
+
+.split,
+.cards,
+.card-grid,
+.cards-grid,
+.service-grid,
+.policy-cards,
+.impact-grid,
+.case-grid,
+.model-flow,
+.step-list,
+.faq-list {
+  gap: clamp(0.62rem, 1.7vw, 0.96rem);
+}
+
+.card {
+  padding: clamp(0.9rem, 2.1vw, 1.08rem);
+}
+
+.hero,
+.page-hero {
+  min-height: 64vh;
+}
+
+.hero-content,
+.page-hero-content {
+  max-width: min(70ch, 100%);
+  padding-block: clamp(1.28rem, 3.8vw, 2.34rem);
+}
+
+.image-band-content {
+  max-width: min(74ch, 100%);
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: clamp(1.02rem, 4.6vw, 1.62rem) 0;
+  }
+
+  .hero,
+  .page-hero {
+    min-height: 56vh;
+  }
+
+  .hero-content,
+  .page-hero-content {
+    padding-block: 1.36rem 1.08rem;
+  }
+
+  .hero .hero-copy,
+  .page-hero .hero-copy {
+    font-size: 0.96rem;
+    line-height: 1.66;
   }
 }
