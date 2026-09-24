@@ -340,13 +340,13 @@ html[data-theme="v4"] .guide-banner,
 html[data-theme="v4"] .message-card,
 html[data-theme="v4"] .service-card,
 html[data-theme="v4"] .faq-item {
-  margin: 0 !important;
-  padding: 16px 0 !important;
-  border: 0 !important;
-  border-top: 1px solid #d9dfe7 !important;
+  margin: 0 0 16px !important;
+  padding: 24px 16px !important;
+  border: 1px solid #d9dfe7 !important;
+  border-top: 2px solid #142033 !important;
   border-radius: 0 !important;
-  box-shadow: none !important;
-  background: transparent !important;
+  box-shadow: 0 16px 32px -24px rgba(20, 32, 51, 0.35) !important;
+  background: #fff !important;
 }
 
 html[data-theme="v4"] .btn,
@@ -362,4 +362,404 @@ html[data-theme="v4"] .site-footer {
 
 html[data-theme="v4"] .footer-grid li {
   white-space: normal !important;
+}
+
+html[data-theme="v4"] .leader-profile {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  align-items: center;
+  gap: 16px;
+  margin: 16px 0 24px;
+  padding: 16px 0;
+  border-top: 1px solid #d9dfe7;
+  border-bottom: 1px solid #d9dfe7;
+}
+
+html[data-theme="v4"] .leader-profile img {
+  width: 96px;
+  height: 120px;
+  object-fit: cover;
+  object-position: center 20%;
+  border: 1px solid #d9dfe7;
+}
+
+html[data-theme="v4"] .leader-profile p {
+  margin: 0 !important;
+}
+
+html[data-theme="v4"] .leader-profile .leader-name {
+  font-size: 11px !important;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  line-height: 1.6 !important;
+  color: #2f5d8a !important;
+}
+
+html[data-theme="v4"] .leader-profile .leader-role {
+  margin-top: 8px !important;
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+  color: #56657a !important;
+}
+
+html[data-theme="v4"] .leader-profile .leader-person {
+  font-family: "Iowan Old Style", Palatino, "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: 24px !important;
+  font-weight: 600;
+  line-height: 1.4 !important;
+  letter-spacing: 0.12em;
+  color: #142033;
+}
+
+html[data-theme="v4"] .section-heading {
+  border-left: 4px solid #2f5d8a !important;
+}
+
+html[data-theme="v4"] main .eyebrow {
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 8px !important;
+  font-family: "Hiragino Sans", "Noto Sans JP", "Yu Gothic", sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1.6 !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase;
+  color: #2f5d8a !important;
+}
+
+html[data-theme="v4"] :is(.message-card, .info-item, .service-card, .support-card, .story-card, .process-item, .contact-card, .summary-card, .chart-card, .compare-card, .faq-item, .standard-card)::before {
+  display: none !important;
+}
+
+html[data-theme="v4"] :is(.message-card, .info-item, .service-card, .support-card, .story-card, .process-item, .contact-card, .summary-card, .chart-card, .compare-card, .faq-item, .standard-card)::after {
+  height: 2px !important;
+  background: #142033 !important;
+}
+
+/* One palette for every inner page: paper, navy ink, steel blue. */
+
+html[data-theme="v4"],
+html[data-theme="v4"] body,
+html[data-theme="v4"] body[data-tone] {
+  --color-bg: #f6f3ec;
+  --color-surface: #fff;
+  --color-surface-2: #eef2f7;
+  --color-primary: #2f5d8a;
+  --color-primary-soft: #2f5d8a;
+  --color-text: #142033;
+  --color-text-muted: #3b4a5e;
+  --color-border: #d9dfe7;
+  --color-border-strong: #b9c4d2;
+  --gradient-primary: linear-gradient(#142033, #142033);
+  --gradient-surface: #fff;
+  --gradient-surface-soft: #fff;
+  --shadow-soft: 0 16px 32px -24px rgba(20, 32, 51, 0.35);
+  --shadow-card: 0 16px 32px -24px rgba(20, 32, 51, 0.35);
+  --logo-glow: transparent;
+  --radius-lg: 0;
+  --radius-md: 0;
+  --radius-sm: 0;
+}
+
+html[data-theme="v4"] body {
+  color: #142033 !important;
+}
+
+html[data-theme="v4"] main :is(
+  .policy-flow-map, .profile-banner, .process-cta, .about-details,
+  .policy-card, .policy-panel, .policy-chart, .policy-benefit, .benefit-card,
+  .summary-card, .chart-card, .compare-card, .standard-card, .support-card,
+  .story-card, .process-item, .contact-card, .flow-step, .stat-card,
+  [class*="-card"], [class*="-panel"], [class*="-box"]
+) {
+  border-radius: 0 !important;
+  background: #fff !important;
+  border-color: #d9dfe7 !important;
+  box-shadow: 0 16px 32px -24px rgba(20, 32, 51, 0.35) !important;
+}
+
+html[data-theme="v4"] main :is([class*="-card"], [class*="-panel"], [class*="-box"]) :is([class*="-card"], [class*="-panel"], [class*="-box"], li) {
+  box-shadow: none !important;
+}
+
+html[data-theme="v4"] main .btn {
+  border-radius: 0 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+}
+
+html[data-theme="v4"] main .btn-primary {
+  border: 0 !important;
+  background: #142033 !important;
+  color: #fff !important;
+  box-shadow: 0 8px 24px rgba(20, 32, 51, 0.18) !important;
+}
+
+html[data-theme="v4"] main .btn-secondary {
+  border: 1px solid #142033 !important;
+  background: #fff !important;
+  color: #142033 !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="v4"] .policy-ring {
+  background:
+    radial-gradient(circle at center, #fff 0 38%, transparent 39% 100%),
+    conic-gradient(#142033 0 40%, #2f5d8a 40% 75%, #9fbad6 75% 100%) !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="v4"] .about-anchor-nav {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px !important;
+  margin-top: 24px !important;
+}
+
+html[data-theme="v4"] .about-anchor-nav .btn {
+  justify-content: space-between !important;
+  min-height: 48px !important;
+  padding: 8px 12px !important;
+  font-size: 13px !important;
+  letter-spacing: 0.02em !important;
+  text-align: left;
+}
+
+html[data-theme="v4"] .about-anchor-nav .btn::after {
+  content: "↓";
+  color: #2f5d8a;
+}
+
+/* Footer matches the landing footer. */
+
+html[data-theme="v4"] .site-footer {
+  background: #efebe2 !important;
+  background-image: none !important;
+  border-top: 1px solid #d9dfe7 !important;
+  color: #2a3547 !important;
+}
+
+html[data-theme="v4"] .site-footer h3 {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.2em !important;
+  color: #2f5d8a !important;
+}
+
+html[data-theme="v4"] .site-footer :is(p, li, a, span) {
+  color: #2a3547 !important;
+}
+
+html[data-theme="v4"] .footer-logo {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="v4"] main > .section {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+html[data-theme="v4"] main > .section::before,
+html[data-theme="v4"] main > .section::after {
+  content: none !important;
+}
+
+html[data-theme="v4"] .dot-home { background: #142033 !important; }
+html[data-theme="v4"] .dot-work { background: #2f5d8a !important; }
+html[data-theme="v4"] .dot-stay { background: #9fbad6 !important; }
+
+html[data-theme="v4"] .policy-bars li {
+  border-radius: 0 !important;
+  background: #fff !important;
+}
+
+html[data-theme="v4"] .policy-bar-head strong { color: #2f5d8a !important; }
+
+html[data-theme="v4"] .policy-track {
+  height: 4px !important;
+  border-radius: 0 !important;
+  background: #eef2f7 !important;
+}
+
+html[data-theme="v4"] .policy-track > span {
+  border-radius: 0 !important;
+  background: #2f5d8a !important;
+}
+
+html[data-theme="v4"] .policy-flow-num {
+  width: auto !important;
+  aspect-ratio: auto !important;
+  border-radius: 0 !important;
+  background: none !important;
+  font-family: "Iowan Old Style", Palatino, "Yu Mincho", serif;
+  font-size: 20px !important;
+  font-weight: 400 !important;
+  color: #2f5d8a !important;
+}
+
+html[data-theme="v4"] main :is(h1, h2, h3, h4) {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  line-break: strict;
+  text-wrap: balance;
+}
+
+html[data-theme="v4"] main :is(.message-card, .info-item, .service-card, .faq-item, .guide-banner)::after {
+  content: none !important;
+}
+
+html[data-theme="v4"] .story-card blockquote {
+  border-left: 2px solid #2f5d8a !important;
+  background: #f6f3ec !important;
+  border-radius: 0 !important;
+  color: #142033 !important;
+}
+
+html[data-theme="v4"] .process-number {
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  aspect-ratio: auto !important;
+  border-radius: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  font-family: "Iowan Old Style", Palatino, "Yu Mincho", serif !important;
+  font-size: 24px !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  color: #2f5d8a !important;
+}
+
+html[data-theme="v4"] .emergency-inner {
+  display: grid !important;
+  gap: 16px !important;
+  padding: 32px 24px !important;
+  border: 0 !important;
+  border-left: 4px solid #b3413a !important;
+  border-radius: 0 !important;
+  background: #142033 !important;
+  background-image: none !important;
+  box-shadow: 0 16px 32px -24px rgba(20, 32, 51, 0.5) !important;
+  color: #fff !important;
+}
+
+html[data-theme="v4"] .emergency-inner::before,
+html[data-theme="v4"] .emergency-inner::after,
+html[data-theme="v4"] .emergency .alert-icon {
+  display: none !important;
+}
+
+html[data-theme="v4"] .emergency-inner h1 {
+  margin: 0 0 8px !important;
+  font-family: "Iowan Old Style", Palatino, "Yu Mincho", "Hiragino Mincho ProN", serif !important;
+  font-size: 24px !important;
+  line-height: 1.4 !important;
+  color: #fff !important;
+}
+
+html[data-theme="v4"] .emergency-inner p {
+  margin: 0 !important;
+  font-size: 15px !important;
+  line-height: 1.9 !important;
+  color: rgba(255, 255, 255, 0.84) !important;
+}
+
+html[data-theme="v4"] .emergency-inner .btn-emergency {
+  justify-content: center !important;
+  min-height: 56px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  color: #142033 !important;
+  font-family: "Iowan Old Style", Palatino, "Yu Mincho", serif !important;
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="v4"] main :is(input, select, textarea) {
+  border: 1px solid #b9c4d2 !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="v4"] main :is(input, select, textarea):focus {
+  outline: 2px solid #2f5d8a !important;
+  outline-offset: 0 !important;
+}
+
+html[data-theme="v4"] .leader-closing {
+  margin: 32px 0 8px !important;
+  padding: 24px 0 0 !important;
+  border-top: 1px solid #d9dfe7;
+  font-family: "Iowan Old Style", Palatino, "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: 17px !important;
+  font-weight: 600;
+  line-height: 1.8 !important;
+  letter-spacing: 0.04em;
+  color: #142033 !important;
+}
+
+html[data-theme="v4"] .leader-closing-en {
+  margin: 0 0 24px !important;
+  font-size: 13px !important;
+  line-height: 1.8 !important;
+  letter-spacing: 0.04em;
+  color: #56657a !important;
+}
+
+html[data-theme="v4"] .leader-sign {
+  display: grid;
+  justify-items: end;
+  gap: 4px;
+  margin: 0 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.08em;
+  color: #56657a !important;
+}
+
+html[data-theme="v4"] .leader-sign span {
+  font-family: "Iowan Old Style", Palatino, "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: #142033;
+}
+
+html[data-theme="v4"] main table tr {
+  border-radius: 0 !important;
+  border-color: #d9dfe7 !important;
+  background: #f6f3ec !important;
+}
+
+html[data-theme="v4"] .profile-banner {
+  display: grid !important;
+  grid-template-columns: 64px 1fr !important;
+  align-items: center !important;
+  gap: 16px !important;
+  padding: 16px !important;
+  text-decoration: none !important;
+}
+
+html[data-theme="v4"] .profile-banner-photo {
+  width: 64px;
+  height: 80px;
+  object-fit: cover;
+  border: 1px solid #d9dfe7;
+}
+
+html[data-theme="v4"] .profile-banner-text {
+  display: grid;
+  gap: 4px;
+}
+
+html[data-theme="v4"] .profile-banner-text > span:last-child {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #3b4a5e;
 }
