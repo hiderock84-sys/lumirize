@@ -18,7 +18,7 @@
     />
     <meta property="og:image" content="https://lumirize.com/assets/lumirize-logo-horizontal.png" />
     <link rel="icon" type="image/png" href="./assets/lumirize-logo-mark.png" />
-    <link rel="stylesheet" href="./landing.css?v=20260924k" />
+    <link rel="stylesheet" href="./landing.css?v=20260924m" />
   </head>
   <body>
     <a class="skip" href="#main">本文へスキップ</a>
@@ -26,23 +26,26 @@
       <a class="logo" href="./index.html" aria-label="株式会社ルミライズ トップ">
         <img src="./assets/lumirize-logo-horizontal.png" alt="LUMIRIZE" width="1286" height="245" />
       </a>
-      <a class="consult" href="./contact.html">相談する</a>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="メニューを開く">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span class="menu-word" aria-hidden="true"><span>Menu</span><span>Close</span></span>
+        <span class="menu-lines" aria-hidden="true"><i></i><i></i></span>
       </button>
       <nav class="menu" id="site-menu" aria-label="サイトメニュー">
-        <ul>
-          <li><a href="./about.html">私たちについて</a></li>
-          <li><a href="./policy.html">制度</a></li>
-          <li><a href="./stats.html">実績</a></li>
-          <li><a href="./services.html">サービス</a></li>
-          <li><a href="./support.html">支援</a></li>
-          <li><a href="./process.html">流れ</a></li>
-          <li><a href="./faq.html">FAQ</a></li>
-          <li><a href="./contact.html">お問い合わせ</a></li>
-        </ul>
+        <p class="menu-head">Index</p>
+        <ol>
+          <li><a href="./about.html"><b>私たちについて</b><em>About</em></a></li>
+          <li><a href="./policy.html"><b>公的支援プラン</b><em>Policy</em></a></li>
+          <li><a href="./stats.html"><b>支援実績</b><em>Results</em></a></li>
+          <li><a href="./services.html"><b>サービス</b><em>Services</em></a></li>
+          <li><a href="./support.html"><b>支援内容</b><em>Support</em></a></li>
+          <li><a href="./process.html"><b>入居までの流れ</b><em>Process</em></a></li>
+          <li><a href="./faq.html"><b>よくある質問</b><em>FAQ</em></a></li>
+          <li><a href="./representative.html"><b>代表メッセージ</b><em>Message</em></a></li>
+        </ol>
+        <div class="menu-foot">
+          <a class="menu-cta" href="./contact.html">無料相談を予約する<span aria-hidden="true">→</span></a>
+          <a class="menu-tel" href="tel:0427048308"><small>TEL</small>042-704-8308</a>
+        </div>
       </nav>
     </header>
 
@@ -62,8 +65,8 @@
             家があるから、明日がある。ルミライズは住まいを起点に、制度・仕事・暮らしの定着までを一体で支えます。
           </p>
           <div class="actions">
-            <a class="primary" href="./contact.html">無料相談を予約する</a>
-            <a class="secondary" href="tel:0427048308">電話 042-704-8308</a>
+            <a class="cta" href="./contact.html">無料相談を予約する<span aria-hidden="true">→</span></a>
+            <a class="tel" href="tel:0427048308"><small>TEL</small>042-704-8308</a>
           </div>
         </div>
       </section>
@@ -71,72 +74,90 @@
       <section class="block" aria-labelledby="points-title">
         <p class="eyebrow">Points</p>
         <h2 id="points-title">三つの要点</h2>
+        <p class="intro">住まい・制度・面接。三つをひとつの流れにすることで、再出発が「続く暮らし」になります。</p>
         <ol class="points">
           <li>
             <a href="./about.html">
+              <span class="p-head"><span class="p-num">01</span><span class="p-en">Housing</span></span>
               <strong>住まいが先</strong>
-              <span>住まいは尊厳の前提です。部屋を渡して終わらせず、定着まで支えます。</span>
+              <span class="p-text">住まいは尊厳の前提です。部屋を渡して終わらせず、暮らしが根づく定着まで支えます。</span>
+              <span class="flow" aria-hidden="true"><span>入居</span><span>生活</span><span>定着</span></span>
+              <span class="more">理念を見る</span>
             </a>
           </li>
           <li>
             <a href="./policy.html">
+              <span class="p-head"><span class="p-num">02</span><span class="p-en">System</span></span>
               <strong>制度でつなぐ</strong>
-              <span>家賃補助、住宅扶助、ハローワーク、就労支援を一つの流れにつなぎます。</span>
+              <span class="p-text">家賃補助、住宅扶助、ハローワーク、就労支援を、途切れない一つの流れにつなぎます。</span>
+              <span class="tags" aria-hidden="true"><span>家賃補助</span><span>住宅扶助</span><span>ハローワーク</span><span>就労支援</span></span>
+              <span class="more">制度を見る</span>
             </a>
           </li>
           <li>
             <a href="./support.html">
+              <span class="p-head"><span class="p-num">03</span><span class="p-en">Follow-up</span></span>
               <strong>面接で伴走</strong>
-              <span>入居後は、3ヶ月・6ヶ月・1年・2年の面接で定着を伴走します。</span>
+              <span class="p-text">入居後は定期面接で生活の変化を確かめ、つまずく前に手を打ちます。</span>
+              <span class="line" aria-hidden="true"><span>3ヶ月</span><span>6ヶ月</span><span>1年</span><span>2年</span></span>
+              <span class="more">支援内容を見る</span>
             </a>
           </li>
         </ol>
       </section>
 
-      <section class="block" aria-labelledby="who-title">
+      <section class="band" aria-labelledby="who-title">
         <p class="eyebrow">Support</p>
         <h2 id="who-title">相談できる方</h2>
+        <p class="intro">住まいを見つけにくい事情を抱えた方へ。ご本人だけでなく、ご家族や支援者からのご相談も受け付けています。</p>
         <ul class="who">
-          <li>依存症からの回復途上にある方</li>
-          <li>刑務所出所後の方</li>
-          <li>DV被害を受けた母子</li>
-          <li>LGBTQ+当事者</li>
-          <li>外国人住民</li>
+          <li><span>01</span>依存症からの回復途上にある方</li>
+          <li><span>02</span>刑務所出所後の方</li>
+          <li><span>03</span>DV被害を受けた母子</li>
+          <li><span>04</span>LGBTQ+当事者</li>
+          <li><span>05</span>外国人住民</li>
         </ul>
-      </section>
-
-      <section class="block" aria-labelledby="rep-title">
-        <p class="eyebrow">Message</p>
-        <h2 id="rep-title">代表の要点</h2>
-        <p class="quote">
-          ダルクのプログラムにつながる方は一部です。つながれない方の割合は非常に高く、その方々に住まいが提供されない矛盾を変えたいと考えています。
-        </p>
-        <a class="text-link secondary" href="./representative.html">代表メッセージを読む</a>
+        <a class="band-link" href="./process.html">入居までの流れを見る<span aria-hidden="true">→</span></a>
       </section>
 
       <section class="block" aria-labelledby="pages-title">
         <p class="eyebrow">Pages</p>
         <h2 id="pages-title">詳しくは各ページへ</h2>
         <ul class="pages">
-          <li><a href="./about.html"><strong>私たちについて</strong><span>理念と支援思想</span></a></li>
-          <li><a href="./policy.html"><strong>公的支援プラン</strong><span>制度の全体像</span></a></li>
-          <li><a href="./stats.html"><strong>支援実績</strong><span>数字と成果</span></a></li>
-          <li><a href="./services.html"><strong>サービス</strong><span>住まいから定着まで</span></a></li>
-          <li><a href="./support.html"><strong>支援内容</strong><span>入居後の実務</span></a></li>
-          <li><a href="./process.html"><strong>入居までの流れ</strong><span>相談から入居まで</span></a></li>
-          <li><a href="./faq.html"><strong>よくある質問</strong><span>制度と面接の要点</span></a></li>
-          <li><a href="./contact.html"><strong>お問い合わせ</strong><span>無料相談・緊急の連絡</span></a></li>
+          <li class="feature">
+            <a href="./about.html">
+              <span class="t-en">01 / About</span>
+              <strong>私たちについて</strong>
+              <span class="t-sub">理念と支援思想</span>
+            </a>
+          </li>
+          <li><a href="./policy.html"><span class="t-en">02 / Policy</span><strong>公的支援プラン</strong><span class="t-sub">制度の全体像</span></a></li>
+          <li><a href="./stats.html"><span class="t-en">03 / Results</span><strong>支援実績</strong><span class="t-sub">数字と成果</span></a></li>
+          <li><a href="./services.html"><span class="t-en">04 / Services</span><strong>サービス</strong><span class="t-sub">住まいから定着まで</span></a></li>
+          <li><a href="./support.html"><span class="t-en">05 / Support</span><strong>支援内容</strong><span class="t-sub">入居後の実務</span></a></li>
+          <li><a href="./process.html"><span class="t-en">06 / Process</span><strong>入居までの流れ</strong><span class="t-sub">相談から入居まで</span></a></li>
+          <li><a href="./faq.html"><span class="t-en">07 / FAQ</span><strong>よくある質問</strong><span class="t-sub">制度と面接の要点</span></a></li>
+          <li class="wide">
+            <a href="./representative.html"><span class="t-en">08 / Message</span><strong>代表メッセージ</strong><span class="t-sub">代表取締役CEO 田中 秀泰</span></a>
+          </li>
+          <li class="wide dark">
+            <a href="./contact.html"><span class="t-en">Contact</span><strong>お問い合わせ</strong><span class="t-sub">無料相談・緊急の連絡</span></a>
+          </li>
         </ul>
       </section>
     </main>
 
     <footer class="site-foot">
-      <p>株式会社ルミライズ　代表取締役CEO 田中 秀泰</p>
-      <p>〒252-0237 神奈川県相模原市中央区千代田3-3-20</p>
-      <p><a href="tel:0427048308">TEL 042-704-8308</a>　FAX 042-707-0392</p>
-      <p><a href="mailto:info@lumirize.com">info@lumirize.com</a></p>
-      <p><a href="./privacy.html">プライバシーポリシー</a>　<a href="./terms.html">利用規約</a></p>
-      <p>© 2021 株式会社ルミライズ</p>
+      <p class="foot-name">株式会社ルミライズ<small>LUMIRIZE Inc.</small></p>
+      <dl>
+        <dt>代表</dt><dd>代表取締役CEO 田中 秀泰</dd>
+        <dt>所在地</dt><dd>〒252-0237<br />神奈川県相模原市中央区千代田3-3-20</dd>
+        <dt>TEL</dt><dd><a href="tel:0427048308">042-704-8308</a></dd>
+        <dt>FAX</dt><dd>042-707-0392</dd>
+        <dt>MAIL</dt><dd><a href="mailto:info@lumirize.com">info@lumirize.com</a></dd>
+      </dl>
+      <p class="foot-links"><a href="./privacy.html">プライバシーポリシー</a><a href="./terms.html">利用規約</a></p>
+      <p class="foot-copy">© 2021 LUMIRIZE Inc.</p>
     </footer>
 
     <script>
