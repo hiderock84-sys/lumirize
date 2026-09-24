@@ -777,3 +777,14 @@ h1 {
 @media (prefers-reduced-motion: reduce) {
   .menu, .menu-word span, .menu-lines i { transition: none; }
 }
+
+@media (min-width: 960px) {
+  .menu > * {
+    width: 100%;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .menu-foot { margin-top: 48px; }
+}

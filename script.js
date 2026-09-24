@@ -223,6 +223,38 @@
     revealNodes.forEach((node) => node.classList.add("is-visible"));
   }
 
+  const faqItems = document.querySelectorAll(".faq-item");
+  faqItems.forEach((item, index) => {
+    const button = item.querySelector(".faq-question");
+    const answer = item.querySelector(".faq-answer");
+    if (!button || !answer) return;
+
+    const answerId = `faq-answer-${index + 1}`;
+    answer.id = answerId;
+    button.setAttribute("type", "button");
+    button.setAttribute("aria-controls", answerId);
+
+    button.addEventListener("click", () => {
+      const currentlyOpen = item.classList.contains("active");
+
+      faqItems.forEach((otherItem) => {
+        const otherButton = otherItem.querySelector(".faq-question");
+        const otherAnswer = otherItem.querySelector(".faq-answer");
+        if (!otherButton || !otherAnswer) return;
+
+        otherItem.classList.remove("active");
+        otherButton.setAttribute("aria-expanded", "false");
+        otherAnswer.style.maxHeight = null;
+      });
+
+      if (!currentlyOpen) {
+        item.classList.add("active");
+        button.setAttribute("aria-expanded", "true");
+        answer.style.maxHeight = `${answer.scrollHeight}px`;
+      }
+    });
+  });
+
   const form = document.getElementById("contact-form");
   const formStatus = document.getElementById("form-status");
   if (form && formStatus) {
