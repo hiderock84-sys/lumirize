@@ -70,7 +70,10 @@ a { color: inherit; }
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  min-height: calc(100svh - 72px - env(safe-area-inset-top));
+  width: min(100%, calc((100svh - 72px - env(safe-area-inset-top)) * 2 / 3));
+  aspect-ratio: 2 / 3;
+  max-height: calc(100svh - 72px - env(safe-area-inset-top));
+  margin-inline: auto;
   overflow: hidden;
   color: #fff;
   background: #142033;
@@ -94,9 +97,9 @@ a { color: inherit; }
   z-index: 1;
   background: linear-gradient(
     180deg,
-    rgba(6, 10, 18, 0.62) 0%,
-    rgba(6, 10, 18, 0.34) 52%,
-    rgba(6, 10, 18, 0.46) 100%
+    rgba(6, 10, 18, 0.5) 0%,
+    rgba(6, 10, 18, 0.22) 46%,
+    rgba(6, 10, 18, 0.28) 100%
   );
 }
 
