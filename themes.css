@@ -1,12 +1,12 @@
-/* Five layout systems for the official site.
-   Spacing stays on an 8px rhythm. Type stays on a fixed scale.
-   v1 Grid / v2 Center / v3 Cinema / v4 Rail / v5 Split */
+/* Structural layouts for every official page.
+   These rules are not color skins. Each theme changes where the
+   navigation, photo, headings, and cards sit. */
 
 .theme-dock {
   position: fixed;
   right: 16px;
   bottom: 16px;
-  z-index: 400;
+  z-index: 500;
   display: grid;
   gap: 8px;
   width: min(168px, calc(100vw - 32px));
@@ -17,7 +17,6 @@
 
 .theme-dock p {
   margin: 0;
-  color: #4c5968;
   font-size: 12px;
   letter-spacing: 0.14em;
   line-height: 1.4;
@@ -32,274 +31,379 @@
   padding: 8px 12px;
   font-size: 13px;
   font-weight: 600;
-  line-height: 1.4;
 }
 
 .theme-dock a[aria-current="true"] {
   color: #fff;
   background: #121820;
-  border-color: #121820;
 }
 
-html[data-theme] {
-  --fs-body: 16px;
-  --fs-h1: 40px;
-  --fs-h2: 28px;
-  --fs-h3: 18px;
+html[data-theme] .menu-toggle {
+  display: none !important;
 }
 
-html[data-theme] body {
-  font-size: 16px;
-  line-height: 1.75;
-  letter-spacing: 0;
+html[data-theme] .global-nav,
+html[data-theme] .global-nav ul,
+html[data-theme] .global-nav li,
+html[data-theme] .global-nav ul a,
+html[data-theme] .global-nav::before {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  pointer-events: auto !important;
 }
 
-html[data-theme] .section {
-  padding: 64px 0;
+html[data-theme] .global-nav {
+  position: static !important;
+  inset: auto !important;
+  width: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
 }
 
-html[data-theme] .section-heading {
-  margin-bottom: 32px;
+html[data-theme] .global-nav::before {
+  content: none !important;
+  display: none !important;
 }
 
-html[data-theme] .section-heading h1,
-html[data-theme] .section-heading h2,
+html[data-theme] .global-nav ul {
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+html[data-theme] .hero {
+  min-height: 0;
+  padding-top: 0;
+}
+
 html[data-theme] .hero h1 {
-  letter-spacing: 0;
-  line-height: 1.3;
   white-space: normal;
 }
 
-html[data-theme] .hero h1 {
-  font-size: var(--fs-h1);
+html[data-theme] .section-heading::after {
+  content: none;
 }
 
-html[data-theme] .section-heading h2,
-html[data-theme] .section-heading h1 {
-  font-size: var(--fs-h2);
+html[data-theme] main::before,
+html[data-theme] main::after,
+html[data-theme] .hero-content::before,
+html[data-theme] .about::before,
+html[data-theme] .about::after,
+html[data-theme] .services::before,
+html[data-theme] .services::after,
+html[data-theme] .stats-section::before,
+html[data-theme] .stats-section::after,
+html[data-theme] .support::before,
+html[data-theme] .support::after,
+html[data-theme] .stories::before,
+html[data-theme] .stories::after,
+html[data-theme] .process::before,
+html[data-theme] .process::after,
+html[data-theme] .faq::before,
+html[data-theme] .faq::after,
+html[data-theme] .contact::before,
+html[data-theme] .contact::after,
+html[data-theme] .emergency::before,
+html[data-theme] .emergency::after,
+html[data-theme] .standards::before,
+html[data-theme] .standards::after {
+  content: none !important;
+  display: none !important;
 }
 
-html[data-theme] h3 {
-  font-size: var(--fs-h3);
-  line-height: 1.4;
+html[data-theme] .global-nav ul a {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  text-shadow: none !important;
 }
 
+html[data-theme] body {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+html[data-theme] .section {
+  padding: 48px 0;
+}
+
+html[data-theme] body:not(.home-page):not(.legal-page) main > .section:first-child {
+  padding-top: 48px;
+}
+
+/* Shared card targets used across the site */
 html[data-theme] .info-grid,
 html[data-theme] .guide-grid,
 html[data-theme] .service-grid,
 html[data-theme] .support-grid,
 html[data-theme] .philosophy-grid,
-html[data-theme] .contact-grid {
-  gap: 24px;
+html[data-theme] .contact-grid,
+html[data-theme] .stats-summary-grid,
+html[data-theme] .policy-benefit-cards,
+html[data-theme] .story-grid,
+html[data-theme] .faq-list {
+  display: grid;
 }
 
-/* v1 Grid --------------------------------------------------------------- */
+/* v1 — editorial grid. Photo is a block. Text sits under it. Nav is a cell grid. */
+
+html[data-theme="v1"] body {
+  background: #f4f6f8;
+  color: #121820;
+}
 
 html[data-theme="v1"] .site-header,
-html[data-theme="v1"] .site-header.scrolled {
+html[data-theme="v1"] .site-header.scrolled,
+html[data-theme="v1"] body.menu-open .site-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: auto;
   background: #fff !important;
+  background-color: #fff !important;
   border-bottom: 1px solid #d5dbe3 !important;
   box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+html[data-theme="v1"] .header-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  min-height: 0;
+  padding: 12px 0 0;
+}
+
+html[data-theme="v1"] .global-nav ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  width: 100%;
+}
+
+html[data-theme="v1"] .global-nav ul li,
+html[data-theme="v1"] .global-nav ul li + li {
+  padding: 0;
+  border-top: 1px solid #d5dbe3;
+  border-left: 1px solid #d5dbe3;
+}
+
+html[data-theme="v1"] .global-nav ul li + li::before {
+  display: none;
+}
+
+html[data-theme="v1"] .global-nav ul a,
+html[data-theme="v1"] body.home-page .global-nav ul a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 8px;
+  color: #121820;
+  text-shadow: none;
+  font-size: 13px;
+  text-align: center;
+  white-space: normal;
+}
+
+html[data-theme="v1"] .hero {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+html[data-theme="v1"] .hero-cover {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: 42vh;
+  min-height: 220px;
+}
+
+html[data-theme="v1"] .hero-overlay,
+html[data-theme="v1"] .hero::before {
+  display: none;
 }
 
 html[data-theme="v1"] .hero-content {
+  position: relative;
+  width: min(1120px, calc(100% - 32px));
+  max-width: none;
+  margin: 0;
+  padding: 32px 0 8px;
+  color: #121820;
+  background: transparent;
+  border: 0;
   border-radius: 0;
-  background: rgba(8, 18, 32, 0.82);
-  backdrop-filter: none;
   box-shadow: none;
+  backdrop-filter: none;
+}
+
+html[data-theme="v1"] .hero h1,
+html[data-theme="v1"] .hero-subhead,
+html[data-theme="v1"] .hero-lead,
+html[data-theme="v1"] .hero-signoff,
+html[data-theme="v1"] .eyebrow {
+  color: #121820;
+  text-shadow: none;
+}
+
+html[data-theme="v1"] .info-grid,
+html[data-theme="v1"] .guide-grid,
+html[data-theme="v1"] .service-grid,
+html[data-theme="v1"] .support-grid,
+html[data-theme="v1"] .philosophy-grid,
+html[data-theme="v1"] .contact-grid,
+html[data-theme="v1"] .story-grid {
+  grid-template-columns: 1fr;
+  gap: 16px;
 }
 
 html[data-theme="v1"] .info-item,
 html[data-theme="v1"] .guide-banner,
-html[data-theme="v1"] .message-card {
+html[data-theme="v1"] .message-card,
+html[data-theme="v1"] .section-heading {
   border-radius: 0;
   box-shadow: none;
+  border: 1px solid #d5dbe3;
+  background: #fff;
+  padding: 24px;
 }
 
-@media (min-width: 1024px) {
-  html[data-theme="v1"] .header-inner {
-    display: grid;
-    grid-template-columns: 200px minmax(0, 1fr);
-    align-items: stretch;
-    gap: 0;
-    min-height: 0;
-  }
-
-  html[data-theme="v1"] .global-nav {
-    display: block;
-    padding: 0;
-  }
-
-  html[data-theme="v1"] .global-nav ul {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 0;
-    margin: 0;
-  }
-
-  html[data-theme="v1"] .global-nav ul li,
-  html[data-theme="v1"] .global-nav ul li + li {
-    padding: 0;
-  }
-
-  html[data-theme="v1"] .global-nav ul li + li::before {
-    display: none;
-  }
-
-  html[data-theme="v1"] .global-nav ul a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 64px;
-    padding: 8px;
-    border-left: 1px solid #d5dbe3;
-    font-size: 13px;
-    text-align: center;
-    white-space: normal;
-    color: #121820;
-    text-shadow: none;
-  }
-
-  html[data-theme="v1"] .info-grid,
-  html[data-theme="v1"] .guide-grid,
-  html[data-theme="v1"] .service-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 24px;
-  }
+html[data-theme="v1"] main > .section:nth-child(even) {
+  background: #fff;
 }
 
-/* v2 Center ------------------------------------------------------------- */
-
-html[data-theme="v2"] {
-  --fs-h1: 48px;
+html[data-theme="v1"] main {
+  counter-reset: sheet;
 }
+
+html[data-theme="v1"] .section-heading h1::before,
+html[data-theme="v1"] .section-heading h2::before {
+  counter-increment: sheet;
+  content: counter(sheet, decimal-leading-zero);
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+html[data-theme="v1"] .hero h1,
+html[data-theme="v1"] .section-heading h1,
+html[data-theme="v1"] .section-heading h2 {
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+html[data-theme="v1"] .faq-item,
+html[data-theme="v1"] .site-footer {
+  border: 1px solid #d5dbe3;
+  border-radius: 0;
+  box-shadow: none;
+  background: #fff;
+  color: #121820;
+}
+
+html[data-theme="v1"] .site-footer {
+  margin: 16px;
+}
+
+/* v2 — centered column. Framed photo, then one narrow reading column. */
 
 html[data-theme="v2"] body {
   background: #f5f5f7;
 }
 
 html[data-theme="v2"] .site-header,
-html[data-theme="v2"] .site-header.scrolled {
-  background: rgba(245, 245, 247, 0.94) !important;
+html[data-theme="v2"] .site-header.scrolled,
+html[data-theme="v2"] body.menu-open .site-header {
+  position: sticky;
+  background: #f5f5f7 !important;
+  background-color: #f5f5f7 !important;
   border-bottom: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
 }
 
-@media (min-width: 1024px) {
-  html[data-theme="v2"] .header-inner {
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding-top: 16px;
-    padding-bottom: 8px;
-  }
-
-  html[data-theme="v2"] .global-nav,
-  html[data-theme="v2"] .global-nav ul {
-    justify-content: center;
-  }
-
-  html[data-theme="v2"] .global-nav ul a {
-    color: #1d1d1f;
-    text-shadow: none;
-    font-weight: 500;
-  }
-
-  html[data-theme="v2"] .global-nav ul li + li::before {
-    display: none;
-  }
-
-  html[data-theme="v2"] .hero {
-    justify-content: center;
-  }
-
-  html[data-theme="v2"] .hero-content {
-    margin-inline: auto;
-    text-align: center;
-    color: #1d1d1f;
-    background: rgba(255, 255, 255, 0.92);
-    border: 0;
-    border-radius: 0;
-    box-shadow: none;
-    backdrop-filter: none;
-  }
-
-  html[data-theme="v2"] .hero h1,
-  html[data-theme="v2"] .hero-subhead,
-  html[data-theme="v2"] .hero-lead,
-  html[data-theme="v2"] .hero-signoff,
-  html[data-theme="v2"] .eyebrow {
-    color: #1d1d1f;
-    text-shadow: none;
-  }
-
-  html[data-theme="v2"] .hero-cta {
-    justify-content: center;
-  }
-
-  html[data-theme="v2"] .section-heading,
-  html[data-theme="v2"] .section-heading h2,
-  html[data-theme="v2"] .section-heading p {
-    text-align: center;
-    margin-inline: auto;
-  }
-
-  html[data-theme="v2"] .section-heading {
-    padding-left: 0;
-  }
-
-  html[data-theme="v2"] .section-heading::after {
-    margin-inline: auto;
-  }
-
-  html[data-theme="v2"] .info-grid,
-  html[data-theme="v2"] .guide-grid,
-  html[data-theme="v2"] .service-grid,
-  html[data-theme="v2"] .support-grid {
-    grid-template-columns: minmax(0, 720px);
-    justify-content: center;
-  }
-
-  html[data-theme="v2"] .info-item,
-  html[data-theme="v2"] .guide-banner {
-    text-align: center;
-    border-radius: 0;
-    box-shadow: none;
-  }
+html[data-theme="v2"] .header-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-height: 0;
+  padding: 20px 0 8px;
 }
 
-/* v3 Cinema ------------------------------------------------------------- */
-
-html[data-theme="v3"] {
-  --fs-h1: 56px;
+html[data-theme="v2"] .global-nav,
+html[data-theme="v2"] .global-nav ul {
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-html[data-theme="v3"] body {
-  background: #000;
-  color: #f5f5f5;
+html[data-theme="v2"] .global-nav ul {
+  display: flex;
+  gap: 4px 16px;
+  margin: 0;
 }
 
-html[data-theme="v3"] .site-header,
-html[data-theme="v3"] .site-header.scrolled {
-  background: rgba(0, 0, 0, 0.82) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.16) !important;
+html[data-theme="v2"] .global-nav ul li + li {
+  padding: 0;
 }
 
-html[data-theme="v3"] .brand {
-  background: #fff;
-  padding: 8px 12px;
+html[data-theme="v2"] .global-nav ul li + li::before {
+  display: none;
 }
 
-html[data-theme="v3"] .global-nav ul a,
-html[data-theme="v3"] body.home-page .global-nav ul a {
-  color: #fff;
+html[data-theme="v2"] .global-nav ul a,
+html[data-theme="v2"] body.home-page .global-nav ul a {
+  color: #1d1d1f;
   text-shadow: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 0;
 }
 
-html[data-theme="v3"] .hero {
-  align-items: end;
+html[data-theme="v2"] .hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f5f5f7;
 }
 
-html[data-theme="v3"] .hero-content {
+html[data-theme="v2"] .hero-cover {
+  position: relative;
+  inset: auto;
+  width: min(720px, calc(100% - 32px));
+  height: 46vh;
+  min-height: 220px;
+  margin: 16px auto 0;
+}
+
+html[data-theme="v2"] .hero-overlay,
+html[data-theme="v2"] .hero::before {
+  display: none;
+}
+
+html[data-theme="v2"] .hero-content,
+html[data-theme="v2"] .section-heading,
+html[data-theme="v2"] .section > .container {
+  text-align: center;
+}
+
+html[data-theme="v2"] .hero-content {
+  position: relative;
+  width: min(640px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0;
+  color: #1d1d1f;
   background: transparent;
   border: 0;
   border-radius: 0;
@@ -307,47 +411,210 @@ html[data-theme="v3"] .hero-content {
   backdrop-filter: none;
 }
 
+html[data-theme="v2"] .hero h1,
+html[data-theme="v2"] .hero-subhead,
+html[data-theme="v2"] .hero-lead,
+html[data-theme="v2"] .hero-signoff,
+html[data-theme="v2"] .eyebrow,
+html[data-theme="v2"] .section-heading h1,
+html[data-theme="v2"] .section-heading h2,
+html[data-theme="v2"] .section-heading p {
+  color: #1d1d1f;
+  text-shadow: none;
+  margin-inline: auto;
+}
+
+html[data-theme="v2"] .hero-cta,
+html[data-theme="v2"] .section-heading {
+  justify-content: center;
+  padding-left: 0;
+}
+
+html[data-theme="v2"] .info-grid,
+html[data-theme="v2"] .guide-grid,
+html[data-theme="v2"] .service-grid,
+html[data-theme="v2"] .support-grid,
+html[data-theme="v2"] .philosophy-grid,
+html[data-theme="v2"] .contact-grid,
+html[data-theme="v2"] .story-grid,
+html[data-theme="v2"] .stats-summary-grid {
+  grid-template-columns: minmax(0, 640px);
+  justify-content: center;
+  gap: 16px;
+}
+
+html[data-theme="v2"] .info-item,
+html[data-theme="v2"] .guide-banner,
+html[data-theme="v2"] .message-card {
+  text-align: center;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: #fff;
+  padding: 32px 24px;
+}
+
+html[data-theme="v2"] .container {
+  width: min(520px, calc(100% - 40px));
+}
+
+html[data-theme="v2"] .section {
+  padding: 80px 0;
+}
+
+html[data-theme="v2"] .hero h1,
+html[data-theme="v2"] .section-heading h1,
+html[data-theme="v2"] .section-heading h2 {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+
+html[data-theme="v2"] .site-footer,
+html[data-theme="v2"] .faq-item {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  text-align: center;
+  color: #1d1d1f;
+}
+
+/* v3 — cinema. Full-bleed photo, type pinned to the bottom, rows instead of cards. */
+
+html[data-theme="v3"] body,
+html[data-theme="v3"] main,
 html[data-theme="v3"] .section,
-html[data-theme="v3"] .site-footer,
-html[data-theme="v3"] .message-card,
-html[data-theme="v3"] .info-item {
+html[data-theme="v3"] .site-footer {
   background: #000;
   color: #f5f5f5;
 }
 
+html[data-theme="v3"] .site-header,
+html[data-theme="v3"] .site-header.scrolled,
+html[data-theme="v3"] body.menu-open .site-header {
+  position: absolute;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+html[data-theme="v3"] .brand {
+  background: #fff;
+  padding: 6px 10px;
+}
+
+html[data-theme="v3"] .global-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+}
+
+html[data-theme="v3"] .global-nav ul li + li {
+  padding: 0;
+}
+
+html[data-theme="v3"] .global-nav ul li + li::before {
+  display: none;
+}
+
+html[data-theme="v3"] .global-nav ul a,
+html[data-theme="v3"] body.home-page .global-nav ul a {
+  color: #fff;
+  text-shadow: none;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+html[data-theme="v3"] .hero {
+  display: flex;
+  align-items: flex-end;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 0;
+}
+
+html[data-theme="v3"] .hero-cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+html[data-theme="v3"] .hero-overlay {
+  display: block;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.78));
+}
+
+html[data-theme="v3"] .hero-content {
+  position: relative;
+  width: min(880px, calc(100% - 32px));
+  margin: 0 0 32px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  color: #fff;
+}
+
+html[data-theme="v3"] .hero h1 {
+  font-size: 40px;
+}
+
+html[data-theme="v3"] .section-heading h1,
+html[data-theme="v3"] .section-heading h2,
 html[data-theme="v3"] .section-heading p,
-html[data-theme="v3"] .info-item p {
-  color: #b5b5b5;
+html[data-theme="v3"] .info-item,
+html[data-theme="v3"] .guide-banner,
+html[data-theme="v3"] .message-card,
+html[data-theme="v3"] .message-card p {
+  color: #f5f5f5;
+}
+
+html[data-theme="v3"] .section-heading p,
+html[data-theme="v3"] .info-item p,
+html[data-theme="v3"] .guide-banner {
+  color: #c8c8c8;
 }
 
 html[data-theme="v3"] .info-grid,
 html[data-theme="v3"] .guide-grid,
 html[data-theme="v3"] .service-grid,
 html[data-theme="v3"] .support-grid,
-html[data-theme="v3"] .philosophy-grid {
-  grid-template-columns: minmax(0, 1fr);
+html[data-theme="v3"] .philosophy-grid,
+html[data-theme="v3"] .contact-grid,
+html[data-theme="v3"] .story-grid,
+html[data-theme="v3"] .stats-summary-grid,
+html[data-theme="v3"] .faq-list {
+  grid-template-columns: 1fr;
   gap: 0;
 }
 
 html[data-theme="v3"] .info-item,
 html[data-theme="v3"] .guide-banner,
-html[data-theme="v3"] .message-card {
+html[data-theme="v3"] .message-card,
+html[data-theme="v3"] .faq-item {
   border: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 0;
   box-shadow: none;
   background: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 28px 0;
 }
 
 html[data-theme="v3"] .theme-dock {
   background: #111;
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.24);
 }
 
 html[data-theme="v3"] .theme-dock a {
   color: #fff;
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.24);
 }
 
 html[data-theme="v3"] .theme-dock a[aria-current="true"] {
@@ -355,88 +622,382 @@ html[data-theme="v3"] .theme-dock a[aria-current="true"] {
   color: #000;
 }
 
-/* v4 Rail --------------------------------------------------------------- */
+html[data-theme="v3"] a,
+html[data-theme="v3"] h1,
+html[data-theme="v3"] h2,
+html[data-theme="v3"] h3,
+html[data-theme="v3"] p,
+html[data-theme="v3"] li,
+html[data-theme="v3"] .site-footer,
+html[data-theme="v3"] .site-footer a {
+  color: #f5f5f5;
+}
 
-@media (min-width: 1024px) {
-  html[data-theme="v4"] .site-header,
-  html[data-theme="v4"] .site-header.scrolled {
-    position: fixed;
-    inset: 0 auto 0 0;
-    width: 240px;
-    height: 100vh;
-    overflow: auto;
-    background: #f3efe6 !important;
-    border-right: 1px solid #e0d6c8 !important;
-    border-bottom: 0 !important;
-  }
+html[data-theme="v3"] body:not(.home-page) main > .section:first-child {
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 40px;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.78)),
+    url("https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1800&q=80") center/cover no-repeat !important;
+}
 
-  html[data-theme="v4"] .header-inner {
-    flex-direction: column;
+html[data-theme="v3"] body:not(.home-page) main > .section:first-child .eyebrow,
+html[data-theme="v3"] body:not(.home-page) main > .section:first-child h1,
+html[data-theme="v3"] body:not(.home-page) main > .section:first-child p {
+  color: #fff;
+}
+
+html[data-theme="v3"] .faq-item,
+html[data-theme="v3"] .site-footer {
+  background: #000;
+  border: 0;
+  border-radius: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: none;
+}
+
+html[data-theme="v3"] .btn,
+html[data-theme="v3"] .btn-primary,
+html[data-theme="v3"] .btn-nav {
+  background: #fff !important;
+  color: #000 !important;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* v4 — side rail on wide screens, stacked photo-then-text on small screens. */
+
+html[data-theme="v4"] body {
+  background: #f6f3ec;
+  color: #1c1915;
+}
+
+html[data-theme="v4"] .site-header,
+html[data-theme="v4"] .site-header.scrolled,
+html[data-theme="v4"] body.menu-open .site-header {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 112px;
+  height: 100vh;
+  height: 100svh;
+  overflow: auto;
+  z-index: 200;
+  background: #f3efe6 !important;
+  background-color: #f3efe6 !important;
+  border-right: 1px solid #e0d6c8 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+html[data-theme="v4"] .header-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+  min-height: 0;
+  width: auto;
+  padding: 16px 12px 28px;
+}
+
+html[data-theme="v4"] .brand {
+  width: 100%;
+  max-width: none;
+}
+
+html[data-theme="v4"] main,
+html[data-theme="v4"] .site-footer {
+  margin-left: 112px;
+}
+
+html[data-theme="v4"] .global-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: visible;
+  margin: 0;
+}
+
+html[data-theme="v4"] .global-nav > .btn-nav {
+  display: block;
+  margin-top: 12px;
+  padding: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: normal;
+  text-align: center;
+}
+
+html[data-theme="v4"] .global-nav ul li,
+html[data-theme="v4"] .global-nav ul li + li {
+  padding: 0;
+  flex: 0 0 auto;
+}
+
+html[data-theme="v4"] .global-nav ul li + li::before {
+  display: none;
+}
+
+html[data-theme="v4"] .global-nav ul a,
+html[data-theme="v4"] body.home-page .global-nav ul a {
+  display: block;
+  padding: 10px 0;
+  color: #1c1915;
+  text-shadow: none;
+  font-size: 12px;
+  line-height: 1.35;
+  white-space: normal;
+  border-bottom: 1px solid #e0d6c8;
+}
+
+html[data-theme="v4"] .hero {
+  display: flex;
+  flex-direction: column;
+  background: #f6f3ec;
+}
+
+html[data-theme="v4"] .hero-cover {
+  position: relative;
+  inset: auto;
+  order: 0;
+  width: 100%;
+  height: 38vh;
+  min-height: 200px;
+}
+
+html[data-theme="v4"] .hero-overlay,
+html[data-theme="v4"] .hero::before {
+  display: none;
+}
+
+html[data-theme="v4"] .hero-content {
+  position: relative;
+  order: 1;
+  width: min(1120px, calc(100% - 32px));
+  margin: 0;
+  padding: 32px 0;
+  color: #1c1915;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+html[data-theme="v4"] .hero h1,
+html[data-theme="v4"] .hero-subhead,
+html[data-theme="v4"] .hero-lead,
+html[data-theme="v4"] .hero-signoff,
+html[data-theme="v4"] .eyebrow,
+html[data-theme="v4"] .section-heading h1,
+html[data-theme="v4"] .section-heading h2 {
+  color: #1c1915;
+  text-shadow: none;
+  font-family: "Iowan Old Style", Palatino, "Yu Mincho", "Hiragino Mincho ProN", serif;
+}
+
+html[data-theme="v4"] .info-grid,
+html[data-theme="v4"] .guide-grid,
+html[data-theme="v4"] .service-grid,
+html[data-theme="v4"] .support-grid,
+html[data-theme="v4"] .philosophy-grid,
+html[data-theme="v4"] .contact-grid,
+html[data-theme="v4"] .story-grid {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+html[data-theme="v4"] .info-item,
+html[data-theme="v4"] .guide-banner,
+html[data-theme="v4"] .message-card {
+  border: 0;
+  border-top: 1px solid #e0d6c8;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  padding: 24px 0;
+}
+
+html[data-theme="v4"] main > .section:first-child .section-heading {
+  border-left: 4px solid #3e5344;
+  padding-left: 16px;
+}
+
+/* v5 — fixed city plate on every page. Copy lives in the remaining column. */
+
+html[data-theme="v5"] body {
+  background: #f4f1ea;
+  color: #142033;
+}
+
+html[data-theme="v5"] body::before {
+  content: "";
+  position: fixed;
+  z-index: 60;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 34vh;
+  background:
+    linear-gradient(180deg, rgba(12, 20, 32, 0.15), rgba(12, 20, 32, 0.28)),
+    url("https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1800&q=80") center/cover no-repeat;
+}
+
+html[data-theme="v5"] .site-header,
+html[data-theme="v5"] .site-header.scrolled,
+html[data-theme="v5"] body.menu-open .site-header {
+  position: relative;
+  top: auto;
+  margin-top: 34vh;
+  z-index: 70;
+  background: #f4f1ea !important;
+  background-color: #f4f1ea !important;
+  border-bottom: 1px solid #ddd6c8 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+html[data-theme="v5"] main {
+  position: relative;
+  z-index: 1;
+  margin-top: 0;
+  background: #f4f1ea;
+}
+
+html[data-theme="v5"] .hero-cover,
+html[data-theme="v5"] .hero-overlay,
+html[data-theme="v5"] .hero::before {
+  display: none;
+}
+
+html[data-theme="v5"] .hero {
+  min-height: 0;
+  padding: 32px 0 0;
+  background: transparent;
+}
+
+html[data-theme="v5"] .hero-content {
+  position: relative;
+  width: min(720px, calc(100% - 32px));
+  margin: 0;
+  padding: 8px 0 24px;
+  color: #142033;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+html[data-theme="v5"] .hero h1,
+html[data-theme="v5"] .hero-subhead,
+html[data-theme="v5"] .hero-lead,
+html[data-theme="v5"] .hero-signoff,
+html[data-theme="v5"] .section-heading h1,
+html[data-theme="v5"] .section-heading h2,
+html[data-theme="v5"] .section-heading p {
+  color: #142033;
+  text-shadow: none;
+}
+
+html[data-theme="v5"] .eyebrow {
+  color: #8d6a3f;
+  text-shadow: none;
+}
+
+html[data-theme="v5"] .global-nav ul a,
+html[data-theme="v5"] body.home-page .global-nav ul a {
+  color: #142033;
+  text-shadow: none;
+}
+
+html[data-theme="v5"] .global-nav ul li + li::before {
+  display: none;
+}
+
+html[data-theme="v5"] .info-grid,
+html[data-theme="v5"] .guide-grid,
+html[data-theme="v5"] .service-grid,
+html[data-theme="v5"] .support-grid,
+html[data-theme="v5"] .philosophy-grid,
+html[data-theme="v5"] .contact-grid,
+html[data-theme="v5"] .story-grid {
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+html[data-theme="v5"] .info-item,
+html[data-theme="v5"] .guide-banner,
+html[data-theme="v5"] .message-card {
+  border: 0;
+  border-left: 3px solid #8d6a3f;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  padding: 4px 0 4px 16px;
+}
+
+/* Wide screens: make the five structures unmistakable. */
+
+@media (min-width: 960px) {
+  html[data-theme="v1"] .header-inner {
+    grid-template-columns: 180px minmax(0, 1fr);
     align-items: stretch;
-    justify-content: flex-start;
-    gap: 32px;
-    min-height: 100%;
-    padding: 32px 20px;
-  }
-
-  html[data-theme="v4"] .global-nav {
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
     padding: 0;
   }
 
-  html[data-theme="v4"] .global-nav ul {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    margin: 0;
+  html[data-theme="v1"] .brand {
+    display: flex;
+    align-items: center;
+    width: 160px;
   }
 
-  html[data-theme="v4"] .global-nav ul li + li {
-    padding-left: 0;
+  html[data-theme="v1"] .global-nav ul {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  html[data-theme="v4"] .global-nav ul li + li::before {
-    display: none;
+  html[data-theme="v1"] .info-grid,
+  html[data-theme="v1"] .service-grid,
+  html[data-theme="v1"] .guide-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
   }
 
-  html[data-theme="v4"] .global-nav ul a {
-    display: block;
+  html[data-theme="v4"] .site-header,
+  html[data-theme="v4"] .site-header.scrolled,
+  html[data-theme="v4"] body.menu-open .site-header {
+    width: 232px;
+  }
+
+  html[data-theme="v4"] .header-inner {
+    gap: 28px;
+    padding: 28px 18px;
+  }
+
+  html[data-theme="v4"] .global-nav ul a,
+  html[data-theme="v4"] body.home-page .global-nav ul a {
+    font-size: 15px;
     padding: 12px 0;
-    border-bottom: 1px solid #e0d6c8;
-    color: #1c1915;
-    text-align: left;
-    text-shadow: none;
-    font-size: 14px;
-    white-space: normal;
   }
 
   html[data-theme="v4"] main,
   html[data-theme="v4"] .site-footer {
-    margin-left: 240px;
+    margin-left: 232px;
   }
 
   html[data-theme="v4"] .hero {
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-    align-items: stretch;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     min-height: 100vh;
-    padding: 0;
   }
 
   html[data-theme="v4"] .hero-cover {
-    position: relative;
     grid-column: 2;
     grid-row: 1;
-    width: 100%;
     height: 100%;
     min-height: 100vh;
-  }
-
-  html[data-theme="v4"] .hero-overlay,
-  html[data-theme="v4"] .hero::before {
-    display: none;
   }
 
   html[data-theme="v4"] .hero-content {
@@ -444,153 +1005,34 @@ html[data-theme="v3"] .theme-dock a[aria-current="true"] {
     grid-row: 1;
     align-self: center;
     width: auto;
-    max-width: none;
-    margin: 0;
-    padding: 64px 48px;
-    color: #1c1915;
-    background: #f6f3ec;
-    border: 0;
-    border-radius: 0;
-    box-shadow: none;
-    backdrop-filter: none;
+    padding: 64px 40px;
   }
 
-  html[data-theme="v4"] .hero h1,
-  html[data-theme="v4"] .hero-subhead,
-  html[data-theme="v4"] .hero-lead,
-  html[data-theme="v4"] .hero-signoff,
-  html[data-theme="v4"] .eyebrow {
-    color: #1c1915;
-    text-shadow: none;
+  html[data-theme="v5"] body::before {
+    width: 46vw;
+    height: 100vh;
   }
 
-  html[data-theme="v4"] .info-grid,
-  html[data-theme="v4"] .guide-grid,
-  html[data-theme="v4"] .service-grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0;
-  }
-
-  html[data-theme="v4"] .info-item,
-  html[data-theme="v4"] .guide-banner,
-  html[data-theme="v4"] .message-card {
-    border-radius: 0;
-    box-shadow: none;
-    border: 0;
-    border-top: 1px solid #e0d6c8;
-    background: transparent;
-  }
-}
-
-/* v5 Split -------------------------------------------------------------- */
-
-@media (min-width: 1024px) {
   html[data-theme="v5"] body {
-    padding-left: 48vw;
-    background: #f4f1ea;
+    padding-left: 46vw;
+  }
+
+  html[data-theme="v5"] main {
+    margin-top: 0;
+  }
+
+  html[data-theme="v5"] .site-header,
+  html[data-theme="v5"] .site-header.scrolled,
+  html[data-theme="v5"] body.menu-open .site-header {
+    position: sticky;
+    top: 0;
+    left: 46vw;
+    right: 0;
+    width: auto;
+    margin-top: 0;
   }
 
   html[data-theme="v5"] .container {
     width: min(640px, calc(100% - 64px));
-  }
-
-  html[data-theme="v5"] .site-header,
-  html[data-theme="v5"] .site-header.scrolled {
-    left: 48vw;
-    right: 0;
-    width: auto;
-    background: #f4f1ea !important;
-    border-bottom: 1px solid #ddd6c8 !important;
-  }
-
-  html[data-theme="v5"] .header-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  html[data-theme="v5"] .global-nav,
-  html[data-theme="v5"] .global-nav ul {
-    justify-content: flex-start;
-  }
-
-  html[data-theme="v5"] .global-nav ul a {
-    color: #142033;
-    text-shadow: none;
-  }
-
-  html[data-theme="v5"] .global-nav ul li + li::before {
-    display: none;
-  }
-
-  html[data-theme="v5"] .hero {
-    min-height: 0;
-    padding-top: 128px;
-    background: transparent;
-  }
-
-  html[data-theme="v5"] .hero::before,
-  html[data-theme="v5"] .hero-overlay {
-    display: none;
-  }
-
-  html[data-theme="v5"] .hero-cover {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 48vw;
-    height: 100vh;
-    z-index: 80;
-  }
-
-  html[data-theme="v5"] .hero-content {
-    width: auto;
-    max-width: none;
-    color: #142033;
-    background: transparent;
-    border: 0;
-    border-radius: 0;
-    box-shadow: none;
-    backdrop-filter: none;
-  }
-
-  html[data-theme="v5"] .hero h1,
-  html[data-theme="v5"] .hero-subhead,
-  html[data-theme="v5"] .hero-lead,
-  html[data-theme="v5"] .hero-signoff,
-  html[data-theme="v5"] .eyebrow {
-    color: #142033;
-    text-shadow: none;
-  }
-
-  html[data-theme="v5"] .eyebrow {
-    color: #8d6a3f;
-  }
-
-  html[data-theme="v5"] .info-grid,
-  html[data-theme="v5"] .guide-grid,
-  html[data-theme="v5"] .service-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  html[data-theme="v5"] .info-item,
-  html[data-theme="v5"] .guide-banner,
-  html[data-theme="v5"] .message-card {
-    border-radius: 0;
-    box-shadow: none;
-    border: 0;
-    border-left: 2px solid #8d6a3f;
-    background: transparent;
-  }
-}
-
-@media (max-width: 1023px) {
-  html[data-theme] {
-    --fs-h1: 32px;
-    --fs-h2: 24px;
-  }
-
-  html[data-theme] .section {
-    padding: 40px 0;
   }
 }
