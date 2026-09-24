@@ -20,10 +20,23 @@ html[data-theme="v4"] .global-nav ul a::after {
   display: none !important;
 }
 
+html[data-theme="v4"] .global-nav ul {
+  gap: 8px !important;
+  padding: 0 16px 16px !important;
+}
+
 html[data-theme="v4"] .global-nav ul a {
-  font-size: 16px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  min-height: 40px !important;
+  padding: 8px 16px !important;
+  border: 1px solid #1c1915 !important;
+  background: #fff !important;
+  box-shadow: inset 0 2px 0 #3e5344 !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
   line-height: 1.4 !important;
-  padding: 8px 16px 8px 0 !important;
 }
 
 html[data-theme="v4"] main::before {
