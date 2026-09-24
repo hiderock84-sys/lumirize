@@ -1,0 +1,429 @@
+/* iPhone-first landing. Five structures, one page.
+   Phone width is the default. Nothing uses 100vw. */
+
+:root {
+  --ink: #142033;
+  --paper: #f7f5f1;
+  --line: #d7d2c8;
+  --gap: 16px;
+  --pad: 20px;
+  --dock: calc(58px + env(safe-area-inset-bottom));
+  --type: "Hiragino Sans", "Noto Sans JP", "Yu Gothic", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+html, body {
+  margin: 0;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  font-family: var(--type);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink);
+  background: var(--paper);
+  padding-bottom: var(--dock);
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; }
+
+.skip {
+  position: absolute;
+  left: 8px;
+  top: -40px;
+}
+
+.skip:focus { top: 8px; }
+
+.bar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 12px;
+  align-items: center;
+  padding: calc(10px + env(safe-area-inset-top)) var(--pad) 10px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+
+.logo { width: 132px; }
+
+.logo img { width: 100%; height: auto; }
+
+.consult {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 14px;
+  background: #142033;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.chapters {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0;
+  padding: 0 0 4px;
+  list-style: none;
+}
+
+.chapters a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 2px;
+  text-decoration: none;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.hero { display: flex; flex-direction: column; }
+
+.photo {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.copy { padding: 24px var(--pad) 8px; }
+
+.kicker {
+  margin: 0 0 8px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0 0 12px;
+  font-size: 32px;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.lead { margin: 0; }
+
+.actions {
+  display: grid;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.primary, .secondary, .text-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 16px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.primary { background: #142033; color: #fff; }
+
+.secondary {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+}
+
+.block {
+  padding: 32px var(--pad);
+}
+
+.block h2 {
+  margin: 0 0 16px;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.points, .who, .pages {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.points a, .pages a {
+  display: grid;
+  gap: 4px;
+  text-decoration: none;
+}
+
+.points strong, .pages strong { font-size: 16px; }
+
+.points span, .pages span, .who li {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.who li { padding: 8px 0; }
+
+.quote {
+  margin: 0 0 16px;
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.site-foot {
+  padding: 8px var(--pad) 32px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.site-foot p { margin: 0 0 8px; }
+
+.site-foot a { text-decoration: none; }
+
+.switch {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  display: flex;
+  margin: 0;
+  padding: 0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  list-style: none;
+  background: #fff;
+  border-top: 1px solid var(--line);
+}
+
+.switch a {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 6px 2px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.25;
+  border-left: 1px solid var(--line);
+}
+
+.switch li:first-child a { border-left: 0; }
+
+.switch a[aria-current="true"] {
+  background: #142033;
+  color: #fff;
+}
+
+/* 1 グリッド — numbered cells */
+
+html[data-theme="v1"] body { background: #f4f6f8; }
+
+html[data-theme="v1"] .points,
+html[data-theme="v1"] .pages {
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid #cfd6de;
+  border-left: 1px solid #cfd6de;
+}
+
+html[data-theme="v1"] .points a,
+html[data-theme="v1"] .pages a {
+  min-height: 88px;
+  padding: 16px;
+  background: #fff;
+  border-right: 1px solid #cfd6de;
+  border-bottom: 1px solid #cfd6de;
+}
+
+html[data-theme="v1"] .points { counter-reset: point; }
+
+html[data-theme="v1"] .points a::before {
+  counter-increment: point;
+  content: counter(point, decimal-leading-zero);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+}
+
+html[data-theme="v1"] .who {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-top: 1px solid #cfd6de;
+  border-left: 1px solid #cfd6de;
+}
+
+html[data-theme="v1"] .who li {
+  margin: 0;
+  padding: 16px;
+  background: #fff;
+  border-right: 1px solid #cfd6de;
+  border-bottom: 1px solid #cfd6de;
+}
+
+/* 2 センター — one narrow column */
+
+html[data-theme="v2"] body { background: #f5f5f7; }
+
+html[data-theme="v2"] .bar,
+html[data-theme="v2"] .copy,
+html[data-theme="v2"] .block,
+html[data-theme="v2"] .site-foot {
+  text-align: center;
+}
+
+html[data-theme="v2"] .bar {
+  justify-items: center;
+  background: #f5f5f7;
+  border-bottom: 0;
+}
+
+html[data-theme="v2"] .chapters { justify-content: center; flex-wrap: wrap; overflow: visible; }
+
+html[data-theme="v2"] .photo {
+  width: calc(100% - 48px);
+  height: 200px;
+  margin: 16px auto 0;
+}
+
+html[data-theme="v2"] h1 { font-size: 36px; font-weight: 600; }
+
+html[data-theme="v2"] .points,
+html[data-theme="v2"] .pages,
+html[data-theme="v2"] .who { gap: 24px; }
+
+html[data-theme="v2"] .actions { justify-items: center; }
+
+/* 3 シネマ — photo fills the first screen */
+
+html[data-theme="v3"] body,
+html[data-theme="v3"] .block,
+html[data-theme="v3"] .site-foot { background: #000; color: #f5f5f5; }
+
+html[data-theme="v3"] .bar {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+  border: 0;
+  color: #fff;
+}
+
+html[data-theme="v3"] .logo { background: #fff; padding: 4px 6px; }
+
+html[data-theme="v3"] .consult { background: #fff; color: #000; }
+
+html[data-theme="v3"] .hero {
+  position: relative;
+  min-height: calc(100svh - var(--dock));
+  justify-content: flex-end;
+  color: #fff;
+}
+
+html[data-theme="v3"] .photo {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+
+html[data-theme="v3"] .copy {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 24px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.72));
+}
+
+html[data-theme="v3"] .secondary { color: #fff; border-color: #fff; }
+
+html[data-theme="v3"] .points a,
+html[data-theme="v3"] .pages a,
+html[data-theme="v3"] .who li {
+  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+html[data-theme="v3"] .switch { background: #111; border-color: #333; }
+
+html[data-theme="v3"] .switch a { color: #fff; border-color: #333; }
+
+html[data-theme="v3"] .switch a[aria-current="true"] { background: #fff; color: #000; }
+
+/* 4 レール — chapter row, then ruled text */
+
+html[data-theme="v4"] body { background: #f6f3ec; color: #1c1915; }
+
+html[data-theme="v4"] .bar {
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  background: #f3efe6;
+  border-bottom: 1px solid #e0d6c8;
+}
+
+html[data-theme="v4"] .chapters a {
+  padding-right: 14px;
+  border-right: 1px solid #e0d6c8;
+}
+
+html[data-theme="v4"] h1,
+html[data-theme="v4"] h2 {
+  font-family: "Iowan Old Style", Palatino, "Yu Mincho", "Hiragino Mincho ProN", serif;
+}
+
+html[data-theme="v4"] .hero { background: #f6f3ec; }
+
+html[data-theme="v4"] .copy { order: 1; }
+
+html[data-theme="v4"] .photo { order: 2; height: 160px; }
+
+html[data-theme="v4"] .points a,
+html[data-theme="v4"] .pages a,
+html[data-theme="v4"] .who li {
+  padding: 16px 0;
+  border-top: 1px solid #e0d6c8;
+}
+
+html[data-theme="v4"] .block h2 {
+  border-left: 4px solid #3e5344;
+  padding-left: 12px;
+}
+
+/* 5 分割 — city band, then the paper */
+
+html[data-theme="v5"] body { background: #f4f1ea; }
+
+html[data-theme="v5"] .photo { height: 168px; }
+
+html[data-theme="v5"] .bar {
+  background: #f4f1ea;
+  border-bottom: 1px solid #ddd6c8;
+}
+
+html[data-theme="v5"] .kicker { color: #8d6a3f; }
+
+html[data-theme="v5"] .points a,
+html[data-theme="v5"] .quote {
+  border-left: 3px solid #8d6a3f;
+  padding-left: 12px;
+}
+
+html[data-theme="v5"] .pages a,
+html[data-theme="v5"] .who li {
+  padding: 12px 0 12px 12px;
+  border-left: 3px solid #8d6a3f;
+}
