@@ -18,7 +18,7 @@
     />
     <meta property="og:image" content="https://lumirize.com/assets/lumirize-logo-horizontal.png" />
     <link rel="icon" type="image/png" href="./assets/lumirize-logo-mark.png" />
-    <link rel="stylesheet" href="./landing.css?v=20260924j" />
+    <link rel="stylesheet" href="./landing.css?v=20260924k" />
   </head>
   <body>
     <a class="skip" href="#main">本文へスキップ</a>
@@ -27,18 +27,13 @@
         <img src="./assets/lumirize-logo-horizontal.png" alt="LUMIRIZE" width="1286" height="245" />
       </a>
       <a class="consult" href="./contact.html">相談する</a>
-    </header>
-
-    <main id="main">
-      <section class="hero" aria-labelledby="hero-title">
-        <img
-          class="photo"
-          src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=max&w=2800&q=90"
-          alt="朝の光に並ぶ銀色の都市のビル街"
-          width="2800"
-          height="1867"
-        />
-        <ul class="chapters">
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="メニューを開く">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="menu" id="site-menu" aria-label="サイトメニュー">
+        <ul>
           <li><a href="./about.html">私たちについて</a></li>
           <li><a href="./policy.html">制度</a></li>
           <li><a href="./stats.html">実績</a></li>
@@ -46,12 +41,25 @@
           <li><a href="./support.html">支援</a></li>
           <li><a href="./process.html">流れ</a></li>
           <li><a href="./faq.html">FAQ</a></li>
+          <li><a href="./contact.html">お問い合わせ</a></li>
         </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <img
+          class="photo"
+          src="https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=max&w=2800&q=90"
+          alt="青に染まる都市のビル街"
+          width="2800"
+          height="1701"
+        />
         <div class="copy">
           <p class="kicker">Housing First</p>
-          <h1 id="hero-title">住まいから、社会参加を実装する。</h1>
+          <h1 id="hero-title">住まいがあれば、やり直せる。</h1>
           <p class="lead">
-            ルミライズは、住まい・制度・就労・定着を一体で設計し、再出発が続く暮らしを支えます。相談から入居・定着まで伴走します。
+            家があるから、明日がある。ルミライズは住まいを起点に、制度・仕事・暮らしの定着までを一体で支えます。
           </p>
           <div class="actions">
             <a class="primary" href="./contact.html">無料相談を予約する</a>
@@ -131,5 +139,39 @@
       <p>© 2021 株式会社ルミライズ</p>
     </footer>
 
+    <script>
+      (() => {
+        const btn = document.querySelector(".menu-btn");
+        const menu = document.getElementById("site-menu");
+        if (!btn || !menu) return;
+        const set = (open) => {
+          btn.setAttribute("aria-expanded", String(open));
+          btn.setAttribute("aria-label", open ? "メニューを閉じる" : "メニューを開く");
+          menu.classList.toggle("open", open);
+          document.body.classList.toggle("menu-open", open);
+        };
+        btn.addEventListener("click", () => {
+          set(btn.getAttribute("aria-expanded") !== "true");
+        });
+        menu.addEventListener("click", (event) => {
+          if (event.target.closest("a")) set(false);
+        });
+        document.addEventListener("click", (event) => {
+          if (
+            menu.classList.contains("open") &&
+            !menu.contains(event.target) &&
+            !btn.contains(event.target)
+          ) {
+            set(false);
+          }
+        });
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && menu.classList.contains("open")) {
+            set(false);
+            btn.focus();
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
