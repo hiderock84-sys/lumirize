@@ -1,0 +1,596 @@
+/* Five layout systems for the official site.
+   Spacing stays on an 8px rhythm. Type stays on a fixed scale.
+   v1 Grid / v2 Center / v3 Cinema / v4 Rail / v5 Split */
+
+.theme-dock {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 400;
+  display: grid;
+  gap: 8px;
+  width: min(168px, calc(100vw - 32px));
+  padding: 12px;
+  border: 1px solid #d5dbe3;
+  background: #fff;
+}
+
+.theme-dock p {
+  margin: 0;
+  color: #4c5968;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.theme-dock a {
+  display: block;
+  text-decoration: none;
+  color: #121820;
+  border: 1px solid #d5dbe3;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.theme-dock a[aria-current="true"] {
+  color: #fff;
+  background: #121820;
+  border-color: #121820;
+}
+
+html[data-theme] {
+  --fs-body: 16px;
+  --fs-h1: 40px;
+  --fs-h2: 28px;
+  --fs-h3: 18px;
+}
+
+html[data-theme] body {
+  font-size: 16px;
+  line-height: 1.75;
+  letter-spacing: 0;
+}
+
+html[data-theme] .section {
+  padding: 64px 0;
+}
+
+html[data-theme] .section-heading {
+  margin-bottom: 32px;
+}
+
+html[data-theme] .section-heading h1,
+html[data-theme] .section-heading h2,
+html[data-theme] .hero h1 {
+  letter-spacing: 0;
+  line-height: 1.3;
+  white-space: normal;
+}
+
+html[data-theme] .hero h1 {
+  font-size: var(--fs-h1);
+}
+
+html[data-theme] .section-heading h2,
+html[data-theme] .section-heading h1 {
+  font-size: var(--fs-h2);
+}
+
+html[data-theme] h3 {
+  font-size: var(--fs-h3);
+  line-height: 1.4;
+}
+
+html[data-theme] .info-grid,
+html[data-theme] .guide-grid,
+html[data-theme] .service-grid,
+html[data-theme] .support-grid,
+html[data-theme] .philosophy-grid,
+html[data-theme] .contact-grid {
+  gap: 24px;
+}
+
+/* v1 Grid --------------------------------------------------------------- */
+
+html[data-theme="v1"] .site-header,
+html[data-theme="v1"] .site-header.scrolled {
+  background: #fff !important;
+  border-bottom: 1px solid #d5dbe3 !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="v1"] .hero-content {
+  border-radius: 0;
+  background: rgba(8, 18, 32, 0.82);
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+html[data-theme="v1"] .info-item,
+html[data-theme="v1"] .guide-banner,
+html[data-theme="v1"] .message-card {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (min-width: 1024px) {
+  html[data-theme="v1"] .header-inner {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    align-items: stretch;
+    gap: 0;
+    min-height: 0;
+  }
+
+  html[data-theme="v1"] .global-nav {
+    display: block;
+    padding: 0;
+  }
+
+  html[data-theme="v1"] .global-nav ul {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0;
+    margin: 0;
+  }
+
+  html[data-theme="v1"] .global-nav ul li,
+  html[data-theme="v1"] .global-nav ul li + li {
+    padding: 0;
+  }
+
+  html[data-theme="v1"] .global-nav ul li + li::before {
+    display: none;
+  }
+
+  html[data-theme="v1"] .global-nav ul a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 64px;
+    padding: 8px;
+    border-left: 1px solid #d5dbe3;
+    font-size: 13px;
+    text-align: center;
+    white-space: normal;
+    color: #121820;
+    text-shadow: none;
+  }
+
+  html[data-theme="v1"] .info-grid,
+  html[data-theme="v1"] .guide-grid,
+  html[data-theme="v1"] .service-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+/* v2 Center ------------------------------------------------------------- */
+
+html[data-theme="v2"] {
+  --fs-h1: 48px;
+}
+
+html[data-theme="v2"] body {
+  background: #f5f5f7;
+}
+
+html[data-theme="v2"] .site-header,
+html[data-theme="v2"] .site-header.scrolled {
+  background: rgba(245, 245, 247, 0.94) !important;
+  border-bottom: 0 !important;
+}
+
+@media (min-width: 1024px) {
+  html[data-theme="v2"] .header-inner {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding-top: 16px;
+    padding-bottom: 8px;
+  }
+
+  html[data-theme="v2"] .global-nav,
+  html[data-theme="v2"] .global-nav ul {
+    justify-content: center;
+  }
+
+  html[data-theme="v2"] .global-nav ul a {
+    color: #1d1d1f;
+    text-shadow: none;
+    font-weight: 500;
+  }
+
+  html[data-theme="v2"] .global-nav ul li + li::before {
+    display: none;
+  }
+
+  html[data-theme="v2"] .hero {
+    justify-content: center;
+  }
+
+  html[data-theme="v2"] .hero-content {
+    margin-inline: auto;
+    text-align: center;
+    color: #1d1d1f;
+    background: rgba(255, 255, 255, 0.92);
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  html[data-theme="v2"] .hero h1,
+  html[data-theme="v2"] .hero-subhead,
+  html[data-theme="v2"] .hero-lead,
+  html[data-theme="v2"] .hero-signoff,
+  html[data-theme="v2"] .eyebrow {
+    color: #1d1d1f;
+    text-shadow: none;
+  }
+
+  html[data-theme="v2"] .hero-cta {
+    justify-content: center;
+  }
+
+  html[data-theme="v2"] .section-heading,
+  html[data-theme="v2"] .section-heading h2,
+  html[data-theme="v2"] .section-heading p {
+    text-align: center;
+    margin-inline: auto;
+  }
+
+  html[data-theme="v2"] .section-heading {
+    padding-left: 0;
+  }
+
+  html[data-theme="v2"] .section-heading::after {
+    margin-inline: auto;
+  }
+
+  html[data-theme="v2"] .info-grid,
+  html[data-theme="v2"] .guide-grid,
+  html[data-theme="v2"] .service-grid,
+  html[data-theme="v2"] .support-grid {
+    grid-template-columns: minmax(0, 720px);
+    justify-content: center;
+  }
+
+  html[data-theme="v2"] .info-item,
+  html[data-theme="v2"] .guide-banner {
+    text-align: center;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+/* v3 Cinema ------------------------------------------------------------- */
+
+html[data-theme="v3"] {
+  --fs-h1: 56px;
+}
+
+html[data-theme="v3"] body {
+  background: #000;
+  color: #f5f5f5;
+}
+
+html[data-theme="v3"] .site-header,
+html[data-theme="v3"] .site-header.scrolled {
+  background: rgba(0, 0, 0, 0.82) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16) !important;
+}
+
+html[data-theme="v3"] .brand {
+  background: #fff;
+  padding: 8px 12px;
+}
+
+html[data-theme="v3"] .global-nav ul a,
+html[data-theme="v3"] body.home-page .global-nav ul a {
+  color: #fff;
+  text-shadow: none;
+}
+
+html[data-theme="v3"] .hero {
+  align-items: end;
+}
+
+html[data-theme="v3"] .hero-content {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+html[data-theme="v3"] .section,
+html[data-theme="v3"] .site-footer,
+html[data-theme="v3"] .message-card,
+html[data-theme="v3"] .info-item {
+  background: #000;
+  color: #f5f5f5;
+}
+
+html[data-theme="v3"] .section-heading p,
+html[data-theme="v3"] .info-item p {
+  color: #b5b5b5;
+}
+
+html[data-theme="v3"] .info-grid,
+html[data-theme="v3"] .guide-grid,
+html[data-theme="v3"] .service-grid,
+html[data-theme="v3"] .support-grid,
+html[data-theme="v3"] .philosophy-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+html[data-theme="v3"] .info-item,
+html[data-theme="v3"] .guide-banner,
+html[data-theme="v3"] .message-card {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+html[data-theme="v3"] .theme-dock {
+  background: #111;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+html[data-theme="v3"] .theme-dock a {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+html[data-theme="v3"] .theme-dock a[aria-current="true"] {
+  background: #fff;
+  color: #000;
+}
+
+/* v4 Rail --------------------------------------------------------------- */
+
+@media (min-width: 1024px) {
+  html[data-theme="v4"] .site-header,
+  html[data-theme="v4"] .site-header.scrolled {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 240px;
+    height: 100vh;
+    overflow: auto;
+    background: #f3efe6 !important;
+    border-right: 1px solid #e0d6c8 !important;
+    border-bottom: 0 !important;
+  }
+
+  html[data-theme="v4"] .header-inner {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 32px;
+    min-height: 100%;
+    padding: 32px 20px;
+  }
+
+  html[data-theme="v4"] .global-nav {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 0;
+  }
+
+  html[data-theme="v4"] .global-nav ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin: 0;
+  }
+
+  html[data-theme="v4"] .global-nav ul li + li {
+    padding-left: 0;
+  }
+
+  html[data-theme="v4"] .global-nav ul li + li::before {
+    display: none;
+  }
+
+  html[data-theme="v4"] .global-nav ul a {
+    display: block;
+    padding: 12px 0;
+    border-bottom: 1px solid #e0d6c8;
+    color: #1c1915;
+    text-align: left;
+    text-shadow: none;
+    font-size: 14px;
+    white-space: normal;
+  }
+
+  html[data-theme="v4"] main,
+  html[data-theme="v4"] .site-footer {
+    margin-left: 240px;
+  }
+
+  html[data-theme="v4"] .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: stretch;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  html[data-theme="v4"] .hero-cover {
+    position: relative;
+    grid-column: 2;
+    grid-row: 1;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+  }
+
+  html[data-theme="v4"] .hero-overlay,
+  html[data-theme="v4"] .hero::before {
+    display: none;
+  }
+
+  html[data-theme="v4"] .hero-content {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 64px 48px;
+    color: #1c1915;
+    background: #f6f3ec;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  html[data-theme="v4"] .hero h1,
+  html[data-theme="v4"] .hero-subhead,
+  html[data-theme="v4"] .hero-lead,
+  html[data-theme="v4"] .hero-signoff,
+  html[data-theme="v4"] .eyebrow {
+    color: #1c1915;
+    text-shadow: none;
+  }
+
+  html[data-theme="v4"] .info-grid,
+  html[data-theme="v4"] .guide-grid,
+  html[data-theme="v4"] .service-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  html[data-theme="v4"] .info-item,
+  html[data-theme="v4"] .guide-banner,
+  html[data-theme="v4"] .message-card {
+    border-radius: 0;
+    box-shadow: none;
+    border: 0;
+    border-top: 1px solid #e0d6c8;
+    background: transparent;
+  }
+}
+
+/* v5 Split -------------------------------------------------------------- */
+
+@media (min-width: 1024px) {
+  html[data-theme="v5"] body {
+    padding-left: 48vw;
+    background: #f4f1ea;
+  }
+
+  html[data-theme="v5"] .container {
+    width: min(640px, calc(100% - 64px));
+  }
+
+  html[data-theme="v5"] .site-header,
+  html[data-theme="v5"] .site-header.scrolled {
+    left: 48vw;
+    right: 0;
+    width: auto;
+    background: #f4f1ea !important;
+    border-bottom: 1px solid #ddd6c8 !important;
+  }
+
+  html[data-theme="v5"] .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  html[data-theme="v5"] .global-nav,
+  html[data-theme="v5"] .global-nav ul {
+    justify-content: flex-start;
+  }
+
+  html[data-theme="v5"] .global-nav ul a {
+    color: #142033;
+    text-shadow: none;
+  }
+
+  html[data-theme="v5"] .global-nav ul li + li::before {
+    display: none;
+  }
+
+  html[data-theme="v5"] .hero {
+    min-height: 0;
+    padding-top: 128px;
+    background: transparent;
+  }
+
+  html[data-theme="v5"] .hero::before,
+  html[data-theme="v5"] .hero-overlay {
+    display: none;
+  }
+
+  html[data-theme="v5"] .hero-cover {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 48vw;
+    height: 100vh;
+    z-index: 80;
+  }
+
+  html[data-theme="v5"] .hero-content {
+    width: auto;
+    max-width: none;
+    color: #142033;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  html[data-theme="v5"] .hero h1,
+  html[data-theme="v5"] .hero-subhead,
+  html[data-theme="v5"] .hero-lead,
+  html[data-theme="v5"] .hero-signoff,
+  html[data-theme="v5"] .eyebrow {
+    color: #142033;
+    text-shadow: none;
+  }
+
+  html[data-theme="v5"] .eyebrow {
+    color: #8d6a3f;
+  }
+
+  html[data-theme="v5"] .info-grid,
+  html[data-theme="v5"] .guide-grid,
+  html[data-theme="v5"] .service-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  html[data-theme="v5"] .info-item,
+  html[data-theme="v5"] .guide-banner,
+  html[data-theme="v5"] .message-card {
+    border-radius: 0;
+    box-shadow: none;
+    border: 0;
+    border-left: 2px solid #8d6a3f;
+    background: transparent;
+  }
+}
+
+@media (max-width: 1023px) {
+  html[data-theme] {
+    --fs-h1: 32px;
+    --fs-h2: 24px;
+  }
+
+  html[data-theme] .section {
+    padding: 40px 0;
+  }
+}
