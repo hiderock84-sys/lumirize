@@ -3,91 +3,171 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>株式会社ルミライズ | 住まいから、尊厳を戻す</title>
+    <title>株式会社ルミライズ | 移民住居支援・暮らしサポート</title>
     <meta
       name="description"
-      content="株式会社ルミライズの公式案内です。移民の住居を起点に、住まい・制度・定着を一つの流れで支える考え方だけを、簡潔に紹介します。"
+      content="株式会社ルミライズは、移民住居支援を中心に、Housing First、制度活用、就労接続、定着支援をひとつながりでご提供します。"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./themes.css" />
+    <script>
+      (function () {
+        var m = location.search.match(/[?&]v=([1-5])/);
+        var v = m ? m[1] : (function () { try { return localStorage.getItem("lumirize-theme") || "1"; } catch (e) { return "1"; } })();
+        document.documentElement.setAttribute("data-theme", "v" + v);
+      })();
+    </script>
   </head>
-  <body class="design-statement">
+  <body>
     <a class="skip-link" href="#main">本文へスキップ</a>
     <header class="site-header">
-      <div class="nav-bar">
-        <a href="./index.html" class="brand" aria-label="株式会社ルミライズ トップへ" aria-current="page">
-          <img src="../logo-horizontal.png" alt="LUMIRIZE 株式会社ルミライズ ロゴ" width="1286" height="245" />
+      <div class="container header-inner">
+        <a href="./index.html" class="brand-logo" aria-label="株式会社ルミライズ トップへ">
+          <img
+            src="../logo-horizontal.png"
+            alt="LUMIRIZE 株式会社ルミライズ ロゴ"
+            width="1286"
+            height="245"
+            loading="eager"
+            decoding="async"
+          />
         </a>
-        <nav class="top-nav" aria-label="主要ナビゲーション">
-          <a href="./migration.html">移民</a>
-          <a href="./system-support.html">制度</a>
-          <a href="./about.html">私たち</a>
-          <a href="./contact.html">相談</a>
+                <nav class="top-nav" aria-label="主要ナビゲーション">
+          <a href="./migration.html">移民支援</a>
+          <a href="./system-support.html">制度支援</a>
+          <a href="./services.html">支援内容</a>
+          <a href="./impact.html">実績</a>
+          <a href="./process.html">流れ</a>
+          <a href="./faq.html">FAQ</a>
+          <a href="./about.html">私たちについて</a>
+          <a href="./contact.html">相談窓口</a>
         </nav>
       </div>
     </header>
 
     <main id="main">
-      <section class="stage">
+      <section class="hero">
         <img
-          class="stage-media"
-          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2800&q=85"
-          alt="ガラスの超高層ビルが垂直に並ぶ、シャープな都心のファサード"
-          width="2800"
-          height="1867"
+          class="hero-image"
+          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=4600&q=100"
+          data-src-v2="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=2800&q=85"
+          data-src-v3="https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=2800&q=85"
+          data-src-v4="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=2800&q=85"
+          data-src-v5="https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=2800&q=85"
+          alt="大都市の超高層ビル群が際立つアーバンスカイライン"
+          width="3600"
+          height="2025"
+          loading="eager"
+          decoding="async"
         />
-        <div class="stage-shade"></div>
-        <div class="stage-copy">
-          <p class="kicker">Lumirize</p>
-          <h1>住まいから、<br />尊厳を戻す。</h1>
-          <p class="lede">移民の方が、言葉や国籍を理由に住まいを失わないこと。株式会社ルミライズはその一点から、再出発が続く環境を整えます。</p>
-          <a class="text-link" href="./contact.html">相談する</a>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+          <p class="eyebrow">Corporate Vision / Lumirize Standard</p>
+          <h1>移民住居支援を最重要に、安心して再出発できる道をつくる。</h1>
+          <p class="hero-copy hero-copy-tight">
+            株式会社ルミライズは、住まい・制度・仕事・定着をひとつの流れでサポートします。
+            机上の理想だけでなく、現場で本当に役立つ支援を、ていねいに積み重ねています。
+          </p>
+          <div class="hero-kpi" aria-label="主要指標">
+            <article><strong>24時間</strong><span>緊急初動体制</span></article>
+            <article><strong>3〜7営業日</strong><span>相談から入居目安</span></article>
+            <article><strong>3ヶ月/6ヶ月</strong><span>定着レビュー</span></article>
+            <article><strong>制度統合</strong><span>住まい・就労・生活支援</span></article>
+          </div>
+          <div class="cta-row cta-row-hero">
+            <a class="btn btn-primary" href="./migration.html">移民支援の戦略を見る</a>
+            <a class="btn btn-secondary" href="./system-support.html">活用制度を確認する</a>
+          </div>
+          <div class="cta-row">
+            <a class="btn btn-secondary" href="./about.html">私たちについてを見る</a>
+          </div>
         </div>
       </section>
 
-      <section class="spec" aria-label="運用の基準">
-        <ul>
-          <li><strong>24時間</strong><span>緊急の初動</span></li>
-          <li><strong>3–7日</strong><span>相談から入居の目安</span></li>
-          <li><strong>3 / 6ヶ月</strong><span>定着の確認</span></li>
-          <li><strong>92%</strong><span>住まいの満足</span></li>
-        </ul>
+      <section class="section">
+        <div class="container">
+          <header class="section-head">
+            <h2>ルミライズの重点戦略</h2>
+            <p class="section-kicker">住まいの安心を起点に、社会参加までを途切れなくつなげる支援設計です。</p>
+          </header>
+          <div class="cards three">
+            <article class="card">
+              <h3>1. 移民住居支援を着実に進める</h3>
+              <p>
+                増える在留外国人の方に合わせ、住まい・契約・生活のつながりをわかりやすく整えます。
+                孤立や不安を減らし、地域で安心して暮らし続けられる状態を目指します。
+              </p>
+            </article>
+            <article class="card">
+              <h3>2. Housing Firstを暮らしに活かす</h3>
+              <p>
+                住まいを「あとで得るもの」ではなく、再出発の出発点として大切にします。
+                そのうえで、仕事や生活が前に進みやすい支援につなげます。
+              </p>
+            </article>
+            <article class="card">
+              <h3>3. 制度を使いやすくする</h3>
+              <p>
+                制度を「知っているだけ」から「実際に使える状態」へ整えます。
+                申請前の確認から利用後のフォローまで一緒に進め、取りこぼしを防ぎます。
+              </p>
+            </article>
+          </div>
+        </div>
       </section>
 
-      <section class="principles" aria-label="三つの方針">
-        <article>
-          <p class="num">01</p>
-          <div>
-            <h2>移民の住居</h2>
-            <p>都市で暮らし続けるための住まいを、最初に確保します。</p>
-          </div>
-          <a href="./migration.html">見る</a>
-        </article>
-        <article>
-          <p class="num">02</p>
-          <div>
-            <h2>Housing First</h2>
-            <p>住まいは条件ではなく、前提です。</p>
-          </div>
-          <a href="./about.html">見る</a>
-        </article>
-        <article>
-          <p class="num">03</p>
-          <div>
-            <h2>使える制度</h2>
-            <p>制度名を並べるのではなく、申請と定着まで通します。</p>
-          </div>
-          <a href="./system-support.html">見る</a>
-        </article>
+      <section class="section section-alt image-band">
+        <img
+          class="image-band-bg"
+          src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=4600&q=100"
+          data-src-v2="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=2400&q=85"
+          data-src-v3="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=2400&q=85"
+          data-src-v4="https://images.unsplash.com/photo-1431576901776-e539bd916ba2?auto=format&fit=crop&w=2400&q=85"
+          data-src-v5="https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=2400&q=85"
+          alt="都心の高層ビル街を見上げる視点"
+          width="3200"
+          height="1800"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="image-band-overlay"></div>
+        <div class="container image-band-content">
+          <p class="eyebrow">Why Lumirize</p>
+          <h2>ルミライズが選ばれる理由</h2>
+          <p class="image-band-copy">相談者の気持ちに寄り添いながら、住まい・制度・仕事を同時に整える実行力が私たちの強みです。</p>
+          <ul class="point-list image-band-list">
+                <li>言語・制度・住居・就労を切り分けずに支援</li>
+                <li>初動から定着まで、担当範囲を明確に伴走</li>
+                <li>行政・福祉・法務・雇用を横断して連携</li>
+          </ul>
+        </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <div class="footer-inner">
+      <div class="container footer-inner">
         <a class="footer-logo" href="./index.html" aria-label="株式会社ルミライズ トップへ">
-          <img src="../logo-horizontal.png" alt="LUMIRIZE 株式会社ルミライズ ロゴ" width="1286" height="245" />
+          <img
+            src="../logo-horizontal.png"
+            alt="LUMIRIZE 株式会社ルミライズ ロゴ"
+            width="1286"
+            height="245"
+            loading="lazy"
+            decoding="async"
+          />
         </a>
         <p>© 株式会社ルミライズ</p>
       </div>
     </footer>
+
+    <aside class="theme-dock" aria-label="デザインバージョン">
+      <p>Design</p>
+      <a href="?v=1" data-theme="1">1 現行コーポレート</a>
+      <a href="?v=2" data-theme="2">2 アップルライト</a>
+      <a href="?v=3" data-theme="3">3 テスラダーク</a>
+      <a href="?v=4" data-theme="4">4 制度・公的</a>
+      <a href="?v=5" data-theme="5">5 国際都市</a>
+    </aside>
+    <script src="./theme.js" defer></script>
   </body>
 </html>

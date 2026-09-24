@@ -6,99 +6,158 @@
     <title>制度支援 | 株式会社ルミライズ</title>
     <meta
       name="description"
-      content="住居確保給付金、生活困窮者自立支援制度、住宅セーフティネット、生活保護の住宅扶助を、申請から定着まで使える形にする制度支援です。"
+      content="制度支援ページ。住居確保給付金・生活困窮者自立支援・住宅セーフティネット・住宅扶助整合・就労支援接続を、現場運用まで一体で支援します。"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./themes.css" />
+    <script>
+      (function () {
+        var m = location.search.match(/[?&]v=([1-5])/);
+        var v = m ? m[1] : (function () { try { return localStorage.getItem("lumirize-theme") || "1"; } catch (e) { return "1"; } })();
+        document.documentElement.setAttribute("data-theme", "v" + v);
+      })();
+    </script>
   </head>
-  <body class="design-civic">
+  <body>
     <a class="skip-link" href="#main">本文へスキップ</a>
     <header class="site-header">
-      <div class="nav-bar">
-        <a href="./index.html" class="brand" aria-label="株式会社ルミライズ トップへ">
-          <img src="../logo-horizontal.png" alt="LUMIRIZE 株式会社ルミライズ ロゴ" width="1286" height="245" />
+      <div class="container header-inner">
+        <a class="brand-logo" href="./index.html" aria-label="トップへ">
+          <img
+            src="../logo-horizontal.png"
+            alt="LUMIRIZE 株式会社ルミライズ ロゴ"
+            width="1286"
+            height="245"
+            loading="eager"
+            decoding="async"
+          />
         </a>
-        <nav class="top-nav" aria-label="主要ナビゲーション">
-          <a href="./migration.html">移民</a>
-          <a href="./system-support.html" aria-current="page">制度</a>
-          <a href="./about.html">私たち</a>
-          <a href="./contact.html">相談</a>
+                <nav class="top-nav" aria-label="主要ナビゲーション">
+          <a href="./migration.html">移民支援</a>
+          <a href="./system-support.html" aria-current="page">制度支援</a>
+          <a href="./services.html">支援内容</a>
+          <a href="./impact.html">実績</a>
+          <a href="./process.html">流れ</a>
+          <a href="./faq.html">FAQ</a>
+          <a href="./about.html">私たちについて</a>
+          <a href="./contact.html">相談窓口</a>
         </nav>
       </div>
     </header>
 
     <main id="main">
-      <section class="dossier">
-        <div>
-          <p class="kicker">Public Systems</p>
-          <h1>制度を、使える仕様にする。</h1>
-          <p class="lede">制度は名前を知っていても、要件・書類・期限が揃わなければ暮らしに届きません。ルミライズは、その手順を一つの仕様として通します。</p>
+      <section class="hero compact-hero">
+        <img
+          class="hero-image"
+          src="https://images.unsplash.com/photo-1494522358652-f30e61a60313?auto=format&fit=crop&w=4600&q=100"
+          data-src-v2="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2800&q=85"
+          data-src-v3="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2800&q=85"
+          data-src-v4="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=2800&q=85"
+          data-src-v5="https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?auto=format&fit=crop&w=2800&q=85"
+          alt="高層ビル群を背景にした都市のオフィス街"
+          width="3600"
+          height="2025"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+          <p class="eyebrow">Institutional Support / Lumirize Standard</p>
+          <h1>制度活用を、暮らしの安定につながる形でサポート。</h1>
+          <p class="hero-copy hero-copy-tight">
+            制度は知っているだけでは十分ではありません。要件確認から申請、利用後のフォローまで、
+            迷わず進められるように並走し、安心して生活を整えられる状態を目指します。
+          </p>
         </div>
-        <figure>
-          <img
-            src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1800&q=85"
-            alt="格子状に規則正しく並ぶガラスファサードの現代建築"
-            width="1800"
-            height="2250"
-          />
-        </figure>
       </section>
 
-      <ol class="statute">
-        <li>
-          <p class="num">01</p>
-          <div>
-            <h2>住居確保給付金</h2>
-            <p>離職や減収で家賃が危ないとき、対象・書類・支給期間を初回で切り分け、申請日に遅れないよう整えます。</p>
+      <section class="section">
+        <div class="container">
+          <header class="section-head">
+            <h2>対応する主要制度</h2>
+            <p class="section-kicker">使えるかどうかの確認から利用後フォローまで、責任をもって一緒に進めます。</p>
+          </header>
+          <div class="card-grid">
+            <article class="card">
+              <h3>住居確保給付金</h3>
+              <p>対象条件・必要書類・期限を初回で整理し、申請まで迷わず進めるようにします。</p>
+            </article>
+            <article class="card">
+              <h3>生活困窮者自立支援制度</h3>
+              <p>住まい・家計・仕事の支援を切り離さず、自治体窓口と連携して進めます。</p>
+            </article>
+            <article class="card">
+              <h3>住宅セーフティネット</h3>
+              <p>受け入れ可能な物件との調整を行い、選べる住まいを広げます。</p>
+            </article>
+            <article class="card">
+              <h3>生活保護住宅扶助整合</h3>
+              <p>扶助基準を確認し、無理なく住み続けられる条件を整えます。</p>
+            </article>
+            <article class="card">
+              <h3>就労移行・就労継続支援接続</h3>
+              <p>早めに収入の見通しを立て、住まいの安定と仕事の継続を両立しやすくします。</p>
+            </article>
+            <article class="card">
+              <h3>行政・福祉・法律相談接続</h3>
+              <p>必要に応じて関係機関へすぐにつなぎ、単独では難しい課題にも対応します。</p>
+            </article>
           </div>
-        </li>
-        <li>
-          <p class="num">02</p>
-          <div>
-            <h2>生活困窮者自立支援制度</h2>
-            <p>住居、家計、仕事の相談を別窓口のたらい回しにせず、自治体の支援方針と生活の予定を合わせて進めます。</p>
-          </div>
-        </li>
-        <li>
-          <p class="num">03</p>
-          <div>
-            <h2>住宅セーフティネット</h2>
-            <p>入居を断られやすい事情がある方に、登録住宅や協力事業者との調整で、選べる部屋を具体的に増やします。</p>
-          </div>
-        </li>
-        <li>
-          <p class="num">04</p>
-          <div>
-            <h2>生活保護の住宅扶助</h2>
-            <p>扶助の範囲と地域の家賃を照合し、入居後に住めなくなる条件を最初から外します。</p>
-          </div>
-        </li>
-        <li>
-          <p class="num">05</p>
-          <div>
-            <h2>就労支援への接続</h2>
-            <p>住まいが決まった週に、収入の見通しとハローワーク等の手続きを置き、家賃だけの安心で終わらせません。</p>
-          </div>
-        </li>
-      </ol>
+        </div>
+      </section>
 
-      <figure class="civic-photo">
+      <section class="section section-alt image-band">
         <img
-          src="https://images.unsplash.com/photo-1431576901776-e539bd916ba2?auto=format&fit=crop&w=2400&q=85"
-          alt="石と列柱が規則正しく続く、公的建築のようなファサード"
-          width="2400"
-          height="1050"
+          class="image-band-bg"
+          src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=4600&q=100"
+          data-src-v2="https://images.unsplash.com/photo-1554469384-e58fac16e23a?auto=format&fit=crop&w=2400&q=85"
+          data-src-v3="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=2400&q=85"
+          data-src-v4="https://images.unsplash.com/photo-1431576901776-e539bd916ba2?auto=format&fit=crop&w=2400&q=85"
+          data-src-v5="https://images.unsplash.com/photo-1494522358652-f30e61a60313?auto=format&fit=crop&w=2400&q=85"
+          alt="都市オフィスで資料を確認する支援チーム"
+          width="3200"
+          height="1800"
+          loading="lazy"
+          decoding="async"
         />
-        <figcaption>公的な手続きは、整った導線があって初めて暮らしに届きます。</figcaption>
-      </figure>
+        <div class="image-band-overlay"></div>
+        <div class="container image-band-content">
+          <p class="eyebrow">Institution Design</p>
+          <h2>取りこぼしを防ぐ運用設計</h2>
+          <p class="image-band-copy">制度を使って終わりではなく、使った後まで見据えて安定につなげます。</p>
+          <ul class="point-list image-band-list">
+                <li>申請前に要件とリスクを見える化</li>
+                <li>必要書類・期限・担当を明確化</li>
+                <li>住まい・制度・仕事を同時に調整</li>
+          </ul>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
-      <div class="footer-inner">
-        <a class="footer-logo" href="./index.html" aria-label="株式会社ルミライズ トップへ">
-          <img src="../logo-horizontal.png" alt="LUMIRIZE 株式会社ルミライズ ロゴ" width="1286" height="245" />
+      <div class="container footer-inner">
+        <a class="footer-logo" href="./index.html" aria-label="トップへ">
+          <img
+            src="../logo-horizontal.png"
+            alt="LUMIRIZE 株式会社ルミライズ ロゴ"
+            width="1286"
+            height="245"
+            loading="lazy"
+            decoding="async"
+          />
         </a>
         <p>© 株式会社ルミライズ</p>
       </div>
     </footer>
+
+    <aside class="theme-dock" aria-label="デザインバージョン">
+      <p>Design</p>
+      <a href="?v=1" data-theme="1">1 現行コーポレート</a>
+      <a href="?v=2" data-theme="2">2 アップルライト</a>
+      <a href="?v=3" data-theme="3">3 テスラダーク</a>
+      <a href="?v=4" data-theme="4">4 制度・公的</a>
+      <a href="?v=5" data-theme="5">5 国際都市</a>
+    </aside>
+    <script src="./theme.js" defer></script>
   </body>
 </html>
