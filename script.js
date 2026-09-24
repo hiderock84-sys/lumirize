@@ -34,6 +34,15 @@
     }
   })();
 
+  const initToneSwitcher = () => {
+    document.body.setAttribute("data-tone", "warm");
+    try {
+      localStorage.removeItem("lumirize-tone");
+    } catch {
+      // Ignore storage errors.
+    }
+  };
+
   const setMenuOpenState = (isOpen) => {
     if (!menuToggle || !globalNav) return;
     menuToggle.setAttribute("aria-expanded", String(isOpen));
@@ -145,6 +154,7 @@
   updateHeaderState();
   window.addEventListener("scroll", updateHeaderState, { passive: true });
   window.addEventListener("resize", updateHeaderState);
+  initToneSwitcher();
 
   if (menuToggle && globalNav) {
     menuToggle.addEventListener("click", () => {
@@ -221,6 +231,7 @@
 
     const answerId = `faq-answer-${index + 1}`;
     answer.id = answerId;
+    button.setAttribute("type", "button");
     button.setAttribute("aria-controls", answerId);
 
     button.addEventListener("click", () => {
