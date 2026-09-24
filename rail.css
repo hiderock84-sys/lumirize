@@ -130,7 +130,7 @@ html[data-theme="v4"] main::before {
   opacity: 1 !important;
   mix-blend-mode: normal !important;
   filter: none !important;
-  background: url("https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=max&w=2800&q=90") center 42% / cover no-repeat !important;
+  background: url("https://images.unsplash.com/photo-1742196642606-bcf7b5a0fdd5?auto=format&fit=max&w=2800&q=90") center 38% / cover no-repeat !important;
 }
 
 html[data-theme="v4"] .section {
