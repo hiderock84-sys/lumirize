@@ -1769,7 +1769,7 @@ body.home-page #about.section {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("https://images.unsplash.com/photo-1460472178825-e5240623afd5?auto=format&fit=crop&w=2400&q=90") center / cover no-repeat;
+  background: url("https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=3200&q=96") center / cover no-repeat;
   opacity: 0.09;
   mix-blend-mode: soft-light;
   pointer-events: none;

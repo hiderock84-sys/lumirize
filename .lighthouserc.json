@@ -9,10 +9,7 @@
         "http://127.0.0.1:4173/simple/index.html",
         "http://127.0.0.1:4173/simple/migration.html",
         "http://127.0.0.1:4173/simple/system-support.html",
-        "http://127.0.0.1:4173/simple/services.html",
-        "http://127.0.0.1:4173/simple/impact.html",
-        "http://127.0.0.1:4173/simple/process.html",
-        "http://127.0.0.1:4173/simple/faq.html",
+        "http://127.0.0.1:4173/simple/about.html",
         "http://127.0.0.1:4173/simple/contact.html"
       ]
     },

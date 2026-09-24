@@ -18,10 +18,7 @@ REQUIRED_PAGES = [
     "index.html",
     "migration.html",
     "system-support.html",
-    "services.html",
-    "impact.html",
-    "process.html",
-    "faq.html",
+    "about.html",
     "contact.html",
 ]
 
