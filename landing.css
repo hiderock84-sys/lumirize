@@ -25,8 +25,11 @@ body {
   font-family: var(--type);
   font-size: 16px;
   line-height: 1.75;
+  letter-spacing: 0.02em;
   color: var(--ink);
   background: var(--paper);
+  overflow-wrap: break-word;
+  line-break: strict;
 }
 
 img { max-width: 100%; display: block; }
@@ -107,25 +110,36 @@ a { color: inherit; }
 
 .chapters {
   display: flex;
-  gap: 0;
+  gap: 8px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   margin: 0;
-  padding: 16px 0 0 var(--pad);
+  padding: 16px var(--pad) 0;
   list-style: none;
 }
+
+.chapters li { flex: 0 0 auto; }
 
 .chapters a {
   display: inline-flex;
   align-items: center;
   min-height: 40px;
-  padding: 8px 16px 8px 0;
-  border-right: 1px solid rgba(28, 25, 21, 0.28);
-  margin-right: 16px;
+  padding: 8px 16px;
+  border: 1px solid var(--ink);
+  background: rgba(246, 243, 236, 0.88);
+  box-shadow: inset 0 2px 0 var(--rule);
   color: var(--ink);
   text-decoration: none;
   white-space: nowrap;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.chapters a:hover,
+.chapters a:focus-visible {
+  background: var(--ink);
+  color: #fff;
 }
 
 .copy { padding: 24px var(--pad) 32px; max-width: 40rem; }
@@ -142,7 +156,9 @@ h1, h2 { font-family: var(--serif); font-weight: 600; }
 h1 {
   margin: 0 0 16px;
   font-size: 32px;
-  line-height: 1.3;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  text-wrap: balance;
 }
 
 .hero h1,
@@ -151,7 +167,14 @@ h1 {
   text-shadow: none;
 }
 
-.lead { margin: 0; }
+.lead {
+  margin: 0;
+  max-width: 34em;
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 0.04em;
+  text-wrap: pretty;
+}
 
 .actions { display: grid; gap: 8px; margin-top: 24px; }
 
@@ -180,24 +203,99 @@ h1 {
   padding-left: 12px;
 }
 
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rule);
+}
+
 .points, .who, .pages {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.points a, .pages a, .who li {
+.points { counter-reset: point; }
+
+.points li { position: relative; counter-increment: point; }
+
+.points a, .pages a {
+  position: relative;
   display: grid;
   gap: 8px;
-  padding: 16px 0;
+  padding: 16px 32px 16px 0;
   border-top: 1px solid var(--line);
   text-decoration: none;
 }
 
-.points strong, .pages strong { font-size: 16px; }
-.points span, .pages span { font-size: 16px; line-height: 1.75; }
+.points a { padding-left: 56px; }
 
-.quote { margin: 0 0 16px; font-size: 16px; line-height: 1.75; }
+.points li:last-child a,
+.pages li:last-child a {
+  border-bottom: 1px solid var(--line);
+}
+
+.points li::before {
+  content: counter(point, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 16px;
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--rule);
+}
+
+.points a::after,
+.pages a::after {
+  content: "→";
+  position: absolute;
+  right: 8px;
+  top: 16px;
+  font-weight: 700;
+}
+
+.points strong, .pages strong { font-size: 16px; letter-spacing: 0.02em; }
+.points span, .pages span {
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 0.04em;
+  max-width: 34em;
+}
+
+.who {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.who li {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 1px solid var(--ink);
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: inset 0 2px 0 var(--rule);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.quote {
+  margin: 0 0 16px;
+  padding-left: 16px;
+  border-left: 4px solid var(--rule);
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 0.04em;
+}
 
 .site-foot {
   padding: 16px var(--pad) calc(32px + env(safe-area-inset-bottom));
