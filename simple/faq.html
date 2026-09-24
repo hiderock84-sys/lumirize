@@ -6,9 +6,17 @@
     <title>FAQ | 株式会社ルミライズ</title>
     <meta
       name="description"
-      content="住まい支援、移民支援、制度活用、入居までの流れに関するよくある質問を掲載。"
+      content="住まい支援、移民支援、制度活用、入居までの流れに関するよくある質問と、相談前の判断ポイントをまとめています。"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./themes.css" />
+    <script>
+      (function () {
+        var m = location.search.match(/[?&]v=([1-5])/);
+        var v = m ? m[1] : (function () { try { return localStorage.getItem("lumirize-theme") || "1"; } catch (e) { return "1"; } })();
+        document.documentElement.setAttribute("data-theme", "v" + v);
+      })();
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main">本文へスキップ</a>
@@ -42,6 +50,10 @@
         <img
           class="hero-image"
           src="https://images.unsplash.com/photo-1494522358652-f30e61a60313?auto=format&fit=crop&w=4600&q=100"
+          data-src-v2="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2800&q=85"
+          data-src-v3="https://images.unsplash.com/photo-1494522358652-f30e61a60313?auto=format&fit=crop&w=2800&q=85"
+          data-src-v4="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=2800&q=85"
+          data-src-v5="https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?auto=format&fit=crop&w=2800&q=85"
           alt="夜景のビジネス街を見渡す会議室"
           width="3200"
           height="2000"
@@ -120,5 +132,15 @@
         <p>© 株式会社ルミライズ</p>
       </div>
     </footer>
+
+    <aside class="theme-dock" aria-label="デザインバージョン">
+      <p>Design</p>
+      <a href="?v=1" data-theme="1">1 グリッド</a>
+      <a href="?v=2" data-theme="2">2 センター</a>
+      <a href="?v=3" data-theme="3">3 シネマ</a>
+      <a href="?v=4" data-theme="4">4 レール</a>
+      <a href="?v=5" data-theme="5">5 分割</a>
+    </aside>
+    <script src="./theme.js" defer></script>
   </body>
 </html>

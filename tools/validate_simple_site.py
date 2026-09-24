@@ -23,6 +23,7 @@ REQUIRED_PAGES = [
     "process.html",
     "faq.html",
     "contact.html",
+    "about.html",
 ]
 
 

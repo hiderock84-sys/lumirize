@@ -9,6 +9,14 @@
       content="ルミライズの考え方と代表挨拶を、移民支援の当事者背景を中心に簡潔にまとめたページです。"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./themes.css" />
+    <script>
+      (function () {
+        var m = location.search.match(/[?&]v=([1-5])/);
+        var v = m ? m[1] : (function () { try { return localStorage.getItem("lumirize-theme") || "1"; } catch (e) { return "1"; } })();
+        document.documentElement.setAttribute("data-theme", "v" + v);
+      })();
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main">本文へスキップ</a>
@@ -42,6 +50,10 @@
         <img
           class="hero-image"
           src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=4600&q=100"
+          data-src-v2="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=2800&q=85"
+          data-src-v3="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=2800&q=85"
+          data-src-v4="https://images.unsplash.com/photo-1431576901776-e539bd916ba2?auto=format&fit=crop&w=2800&q=85"
+          data-src-v5="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=2800&q=85"
           alt="高層ビルが並ぶ都市景観"
           width="3400"
           height="2100"
@@ -137,6 +149,10 @@
         <img
           class="image-band-bg"
           src="https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=4600&q=100"
+          data-src-v2="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2400&q=85"
+          data-src-v3="https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=2400&q=85"
+          data-src-v4="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=2400&q=85"
+          data-src-v5="https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=2400&q=85"
           alt="都市の高層ビルと暮らしの風景"
           width="3200"
           height="1800"
@@ -203,5 +219,15 @@
         <p>© 株式会社ルミライズ</p>
       </div>
     </footer>
+
+    <aside class="theme-dock" aria-label="デザインバージョン">
+      <p>Design</p>
+      <a href="?v=1" data-theme="1">1 グリッド</a>
+      <a href="?v=2" data-theme="2">2 センター</a>
+      <a href="?v=3" data-theme="3">3 シネマ</a>
+      <a href="?v=4" data-theme="4">4 レール</a>
+      <a href="?v=5" data-theme="5">5 分割</a>
+    </aside>
+    <script src="./theme.js" defer></script>
   </body>
 </html>
