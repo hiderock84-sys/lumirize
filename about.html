@@ -40,6 +40,14 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./themes.css" />
+    <script>
+      (function () {
+        var m = location.search.match(/[?&]v=([1-5])/);
+        var v = m ? m[1] : (function () { try { return localStorage.getItem("lumirize-layout") || "1"; } catch (e) { return "1"; } })();
+        document.documentElement.setAttribute("data-theme", "v" + v);
+      })();
+    </script>
     <style>
       .about-anchor-nav {
         margin-top: 1rem;
@@ -310,7 +318,7 @@
             <p>
               住居提供で終わらせず、ハローワーク等の就労支援制度、就労移行支援・就労継続支援、
               医療・福祉・行政手続きへの接続まで見据えることが、私たちの支援の中核です。
-              3ヶ月・6ヶ月の定着面談を通じ、生活の細部まで伴走します。
+              3ヶ月・6ヶ月・1年・2年の面接を通じ、生活の細部まで伴走します。
             </p>
             <p>回復の形は一つではありません。支援もまた、多様であるべきです。</p>
 
@@ -455,5 +463,15 @@
     <a class="mobile-consult" href="./contact.html" aria-label="無料相談を予約">無料相談</a>
 
     <script src="./script.js"></script>
+  
+    <aside class="theme-dock" aria-label="デザインバージョン">
+      <p>Design</p>
+      <a href="?v=1" data-theme="1">1 グリッド</a>
+      <a href="?v=2" data-theme="2">2 センター</a>
+      <a href="?v=3" data-theme="3">3 シネマ</a>
+      <a href="?v=4" data-theme="4">4 レール</a>
+      <a href="?v=5" data-theme="5">5 分割</a>
+    </aside>
+    <script src="./theme.js" defer></script>
   </body>
 </html>

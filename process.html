@@ -6,7 +6,7 @@
     <title>入居までの流れ | 株式会社ルミライズ</title>
     <meta
       name="description"
-      content="株式会社ルミライズの入居までの流れ。住まい支援、家賃補助制度確認、就労支援接続、3ヶ月・6ヶ月定着支援までを見据えた相談導線をご案内します。"
+      content="株式会社ルミライズの入居までの流れ。住まい支援、家賃補助制度確認、就労支援接続、3ヶ月・6ヶ月・1年・2年の面接までを見据えた相談導線をご案内します。"
     />
     <meta
       name="keywords"
@@ -20,7 +20,7 @@
     <meta property="og:title" content="入居までの流れ | 株式会社ルミライズ" />
     <meta
       property="og:description"
-      content="株式会社ルミライズの入居までの流れ。住まい支援、家賃補助制度確認、就労支援接続、3ヶ月・6ヶ月定着支援までを見据えた相談導線をご案内します。"
+      content="株式会社ルミライズの入居までの流れ。住まい支援、家賃補助制度確認、就労支援接続、3ヶ月・6ヶ月・1年・2年の面接までを見据えた相談導線をご案内します。"
     />
     <meta property="og:url" content="https://lumirize.com/process.html" />
     <meta property="og:image" content="https://lumirize.com/assets/lumirize-logo-horizontal.png" />
@@ -28,7 +28,7 @@
     <meta name="twitter:title" content="入居までの流れ | 株式会社ルミライズ" />
     <meta
       name="twitter:description"
-      content="株式会社ルミライズの入居までの流れ。住まい支援、家賃補助制度確認、就労支援接続、3ヶ月・6ヶ月定着支援までを見据えた相談導線をご案内します。"
+      content="株式会社ルミライズの入居までの流れ。住まい支援、家賃補助制度確認、就労支援接続、3ヶ月・6ヶ月・1年・2年の面接までを見据えた相談導線をご案内します。"
     />
     <meta name="twitter:image" content="https://lumirize.com/assets/lumirize-logo-horizontal.png" />
     <link rel="icon" type="image/png" href="./assets/lumirize-logo-mark.png" />
@@ -40,6 +40,14 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./themes.css" />
+    <script>
+      (function () {
+        var m = location.search.match(/[?&]v=([1-5])/);
+        var v = m ? m[1] : (function () { try { return localStorage.getItem("lumirize-layout") || "1"; } catch (e) { return "1"; } })();
+        document.documentElement.setAttribute("data-theme", "v" + v);
+      })();
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">本文へスキップ</a>
@@ -162,9 +170,9 @@
             <li class="process-item">
               <div class="process-head">
                 <span class="process-number">05</span>
-                <h2>入居・3ヶ月/6ヶ月定着支援</h2>
+                <h2>入居・3ヶ月・6ヶ月・1年・2年の面接</h2>
               </div>
-              <p>新しい生活の開始後も、定期訪問や面談を通じて継続支援を行います。3ヶ月・6ヶ月の節目で定着面談を実施します。</p>
+              <p>新しい生活の開始後も、定期訪問や面談を通じて継続支援を行います。3ヶ月・6ヶ月・1年・2年の面接を実施します。</p>
               <ul>
                 <li>入居手続きのサポート</li>
                 <li>ライフライン手続き支援</li>
@@ -249,5 +257,15 @@
     <a class="mobile-consult" href="./contact.html" aria-label="無料相談を予約">無料相談</a>
 
     <script src="./script.js"></script>
+  
+    <aside class="theme-dock" aria-label="デザインバージョン">
+      <p>Design</p>
+      <a href="?v=1" data-theme="1">1 グリッド</a>
+      <a href="?v=2" data-theme="2">2 センター</a>
+      <a href="?v=3" data-theme="3">3 シネマ</a>
+      <a href="?v=4" data-theme="4">4 レール</a>
+      <a href="?v=5" data-theme="5">5 分割</a>
+    </aside>
+    <script src="./theme.js" defer></script>
   </body>
 </html>

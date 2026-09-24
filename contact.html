@@ -40,6 +40,14 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./themes.css" />
+    <script>
+      (function () {
+        var m = location.search.match(/[?&]v=([1-5])/);
+        var v = m ? m[1] : (function () { try { return localStorage.getItem("lumirize-layout") || "1"; } catch (e) { return "1"; } })();
+        document.documentElement.setAttribute("data-theme", "v" + v);
+      })();
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">本文へスキップ</a>
@@ -193,7 +201,7 @@
                   <option value="住まい支援・入居相談">住まい支援・入居相談</option>
                   <option value="家賃補助・制度活用相談">家賃補助・制度活用相談</option>
                   <option value="就労支援接続相談">就労支援接続相談</option>
-                  <option value="3ヶ月・6ヶ月定着支援相談">3ヶ月・6ヶ月定着支援相談</option>
+                  <option value="3ヶ月・6ヶ月・1年・2年の面接相談">3ヶ月・6ヶ月・1年・2年の面接相談</option>
                   <option value="依存症者向け住宅について">依存症者向け住宅について</option>
                   <option value="刑務所出所者向け住宅について">刑務所出所者向け住宅について</option>
                   <option value="LGBTQ+向け住居支援について">LGBTQ+向け住居支援について</option>
@@ -285,5 +293,15 @@
     <a class="mobile-consult" href="./contact.html" aria-label="無料相談を予約">無料相談</a>
 
     <script src="./script.js"></script>
+  
+    <aside class="theme-dock" aria-label="デザインバージョン">
+      <p>Design</p>
+      <a href="?v=1" data-theme="1">1 グリッド</a>
+      <a href="?v=2" data-theme="2">2 センター</a>
+      <a href="?v=3" data-theme="3">3 シネマ</a>
+      <a href="?v=4" data-theme="4">4 レール</a>
+      <a href="?v=5" data-theme="5">5 分割</a>
+    </aside>
+    <script src="./theme.js" defer></script>
   </body>
 </html>

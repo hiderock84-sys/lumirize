@@ -6,7 +6,7 @@
     <title>サービス | 株式会社ルミライズ</title>
     <meta
       name="description"
-      content="株式会社ルミライズのサービス一覧。住まい支援、家賃補助制度の活用、就労支援制度接続、3ヶ月・6ヶ月定着支援まで一体化した安心設計をご紹介します。"
+      content="株式会社ルミライズのサービス一覧。住まい支援、家賃補助制度の活用、就労支援制度接続、3ヶ月・6ヶ月・1年・2年の面接まで一体化した安心設計をご紹介します。"
     />
     <meta
       name="keywords"
@@ -20,7 +20,7 @@
     <meta property="og:title" content="サービス | 株式会社ルミライズ" />
     <meta
       property="og:description"
-      content="株式会社ルミライズのサービス一覧。住まい支援、家賃補助制度の活用、就労支援制度接続、3ヶ月・6ヶ月定着支援まで一体化した安心設計をご紹介します。"
+      content="株式会社ルミライズのサービス一覧。住まい支援、家賃補助制度の活用、就労支援制度接続、3ヶ月・6ヶ月・1年・2年の面接まで一体化した安心設計をご紹介します。"
     />
     <meta property="og:url" content="https://lumirize.com/services.html" />
     <meta property="og:image" content="https://lumirize.com/assets/lumirize-logo-horizontal.png" />
@@ -28,7 +28,7 @@
     <meta name="twitter:title" content="サービス | 株式会社ルミライズ" />
     <meta
       name="twitter:description"
-      content="株式会社ルミライズのサービス一覧。住まい支援、家賃補助制度の活用、就労支援制度接続、3ヶ月・6ヶ月定着支援まで一体化した安心設計をご紹介します。"
+      content="株式会社ルミライズのサービス一覧。住まい支援、家賃補助制度の活用、就労支援制度接続、3ヶ月・6ヶ月・1年・2年の面接まで一体化した安心設計をご紹介します。"
     />
     <meta name="twitter:image" content="https://lumirize.com/assets/lumirize-logo-horizontal.png" />
     <link rel="icon" type="image/png" href="./assets/lumirize-logo-mark.png" />
@@ -40,6 +40,14 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./themes.css" />
+    <script>
+      (function () {
+        var m = location.search.match(/[?&]v=([1-5])/);
+        var v = m ? m[1] : (function () { try { return localStorage.getItem("lumirize-layout") || "1"; } catch (e) { return "1"; } })();
+        document.documentElement.setAttribute("data-theme", "v" + v);
+      })();
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">本文へスキップ</a>
@@ -112,7 +120,7 @@
                 <li>住居確保給付金等の活用可能性確認</li>
                 <li>生活困窮者自立支援制度との連携</li>
                 <li>再発防止と就労継続支援</li>
-                <li>3ヶ月・6ヶ月定着面談</li>
+                <li>3ヶ月・6ヶ月・1年・2年の面接</li>
               </ul>
             </article>
             <article class="service-card">
@@ -253,5 +261,15 @@
     <a class="mobile-consult" href="./contact.html" aria-label="無料相談を予約">無料相談</a>
 
     <script src="./script.js"></script>
+  
+    <aside class="theme-dock" aria-label="デザインバージョン">
+      <p>Design</p>
+      <a href="?v=1" data-theme="1">1 グリッド</a>
+      <a href="?v=2" data-theme="2">2 センター</a>
+      <a href="?v=3" data-theme="3">3 シネマ</a>
+      <a href="?v=4" data-theme="4">4 レール</a>
+      <a href="?v=5" data-theme="5">5 分割</a>
+    </aside>
+    <script src="./theme.js" defer></script>
   </body>
 </html>

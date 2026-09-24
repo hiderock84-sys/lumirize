@@ -40,6 +40,14 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./themes.css" />
+    <script>
+      (function () {
+        var m = location.search.match(/[?&]v=([1-5])/);
+        var v = m ? m[1] : (function () { try { return localStorage.getItem("lumirize-layout") || "1"; } catch (e) { return "1"; } })();
+        document.documentElement.setAttribute("data-theme", "v" + v);
+      })();
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">本文へスキップ</a>
@@ -128,12 +136,15 @@
             </p>
             <p class="message-theme">万人に同じプログラムが合うわけではない。</p>
             <p>
+              ダルクのプログラムにつながる方は、支援を必要とする方の一部です。つながれない方の割合は非常に高く、その方々に住まいが提供されないまま残されています。私はこの矛盾を変えたい。プログラムに入れないことを理由に、暮らしの前提である住まいまで届かない状態を、このままにはしたくありません。
+            </p>
+            <p>
               この現実に向き合った結果、私は「住まいは条件ではなく前提」という結論に至りました。
               まず安心して暮らせる環境があり、その上で回復や再出発が始まると考えています。
             </p>
             <p>
               さらに、支援は気持ちだけでは続きません。住居確保給付金、住宅セーフティネット、住宅扶助、
-              就労支援制度などを現場で機能する形に整え、3ヶ月・6ヶ月の定着支援までつなげる実装が必要です。
+              就労支援制度などを現場で機能する形に整え、3ヶ月・6ヶ月・1年・2年の面接までつなげる実装が必要です。
             </p>
             <p>
               13年以上の現場経験の中で、依存症者、刑務所出所者、生活困窮者、
@@ -244,5 +255,15 @@
     <a class="mobile-consult" href="./contact.html" aria-label="無料相談を予約">無料相談</a>
 
     <script src="./script.js"></script>
+  
+    <aside class="theme-dock" aria-label="デザインバージョン">
+      <p>Design</p>
+      <a href="?v=1" data-theme="1">1 グリッド</a>
+      <a href="?v=2" data-theme="2">2 センター</a>
+      <a href="?v=3" data-theme="3">3 シネマ</a>
+      <a href="?v=4" data-theme="4">4 レール</a>
+      <a href="?v=5" data-theme="5">5 分割</a>
+    </aside>
+    <script src="./theme.js" defer></script>
   </body>
 </html>

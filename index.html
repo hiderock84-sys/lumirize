@@ -47,6 +47,14 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./themes.css" />
+    <script>
+      (function () {
+        var m = location.search.match(/[?&]v=([1-5])/);
+        var v = m ? m[1] : (function () { try { return localStorage.getItem("lumirize-layout") || "1"; } catch (e) { return "1"; } })();
+        document.documentElement.setAttribute("data-theme", "v" + v);
+      })();
+    </script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -253,6 +261,9 @@
               住まいは人生の基盤であり、人間の尊厳そのものです。私たちは、部屋を提供するだけで終わらず、
               家賃補助・就労支援制度・行政連携を組み合わせて、一人ひとりの再出発に伴走します。
             </p>
+            <p>
+              ダルクのプログラムにつながる方は一部です。つながれない方の割合は非常に高く、その方々に住まいが提供されない矛盾を、私たちは変えたいと考えています。
+            </p>
           </article>
 
           <div class="info-grid reveal">
@@ -265,8 +276,8 @@
               <p>ハローワーク、就労移行支援、就労継続支援等と接続し、収入と生活の安定を同時に設計します。</p>
             </article>
             <article class="info-item">
-              <h3>3ヶ月・6ヶ月定着支援</h3>
-              <p>入居後の節目で定着面談を実施し、家計・就労・生活リズムを調整。孤立を防ぎ、安定を着実に積み上げます。</p>
+              <h3>3ヶ月・6ヶ月・1年・2年の面接</h3>
+              <p>入居後の節目で面接を実施し、家計・就労・生活リズムを調整。孤立を防ぎ、安定を着実に積み上げます。</p>
             </article>
           </div>
 
@@ -292,7 +303,7 @@
             <p class="message-theme">制度を、説明で終わらせない。</p>
             <p>
               家賃補助、生活困窮者自立支援、住宅セーフティネット、住宅扶助、就労支援制度を一体運用し、
-              入居前の準備から入居後3ヶ月・6ヶ月の定着まで伴走します。
+              入居前の準備から入居後3ヶ月・6ヶ月・1年・2年の面接まで伴走します。
             </p>
           </article>
 
@@ -309,7 +320,7 @@
               </article>
               <article class="institution-pillar">
                 <h4>定着の伴走</h4>
-                <p>3ヶ月・6ヶ月面談で生活課題を早期調整し、再不安定化を予防します。</p>
+                <p>3ヶ月・6ヶ月・1年・2年の面接で生活課題を早期調整し、再不安定化を予防します。</p>
               </article>
             </div>
           </section>
@@ -355,7 +366,7 @@
             <article class="service-card">
               <p class="service-number">03</p>
               <h3>入居後の定着伴走</h3>
-              <p>住居提供後も、生活の安定と社会参加を見据えた3ヶ月・6ヶ月の定着支援を継続します。</p>
+              <p>住居提供後も、生活の安定と社会参加を見据えた3ヶ月・6ヶ月・1年・2年の面接を継続します。</p>
               <ul class="check-list">
                 <li>生活相談・家計調整・就労継続支援</li>
                 <li>医療・福祉・行政とのケース連携</li>
@@ -421,7 +432,7 @@
               </button>
               <div class="faq-answer">
                 <p>
-                  定期面談と必要時の関係機関連携を行い、3ヶ月・6ヶ月の節目で定着確認を実施します。就労・家計・生活リズムを早期に調整し、継続居住を支えます。
+                  定期面談と必要時の関係機関連携を行い、3ヶ月・6ヶ月・1年・2年の面接を実施します。就労・家計・生活リズムを早期に調整し、継続居住を支えます。
                 </p>
               </div>
             </article>
@@ -517,5 +528,15 @@
     <a class="mobile-consult" href="./contact.html" aria-label="無料相談を予約">無料相談</a>
 
     <script src="./script.js"></script>
+  
+    <aside class="theme-dock" aria-label="デザインバージョン">
+      <p>Design</p>
+      <a href="?v=1" data-theme="1">1 グリッド</a>
+      <a href="?v=2" data-theme="2">2 センター</a>
+      <a href="?v=3" data-theme="3">3 シネマ</a>
+      <a href="?v=4" data-theme="4">4 レール</a>
+      <a href="?v=5" data-theme="5">5 分割</a>
+    </aside>
+    <script src="./theme.js" defer></script>
   </body>
 </html>

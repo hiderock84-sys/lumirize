@@ -6,7 +6,7 @@
     <title>支援内容 | 株式会社ルミライズ</title>
     <meta
       name="description"
-      content="株式会社ルミライズの支援内容。住まい支援、家賃補助制度活用、就労制度接続、3ヶ月・6ヶ月定着支援まで、守られている安心を実装する支援内容をご紹介します。"
+      content="株式会社ルミライズの支援内容。住まい支援、家賃補助制度活用、就労制度接続、3ヶ月・6ヶ月・1年・2年の面接まで、守られている安心を実装する支援内容をご紹介します。"
     />
     <meta
       name="keywords"
@@ -20,7 +20,7 @@
     <meta property="og:title" content="支援内容 | 株式会社ルミライズ" />
     <meta
       property="og:description"
-      content="株式会社ルミライズの支援内容。住まい支援、家賃補助制度活用、就労制度接続、3ヶ月・6ヶ月定着支援まで、守られている安心を実装する支援内容をご紹介します。"
+      content="株式会社ルミライズの支援内容。住まい支援、家賃補助制度活用、就労制度接続、3ヶ月・6ヶ月・1年・2年の面接まで、守られている安心を実装する支援内容をご紹介します。"
     />
     <meta property="og:url" content="https://lumirize.com/support.html" />
     <meta property="og:image" content="https://lumirize.com/assets/lumirize-logo-horizontal.png" />
@@ -28,7 +28,7 @@
     <meta name="twitter:title" content="支援内容 | 株式会社ルミライズ" />
     <meta
       name="twitter:description"
-      content="株式会社ルミライズの支援内容。住まい支援、家賃補助制度活用、就労制度接続、3ヶ月・6ヶ月定着支援まで、守られている安心を実装する支援内容をご紹介します。"
+      content="株式会社ルミライズの支援内容。住まい支援、家賃補助制度活用、就労制度接続、3ヶ月・6ヶ月・1年・2年の面接まで、守られている安心を実装する支援内容をご紹介します。"
     />
     <meta name="twitter:image" content="https://lumirize.com/assets/lumirize-logo-horizontal.png" />
     <link rel="icon" type="image/png" href="./assets/lumirize-logo-mark.png" />
@@ -40,6 +40,14 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./themes.css" />
+    <script>
+      (function () {
+        var m = location.search.match(/[?&]v=([1-5])/);
+        var v = m ? m[1] : (function () { try { return localStorage.getItem("lumirize-layout") || "1"; } catch (e) { return "1"; } })();
+        document.documentElement.setAttribute("data-theme", "v" + v);
+      })();
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">本文へスキップ</a>
@@ -171,7 +179,7 @@
               </article>
             </div>
 
-            <p class="support-grid-caption">住居提供で終わらせず、家賃補助活用・就労制度接続・3ヶ月/6ヶ月定着支援まで見据えた実務支援を継続します。</p>
+            <p class="support-grid-caption">住居提供で終わらせず、家賃補助活用・就労制度接続・3ヶ月・6ヶ月・1年・2年の面接まで見据えた実務支援を継続します。</p>
           </section>
         </div>
       </section>
@@ -205,7 +213,7 @@
             <article class="story-card">
               <h3>Cさん（50代男性）</h3>
               <p class="story-subtitle">アルコール依存からの回復と家族再会</p>
-              <p>ナイトケアハウスでの生活と3ヶ月・6ヶ月定着支援により、断酒継続と家族関係の再構築につながりました。</p>
+              <p>ナイトケアハウスでの生活と3ヶ月・6ヶ月・1年・2年の面接により、断酒継続と家族関係の再構築につながりました。</p>
               <blockquote>「もう一度、家族と話せる日が来ました。」</blockquote>
             </article>
             <article class="story-card">
@@ -298,5 +306,15 @@
     <a class="mobile-consult" href="./contact.html" aria-label="無料相談を予約">無料相談</a>
 
     <script src="./script.js"></script>
+  
+    <aside class="theme-dock" aria-label="デザインバージョン">
+      <p>Design</p>
+      <a href="?v=1" data-theme="1">1 グリッド</a>
+      <a href="?v=2" data-theme="2">2 センター</a>
+      <a href="?v=3" data-theme="3">3 シネマ</a>
+      <a href="?v=4" data-theme="4">4 レール</a>
+      <a href="?v=5" data-theme="5">5 分割</a>
+    </aside>
+    <script src="./theme.js" defer></script>
   </body>
 </html>
