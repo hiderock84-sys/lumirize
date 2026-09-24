@@ -39,7 +39,7 @@ html[data-theme="v4"] main::before {
   opacity: 1 !important;
   mix-blend-mode: normal !important;
   filter: none !important;
-  background: url("https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=max&w=2400&q=90") center 32% / cover no-repeat !important;
+  background: url("https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=max&w=2400&q=90") center 42% / cover no-repeat !important;
 }
 
 html[data-theme="v4"] .section {
