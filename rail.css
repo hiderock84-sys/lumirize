@@ -855,3 +855,7 @@ html[data-theme="v4"] .faq-benefit-list li {
   line-height: 1.8 !important;
   margin-bottom: 8px;
 }
+
+html[data-theme="v4"] .faq-question > span:first-child {
+  text-wrap: balance;
+}
