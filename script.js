@@ -34,82 +34,13 @@
     }
   })();
 
-  const toneKey = "lumirize-tone";
-  const toneValues = new Set(["warm", "sharp"]);
-  let toneSwitch = null;
-
-  const getToneFromUrl = () => {
+  const initToneSwitcher = () => {
+    document.body.setAttribute("data-tone", "warm");
     try {
-      const toneParam = new URL(window.location.href).searchParams.get("tone");
-      return toneParam && toneValues.has(toneParam) ? toneParam : null;
-    } catch {
-      return null;
-    }
-  };
-
-  const getStoredTone = () => {
-    try {
-      const stored = localStorage.getItem(toneKey);
-      return stored && toneValues.has(stored) ? stored : null;
-    } catch {
-      return null;
-    }
-  };
-
-  const updateToneButtons = (activeTone) => {
-    if (!toneSwitch) return;
-    const buttons = toneSwitch.querySelectorAll("button[data-tone]");
-    buttons.forEach((button) => {
-      const selected = button.getAttribute("data-tone") === activeTone;
-      button.setAttribute("aria-pressed", String(selected));
-    });
-  };
-
-  const applyToneCopy = (activeTone) => {
-    const copyTargets = document.querySelectorAll("[data-tone-warm][data-tone-sharp]");
-    copyTargets.forEach((node) => {
-      const nextText = activeTone === "sharp" ? node.getAttribute("data-tone-sharp") : node.getAttribute("data-tone-warm");
-      if (!nextText) return;
-      node.textContent = nextText;
-    });
-  };
-
-  const applyTone = (tone) => {
-    const nextTone = toneValues.has(tone) ? tone : "warm";
-    document.body.setAttribute("data-tone", nextTone);
-    try {
-      localStorage.setItem(toneKey, nextTone);
+      localStorage.removeItem("lumirize-tone");
     } catch {
       // Ignore storage errors.
     }
-    applyToneCopy(nextTone);
-    updateToneButtons(nextTone);
-  };
-
-  const initToneSwitcher = () => {
-    const initialTone = getToneFromUrl() || getStoredTone() || "warm";
-    applyTone(initialTone);
-
-    toneSwitch = document.createElement("div");
-    toneSwitch.className = "tone-switch";
-    toneSwitch.setAttribute("role", "group");
-    toneSwitch.setAttribute("aria-label", "文章トーン切替");
-    toneSwitch.innerHTML = `
-      <span class="tone-switch-label">文章トーン</span>
-      <button type="button" data-tone="warm" aria-pressed="false">Warm</button>
-      <button type="button" data-tone="sharp" aria-pressed="false">Sharp</button>
-    `;
-
-    toneSwitch.addEventListener("click", (event) => {
-      const button = event.target.closest("button[data-tone]");
-      if (!button) return;
-      const selectedTone = button.getAttribute("data-tone");
-      if (!selectedTone) return;
-      applyTone(selectedTone);
-    });
-
-    document.body.append(toneSwitch);
-    updateToneButtons(initialTone);
   };
 
   const setMenuOpenState = (isOpen) => {
