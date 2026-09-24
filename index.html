@@ -18,19 +18,7 @@
     />
     <meta property="og:image" content="https://lumirize.com/assets/lumirize-logo-horizontal.png" />
     <link rel="icon" type="image/png" href="./assets/lumirize-logo-mark.png" />
-    <link rel="stylesheet" href="./landing.css?v=20260924d" />
-    <script>
-      (function () {
-        var match = location.search.match(/[?&]v=([1-5])/);
-        var theme = match ? match[1] : "1";
-        try {
-          if (!match) theme = localStorage.getItem("lumirize-layout") || "1";
-          localStorage.setItem("lumirize-layout", theme);
-        } catch (err) {}
-        if (!/^[1-5]$/.test(theme)) theme = "1";
-        document.documentElement.setAttribute("data-theme", "v" + theme);
-      })();
-    </script>
+    <link rel="stylesheet" href="./landing.css?v=20260924e" />
   </head>
   <body>
     <a class="skip" href="#main">本文へスキップ</a>
@@ -40,14 +28,13 @@
       </a>
       <a class="consult" href="./contact.html">相談する</a>
       <ul class="chapters">
-        <li><a href="./about.html">理念</a></li>
+        <li><a href="./about.html">私たちについて</a></li>
         <li><a href="./policy.html">制度</a></li>
         <li><a href="./stats.html">実績</a></li>
         <li><a href="./services.html">サービス</a></li>
         <li><a href="./support.html">支援</a></li>
         <li><a href="./process.html">流れ</a></li>
         <li><a href="./faq.html">FAQ</a></li>
-        <li><a href="./representative.html">代表</a></li>
       </ul>
     </header>
 
@@ -55,10 +42,10 @@
       <section class="hero" aria-labelledby="hero-title">
         <img
           class="photo"
-          src="https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?auto=format&fit=crop&w=1600&q=80"
-          alt="高層ビルが並ぶ都市の景観"
-          width="1600"
-          height="900"
+          src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=2800&q=90"
+          alt="ビルが立ち並ぶ都市の街路"
+          width="2800"
+          height="1867"
         />
         <div class="copy">
           <p class="kicker">Housing First</p>
@@ -140,25 +127,5 @@
       <p>© 2021 株式会社ルミライズ</p>
     </footer>
 
-    <ul class="switch" aria-label="デザイン">
-      <li><a href="?v=1" data-theme="1">グリッド</a></li>
-      <li><a href="?v=2" data-theme="2">センター</a></li>
-      <li><a href="?v=3" data-theme="3">シネマ</a></li>
-      <li><a href="?v=4" data-theme="4">レール</a></li>
-      <li><a href="?v=5" data-theme="5">分割</a></li>
-    </ul>
-    <script>
-      (function () {
-        var theme = (document.documentElement.getAttribute("data-theme") || "v1").slice(1);
-        document.querySelectorAll(".switch a").forEach(function (link) {
-          if (link.getAttribute("data-theme") === theme) link.setAttribute("aria-current", "true");
-        });
-        document.querySelectorAll("a[href$='.html']").forEach(function (link) {
-          var href = link.getAttribute("href");
-          if (!href || link.closest(".switch")) return;
-          link.setAttribute("href", href + (href.indexOf("?") === -1 ? "?" : "&") + "v=" + theme);
-        });
-      })();
-    </script>
   </body>
 </html>

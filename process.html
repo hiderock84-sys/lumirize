@@ -41,12 +41,9 @@
     />
     <link rel="stylesheet" href="./styles.css" />
     <link rel="stylesheet" href="./themes.css?v=20260924c" />
+    <link rel="stylesheet" href="./rail.css?v=20260924e" />
     <script>
-      (function () {
-        var m = location.search.match(/[?&]v=([1-5])/);
-        var v = m ? m[1] : (function () { try { return localStorage.getItem("lumirize-layout") || "1"; } catch (e) { return "1"; } })();
-        document.documentElement.setAttribute("data-theme", "v" + v);
-      })();
+      document.documentElement.setAttribute("data-theme", "v4");
     </script>
   </head>
   <body>
@@ -257,15 +254,6 @@
     <a class="mobile-consult" href="./contact.html" aria-label="無料相談を予約">無料相談</a>
 
     <script src="./script.js"></script>
-  
-    <aside class="theme-dock" aria-label="デザインバージョン">
-      <p>Design</p>
-      <a href="?v=1" data-theme="1">1 グリッド</a>
-      <a href="?v=2" data-theme="2">2 センター</a>
-      <a href="?v=3" data-theme="3">3 シネマ</a>
-      <a href="?v=4" data-theme="4">4 レール</a>
-      <a href="?v=5" data-theme="5">5 分割</a>
-    </aside>
-    <script src="./theme.js" defer></script>
+
   </body>
 </html>
