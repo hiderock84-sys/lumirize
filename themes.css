@@ -1036,3 +1036,261 @@ html[data-theme="v5"] .message-card {
     width: min(640px, calc(100% - 64px));
   }
 }
+
+/* iPhone and other narrow screens. The page stays inside the display,
+   and the version switch sits in one row along the bottom. */
+
+@media (max-width: 959px) {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  html[data-theme],
+  html[data-theme] body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  html[data-theme] body {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom)) !important;
+  }
+
+  html[data-theme] .container,
+  html[data-theme] .hero-content,
+  html[data-theme] .section-heading {
+    width: calc(100% - 32px) !important;
+    max-width: calc(100% - 32px);
+  }
+
+  html[data-theme] .footer-bottom,
+  html[data-theme] .footer-grid,
+  html[data-theme] .guide-banner,
+  html[data-theme] .info-item,
+  html[data-theme] .message-card {
+    max-width: 100%;
+  }
+
+  html[data-theme] .footer-grid li,
+  html[data-theme] .hero h1,
+  html[data-theme] .section-heading h1,
+  html[data-theme] .section-heading h2 {
+    white-space: normal !important;
+  }
+
+  html[data-theme] input,
+  html[data-theme] select,
+  html[data-theme] textarea {
+    font-size: 16px;
+  }
+
+  html[data-theme] .header-inner,
+  html[data-theme] .global-nav,
+  html[data-theme] .mobile-nav-cta,
+  html[data-theme] .btn,
+  html[data-theme] .btn-nav,
+  html[data-theme] .btn-nav-tel {
+    min-width: 0 !important;
+    max-width: 100%;
+  }
+
+  html[data-theme] .mobile-nav-cta {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    margin: 8px 0 0 !important;
+  }
+
+  html[data-theme] .btn,
+  html[data-theme] .btn-nav,
+  html[data-theme] .btn-nav-tel,
+  html[data-theme] .global-nav ul a {
+    white-space: normal !important;
+  }
+
+  html[data-theme] .nav-label-en,
+  html[data-theme] .global-nav ul a::after {
+    display: none !important;
+  }
+
+  html[data-theme="v1"] .hero-cover {
+    height: 168px !important;
+    min-height: 0 !important;
+  }
+
+  html[data-theme="v1"] .global-nav ul a,
+  html[data-theme="v1"] body.home-page .global-nav ul a {
+    min-height: 40px;
+    padding: 6px 8px !important;
+    font-size: 13px !important;
+  }
+
+  html[data-theme="v2"] .section {
+    padding: 40px 0;
+  }
+
+  html[data-theme="v2"] .hero-cover {
+    height: 180px !important;
+    min-height: 0 !important;
+    width: calc(100% - 32px) !important;
+  }
+
+  html[data-theme="v2"] .global-nav ul,
+  html[data-theme="v3"] .global-nav ul,
+  html[data-theme="v5"] .global-nav ul {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0 12px;
+    width: 100% !important;
+  }
+
+  html[data-theme="v2"] .global-nav ul li,
+  html[data-theme="v3"] .global-nav ul li,
+  html[data-theme="v5"] .global-nav ul li {
+    width: auto !important;
+  }
+
+  html[data-theme="v2"] .global-nav ul a,
+  html[data-theme="v3"] .global-nav ul a,
+  html[data-theme="v5"] .global-nav ul a,
+  html[data-theme="v2"] body.home-page .global-nav ul a,
+  html[data-theme="v3"] body.home-page .global-nav ul a,
+  html[data-theme="v5"] body.home-page .global-nav ul a {
+    display: inline-flex !important;
+    align-items: center;
+    min-height: 36px;
+    padding: 4px 0 !important;
+    font-size: 14px !important;
+  }
+
+  .theme-dock {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    gap: 0;
+    padding: 0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    border-width: 1px 0 0;
+  }
+
+  .theme-dock p {
+    display: none;
+  }
+
+  .theme-dock a {
+    flex: 1 1 0;
+    min-height: 52px;
+    margin: 0;
+    padding: 8px 2px;
+    border-width: 0 0 0 1px;
+    font-size: 12px;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  .theme-dock a:first-of-type {
+    border-left: 0;
+  }
+
+  html[data-theme="v3"] .hero,
+  html[data-theme="v3"] body:not(.home-page) main > .section:first-child {
+    min-height: 100svh;
+    padding-bottom: calc(88px + env(safe-area-inset-bottom));
+  }
+
+  html[data-theme="v4"] .site-header,
+  html[data-theme="v4"] .site-header.scrolled,
+  html[data-theme="v4"] body.menu-open .site-header {
+    position: sticky;
+    inset: auto;
+    top: 0;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    border-right: 0 !important;
+    border-bottom: 1px solid #e0d6c8 !important;
+  }
+
+  html[data-theme="v4"] .header-inner {
+    padding: 12px 16px 0;
+  }
+
+  html[data-theme="v4"] .brand {
+    width: 148px;
+  }
+
+  html[data-theme="v4"] .global-nav ul {
+    flex-direction: row;
+    gap: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  html[data-theme="v4"] .global-nav ul a,
+  html[data-theme="v4"] body.home-page .global-nav ul a {
+    white-space: nowrap !important;
+    font-size: 14px;
+    line-height: 1.3;
+    padding: 12px 14px;
+    border-bottom: 0;
+    border-right: 1px solid #e0d6c8;
+  }
+
+  html[data-theme="v4"] .global-nav > .btn-nav,
+  html[data-theme="v4"] .mobile-nav-cta {
+    display: none !important;
+  }
+
+  html[data-theme="v4"] .global-nav {
+    overflow: hidden;
+    max-width: 100%;
+  }
+
+  html[data-theme="v4"] main,
+  html[data-theme="v4"] .site-footer {
+    margin-left: 0;
+  }
+
+  html[data-theme="v5"] body::before {
+    position: absolute;
+    width: 100%;
+    height: 168px;
+  }
+
+  html[data-theme="v5"] .site-header,
+  html[data-theme="v5"] .site-header.scrolled,
+  html[data-theme="v5"] body.menu-open .site-header {
+    position: relative;
+    left: auto;
+    right: auto;
+    width: 100%;
+    margin-top: 168px;
+  }
+
+  html[data-theme="v5"] body {
+    padding-left: 0;
+  }
+
+  html[data-theme="v3"] .mobile-nav-cta {
+    display: none !important;
+  }
+
+  html[data-theme="v3"] .brand {
+    width: 120px;
+  }
+
+  html[data-theme="v3"] .global-nav ul {
+    flex-wrap: nowrap !important;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  html[data-theme="v3"] .global-nav ul a,
+  html[data-theme="v3"] body.home-page .global-nav ul a {
+    white-space: nowrap !important;
+    padding: 8px 10px 8px 0 !important;
+  }
+}
