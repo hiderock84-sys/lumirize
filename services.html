@@ -2,11 +2,11 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>サービス | 株式会社ルミライズ</title>
     <meta
       name="description"
-      content="株式会社ルミライズのサービス一覧。住まい支援、家賃補助制度の活用、就労支援制度接続、3ヶ月・6ヶ月定着支援まで一体化した安心設計をご紹介します。"
+      content="株式会社ルミライズのサービス一覧。住まい支援、家賃補助制度の活用、就労支援制度接続、3ヶ月・6ヶ月・1年・2年の面接まで一体化した安心設計をご紹介します。"
     />
     <meta
       name="keywords"
@@ -20,7 +20,7 @@
     <meta property="og:title" content="サービス | 株式会社ルミライズ" />
     <meta
       property="og:description"
-      content="株式会社ルミライズのサービス一覧。住まい支援、家賃補助制度の活用、就労支援制度接続、3ヶ月・6ヶ月定着支援まで一体化した安心設計をご紹介します。"
+      content="株式会社ルミライズのサービス一覧。住まい支援、家賃補助制度の活用、就労支援制度接続、3ヶ月・6ヶ月・1年・2年の面接まで一体化した安心設計をご紹介します。"
     />
     <meta property="og:url" content="https://lumirize.com/services.html" />
     <meta property="og:image" content="https://lumirize.com/assets/lumirize-logo-horizontal.png" />
@@ -28,7 +28,7 @@
     <meta name="twitter:title" content="サービス | 株式会社ルミライズ" />
     <meta
       name="twitter:description"
-      content="株式会社ルミライズのサービス一覧。住まい支援、家賃補助制度の活用、就労支援制度接続、3ヶ月・6ヶ月定着支援まで一体化した安心設計をご紹介します。"
+      content="株式会社ルミライズのサービス一覧。住まい支援、家賃補助制度の活用、就労支援制度接続、3ヶ月・6ヶ月・1年・2年の面接まで一体化した安心設計をご紹介します。"
     />
     <meta name="twitter:image" content="https://lumirize.com/assets/lumirize-logo-horizontal.png" />
     <link rel="icon" type="image/png" href="./assets/lumirize-logo-mark.png" />
@@ -40,6 +40,11 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./themes.css?v=20260924c" />
+    <link rel="stylesheet" href="./rail.css?v=20260924k" />
+    <script>
+      document.documentElement.setAttribute("data-theme", "v4");
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">本文へスキップ</a>
@@ -94,26 +99,31 @@
           <header class="section-heading reveal">
             <p class="eyebrow">Services</p>
             <h1 id="services-title">私たちのサービス</h1>
-            <p>住まいを失わせないことが、再出発の第一歩。Housing Firstの理念に制度活用力を重ね、安心が続くサービスを提供しています。</p>
+            <p
+              data-tone-warm="住まいを失わせないことが、再出発の第一歩。Housing Firstに制度活用力を重ね、安心して暮らせる日常を取り戻します。"
+              data-tone-sharp="住まいを失わせないことが、再出発の第一歩。Housing Firstと制度活用を統合し、再出発の成果を実務で実現します。"
+            >
+              住まいを失わせないことが、再出発の第一歩。Housing Firstに制度活用力を重ね、公的制度要件と現場知見に基づく支援を実装します。
+            </p>
           </header>
 
           <div class="service-grid reveal">
             <article class="service-card">
               <p class="service-number">01</p>
               <h2>依存症者向け 住まい再建サービス</h2>
-              <p>回復の途上にある方へ、制度活用を前提に安心して暮らせる住まいを確保し、生活を立て直す導線を整えます。</p>
+              <p>回復の途上にある方へ、制度活用を前提に安心して暮らせる住まいを確保し、生活再建の導線を整えます。</p>
               <ul class="check-list">
                 <li>回復を支える安定した住環境</li>
                 <li>住居確保給付金等の活用可能性確認</li>
                 <li>生活困窮者自立支援制度との連携</li>
                 <li>再発防止と就労継続支援</li>
-                <li>3ヶ月・6ヶ月定着面談</li>
+                <li>3ヶ月・6ヶ月・1年・2年の面接</li>
               </ul>
             </article>
             <article class="service-card">
               <p class="service-number">02</p>
               <h2>刑務所出所者向け 社会再参加サービス</h2>
-              <p>出所後の住まい不安を早期に解消し、制度と就労支援の接続で社会復帰を継続できる土台をつくります。</p>
+              <p>出所後の住まい不安を早期に解消し、制度と就労支援を接続して社会復帰を継続できる土台をつくります。</p>
               <ul class="check-list">
                 <li>出所後すぐに入居可能</li>
                 <li>住宅セーフティネットへの接続</li>
@@ -162,7 +172,7 @@
               <p class="service-number">06</p>
               <h2>外国人労働者・移民向け 住居支援</h2>
               <p>
-                言語・制度・文化差による住居課題に対応し、外国人労働者や移民の方々が安心して生活できる住まいと実務支援を提供します。
+                言語・制度・文化差による住居課題に対応し、外国人労働者・外国人住民の方々が安心して生活できる住まいと実務支援を提供します。
               </p>
               <ul class="check-list">
                 <li>日本語・制度理解を補う入居サポート</li>
@@ -174,7 +184,12 @@
           </div>
 
           <div class="process-cta reveal">
-            <p>制度支援が受けられる安心設計の相談は、お問い合わせページから受け付けています。</p>
+            <p
+              data-tone-warm="制度支援が受けられる安心設計のご相談は、お問い合わせページからいつでも受け付けています。"
+              data-tone-sharp="制度支援が受けられる安心設計は、お問い合わせページから即時相談いただけます。"
+            >
+              制度支援が受けられる安心設計のご相談は、お問い合わせページから受け付けています。
+            </p>
             <a class="btn btn-secondary" href="./process.html">入居までの流れを見る</a>
             <a class="btn btn-primary" href="./contact.html">制度活用を相談する</a>
           </div>
@@ -195,7 +210,7 @@
             loading="lazy"
             decoding="async"
           />
-          <p>再犯防止とHousing First。住まいを整え、回復と再出発へ。誰もが再び光を見出せる未来をつくります。</p>
+          <p>Housing Firstの実装で住まい・制度・就労をつなぎ、回復と再出発を継続可能な暮らしへ。誰もが尊厳を取り戻せる未来をつくります。</p>
         </section>
         <section>
           <h3>サービス</h3>
@@ -243,5 +258,6 @@
     <a class="mobile-consult" href="./contact.html" aria-label="無料相談を予約">無料相談</a>
 
     <script src="./script.js"></script>
+
   </body>
 </html>
