@@ -1,4 +1,5 @@
 <!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -23,7 +24,7 @@
   </script>
 <meta name="robots" content="index, follow"><link rel="stylesheet" href="design-system.css?v=20260925-r8">
 <link rel="stylesheet" href="glass-buttons.css?v=20260925-r7">
-<link rel="stylesheet" href="content-system.css?v=20260926-r9"></head>
+<link rel="stylesheet" href="content-system.css?v=20260926-r9"><link rel="stylesheet" href="reference-motion.css?v=20260926-r10"></head>
 <body class="merged-page">
   <a class="skip-link" href="#main-content">本文へスキップ</a>
   <header class="header" id="top">
@@ -48,7 +49,7 @@
   </dialog>
 
   <main id="main-content" class="merged-content merged-home">
-      <section class="v2-hero v2-urban-hero" aria-labelledby="hero-heading">
+      <section class="v2-hero" aria-labelledby="hero-heading">
         <div class="v2-hero-copy">
           <p class="v2-eyebrow v2-hero-enter">住まいから、再出発を支える。</p>
           <h1 id="hero-heading" class="v2-hero-enter">人は、<br>必ずやり直せる。</h1>
@@ -73,7 +74,7 @@
           <a class="v2-small-link" href="support.html#guide">費用・ご利用について</a>
         </div>
         <figure class="v2-hero-photo">
-          <img src="hero-902.webp" srcset="hero-480.webp 480w, hero-902.webp 902w" sizes="(max-width: 760px) 100vw, 50vw" decoding="async" alt="朝の光が入る住まいで穏やかに過ごす人のイメージ" width="902" height="1603" loading="lazy">
+          <img src="hero-902.webp" srcset="hero-480.webp 480w, hero-902.webp 902w" sizes="(max-width: 760px) 100vw, 50vw" decoding="async" alt="朝の光が入る住まいで穏やかに過ごす人のイメージ" width="902" height="1603" fetchpriority="high">
           <figcaption>住まいが決まると、次の選択肢が生まれる。</figcaption>
         </figure>
       </section>
@@ -91,9 +92,13 @@
             <p class="v2-section-kicker">ストーリー <span>STORY</span></p>
             <h2>住まいが変わると、<br>明日が変わる。</h2>
           </div>
+          <div class="v2-story-options">
+            <button class="v2-motion-toggle" type="button" data-motion-toggle aria-pressed="false" aria-controls="story-scenes" hidden>
+              <span data-motion-label>静止して読む</span></button><a class="v2-story-skip" href="#our-support">支援内容へ進む ↓</a>
           </div>
+        </div>
       </section>
-      <section class="v2-story" id="story-scenes" aria-label="住まいから始まる再出発の物語">
+      <section class="v2-story" id="story-scenes" data-story aria-label="住まいから始まる再出発の物語">
         <div class="v2-story-stage">
           <article class="v2-scene" aria-label="1 夜の路地">
             <img src="scene1-960.webp" srcset="scene1-480.webp 480w, scene1-960.webp 960w" sizes="(max-width: 760px) 100vw, (max-width: 1400px) 100vw, 1200px" decoding="async" alt="夜の路地に立つ人のイメージ" width="1024" height="1536" loading="lazy">
@@ -125,12 +130,19 @@
               </div>
             </div>
           </article>
+          <div class="v2-story-controls">
+            <div class="v2-scene-dots" aria-label="場面を選ぶ">
+              <button type="button" data-scene-go="0" aria-label="夜の路地の場面へ" aria-current="true"></button><button type="button" data-scene-go="1" aria-label="住まいの鍵の場面へ" aria-current="false"></button><button type="button" data-scene-go="2" aria-label="朝の光の場面へ" aria-current="false"></button>
+            </div>
+            <button type="button" class="v2-motion-toggle v2-motion-toggle--dark" data-motion-toggle aria-pressed="false" aria-controls="story-scenes" hidden>
+              <span data-motion-label>静止して読む</span></button><a class="v2-scroll-label" href="#our-support">SCROLL <svg class="v2-icon" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 3v18m-6-6 6 6 6-6"></path></svg></a>
           </div>
+        </div>
       </section>
       <p class="v2-story-context">写真は支援の考え方を伝えるイメージです。</p>
       <section id="our-support" class="v2-section">
         <span id="support" class="anchor-alias" aria-hidden="true"></span><span id="services" class="anchor-alias" aria-hidden="true"></span><div class="v2-wrap">
-          <header class="v2-section-head">
+          <header class="v2-section-head" data-reveal="">
             <p class="v2-section-kicker">支援内容 <span>OUR SUPPORT</span></p>
             <h2>住まいから、<br>その先の暮らしまで。</h2>
           </header>
@@ -141,7 +153,7 @@
             </p>
           </div>
           <div class="v2-support-grid">
-            <a class="v2-support-card" href="support.html#housing"><figure>
+            <a class="v2-support-card" href="support.html#housing" data-reveal=""><figure>
                 <img src="residence-1200.webp" srcset="residence-480.webp 480w, residence-960.webp 960w, residence-1200.webp 1200w" sizes="(max-width: 760px) calc(100vw - 44px), (max-width: 1000px) 80vw, 720px" decoding="async" alt="ご案内する住まいの室内写真" loading="lazy" width="1200" height="901">
               </figure>
               <div>
@@ -152,7 +164,7 @@
                   </svg>
                 </h3>
                 <p>ナイトケアハウスと一時避難の住まいで、生活の土台を支えます。</p>
-              </div></a><a class="v2-support-card" href="support.html#living"><figure>
+              </div></a><a class="v2-support-card" href="support.html#living" data-reveal=""><figure>
                 <img src="scene2-960.webp" srcset="scene2-480.webp 480w, scene2-960.webp 960w" sizes="(max-width: 760px) 100vw, (max-width: 1400px) 100vw, 1200px" decoding="async" alt="住まいの鍵を受け取る場面のイメージ" loading="lazy" width="1024" height="1536">
               </figure>
               <div>
@@ -163,7 +175,7 @@
                   </svg>
                 </h3>
                 <p>相模原ダルクや関係機関と連携し、就労・就労準備を支えます。</p>
-              </div></a><a class="v2-support-card" href="support.html#followup"><figure>
+              </div></a><a class="v2-support-card" href="support.html#followup" data-reveal=""><figure>
                 <img src="scene3-960.webp" srcset="scene3-480.webp 480w, scene3-960.webp 960w" sizes="(max-width: 760px) 100vw, (max-width: 1400px) 100vw, 1200px" decoding="async" alt="住まいで穏やかに過ごす場面のイメージ" loading="lazy" width="1024" height="1536">
               </figure>
               <div>
@@ -264,5 +276,5 @@
     </div>
   <nav class="extended-footer" aria-label="詳しい情報"><a href="support.html#guide">費用・対応地域</a><a href="support-details.html">支援の詳細・体験談</a><a href="philosophy.html">企業理念</a><a href="operating-rules.html">運営規程（案）・PDF</a></nav></footer>
   <div class="mobile-cta" aria-label="相談窓口"><a class="glass-button" href="tel:0427048308"><span class="glass-button__label">電話で相談 </span> <span aria-hidden="true">↗</span></a><a class="glass-button" href="contact.html#consultation-form"><span class="glass-button__label">無料で相談する </span> <span aria-hidden="true">↗</span></a></div>
-</body>
+<script src="reference-motion.js?v=20260926-r10" defer></script></body>
 </html>
