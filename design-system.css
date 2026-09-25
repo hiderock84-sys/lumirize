@@ -378,3 +378,22 @@ h3 { font-size: 1.25rem; line-height: 1.65; }
   .inner-page main .compare-table td { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); overflow-wrap: anywhere; }
 }
 @media (max-width: 360px) { :root { --gutter: 20px; } }
+
+/* Official Sagamihara DARC photography — retain original image composition. */
+.sourced-photo { min-width: 0; margin: 0; }
+.sourced-photo img { display: block; width: 100%; height: auto; border-radius: 2px; }
+.sourced-photo figcaption { display: flex; flex-direction: column; gap: .25rem; margin-top: 1rem; font-size: .875rem; line-height: 1.8; color: inherit; }
+.sourced-photo figcaption a { width: fit-content; max-width: 100%; font-size: .8125rem; text-decoration: underline; text-underline-offset: .25em; opacity: .8; }
+.source-photo-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: var(--space-4); margin-top: var(--space-6); }
+.source-photo-grid img { aspect-ratio: 4 / 3; object-fit: contain; background: #191b1e; }
+.source-photo-single { max-width: 48rem; margin-block: var(--space-6); }
+.source-photo-feature { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); gap: var(--column-gap); align-items: center; margin-block: var(--space-7); }
+.source-photo-feature > div { min-width: 0; }
+.source-photo-feature .text-link { display: inline-block; margin-top: var(--space-3); }
+.inner-page main .story-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+.inner-page main .story-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+@media (max-width: 700px) {
+ .source-photo-grid, .source-photo-feature, .inner-page main .story-grid { grid-template-columns: minmax(0,1fr); }
+ .source-photo-grid { gap: var(--space-5); }
+ .source-photo-feature { gap: var(--space-4); }
+}
