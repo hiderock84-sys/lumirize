@@ -47,9 +47,9 @@
     copyHeight: 0,
   }));
   let frame = 0;
-  let headerHeight = 68;
+  let headerHeight = 0;
   function syncDimensions() {
-    headerHeight = document.querySelector(".header")?.getBoundingClientRect().height || 68;
+    headerHeight = 0;
     sceneParts.forEach((part) => {
       part.trackHeight = part.track.clientHeight;
       part.copyHeight = part.copy.offsetHeight;

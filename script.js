@@ -84,7 +84,7 @@
       const response = await fetch(form.dataset.ajaxAction, {method: 'POST', headers: {Accept: 'application/json'}, body: data, signal: controller.signal});
       const result = await response.json();
       if (!response.ok || !(result.success === true || result.success === 'true')) throw new Error('Submission not confirmed');
-      message('送信を受け付けました。営業時間内は30分、営業時間外は翌営業日の返信が目安です。返信が届かない場合は、迷惑メールフォルダをご確認のうえ、お電話ください。', 'success');
+      message('送信を受け付けました。営業時間内は30分程度、時間外は翌営業日を目安にご返信します。返信が届かない場合は、迷惑メールフォルダをご確認のうえ、お電話ください。', 'success');
       form.reset();
       updateFallback();
     } catch {
