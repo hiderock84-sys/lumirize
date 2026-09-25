@@ -233,6 +233,8 @@
     answer.id = answerId;
     button.setAttribute("type", "button");
     button.setAttribute("aria-controls", answerId);
+    button.setAttribute("aria-expanded", "false");
+    answer.hidden = true;
 
     button.addEventListener("click", () => {
       const currentlyOpen = item.classList.contains("active");
@@ -244,13 +246,13 @@
 
         otherItem.classList.remove("active");
         otherButton.setAttribute("aria-expanded", "false");
-        otherAnswer.style.maxHeight = null;
+        otherAnswer.hidden = true;
       });
 
       if (!currentlyOpen) {
         item.classList.add("active");
         button.setAttribute("aria-expanded", "true");
-        answer.style.maxHeight = `${answer.scrollHeight}px`;
+        answer.hidden = false;
       }
     });
   });
