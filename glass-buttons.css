@@ -115,3 +115,12 @@
   .mobile-cta .glass-button:hover,
   .mobile-cta .glass-button:active { transform: none; }
 }
+/* The homepage also alternates between light and dark sections. */
+.mobile-cta .glass-button[data-glass-tone="light"] {
+  --glass-ink: #17191d;
+  --glass-text-shadow: 0 1px 3px rgba(255,255,255,.8);
+}
+.mobile-cta .glass-button[data-glass-tone="dark"] {
+  --glass-ink: #fff;
+  --glass-text-shadow: 0 1px 3px rgba(0,0,0,.65);
+}

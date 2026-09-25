@@ -315,3 +315,66 @@ h3 { font-size: 1.25rem; line-height: 1.65; }
   .consultation-layout { display: block; }
   .contact-form-wrap { display: none; }
 }
+
+/* Editorial and usability audit: consistent reading rhythm and clear actions. */
+.menu-toggle { display: flex; padding: .75rem; }
+.inner-page main .message-card > p { max-width: 46rem; }
+.inner-page main .message-card > h3 { margin-top: 2rem; }
+.inner-page main .message-card > .about-divider + h3 { margin-top: 0; }
+.inner-page main .policy-flow-steps { list-style: none; padding: 0; }
+.inner-page main .policy-flow-steps > li { margin-top: 0; }
+.inner-page main .source-note, .inner-page main .field-hint { font-size: .875rem; line-height: 1.8; margin-top: 1rem; }
+.inner-page main .service-note { border-block: 1px solid var(--line); padding-block: 2rem; margin-top: 3rem; }
+.inner-page main .category-caption { display: block; font-size: .75rem; font-weight: 400; letter-spacing: .07em; margin-top: .5rem; color: var(--muted); }
+.inner-page main .faq-question { cursor: pointer; }
+.inner-page main table caption { text-align: left; font-size: .875rem; padding: 1rem; color: var(--muted); }
+.inner-page main .compare-card { min-width: 0; }
+.inner-page main .stats-dashboard:has(.compare-table) { grid-template-columns: minmax(0, 1fr); }
+.inner-page main :is(a, button, summary):focus-visible { outline-color: #325b7a; }
+.inner-page main .checkbox-row label { min-height: 44px; cursor: pointer; }
+.inner-page main .btn:disabled { opacity: .55; cursor: wait; }
+.inner-page main .form-status.error { padding: 1rem; background: #f6e6e4; border-left: 3px solid #9e2424; }
+.founder-intro { display: flex; gap: 1.5rem; align-items: center; margin-bottom: 2rem; }
+.founder-intro img { width: 6rem; height: 7.5rem; object-fit: cover; }
+.founder-intro p { line-height: 1.9; }
+.inner-page main .faq-answer:not([hidden]) { max-height: none; overflow: visible; }
+@media (min-width: 901px) {
+  .mobile-menu { max-width: 44rem; margin-left: auto; }
+}
+@media (min-width: 901px) and (max-width: 1100px) {
+  .desktop-nav { gap: 1rem; }
+  .header__actions { gap: 1rem; }
+  .desktop-nav a, .header__contact { font-size: .8125rem; }
+}
+@media (max-width: 600px) {
+  html { scroll-padding-top: 1.5rem; scroll-padding-bottom: calc(7rem + env(safe-area-inset-bottom)); }
+  .inner-page main .compare-table-wrap { border: 0; overflow: visible; }
+  .inner-page main .compare-table { min-width: 0; }
+  .inner-page main .compare-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .inner-page main .compare-table caption { display: block; padding: 0 0 1rem; }
+  .inner-page main .compare-table tbody, .inner-page main .compare-table tr { display: block; }
+  .inner-page main .compare-table tr + tr { margin-top: 1.5rem; }
+  .inner-page main .compare-table th[scope="row"] { display: block; padding: 1rem; }
+  .inner-page main .compare-table td { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: .75rem; padding: 1rem 0; }
+  .inner-page main .compare-table td::before { content: attr(data-label); color: var(--muted); }
+  .mobile-cta { pointer-events: none; }
+  .mobile-cta a { pointer-events: auto; }
+  .inner-page main .section-heading .eyebrow { font-size: .75rem; }
+  .hero__bottom { font-size: .75rem; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+@media (max-width: 600px) {
+  #contact-title .title-unit { display: block; }
+}
+@media (max-width: 600px) {
+  :root { --gutter: 24px; }
+  .header__inner, .header__actions { gap: 16px; }
+  .wordmark { font-size: clamp(22px, 6.5vw, 1.65rem); }
+  .menu-toggle { flex: 0 0 46px; padding: 12px; }
+  .hero__actions .glass-button { min-width: 0; max-width: 100%; }
+  .section-label { flex-wrap: wrap; }
+  .contact__phone { font-size: clamp(1rem, 7vw, 2rem); }
+  .contact__phone, .contact__email { max-width: 100%; flex-wrap: wrap; overflow-wrap: anywhere; }
+  .inner-page main .compare-table td { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); overflow-wrap: anywhere; }
+}
+@media (max-width: 360px) { :root { --gutter: 20px; } }
