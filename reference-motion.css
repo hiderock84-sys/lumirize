@@ -519,56 +519,79 @@ html.motion-paused .reveal-ready{
 
 .scroll-story-system .motion-enabled .v2-scene:nth-child(3) .v2-scene-copy p{color:#fff;font-weight:500}
 
-/* Desktop: show the entire portrait and message within the visible slide. */
+/* Desktop uses the same photo-and-copy composition as the phone story. */
+.scroll-story-system .v2-scene-backdrop { display: none; }
 @media (min-width: 761px) {
-  .scroll-story-system .motion-enabled .v2-story-stage {
-    min-height: 0;
+  .scroll-story-system {
+    --gutter: clamp(24px, 4vw, 64px);
+    --story-photo-width: min(100%, calc((100svh - 56px) * .8));
+  }
+  .scroll-story-system .v2-wrap {
+    width: min(1200px, calc(100% - 2 * var(--gutter)));
+  }
+  .scroll-story-system .v2-story-intro {
+    padding: clamp(64px, 6.2vw, 88px) 0 40px;
+  }
+  .scroll-story-system .motion-enabled .v2-story-stage { min-height: 0; }
+  .scroll-story-system .motion-enabled .v2-scene-backdrop {
+    display: block;
+    position: absolute;
+    inset: -24px;
+    background-size: cover;
+    background-position: center;
+    filter: blur(24px) brightness(.42) saturate(.8);
+    pointer-events: none;
+    will-change: opacity;
   }
   .scroll-story-system .motion-enabled .v2-scene > img {
-    inset: 40px 24px 40px 50%;
-    width: calc(50% - 24px);
-    max-width: calc(50% - 24px);
-    height: calc(100% - 80px);
-    object-fit: contain;
-    object-position: center;
+    inset: 0 auto 0 calc((100% - var(--story-photo-width)) / 2);
+    width: var(--story-photo-width);
+    max-width: none;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 40%;
     transform-origin: center;
+    mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
   }
+  .scroll-story-system .motion-enabled .v2-scene:first-child > img { object-position: 50% 60%; }
   .scroll-story-system .motion-enabled .v2-story-stage::after {
-    display: none;
+    display: block;
+    opacity: 1;
+    background: linear-gradient(0deg, #041015d9 0%, #04101580 24%, transparent 66%);
   }
   .scroll-story-system .motion-enabled .v2-scene-text-window {
-    inset: 0 50% 0 0;
+    inset: 0 auto 0 calc((100% - var(--story-photo-width)) / 2);
+    width: var(--story-photo-width);
     display: flex;
-    align-items: center;
-    padding: min(4svh, 40px) clamp(20px, 4vw, 64px);
+    align-items: flex-end;
+    padding: 32px clamp(24px, 3vw, 48px);
   }
   .scroll-story-system .motion-enabled .v2-scene-text-window .v2-scene-copy {
     position: relative;
     inset: auto;
     width: 100%;
     max-width: none;
-    text-shadow: none;
+    text-shadow: 0 2px 12px #041015b3;
     will-change: transform, opacity;
   }
   .scroll-story-system .motion-enabled .v2-scene h2 {
-    font-size: clamp(1.5rem, min(3.3vw, 6.2svh), 3.4rem);
+    font-size: clamp(1.5rem, 4.5svh, 2.5rem);
     line-height: 1.5;
-    letter-spacing: -0.025em;
-    text-shadow: none;
+    letter-spacing: -.025em;
+    text-shadow: 0 2px 14px #04101599;
     overflow-wrap: anywhere;
   }
-  .scroll-story-system .motion-enabled .v2-scene .v2-eyebrow {
-    margin-bottom: min(3svh, 24px);
-  }
+  .scroll-story-system .motion-enabled .v2-scene .v2-eyebrow { margin-bottom: 16px; }
   .scroll-story-system .motion-enabled .v2-scene-copy > p:last-child {
-    margin-top: min(3svh, 20px);
-    font-size: clamp(.875rem, 1.2vw, 1.05rem);
+    margin-top: 16px;
+    font-size: clamp(.875rem, 1.8svh, 1.05rem);
     line-height: 1.8;
+    color: #fff;
   }
-  .scroll-story-system .motion-enabled .v2-scene:nth-child(3) .v2-scene-copy::before {
-    display: none;
+  .scroll-story-system .motion-enabled .v2-scene:nth-child(3) .v2-scene-copy::before { display: none; }
+  .scroll-story-system .motion-enabled .v2-story-controls {
+    padding-inline: max(var(--gutter), calc((100% - 1200px) / 2));
   }
-  .scroll-story-system .v2-story:not(.motion-enabled) .v2-scene > img {
-    object-fit: contain;
-  }
+  .scroll-story-system .v2-story-context { padding: 16px var(--gutter); }
+  .scroll-story-system .v2-story:not(.motion-enabled) .v2-scene > img { object-fit: contain; }
 }

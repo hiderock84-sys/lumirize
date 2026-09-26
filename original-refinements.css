@@ -61,3 +61,54 @@
  .rules-fulltext { margin-top:40px; }
  .rules-document { padding-inline:20px; }
 }
+
+/* Home page desktop: one content edge and a consistent section rhythm. */
+@media screen and (min-width:761px) {
+ body:not(.inner-page) {
+  --home-gutter:clamp(24px,4vw,64px);
+  --home-section-space:clamp(64px,6vw,88px);
+  --gutter:var(--home-gutter);
+  --column-gap:clamp(32px,4vw,64px);
+ }
+ body:not(.inner-page) :is(.container,.header__inner) {
+  width:min(1200px,calc(100% - 2 * var(--home-gutter)));
+  max-width:1200px;
+  margin-inline:auto;
+  padding-inline:0;
+ }
+ body:not(.inner-page) .hero__caption {
+  right:max(var(--home-gutter),calc((100% - 1200px) / 2));
+ }
+ body:not(.inner-page) #main > :is(.section,.statement) {
+  padding-block:var(--home-section-space);
+ }
+ body:not(.inner-page) #main .section-label {
+  margin-bottom:40px;
+  padding-bottom:16px;
+ }
+ body:not(.inner-page) #main .section-heading {
+  gap:32px;
+  margin-bottom:40px;
+ }
+ body:not(.inner-page) .principles {
+  margin-top:48px;
+  padding-top:32px;
+  gap:32px;
+ }
+ body:not(.inner-page) .business-summary {
+  max-width:none;
+  padding-block:32px;
+  margin-bottom:40px;
+ }
+ body:not(.inner-page) .business-summary > p:not(.eyebrow) {
+  max-width:52rem;
+ }
+ body:not(.inner-page) .service { padding-block:32px; }
+ body:not(.inner-page) .source-photo-grid {
+  gap:var(--column-gap);
+  margin-top:40px;
+ }
+ body:not(.inner-page) #main > .faq-section { padding-top:0; }
+ body:not(.inner-page) .faq-section .container { padding-top:40px; }
+ body:not(.inner-page) .faq-section .container::before { left:0; right:0; }
+}
