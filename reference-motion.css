@@ -341,6 +341,7 @@
   inset: 0 0 var(--story-controls-height);
   z-index: 4;
   pointer-events: none;
+  opacity: var(--story-shade-opacity, 1);
   background:
     linear-gradient(90deg, rgba(4, 16, 21, 0.48), rgba(4, 16, 21, 0.34) 82%, rgba(4, 16, 21, 0.12)),
     linear-gradient(
@@ -509,3 +510,11 @@ html.motion-paused .reveal-ready{
   }}
 .scroll-story-system .v2-story:not(.motion-enabled) .v2-scene{background:#1b1e22;color:#f4f4f1}.scroll-story-system .v2-story:not(.motion-enabled) .v2-scene-copy{padding:40px}.scroll-story-system .v2-story:not(.motion-enabled) .v2-scene p{color:#bbc2ca}.scroll-story-system .v2-story-controls button{cursor:pointer}.scroll-story-system .v2-scene-dots{flex-shrink:0}.scroll-story-system .v2-story-intro .v2-wrap{gap:24px}.scroll-story-system .v2-story-context{padding:16px 24px;margin:0}
 .scroll-story-system{--gutter:24px;--muted:#bcc1c7;--line:#ffffff33;background:#111214;color:#f8f8f7}.scroll-story-system .v2-wrap{width:min(1200px,calc(100% - 48px));margin-inline:auto}.scroll-story-system .v2-section-kicker{font-size:.875rem;letter-spacing:.13em;margin-bottom:20px}.scroll-story-system .v2-section-kicker span{margin-left:16px;color:#b7bdc5}.scroll-story-system .v2-story-context{font-size:.875rem;text-align:center}.scroll-story-system .v2-icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.5}.scroll-story-system button{font-family:inherit}.scroll-story-system .v2-story:not(.motion-enabled) .v2-scene{background:#1b1e22;color:#f4f4f1}@media(max-width:760px){.scroll-story-system .v2-story-controls{gap:8px}.scroll-story-system .v2-scene-copy{max-width:calc(100% - 48px)}.scroll-story-system .v2-scene-copy>p:last-child{font-size:1rem}}
+
+/* The final scene opens into warm morning light without dimming the whole photo. */
+.scroll-story-system .v2-scene:nth-child(3)>img{filter:brightness(1.16) contrast(.97) saturate(1.06)}
+.scroll-story-system .motion-enabled .v2-scene:nth-child(3) .v2-scene-copy{isolation:isolate;text-shadow:0 1px 4px #071015e6,0 3px 18px #07101580}
+.scroll-story-system .motion-enabled .v2-scene:nth-child(3) h2{text-shadow:0 1px 4px #071015e6,0 3px 18px #07101580}
+.scroll-story-system .motion-enabled .v2-scene:nth-child(3) .v2-scene-copy::before{content:"";position:absolute;inset:-28px 0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 42% 50%,#07101540 0%,#07101520 42%,transparent 74%)}
+
+.scroll-story-system .motion-enabled .v2-scene:nth-child(3) .v2-scene-copy p{color:#fff;font-weight:500}

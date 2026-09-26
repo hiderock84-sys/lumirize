@@ -70,6 +70,8 @@
     const pos = progress * 3;
     const cross1 = smooth(0.84, 1.16, pos);
     const cross2 = smooth(1.84, 2.16, pos);
+    // Let the morning scene open into light at the same pace as its crossfade.
+    stage.style.setProperty("--story-shade-opacity", (1 - 0.78 * cross2).toFixed(3));
     // Keep the previous photo opaque beneath the incoming one: no dark flash.
     const weights = [1, cross1, cross2];
     const current = pos < 1 ? 0 : pos < 2 ? 1 : 2;
