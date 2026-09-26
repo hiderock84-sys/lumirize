@@ -40,13 +40,13 @@
     return t * t * (3 - 2 * t);
   };
   const sceneParts = scenes.map((scene) => ({
+    scene,
     photo: scene.querySelector("img"),
     backdrop: scene.querySelector(".v2-scene-backdrop"),
     copy: scene.querySelector(".v2-scene-copy"),
     track: scene.querySelector(".v2-scene-text-window"),
     trackHeight: 0,
     copyHeight: 0,
-    copyTravel: 0,
   }));
   let frame = 0;
   let headerHeight = 0;
@@ -55,10 +55,6 @@
     sceneParts.forEach((part) => {
       part.trackHeight = part.track.clientHeight;
       part.copyHeight = part.copy.offsetHeight;
-      const trackStyle = getComputedStyle(part.track);
-      const padding = Math.max(parseFloat(trackStyle.paddingTop) || 0, parseFloat(trackStyle.paddingBottom) || 0);
-      // The copy rises within the photograph while retaining a safe inset.
-      part.copyTravel = Math.max(0, Math.min(64, part.trackHeight - part.copyHeight - 2 * padding - 12));
     });
     requestMotion();
   }
@@ -78,34 +74,43 @@
     const cross2 = smooth(1.84, 2.16, pos);
     // Let the morning scene open into light at the same pace as its crossfade.
     stage.style.setProperty("--story-shade-opacity", (1 - 0.78 * cross2).toFixed(3));
-    // Matching photo frames crossfade while the desktop text takes turns.
     const weights = [1, cross1, cross2];
-    const copyWeights = [
-      1 - smooth(0.78, 0.98, pos),
-      smooth(1.02, 1.22, pos) * (1 - smooth(1.78, 1.98, pos)),
-      smooth(2.02, 2.22, pos),
-    ];
     const current = pos < 1 ? 0 : pos < 2 ? 1 : 2;
     sceneParts.forEach((part, i) => {
       const local = clamp(pos - i, 0, 1);
-      part.photo.style.opacity = weights[i].toFixed(3);
-      if (part.backdrop) {
-        part.backdrop.style.opacity = desktop.matches ? weights[i].toFixed(3) : "";
-        part.backdrop.style.zIndex = String(i + 1);
-      }
-      part.photo.style.zIndex = String(i + 1);
-      part.photo.style.transform =
-        "translate3d(0," + ((0.5 - local) * 2.4).toFixed(3) + "%,0) scale(" + (1.055 - local * 0.02).toFixed(4) + ")";
       if (desktop.matches) {
-        // Keep the whole message over the lower part of its photograph.
-        part.copy.style.transform = "translate3d(0," + (-local * part.copyTravel).toFixed(1) + "px,0)";
-        part.copy.style.opacity = copyWeights[i].toFixed(3);
+        // Move one complete scene: photograph, backdrop and message stay together.
+        // Adjacent panels share the same boundary, so they never ghost over each other.
+        const enter = i === 0 ? 1 : smooth(i - 0.18, i + 0.18, pos);
+        const exit = i === scenes.length - 1 ? 0 : smooth(i + 0.82, i + 1.18, pos);
+        part.scene.style.transform = "translate3d(0," + ((1 - enter - exit) * 100).toFixed(4) + "%,0)";
+        part.scene.style.opacity = "1";
+        part.scene.style.zIndex = String(i + 1);
+        part.photo.style.opacity = "1";
+        part.photo.style.zIndex = "1";
+        part.photo.style.transform = "scale(1.02)";
+        if (part.backdrop) {
+          part.backdrop.style.opacity = "1";
+          part.backdrop.style.zIndex = "0";
+        }
+        part.copy.style.transform = "none";
+        part.copy.style.opacity = "1";
       } else {
-        // Preserve the mobile scroll story, including after a viewport resize.
+        // Preserve the phone story and clear desktop panel styles after resizing.
+        part.scene.style.transform = "";
+        part.scene.style.opacity = "";
+        part.scene.style.zIndex = "";
+        part.photo.style.opacity = weights[i].toFixed(3);
+        part.photo.style.zIndex = String(i + 1);
+        part.photo.style.transform =
+          "translate3d(0," + ((0.5 - local) * 2.4).toFixed(3) + "%,0) scale(" + (1.055 - local * 0.02).toFixed(4) + ")";
+        if (part.backdrop) {
+          part.backdrop.style.opacity = "";
+          part.backdrop.style.zIndex = "";
+        }
         const start = part.trackHeight + 16;
         const end = -part.copyHeight - 16;
-        const y = start + (end - start) * local;
-        part.copy.style.transform = "translate3d(0," + y.toFixed(1) + "px,0)";
+        part.copy.style.transform = "translate3d(0," + (start + (end - start) * local).toFixed(1) + "px,0)";
         part.copy.style.opacity = "1";
       }
     });
@@ -132,8 +137,14 @@
       story.classList.toggle("motion-enabled", !motionPaused());
       if (motionPaused()) {
         scenes.forEach((scene) => {
+          scene.style.transform = "";
           scene.style.opacity = "";
           scene.style.zIndex = "";
+          const backdrop = scene.querySelector(".v2-scene-backdrop");
+          if (backdrop) {
+            backdrop.style.opacity = "";
+            backdrop.style.zIndex = "";
+          }
           scene.querySelector("img").style.transform = "";
           scene.querySelector("img").style.opacity = "";
           scene.querySelector("img").style.zIndex = "";
