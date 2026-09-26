@@ -124,3 +124,18 @@
   --glass-ink: #fff;
   --glass-text-shadow: 0 1px 3px rgba(0,0,0,.65);
 }
+/* Keep the fixed dock usable when reading text is enlarged. Page zoom remains
+   available; the controls must not become tall columns covering the article. */
+@media (max-width: 600px) {
+  .mobile-cta { gap: 12px; padding-left: max(20px, env(safe-area-inset-left)); padding-right: max(20px, env(safe-area-inset-right)); }
+  .mobile-cta .glass-button,
+  .mobile-cta .glass-button:last-child {
+    min-height: 56px;
+    padding: 14px 8px;
+    gap: 6px;
+    font-size: clamp(13px, 3.5vw, 16px);
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+  .mobile-cta .glass-button > [aria-hidden="true"] { font-size: 18px; flex-shrink: 0; }
+}

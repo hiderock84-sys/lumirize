@@ -3,20 +3,41 @@
   const menu = document.getElementById("mobileMenu");
   const toggle = document.querySelector(".menu-toggle");
   const closeButton = document.querySelector(".menu-close");
+  const root = document.documentElement;
+  let menuScrollY = null;
+  const unlockPage = () => {
+    if (menuScrollY === null) return;
+    const top = menuScrollY;
+    menuScrollY = null;
+    document.body.classList.remove("menu-open");
+    document.body.style.removeProperty("--menu-scroll-offset");
+    // The root keeps smooth scrolling disabled until the saved position is restored.
+    window.scrollTo({ left: 0, top, behavior: "instant" });
+    root.classList.remove("menu-open");
+    toggle?.setAttribute("aria-expanded", "false");
+    toggle?.focus({ preventScroll: true });
+  };
   const closeMenu = () => {
     if (menu?.open) menu.close();
+    unlockPage();
   };
   toggle?.addEventListener("click", () => {
     if (!menu || menu.open) return;
+    menuScrollY = Math.max(0, window.scrollY);
+    document.body.style.setProperty("--menu-scroll-offset", -menuScrollY + "px");
+    root.classList.add("menu-open");
+    document.body.classList.add("menu-open");
     menu.showModal();
     toggle.setAttribute("aria-expanded", "true");
-    document.body.classList.add("menu-open");
-    closeButton.focus();
+    closeButton.focus({ preventScroll: true });
   });
   closeButton?.addEventListener("click", closeMenu);
   menu?.addEventListener("close", () => {
-    toggle.setAttribute("aria-expanded", "false");
-    document.body.classList.remove("menu-open");
+    unlockPage();
+  });
+  menu?.addEventListener("cancel", event => {
+    event.preventDefault();
+    closeMenu();
   });
   menu?.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener("click", () => {
@@ -49,9 +70,10 @@
   });
   // A local specular highlight follows a pointer without a rendering loop.
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const precisePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
   document.querySelectorAll(".glass-button").forEach(button => {
     const moveHighlight = event => {
-      if (reducedMotion.matches) return;
+      if (reducedMotion.matches || !precisePointer.matches || event.pointerType === "touch") return;
       const rect = button.getBoundingClientRect();
       button.style.setProperty("--glass-x", ((event.clientX - rect.left) / rect.width * 100) + "%");
       button.style.setProperty("--glass-y", ((event.clientY - rect.top) / rect.height * 100) + "%");

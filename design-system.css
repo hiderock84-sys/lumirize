@@ -24,20 +24,31 @@
   --radius: 2px;
 }
 
-/* Keep the document on its vertical axis, including iOS edge overscroll.
-   Local comparison tables retain their own horizontal scrolling. */
+/* Keep the viewport on its vertical axis. Clip the body without creating
+   another scrolling ancestor, so the three-scene sticky story keeps working. */
 html {
   width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
   overscroll-behavior-x: none;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
-@supports (overflow: clip) { html { overflow-x: clip; } }
 body { width: 100%; min-width: 0; margin-inline: 0; font-size: 1rem; line-height: 1.9; overscroll-behavior-x: none; }
-body.page-representative { touch-action: pan-y pinch-zoom; }
+@supports (overflow: clip) { body { overflow-x: clip; overflow-y: visible; } }
+@media (pointer: coarse) {
+  html, body { touch-action: pan-y pinch-zoom; }
+}
+html.menu-open { overflow: hidden; scroll-behavior: auto; }
+body.menu-open { position: fixed; inset-inline: 0; top: var(--menu-scroll-offset, 0px); width: 100%; overflow: hidden; }
+.mobile-menu { overflow-x: hidden; overscroll-behavior: contain; touch-action: pan-y pinch-zoom; }
+.menu-close, .header__actions { flex-shrink: 0; }
+.mobile-cta { max-width: 100%; }
+.mobile-menu .menu-contact { padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px)); }
 main, section, article, .container, .leader-profile, .leader-profile > div { min-width: 0; }
 main p, main li, main dd { overflow-wrap: anywhere; }
+.principles > div, .profile-banner-text { min-width: 0; }
+.principles__en, .profile-banner-text { overflow-wrap: anywhere; }
 .header { padding-top: env(safe-area-inset-top, 0px); }
 .menu-head { padding-top: calc(var(--space-3) + env(safe-area-inset-top, 0px)); }
 .title-unit { display: inline-block; max-width: 100%; text-wrap: wrap; }
@@ -390,6 +401,20 @@ h3 { font-size: 1.25rem; line-height: 1.65; }
 .source-photo-feature { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); gap: var(--column-gap); align-items: center; margin-block: var(--space-7); }
 .source-photo-feature > div { min-width: 0; }
 .source-photo-feature .text-link { display: inline-block; margin-top: var(--space-3); }
+/* Reflow at larger text sizes rather than hiding content beyond the viewport. */
+@media (max-width: 600px) {
+  .header__inner, .menu-head { column-gap: 12px; }
+  .footer__top .wordmark, .menu-head .wordmark { font-size: clamp(22px, 6.5vw, 1.65rem); }
+  .principles { grid-template-columns: minmax(0, 1fr); }
+  .text-link { max-width: 100%; overflow-wrap: anywhere; gap: min(1.5rem, 6vw); }
+  .inner-page main .profile-banner { flex-wrap: wrap; }
+  .inner-page main .profile-banner-text { flex: 1 1 10rem; }
+  .inner-page main .profile-banner-photo { max-width: 100%; }
+  .rules-document .v2-rules-table { margin: 0; }
+  .rules-document .v2-rules-table > div { padding-block: 1rem; border-bottom: 1px solid #bfc5cb; }
+  .rules-document .v2-rules-table dt { font-weight: 600; }
+  .rules-document .v2-rules-table dd { margin: .5rem 0 0; }
+}
 .inner-page main .story-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
 .inner-page main .story-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
 @media (max-width: 700px) {

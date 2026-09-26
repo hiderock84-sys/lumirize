@@ -9,7 +9,6 @@
   }
   const motionPaused = () => media.matches || readingMode;
   const motionButtons = [...document.querySelectorAll("[data-motion-toggle]")];
-  const menuScrollY = null;
   const reveals = [...document.querySelectorAll("[data-reveal]")];
   let observer;
   if (!motionPaused() && "IntersectionObserver" in window) {
@@ -58,7 +57,7 @@
   }
   function drawStory() {
     frame = 0;
-    if (menuScrollY !== null) {
+    if (document.body.classList.contains("menu-open")) {
       return;
     }
     if (!story || !stage || motionPaused()) {
