@@ -595,3 +595,29 @@ html.motion-paused .reveal-ready{
   .scroll-story-system .v2-story-context { padding: 16px var(--gutter); }
   .scroll-story-system .v2-story:not(.motion-enabled) .v2-scene > img { object-fit: contain; }
 }
+
+/* Desktop scene panels: one movement for the image and its complete message. */
+@media screen and (min-width: 761px) {
+  .scroll-story-system .motion-enabled .v2-scene {
+    isolation: isolate;
+    overflow: hidden;
+    background: #07151b;
+    will-change: transform;
+  }
+  .scroll-story-system .motion-enabled .v2-story-stage::after { display: none; }
+  .scroll-story-system .motion-enabled .v2-scene::after {
+    display: block;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(0deg, #041015e6 0%, #04101580 30%, transparent 68%);
+  }
+  .scroll-story-system .motion-enabled .v2-scene-text-window {
+    z-index: 3;
+    padding-bottom: clamp(32px, 5svh, 48px);
+  }
+  .scroll-story-system .motion-enabled .v2-scene-text-window .v2-scene-copy {
+    will-change: auto;
+  }
+  .scroll-story-system .motion-enabled .v2-scene > img,
+  .scroll-story-system .motion-enabled .v2-scene-backdrop { will-change: auto; }
+}
