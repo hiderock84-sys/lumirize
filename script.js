@@ -1,109 +1,100 @@
 (() => {
-  // Mobile nav
-  const toggle = document.querySelector(".nav__toggle");
-  const panel = document.querySelector(".nav__panel");
-  if (toggle && panel) {
-    const close = () => {
-      panel.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-    };
-    toggle.addEventListener("click", () => {
-      const open = panel.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", String(open));
+  'use strict';
+  const faqItems = [...document.querySelectorAll('.faq-item')];
+  faqItems.forEach((item, index) => {
+    const button = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+    if (!button || !answer) return;
+    button.type = 'button';
+    button.id = `faq-question-${index + 1}`;
+    answer.id = `faq-answer-${index + 1}`;
+    button.setAttribute('aria-controls', answer.id);
+    button.setAttribute('aria-expanded', 'false');
+    answer.setAttribute('aria-labelledby', button.id);
+    answer.hidden = true;
+    button.addEventListener('click', () => {
+      const open = button.getAttribute('aria-expanded') !== 'true';
+      item.classList.toggle('active', open);
+      button.setAttribute('aria-expanded', String(open));
+      answer.hidden = !open;
     });
-    panel.addEventListener("click", (e) => {
-      const a = e.target.closest("a");
-      if (a) close();
-    });
-    document.addEventListener("click", (e) => {
-      if (!panel.contains(e.target) && !toggle.contains(e.target)) close();
-    });
-  }
-
-  // Smooth scroll for same-page anchors
-  document.addEventListener("click", (e) => {
-    const a = e.target.closest('a[href^="#"]');
-    if (!a) return;
-    const id = a.getAttribute("href");
-    if (!id || id === "#") return;
-    const el = document.querySelector(id);
-    if (!el) return;
-    e.preventDefault();
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
-  // Reveal on scroll
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((en) => {
-      if (en.isIntersecting) en.target.classList.add("is-in");
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
-
-  // Cinematic scene switch
-  const story = document.querySelector("#story");
-  if (story) {
-    const imgs = story.querySelectorAll(".cinematic__img");
-    const blocks = story.querySelectorAll(".cinematic__block");
-
-    const setScene = (n) => {
-      imgs.forEach(i => i.classList.toggle("is-active", i.dataset.scene === String(n)));
-      blocks.forEach(b => b.classList.toggle("is-active", b.dataset.scene === String(n)));
-    };
-
-    const onScroll = () => {
-      const rect = story.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const progress = Math.min(1, Math.max(0, (vh - rect.top) / (vh + rect.height)));
-      setScene(progress < 0.55 ? 1 : 2);
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-  }
-
-  // Contact form -> open mail client
-  const form = document.querySelector("#contactForm");
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const fd = new FormData(form);
-      const name = (fd.get("name") || "").toString().trim();
-      const email = (fd.get("email") || "").toString().trim();
-      const tel = (fd.get("tel") || "").toString().trim();
-      const type = (fd.get("type") || "").toString().trim();
-      const msg = (fd.get("message") || "").toString().trim();
-
-      if (!type || !msg) {
-        alert("「相談内容」と「お問い合わせ内容」は必須です。");
-        return;
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+  const fallback = document.getElementById('email-fallback');
+  if (!form || !status) return;
+  // Native validation remains available when JavaScript is unavailable.
+  form.noValidate = true;
+  let sending = false;
+  const required = [...form.querySelectorAll('[required]')];
+  const submit = form.querySelector('[type="submit"]');
+  const message = (text, type) => {
+    status.textContent = text;
+    status.className = 'form-status ' + type;
+  };
+  const clearError = field => {
+    field.classList.remove('invalid');
+    field.removeAttribute('aria-invalid');
+    field.removeAttribute('aria-errormessage');
+  };
+  required.forEach(field => {
+    field.addEventListener('input', () => clearError(field));
+    field.addEventListener('change', () => clearError(field));
+  });
+  const updateFallback = () => {
+    const data = new FormData(form);
+    const value = key => String(data.get(key) || '').trim();
+    const subject = '【株式会社ルミライズ】' + (value('topic') || 'お問い合わせ');
+    const body = ['お名前：' + value('name'), 'メール：' + value('email'), '電話：' + value('phone'), '相談種別：' + value('topic'), '', value('message')].join('\n');
+    if (fallback) fallback.href = 'mailto:info@lumirize.co?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  };
+  form.addEventListener('input', updateFallback);
+  form.addEventListener('change', updateFallback);
+  updateFallback();
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (sending) return;
+    let firstInvalid;
+    required.forEach(field => {
+      clearError(field);
+      const valid = field.type === 'checkbox' ? field.checked : field.value.trim().length > 0 && field.checkValidity();
+      if (!valid) {
+        field.classList.add('invalid');
+        field.setAttribute('aria-invalid', 'true');
+        field.setAttribute('aria-errormessage', status.id);
+        firstInvalid ||= field;
       }
-
-      const subject = encodeURIComponent(`【ルミライズ相談】${type}${name ? " / " + name : ""}`);
-      const body = encodeURIComponent(
-`相談内容：${type}
-お名前：${name || "（未記入）"}
-メール：${email || "（未記入）"}
-電話：${tel || "（未記入）"}
-
-お問い合わせ内容：
-${msg}
-`
-      );
-
-      location.href = `mailto:info@lumirize.com?subject=${subject}&body=${body}`;
     });
-  }
-
-  // toTop button
-  const toTop = document.querySelector(".toTop");
-  if (toTop) {
-    const on = () => {
-      if (window.scrollY > 600) toTop.classList.add("is-show");
-      else toTop.classList.remove("is-show");
-    };
-    window.addEventListener("scroll", on, { passive: true });
-    on();
-    toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-  }
+    if (firstInvalid) {
+      message('未入力の必須項目、メールアドレスの形式、個人情報の取り扱いへの同意をご確認ください。', 'error');
+      firstInvalid.focus({preventScroll: true});
+      firstInvalid.scrollIntoView({block: "center", behavior: "auto"});
+      return;
+    }
+    sending = true;
+    submit.disabled = true;
+    form.setAttribute('aria-busy', 'true');
+    message('送信中です。しばらくお待ちください。', 'pending');
+    updateFallback();
+    const data = new FormData(form);
+    data.set('_subject', '【株式会社ルミライズ】' + data.get('topic'));
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000);
+    try {
+      const response = await fetch(form.dataset.ajaxAction, {method: 'POST', headers: {Accept: 'application/json'}, body: data, signal: controller.signal});
+      const result = await response.json();
+      if (!response.ok || !(result.success === true || result.success === 'true')) throw new Error('Submission not confirmed');
+      message('送信を受け付けました。営業時間内は30分程度、時間外は翌営業日を目安にご返信します。返信が届かない場合は、迷惑メールフォルダをご確認のうえ、お電話ください。', 'success');
+      form.reset();
+      updateFallback();
+    } catch {
+      message('送信の完了を確認できませんでした。入力内容は残っています。下の「メールアプリから相談する」またはお電話をご利用ください。', 'error');
+    } finally {
+      clearTimeout(timeout);
+      sending = false;
+      submit.disabled = false;
+      form.removeAttribute('aria-busy');
+    }
+  });
 })();
