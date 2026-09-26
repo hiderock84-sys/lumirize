@@ -525,10 +525,10 @@ html.motion-paused .reveal-ready{
     min-height: 0;
   }
   .scroll-story-system .motion-enabled .v2-scene > img {
-    inset: 20px 24px 20px 50%;
+    inset: 40px 24px 40px 50%;
     width: calc(50% - 24px);
     max-width: calc(50% - 24px);
-    height: calc(100% - 40px);
+    height: calc(100% - 80px);
     object-fit: contain;
     object-position: center;
     transform-origin: center;
@@ -548,7 +548,7 @@ html.motion-paused .reveal-ready{
     width: 100%;
     max-width: none;
     text-shadow: none;
-    will-change: opacity;
+    will-change: transform, opacity;
   }
   .scroll-story-system .motion-enabled .v2-scene h2 {
     font-size: clamp(1.5rem, min(3.3vw, 6.2svh), 3.4rem);

@@ -45,6 +45,8 @@
     track: scene.querySelector(".v2-scene-text-window"),
     trackHeight: 0,
     copyHeight: 0,
+    copyTravel: 0,
+    photoTravel: 0,
   }));
   let frame = 0;
   let headerHeight = 0;
@@ -53,6 +55,11 @@
     sceneParts.forEach((part) => {
       part.trackHeight = part.track.clientHeight;
       part.copyHeight = part.copy.offsetHeight;
+      const trackStyle = getComputedStyle(part.track);
+      const padding = Math.max(parseFloat(trackStyle.paddingTop) || 0, parseFloat(trackStyle.paddingBottom) || 0);
+      // Reserve the actual reading-column padding at both ends of the motion.
+      part.copyTravel = Math.max(0, Math.min(160, (part.trackHeight - part.copyHeight) / 2 - padding - 12));
+      part.photoTravel = Math.max(0, Math.min(36, (part.trackHeight - part.photo.offsetHeight) / 2 - 4));
     });
     requestMotion();
   }
@@ -72,19 +79,21 @@
     const cross2 = smooth(1.84, 2.16, pos);
     // Let the morning scene open into light at the same pace as its crossfade.
     stage.style.setProperty("--story-shade-opacity", (1 - 0.78 * cross2).toFixed(3));
-    // Keep the previous photo opaque beneath the incoming one: no dark flash.
+    // Mobile photos cover one another; desktop portraits need both ends faded
+    // so a previous, differently positioned portrait cannot show at the edges.
     const weights = [1, cross1, cross2];
     const copyWeights = [1 - cross1, cross1 * (1 - cross2), cross2];
     const current = pos < 1 ? 0 : pos < 2 ? 1 : 2;
     sceneParts.forEach((part, i) => {
       const local = clamp(pos - i, 0, 1);
-      part.photo.style.opacity = weights[i].toFixed(3);
+      part.photo.style.opacity = (desktop.matches ? copyWeights[i] : weights[i]).toFixed(3);
       part.photo.style.zIndex = String(i + 1);
-      part.photo.style.transform = desktop.matches ? "none" :
+      part.photo.style.transform = desktop.matches ?
+        "translate3d(0," + ((1 - 2 * local) * part.photoTravel).toFixed(1) + "px,0) scale(" + (0.96 + 0.04 * local).toFixed(4) + ")" :
         "translate3d(0," + ((0.5 - local) * 2.4).toFixed(3) + "%,0) scale(" + (1.055 - local * 0.02).toFixed(4) + ")";
       if (desktop.matches) {
-        // Keep the complete message inside the desktop reading column.
-        part.copy.style.transform = "none";
+        // Move through the available space without sending any text offscreen.
+        part.copy.style.transform = "translate3d(0," + ((1 - 2 * local) * part.copyTravel).toFixed(1) + "px,0)";
         part.copy.style.opacity = copyWeights[i].toFixed(3);
       } else {
         // Preserve the mobile scroll story, including after a viewport resize.
