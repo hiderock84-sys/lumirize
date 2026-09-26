@@ -604,6 +604,7 @@ html.motion-paused .reveal-ready{
     background: #07151b;
     will-change: transform;
   }
+  .scroll-story-system .motion-enabled .v2-story-stage { overflow: clip; }
   .scroll-story-system .motion-enabled .v2-story-stage::after { display: none; }
   .scroll-story-system .motion-enabled .v2-scene::after {
     display: block;
