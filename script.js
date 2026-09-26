@@ -47,7 +47,7 @@
     const value = key => String(data.get(key) || '').trim();
     const subject = '【株式会社ルミライズ】' + (value('topic') || 'お問い合わせ');
     const body = ['お名前：' + value('name'), 'メール：' + value('email'), '電話：' + value('phone'), '相談種別：' + value('topic'), '', value('message')].join('\n');
-    if (fallback) fallback.href = 'mailto:info@lumirize.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    if (fallback) fallback.href = 'mailto:info@lumirize.co?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
   };
   form.addEventListener('input', updateFallback);
   form.addEventListener('change', updateFallback);

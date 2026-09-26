@@ -26,3 +26,38 @@
 .rules-document table{border-collapse:collapse;width:100%;font-size:1rem}
 .rules-document td,.rules-document th{padding:12px;border:1px solid #bfc5cb;overflow-wrap:anywhere;text-align:left}
 @media(max-width:760px){.hero__shade{background:linear-gradient(90deg,#07090c4d,#07090c08),linear-gradient(0deg,#111214 0%,transparent 16%,transparent)}.consultation-guide{padding:24px}.business-summary{margin-bottom:32px}.rules-document{padding:40px 24px 80px}.rules-document .v2-experience-note{padding:20px}.rules-document table{font-size:.875rem}.rules-document td,.rules-document th{padding:8px}}
+
+/* Operating rules: consistent readable columns, responsive data rows. */
+.rules-document { max-width:1040px; }
+.rules-heading { margin-bottom:40px; }
+.rules-heading p { max-width:42em; }
+.rules-effective { font-weight:600; }
+.rules-scope { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; margin:40px 0; }
+.rules-scope section { min-width:0; padding:28px; border:1px solid #c6cbd0; background:#fff; }
+.rules-scope h2 { font-size:1.3rem; margin:12px 0; }
+.rules-toc { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); border-top:1px solid #aeb5bc; margin:32px 0; }
+.rules-toc a { padding:18px 12px; border-bottom:1px solid #c6cbd0; color:inherit; overflow-wrap:anywhere; }
+.rules-source-note { color:#515960; font-size:.9rem; }
+.rules-fulltext { margin-top:56px; }
+.rules-fulltext h2 { padding-top:32px; margin:56px 0 24px; border-top:2px solid #303941; font-size:clamp(1.4rem,3.5vw,1.9rem); }
+.rules-fulltext h3 { margin:36px 0 16px; font-size:1.15rem; line-height:1.7; }
+.rules-fulltext p { line-height:1.95; margin:0 0 16px; overflow-wrap:anywhere; }
+.rules-document [id] { scroll-margin-top:112px; }
+.rules-data { margin:24px 0 32px; padding:0; border-top:1px solid #aeb5bc; }
+.rules-data>div { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,3fr); gap:24px; padding:20px 12px; border-bottom:1px solid #c6cbd0; }
+.rules-data dt { font-weight:650; min-width:0; line-height:1.8; }
+.rules-data dd { margin:0; min-width:0; line-height:1.9; overflow-wrap:anywhere; }
+.rules-data dd p { margin:0 0 8px; }
+.rules-data dd p:last-child { margin-bottom:0; }
+.rules-field-label { display:block; color:#5d656b; font-size:.85em; margin-bottom:4px; }
+.contact-hours-panel { margin:40px 0; padding:28px; border:1px solid #c6cbd0; }
+.contact-hours-panel h2 { font-size:1.35rem; }
+.menu-contact span { max-width:100%; overflow-wrap:anywhere; line-height:1.8; }
+@media(max-width:600px){
+ .rules-scope,.rules-toc { grid-template-columns:minmax(0,1fr); gap:16px; }
+ .rules-toc { gap:0; }
+ .rules-scope section,.contact-hours-panel { padding:24px 20px; }
+ .rules-data>div { grid-template-columns:minmax(0,1fr); gap:8px; padding:18px 0; }
+ .rules-fulltext { margin-top:40px; }
+ .rules-document { padding-inline:20px; }
+}
