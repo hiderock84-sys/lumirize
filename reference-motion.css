@@ -98,7 +98,8 @@
   display: none;
 }
 .scroll-story-system .motion-enabled.v2-story{
-  height: calc(265svh + var(--header));
+  /* Give each message about 25% more scroll distance while keeping scene timing synchronized. */
+  height: calc(310svh + var(--header));
 
   --story-controls-height: 56px;
 }
