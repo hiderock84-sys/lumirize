@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://hiderock84-sys.github.io/lumirize/sitemap.xml
+Sitemap: https://lumirize.co/sitemap.xml

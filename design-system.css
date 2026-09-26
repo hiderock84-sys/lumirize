@@ -348,7 +348,7 @@ h3 { font-size: 1.25rem; line-height: 1.65; }
 .founder-intro { display: flex; gap: 1.5rem; align-items: center; margin-bottom: 2rem; }
 .founder-intro img { width: 6rem; height: 7.5rem; object-fit: cover; }
 .founder-intro p { line-height: 1.9; }
-.inner-page main .faq-answer:not([hidden]) { max-height: none; overflow: visible; }
+.inner-page main .faq-answer:not([hidden]) { visibility: visible; max-height: none; overflow: visible; }
 @media (min-width: 901px) {
   .mobile-menu { max-width: 44rem; margin-left: auto; }
 }
@@ -421,4 +421,16 @@ h3 { font-size: 1.25rem; line-height: 1.65; }
  .source-photo-grid, .source-photo-feature, .inner-page main .story-grid { grid-template-columns: minmax(0,1fr); }
  .source-photo-grid { gap: var(--space-5); }
  .source-photo-feature { gap: var(--space-4); }
+}
+
+/* Print every answer, including questions collapsed on screen. */
+@media print {
+  .inner-page main .faq-answer,
+  .inner-page main .faq-answer[hidden] {
+    display: block !important;
+    visibility: visible;
+    max-height: none;
+    overflow: visible;
+  }
+  .inner-page main .faq-plus { display: none; }
 }

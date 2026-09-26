@@ -51,6 +51,7 @@
   };
   form.addEventListener('input', updateFallback);
   form.addEventListener('change', updateFallback);
+  updateFallback();
   form.addEventListener('submit', async event => {
     event.preventDefault();
     if (sending) return;

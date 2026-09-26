@@ -58,7 +58,10 @@
   const currentForm = document.getElementById("contact-form");
   if (currentForm) {
     const topic = new URLSearchParams(window.location.search).get("topic");
-    if (topic && [...currentForm.elements.topic.options].some(option => option.value === topic)) currentForm.elements.topic.value = topic;
+    if (topic && [...currentForm.elements.topic.options].some(option => option.value === topic)) {
+      currentForm.elements.topic.value = topic;
+      currentForm.elements.topic.dispatchEvent(new Event("change", { bubbles: true }));
+    }
     currentForm.addEventListener("focusin", () => document.body.classList.add("editing-form"));
     currentForm.addEventListener("focusout", () => requestAnimationFrame(() => {
       if (!currentForm.contains(document.activeElement)) document.body.classList.remove("editing-form");
