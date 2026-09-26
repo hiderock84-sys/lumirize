@@ -112,3 +112,76 @@
  body:not(.inner-page) .faq-section .container { padding-top:40px; }
  body:not(.inner-page) .faq-section .container::before { left:0; right:0; }
 }
+
+/* Shared page rhythm. Match class tokens even when reveal classes follow them. */
+@media screen {
+  .inner-page main :is(.service-grid,.stats-summary-grid,.story-grid) {
+    display: grid;
+    grid-template-columns: minmax(0,1fr);
+    gap: 24px;
+  }
+  .inner-page main .profile-banner-text { display: grid; gap: 8px; font-size: 1rem; }
+  .inner-page main .profile-banner-text > * { display: block; }
+  .inner-page main .profile-banner-text > strong { font-size: clamp(1.25rem,2vw,1.5rem); line-height: 1.6; }
+  .inner-page main .source-photo-single { margin-inline: auto; }
+}
+@media screen and (min-width:761px) {
+  body.inner-page {
+    --gutter: clamp(24px,4vw,64px);
+    --column-gap: clamp(32px,4vw,64px);
+    --page-section-space: clamp(64px,6vw,88px);
+    --section-space: var(--page-section-space);
+  }
+  .inner-page :is(.container,.header__inner),
+  .page-representative main .container {
+    width: min(1200px,calc(100% - 2 * var(--gutter)));
+    max-width: 1200px;
+    padding-inline: 0;
+    margin-inline: auto;
+  }
+  .inner-page main > .section { padding-block: 64px var(--page-section-space); }
+  .inner-page main > .section + .section { padding-top: 0; }
+  .inner-page main .section-heading { max-width: none; margin-bottom: 40px; }
+  .inner-page main .section-heading .eyebrow { margin-bottom: 16px; }
+  .inner-page main :is(.container > section,.about-block) { margin-top: 64px; }
+  .inner-page main :is(.service-grid,.stats-summary-grid,.story-grid) {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 24px;
+  }
+  .inner-page main :is(.stats-summary-grid,.story-grid) > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .inner-page main :is(.service-card,.support-card,.summary-card,.story-card) { padding: 32px; }
+  .inner-page main .message-card { margin-block: 64px; padding: 40px; }
+  .inner-page main .section-heading + .message-card { margin-top: 0; }
+  .inner-page main .leader-profile { gap: 32px; margin-bottom: 40px; }
+  .inner-page main .leader-profile p + p { margin-top: 8px; }
+  .page-representative main .message-card { max-width: 960px; margin-inline: auto; }
+  .page-representative main .message-card > p { max-width: 52rem; }
+  .inner-page main .profile-banner { margin-block: 64px; gap: 32px; }
+  .inner-page main .source-photo-single { margin-block: 48px; }
+  .inner-page main :is(.process-cta,.faq-cta) { margin-top: 48px; padding-top: 32px; }
+  .inner-page main .faq-wrapper { max-width: none; }
+  .inner-page main .faq-answer { max-width: 52rem; }
+  .inner-page main .faq-category-title { margin-top: 48px; }
+  .inner-page main .faq-category-title:first-child { margin-top: 0; }
+  .inner-page main:is(.legal-wrap,.rules-document) {
+    box-sizing: border-box;
+    width: min(960px,calc(100% - 2 * var(--gutter)));
+    max-width: 960px;
+    margin-inline: auto;
+    padding: 64px 0 var(--page-section-space);
+  }
+  .inner-page main:is(.legal-wrap,.rules-document) :is(.breadcrumb,.v2-breadcrumb) { margin-bottom: 40px; }
+  .inner-page main:is(.legal-wrap,.rules-document) h2 { margin-top: 48px; margin-bottom: 24px; }
+  .inner-page main.rules-document :is(.rules-scope,.v2-experience-note) h2 { margin-top: 0; }
+  .inner-page main.rules-document .rules-fulltext h2 { margin-top: 48px; padding-top: 32px; }
+  .inner-page main .philosophy-grid > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
+@media screen and (min-width:901px) {
+  .inner-page main .process-item { grid-template-columns: minmax(0,1fr) minmax(0,2fr); gap: 16px 48px; }
+}
+@media screen and (min-width:1100px) {
+  .inner-page main .stats-summary-grid:has(> :nth-child(3)),
+  .inner-page main .philosophy-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .inner-page main .stats-summary-grid:has(> :nth-child(3)) > :last-child,
+  .inner-page main .philosophy-grid > :last-child { grid-column: auto; }
+}
