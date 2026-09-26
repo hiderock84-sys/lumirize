@@ -1,6 +1,7 @@
 (() => {
   "use strict";
   const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const desktop = window.matchMedia("(min-width: 761px)");
   let readingMode = false;
   try {
     readingMode = localStorage.getItem("lumirize-reading-mode") === "static";
@@ -73,19 +74,26 @@
     stage.style.setProperty("--story-shade-opacity", (1 - 0.78 * cross2).toFixed(3));
     // Keep the previous photo opaque beneath the incoming one: no dark flash.
     const weights = [1, cross1, cross2];
+    const copyWeights = [1 - cross1, cross1 * (1 - cross2), cross2];
     const current = pos < 1 ? 0 : pos < 2 ? 1 : 2;
     sceneParts.forEach((part, i) => {
       const local = clamp(pos - i, 0, 1);
       part.photo.style.opacity = weights[i].toFixed(3);
       part.photo.style.zIndex = String(i + 1);
-      part.photo.style.transform =
+      part.photo.style.transform = desktop.matches ? "none" :
         "translate3d(0," + ((0.5 - local) * 2.4).toFixed(3) + "%,0) scale(" + (1.055 - local * 0.02).toFixed(4) + ")";
-      // Each message enters below the frame and leaves above it, including
-      // the last one. Text stays above the photos throughout the handoff.
-      const start = part.trackHeight + 16;
-      const end = -part.copyHeight - 16;
-      const y = start + (end - start) * local;
-      part.copy.style.transform = "translate3d(0," + y.toFixed(1) + "px,0)";
+      if (desktop.matches) {
+        // Keep the complete message inside the desktop reading column.
+        part.copy.style.transform = "none";
+        part.copy.style.opacity = copyWeights[i].toFixed(3);
+      } else {
+        // Preserve the mobile scroll story, including after a viewport resize.
+        const start = part.trackHeight + 16;
+        const end = -part.copyHeight - 16;
+        const y = start + (end - start) * local;
+        part.copy.style.transform = "translate3d(0," + y.toFixed(1) + "px,0)";
+        part.copy.style.opacity = "1";
+      }
     });
     dots.forEach((dot, i) => dot.setAttribute("aria-current", String(i === current)));
   }

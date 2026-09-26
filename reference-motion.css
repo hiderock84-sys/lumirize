@@ -518,3 +518,57 @@ html.motion-paused .reveal-ready{
 .scroll-story-system .motion-enabled .v2-scene:nth-child(3) .v2-scene-copy::before{content:"";position:absolute;inset:-28px 0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 42% 50%,#07101540 0%,#07101520 42%,transparent 74%)}
 
 .scroll-story-system .motion-enabled .v2-scene:nth-child(3) .v2-scene-copy p{color:#fff;font-weight:500}
+
+/* Desktop: show the entire portrait and message within the visible slide. */
+@media (min-width: 761px) {
+  .scroll-story-system .motion-enabled .v2-story-stage {
+    min-height: 0;
+  }
+  .scroll-story-system .motion-enabled .v2-scene > img {
+    inset: 20px 24px 20px 50%;
+    width: calc(50% - 24px);
+    max-width: calc(50% - 24px);
+    height: calc(100% - 40px);
+    object-fit: contain;
+    object-position: center;
+    transform-origin: center;
+  }
+  .scroll-story-system .motion-enabled .v2-story-stage::after {
+    display: none;
+  }
+  .scroll-story-system .motion-enabled .v2-scene-text-window {
+    inset: 0 50% 0 0;
+    display: flex;
+    align-items: center;
+    padding: min(4svh, 40px) clamp(20px, 4vw, 64px);
+  }
+  .scroll-story-system .motion-enabled .v2-scene-text-window .v2-scene-copy {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    max-width: none;
+    text-shadow: none;
+    will-change: opacity;
+  }
+  .scroll-story-system .motion-enabled .v2-scene h2 {
+    font-size: clamp(1.5rem, min(3.3vw, 6.2svh), 3.4rem);
+    line-height: 1.5;
+    letter-spacing: -0.025em;
+    text-shadow: none;
+    overflow-wrap: anywhere;
+  }
+  .scroll-story-system .motion-enabled .v2-scene .v2-eyebrow {
+    margin-bottom: min(3svh, 24px);
+  }
+  .scroll-story-system .motion-enabled .v2-scene-copy > p:last-child {
+    margin-top: min(3svh, 20px);
+    font-size: clamp(.875rem, 1.2vw, 1.05rem);
+    line-height: 1.8;
+  }
+  .scroll-story-system .motion-enabled .v2-scene:nth-child(3) .v2-scene-copy::before {
+    display: none;
+  }
+  .scroll-story-system .v2-story:not(.motion-enabled) .v2-scene > img {
+    object-fit: contain;
+  }
+}
