@@ -124,10 +124,10 @@
       button.disabled = media.matches;
       button.setAttribute("aria-pressed", String(motionPaused()));
       button.querySelector("[data-motion-label]").textContent = media.matches
-        ? "端末設定で静止表示中"
+        ? (button.dataset.labelReduced || "端末設定で静止表示中")
         : readingMode
-          ? "動きのある表示に戻す"
-          : "静止して読む";
+          ? (button.dataset.labelResume || "動きのある表示に戻す")
+          : (button.dataset.labelRead || "静止して読む");
     });
     if (story) {
       story.classList.toggle("motion-enabled", !motionPaused());

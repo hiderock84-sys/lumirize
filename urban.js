@@ -53,10 +53,21 @@
 
 
   document.querySelectorAll('[data-topic]').forEach(link => {
-    link.href = 'contact.html?topic=' + encodeURIComponent(link.dataset.topic) + '#consultation-form';
+    const lang = document.body.dataset.homeLang;
+    const translated = ['en','ko','tl','th'].includes(lang);
+    link.href = 'contact.html?topic=' + encodeURIComponent(link.dataset.topic) + (translated ? '&lang=' + lang + '#languages' : '#consultation-form');
   });
   const currentForm = document.getElementById("contact-form");
   if (currentForm) {
+    const languageNames = {ja: '日本語', en: 'English', ko: '한국어', tl: 'Tagalog', th: 'ภาษาไทย'};
+    const requestedLanguage = new URLSearchParams(window.location.search).get('lang');
+    if (Object.hasOwn(languageNames, requestedLanguage)) {
+      const guideLanguage = requestedLanguage === 'tl' ? 'fil' : requestedLanguage;
+      const guide = document.querySelector('#languages summary[lang="' + guideLanguage + '"]');
+      if (guide) guide.parentElement.open = true;
+      const languageSelect = document.getElementById('language');
+      if (languageSelect) languageSelect.value = languageNames[requestedLanguage];
+    }
     const legacyTopics = {"住まい支援・入居相談": "住まい・入居の相談", "家賃補助・制度活用相談": "住まい・入居の相談", "就労支援接続相談": "住まい・入居の相談", "3か月・6か月・1年・2年の面談相談": "住まい・入居の相談", "依存症者向け住宅について": "住まい・入居の相談", "刑務所出所者向け住宅について": "住まい・入居の相談", "LGBTQ+向け住居支援について": "住まい・入居の相談", "DV被害者向け緊急シェルター支援について": "住まい・入居の相談", "DV被害者向け安全確保・一時居住の相談について": "住まい・入居の相談", "外国人労働者・移民向け住居支援について": "住まい・入居の相談", "外国人労働者・外国人住民向け住居支援について": "住まい・入居の相談", "ナイトケアハウスについて": "ナイトケアハウスの相談", "家族・オーナー・自治体向け連携相談": "家族・支援機関からの相談", "その他": "その他・選び方が分からない"};
     const requestedTopic = new URLSearchParams(window.location.search).get("topic");
     const topic = legacyTopics[requestedTopic] || requestedTopic;
