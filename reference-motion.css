@@ -421,7 +421,7 @@
 }
 .scroll-story-system .v2-motion-toggle[aria-pressed="true"]{
   background: var(--teal);
-  color: #fff;
+  color: #17252f;
 }
 .scroll-story-system .v2-motion-toggle:disabled{
   cursor: default;
@@ -697,3 +697,5 @@ html.motion-paused .reveal-ready{
   .scroll-story-system .v2-story .v2-story-controls,
   .scroll-story-system .v2-story-options { display: none; }
 }
+
+@media(max-width:760px){.scroll-story-system{--dock:calc(84px + env(safe-area-inset-bottom,0px))}.scroll-story-system .motion-enabled .v2-story-stage{min-height:0}}

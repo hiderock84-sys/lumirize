@@ -46,7 +46,7 @@
     const data = new FormData(form);
     const value = key => String(data.get(key) || '').trim();
     const subject = '【株式会社ルミライズ】' + (value('topic') || 'お問い合わせ');
-    const body = ['お名前：' + value('name'), 'メール：' + value('email'), '電話：' + value('phone'), '相談種別：' + value('topic'), '', value('message')].join('\n');
+    const body = ['お名前：' + value('name'), 'メール：' + value('email'), '電話：' + value('phone'), '相談種別：' + value('topic'), '希望言語：' + value('language'), '', value('message')].join('\n');
     if (fallback) fallback.href = 'mailto:info@lumirize.co?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
   };
   form.addEventListener('input', updateFallback);
@@ -67,7 +67,7 @@
       }
     });
     if (firstInvalid) {
-      message('未入力の必須項目、メールアドレスの形式、個人情報の取り扱いへの同意をご確認ください。', 'error');
+      message('未入力の必須項目、メールアドレスの形式、個人情報の取り扱いへの同意をご確認ください。 Please check the required fields, email address and privacy consent.', 'error');
       firstInvalid.focus({preventScroll: true});
       firstInvalid.scrollIntoView({block: "center", behavior: "auto"});
       return;
@@ -75,7 +75,7 @@
     sending = true;
     submit.disabled = true;
     form.setAttribute('aria-busy', 'true');
-    message('送信中です。しばらくお待ちください。', 'pending');
+    message('送信中です。しばらくお待ちください。 Sending…', 'pending');
     updateFallback();
     const data = new FormData(form);
     data.set('_subject', '【株式会社ルミライズ】' + data.get('topic'));
@@ -85,11 +85,11 @@
       const response = await fetch(form.dataset.ajaxAction, {method: 'POST', headers: {Accept: 'application/json'}, body: data, signal: controller.signal});
       const result = await response.json();
       if (!response.ok || !(result.success === true || result.success === 'true')) throw new Error('Submission not confirmed');
-      message('送信を受け付けました。営業時間内は30分程度、時間外は翌営業日を目安にご返信します。返信が届かない場合は、迷惑メールフォルダをご確認のうえ、お電話ください。', 'success');
+      message('送信を受け付けました。 Your message has been submitted. 営業時間内は30分程度、時間外は翌営業日を目安にご返信します。返信が届かない場合は、迷惑メールフォルダをご確認のうえ、お電話ください。', 'success');
       form.reset();
       updateFallback();
     } catch {
-      message('送信の完了を確認できませんでした。入力内容は残っています。下の「メールアプリから相談する」またはお電話をご利用ください。', 'error');
+      message('送信の完了を確認できませんでした。入力内容は残っています。 Submission could not be confirmed. Please email or call us. 下の「メールアプリから相談する」またはお電話をご利用ください。', 'error');
     } finally {
       clearTimeout(timeout);
       sending = false;

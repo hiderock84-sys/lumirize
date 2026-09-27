@@ -57,7 +57,9 @@
   });
   const currentForm = document.getElementById("contact-form");
   if (currentForm) {
-    const topic = new URLSearchParams(window.location.search).get("topic");
+    const legacyTopics = {"住まい支援・入居相談": "住まい・入居の相談", "家賃補助・制度活用相談": "住まい・入居の相談", "就労支援接続相談": "住まい・入居の相談", "3か月・6か月・1年・2年の面談相談": "住まい・入居の相談", "依存症者向け住宅について": "住まい・入居の相談", "刑務所出所者向け住宅について": "住まい・入居の相談", "LGBTQ+向け住居支援について": "住まい・入居の相談", "DV被害者向け緊急シェルター支援について": "住まい・入居の相談", "DV被害者向け安全確保・一時居住の相談について": "住まい・入居の相談", "外国人労働者・移民向け住居支援について": "住まい・入居の相談", "外国人労働者・外国人住民向け住居支援について": "住まい・入居の相談", "ナイトケアハウスについて": "ナイトケアハウスの相談", "家族・オーナー・自治体向け連携相談": "家族・支援機関からの相談", "その他": "その他・選び方が分からない"};
+    const requestedTopic = new URLSearchParams(window.location.search).get("topic");
+    const topic = legacyTopics[requestedTopic] || requestedTopic;
     if (topic && [...currentForm.elements.topic.options].some(option => option.value === topic)) {
       currentForm.elements.topic.value = topic;
       currentForm.elements.topic.dispatchEvent(new Event("change", { bubbles: true }));
