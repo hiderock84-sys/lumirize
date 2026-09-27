@@ -563,14 +563,13 @@ html.motion-paused .reveal-ready{
   .scroll-story-system .motion-enabled .v2-scene-text-window {
     inset: 0 auto 0 calc((100% - var(--story-photo-width)) / 2);
     width: var(--story-photo-width);
-    display: flex;
-    align-items: flex-end;
-    padding: 32px clamp(24px, 3vw, 48px);
+    display: block;
+    padding: 0;
   }
   .scroll-story-system .motion-enabled .v2-scene-text-window .v2-scene-copy {
-    position: relative;
-    inset: auto;
-    width: 100%;
+    position: absolute;
+    inset: 0 clamp(24px, 3vw, 48px) auto;
+    width: auto;
     max-width: none;
     text-shadow: 0 2px 12px #041015b3;
     will-change: transform, opacity;
@@ -597,13 +596,17 @@ html.motion-paused .reveal-ready{
   .scroll-story-system .v2-story:not(.motion-enabled) .v2-scene > img { object-fit: contain; }
 }
 
-/* Desktop scene panels: one movement for the image and its complete message. */
+/* Desktop photos crossfade; each message scrolls inside its own clipped window. */
 @media screen and (min-width: 761px) {
+  .scroll-story-system .motion-enabled.v2-story {
+    /* Give each complete message a slow, continuous pass through the viewport. */
+    height: calc(620svh + var(--header));
+  }
   .scroll-story-system .motion-enabled .v2-scene {
     isolation: isolate;
     overflow: hidden;
     background: #07151b;
-    will-change: transform;
+    will-change: opacity;
   }
   .scroll-story-system .motion-enabled .v2-story-stage { overflow: clip; }
   .scroll-story-system .motion-enabled .v2-story-stage::after { display: none; }
@@ -615,10 +618,10 @@ html.motion-paused .reveal-ready{
   }
   .scroll-story-system .motion-enabled .v2-scene-text-window {
     z-index: 3;
-    padding-bottom: clamp(32px, 5svh, 48px);
+    padding: 0;
   }
   .scroll-story-system .motion-enabled .v2-scene-text-window .v2-scene-copy {
-    will-change: auto;
+    will-change: transform;
   }
   .scroll-story-system .motion-enabled .v2-scene > img,
   .scroll-story-system .motion-enabled .v2-scene-backdrop { will-change: auto; }

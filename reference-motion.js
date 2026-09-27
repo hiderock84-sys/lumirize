@@ -79,12 +79,10 @@
     sceneParts.forEach((part, i) => {
       const local = clamp(pos - i, 0, 1);
       if (desktop.matches) {
-        // Move one complete scene: photograph, backdrop and message stay together.
-        // Adjacent panels share the same boundary, so they never ghost over each other.
-        const enter = i === 0 ? 1 : smooth(i - 0.18, i + 0.18, pos);
-        const exit = i === scenes.length - 1 ? 0 : smooth(i + 0.82, i + 1.18, pos);
-        part.scene.style.transform = "translate3d(0," + ((1 - enter - exit) * 100).toFixed(4) + "%,0)";
-        part.scene.style.opacity = "1";
+        // Crossfade each photograph while its message follows the scroll position.
+        // Keeping the panel still avoids adding a second movement to the text.
+        part.scene.style.transform = "";
+        part.scene.style.opacity = weights[i].toFixed(3);
         part.scene.style.zIndex = String(i + 1);
         part.photo.style.opacity = "1";
         part.photo.style.zIndex = "1";
@@ -93,8 +91,6 @@
           part.backdrop.style.opacity = "1";
           part.backdrop.style.zIndex = "0";
         }
-        part.copy.style.transform = "none";
-        part.copy.style.opacity = "1";
       } else {
         // Preserve the phone story and clear desktop panel styles after resizing.
         part.scene.style.transform = "";
@@ -108,11 +104,11 @@
           part.backdrop.style.opacity = "";
           part.backdrop.style.zIndex = "";
         }
-        const start = part.trackHeight + 16;
-        const end = -part.copyHeight - 16;
-        part.copy.style.transform = "translate3d(0," + (start + (end - start) * local).toFixed(1) + "px,0)";
-        part.copy.style.opacity = "1";
       }
+      const start = part.trackHeight + 16;
+      const end = -part.copyHeight - 16;
+      part.copy.style.transform = "translate3d(0," + (start + (end - start) * local).toFixed(1) + "px,0)";
+      part.copy.style.opacity = "1";
     });
     dots.forEach((dot, i) => dot.setAttribute("aria-current", String(i === current)));
   }
