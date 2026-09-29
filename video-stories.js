@@ -32,6 +32,7 @@
     if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
     const film = link.closest('[data-film]');
+    modal.classList.toggle('story-player--landscape', film.dataset.orientation === 'landscape');
     opener = link;
     title.textContent = film.dataset.title;
     description.textContent = film.dataset.description;
