@@ -12,9 +12,50 @@
   const description = modal.querySelector('[data-player-description]');
   const direct = modal.querySelector('[data-player-direct]');
   const error = modal.querySelector('.story-player__error');
+  const subtitleControls = modal.querySelector('[data-player-subtitles]');
+  let activeFilm = null;
+  let playbackRevision = 0;
   let selected = films[0].dataset.film;
   let opener = null;
   let savedY = null;
+  const play = () => {
+    const revision = playbackRevision;
+    player.play().catch(reason => {
+      if (modal.open && revision === playbackRevision && reason.name !== 'AbortError') error.hidden = false;
+    });
+  };
+  const updateSubtitles = (film, language, switchVideo = false) => {
+    if (!film.dataset.subtitlesEn || !['ja', 'en'].includes(language)) return;
+    const changed = film.dataset.subtitleLanguage !== language;
+    film.dataset.subtitleLanguage = language;
+    const url = language === 'en' ? film.dataset.subtitlesEn : film.dataset.subtitlesJa;
+    film.querySelectorAll('[data-story-play]').forEach(link => { link.href = url; });
+    film.querySelectorAll('[data-subtitle-language]').forEach(button => {
+      button.setAttribute('aria-pressed', String(button.dataset.subtitleLanguage === language));
+    });
+    if (activeFilm !== film) return;
+    subtitleControls.querySelectorAll('[data-subtitle-language]').forEach(button => {
+      button.setAttribute('aria-pressed', String(button.dataset.subtitleLanguage === language));
+    });
+    direct.href = url;
+    if (!switchVideo || !changed) return;
+    const time = player.currentTime || 0;
+    const resume = !player.paused;
+    const revision = ++playbackRevision;
+    player.pause();
+    player.src = url;
+    error.hidden = true;
+    player.addEventListener('loadedmetadata', () => {
+      if (revision === playbackRevision && modal.open) player.currentTime = Math.min(time, Math.max(0, player.duration - .05));
+    }, {once: true});
+    player.load();
+    if (resume) play();
+  };
+  films.forEach(film => updateSubtitles(film, document.documentElement.lang === 'en' ? 'en' : 'ja'));
+  subtitleControls.addEventListener('click', event => {
+    const button = event.target.closest('[data-subtitle-language]');
+    if (button && activeFilm) updateSubtitles(activeFilm, button.dataset.subtitleLanguage, true);
+  });
   const updateSelection = () => {
     choices.hidden = !smallScreen.matches;
     films.forEach(film => { film.hidden = smallScreen.matches && film.dataset.film !== selected; });
@@ -28,10 +69,19 @@
   updateSelection();
 
   section.addEventListener('click', event => {
+    const subtitleButton = event.target.closest('[data-subtitle-language]');
+    if (subtitleButton) {
+      updateSubtitles(subtitleButton.closest('[data-film]'), subtitleButton.dataset.subtitleLanguage);
+      return;
+    }
     const link = event.target.closest('[data-story-play]');
     if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
     const film = link.closest('[data-film]');
+    activeFilm = film;
+    playbackRevision++;
+    subtitleControls.hidden = !film.dataset.subtitlesEn;
+    updateSubtitles(film, film.dataset.subtitleLanguage || 'ja');
     modal.classList.toggle('story-player--landscape', film.dataset.orientation === 'landscape');
     opener = link;
     title.textContent = film.dataset.title;
@@ -46,7 +96,7 @@
     document.documentElement.classList.add('story-player-open');
     document.body.classList.add('story-player-open');
     modal.showModal();
-    player.play().catch(() => { if (modal.open) error.hidden = false; });
+    play();
   });
   modal.querySelector('[data-story-close]').addEventListener('click', () => modal.close());
   modal.addEventListener('click', event => {
@@ -54,6 +104,8 @@
     if (event.target === modal && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) modal.close();
   });
   modal.addEventListener('close', () => {
+    playbackRevision++;
+    activeFilm = null;
     player.pause();
     player.removeAttribute('src');
     player.load();
