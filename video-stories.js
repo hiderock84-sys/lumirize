@@ -53,7 +53,7 @@
   };
   films.forEach(film => updateSubtitles(film, document.documentElement.lang === 'en' ? 'en' : 'ja'));
   subtitleControls.addEventListener('click', event => {
-    const button = event.target.closest('[data-subtitle-language]');
+    const button = event.target.closest('button[data-subtitle-language]');
     if (button && activeFilm) updateSubtitles(activeFilm, button.dataset.subtitleLanguage, true);
   });
   const updateSelection = () => {
@@ -69,7 +69,7 @@
   updateSelection();
 
   section.addEventListener('click', event => {
-    const subtitleButton = event.target.closest('[data-subtitle-language]');
+    const subtitleButton = event.target.closest('button[data-subtitle-language]');
     if (subtitleButton) {
       updateSubtitles(subtitleButton.closest('[data-film]'), subtitleButton.dataset.subtitleLanguage);
       return;
