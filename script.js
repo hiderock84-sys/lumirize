@@ -42,11 +42,30 @@
     field.addEventListener('input', () => clearError(field));
     field.addEventListener('change', () => clearError(field));
   });
+  const safeOptions = document.getElementById('safe-contact');
+  const safeMethod = document.getElementById('safe-contact-method');
+  const voicemail = document.getElementById('safe-voicemail');
+  const syncSafeContact = () => {
+    if (!safeMethod || !voicemail) return;
+    const noPhone = safeMethod.value === '電話不可・メールで連絡';
+    // Keep the control enabled so FormData preserves the instruction.
+    const allowVoicemail = [...voicemail.options].find(option => option.value === '残してよい');
+    if (allowVoicemail) allowVoicemail.disabled = noPhone;
+    if (noPhone) voicemail.value = '残さない';
+  };
+  safeMethod?.addEventListener('change', syncSafeContact);
+  form.addEventListener('reset', () => setTimeout(syncSafeContact, 0));
+  const openSafeOptions = () => {
+    if (safeOptions && location.hash === '#safe-contact') safeOptions.open = true;
+  };
+  window.addEventListener('hashchange', openSafeOptions);
+  openSafeOptions();
+  syncSafeContact();
   const updateFallback = () => {
     const data = new FormData(form);
     const value = key => String(data.get(key) || '').trim();
     const subject = '【株式会社ルミライズ】' + (value('topic') || 'お問い合わせ');
-    const body = ['お名前：' + value('name'), 'メール：' + value('email'), '電話：' + value('phone'), '相談種別：' + value('topic'), '希望言語：' + value('language'), '', value('message')].join('\n');
+    const body = ['お名前：' + value('name'), 'メール：' + value('email'), '電話：' + value('phone'), '相談種別：' + value('topic'), '希望言語：' + value('language'), '安全な連絡方法：' + value('安全な連絡方法'), '留守番電話：' + value('留守番電話'), '連絡可能な時間帯・注意点：' + value('連絡可能な時間帯・注意点'), '', value('message')].join('\n');
     if (fallback) fallback.href = 'mailto:info@lumirize.co?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
   };
   form.addEventListener('input', updateFallback);
