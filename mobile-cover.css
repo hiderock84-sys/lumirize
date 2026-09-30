@@ -1,0 +1,79 @@
+/* A calm phone cover: the complete photograph, followed by readable copy. */
+.mobile-menu .menu-languages { display:none; }
+
+@media screen and (max-width:760px) {
+  body[data-home-lang] > .header { position:relative; inset:auto; border:0; background:#111214; }
+  body[data-home-lang] .header__inner { min-height:64px; padding-inline:var(--gutter); }
+  body[data-home-lang] .header .wordmark { font-size:22px; letter-spacing:.12em; }
+  body[data-home-lang] .header .menu-toggle { top:10px; border-radius:12px; box-shadow:none; }
+  body[data-home-lang] .header .home-languages { display:none; }
+
+  body[data-home-lang] .mobile-menu nav.menu-languages {
+    display:flex; flex-wrap:wrap; gap:8px; margin:0;
+    padding:20px; border-bottom:1px solid #ffffff26;
+  }
+  body[data-home-lang] .mobile-menu nav.menu-languages a {
+    display:flex; align-items:center; justify-content:center;
+    min-height:44px; padding:10px 14px; font-size:14px; line-height:1.5;
+    border:1px solid #ffffff40; border-radius:8px; color:#f8f8f7;
+  }
+  body[data-home-lang] .mobile-menu nav.menu-languages a[aria-current="page"] {
+    color:#152431; background:#e1edf2; border-color:#e1edf2;
+  }
+  body[data-home-lang] .mobile-menu nav.menu-languages a:focus-visible {
+    outline:3px solid #9bd4ff; outline-offset:3px;
+  }
+
+  body[data-home-lang] #main > .hero {
+    display:flex; flex-direction:column; justify-content:flex-start;
+    align-items:stretch; min-height:0; padding:0 0 36px;
+  }
+  body[data-home-lang] .hero > .hero__image {
+    position:relative; inset:auto; z-index:auto; order:0; flex:none;
+    display:block; width:100%; height:auto; aspect-ratio:3 / 2;
+    object-fit:contain; object-position:center; filter:brightness(1.12) saturate(1.03);
+    -webkit-mask-image:none; mask-image:none;
+  }
+  body[data-home-lang] .hero > .hero__shade,
+  body[data-home-lang] .hero .hero__eyebrow,
+  body[data-home-lang] .hero .hero__actions,
+  body[data-home-lang] .hero__bottom > span:first-child { display:none; }
+
+  body[data-home-lang] .hero > .hero__bottom {
+    position:static; order:1; display:block; transform:none;
+    margin:8px auto 0; padding-inline:var(--gutter);
+    font-size:11px; line-height:1.6; letter-spacing:0; text-align:right;
+    color:#aeb2b7; text-shadow:none;
+  }
+  body[data-home-lang] .hero .hero-image-note { font:inherit; letter-spacing:inherit; }
+  body[data-home-lang] .hero > .hero__content { order:2; padding-top:24px; }
+  body[data-home-lang] #main .hero h1 {
+    font-size:clamp(30px,8.2vw,36px); line-height:1.35;
+    letter-spacing:-.035em; text-shadow:none; margin:0;
+  }
+  body[data-home-lang] #main .hero__lead {
+    margin-top:18px; font-size:15px; line-height:1.85;
+    font-weight:400; color:#d4d7db; text-shadow:none;
+  }
+
+  /* Keep consultation in one consistent dock instead of repeating it in the cover. */
+  body[data-home-lang] .mobile-cta {
+    gap:10px; background:#111214ed; border-top:1px solid #ffffff1f;
+    -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  }
+  body[data-home-lang] .mobile-cta .glass-button {
+    min-height:48px; padding:10px 8px; border-radius:12px;
+    color:#f8f8f7; background:#25282c; border:1px solid #ffffff42;
+    box-shadow:none; text-shadow:none; -webkit-backdrop-filter:none; backdrop-filter:none;
+  }
+  body[data-home-lang] .mobile-cta .glass-button:last-child {
+    color:#14222a; background:#e1edf2; border-color:#e1edf2;
+  }
+  body[data-home-lang] .mobile-cta .glass-button::before,
+  body[data-home-lang] .mobile-cta .glass-button::after { display:none; }
+}
+
+/* In short landscape windows the fixed dock is hidden, so retain the inline action. */
+@media screen and (max-width:960px) and (max-height:500px) and (orientation:landscape) {
+  body[data-home-lang] .hero .hero__actions { display:flex; margin-top:24px; }
+}
