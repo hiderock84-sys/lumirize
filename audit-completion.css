@@ -1,0 +1,43 @@
+/* Consultation guidance and navigation: scoped additions to the shared design. */
+.review-date,.review-source { font-size:.8125rem; line-height:1.8; color:#586168; }
+.inner-page main .review-date { margin:12px 0 24px; font-size:.8125rem; }
+.inner-page main .review-panel { margin-block:40px; padding:clamp(24px,4vw,40px); border:1px solid #cad0d4; background:#f6f8f8; }
+.inner-page main .review-panel h2 { font-size:1.5rem; line-height:1.65; margin:0 0 24px; }
+.inner-page main .review-panel h3 { font-size:1.125rem; line-height:1.7; margin:0 0 12px; }
+.review-panel p { line-height:1.9; }
+.review-panel p+p { margin-top:16px; }
+.review-housing-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px; margin:24px 0; }
+.review-panel .check-list { margin-block:24px; }
+.official-resources { padding:0; list-style:none; margin:24px 0; }
+.official-resources li { border-bottom:1px solid #d4dade; }
+.official-resources a { display:block; padding:16px 0; line-height:1.7; overflow-wrap:anywhere; }
+.guide-steps { margin:24px 0; }
+.guide-steps>div { padding:18px 0; border-bottom:1px solid #d0d7db; }
+.guide-steps dt { font-weight:600; margin-bottom:8px; }
+.guide-steps dd { margin:0; line-height:1.9; overflow-wrap:anywhere; }
+.guide-form-link { display:inline-block; padding:14px 18px; border:1px solid #778791; border-radius:6px; margin:12px 0; }
+.inner-page main .dv-navi { padding-top:20px; margin-block:24px; border-top:1px solid #d0d7db; }
+.inner-page main .dv-navi h3 { font-size:1.125rem; line-height:1.7; }
+.inner-page main .dv-external-brief { font-size:.9375rem; line-height:1.9; }
+.review-directions { margin:24px 0; }
+.review-directions>div { display:grid; grid-template-columns:100px minmax(0,1fr); gap:20px; padding:18px 0; border-top:1px solid #ccd3d7; }
+.review-directions dt { font-weight:600; }
+.review-directions dd { margin:0; line-height:1.9; }
+.mobile-menu .review-grouped-nav { display:block; }
+.mobile-menu .nav-group+.nav-group { margin-top:24px; }
+.mobile-menu .nav-group-title { margin:0 0 8px; font-size:.75rem; font-weight:600; letter-spacing:.05em; color:#a9afb4; }
+.mobile-menu .nav-group a { min-height:44px; }
+.footer .footer__nav.review-grouped-nav { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px 40px; }
+.footer .nav-group { min-width:0; }
+.footer .nav-group-title { color:#f3f4f4; font-size:.875rem; font-weight:600; margin:0 0 16px; }
+.footer .nav-group a { display:block; min-height:40px; padding:8px 0; color:#b9bbc1; font-size:.875rem; line-height:1.7; overflow-wrap:anywhere; }
+.footer .nav-group a:hover { color:#fff; }
+.review-panel a:focus-visible,.review-grouped-nav a:focus-visible,.guide-form-link:focus-visible { outline:3px solid #719bb3; outline-offset:4px; }
+@media(max-width:760px){
+ .review-housing-grid { grid-template-columns:minmax(0,1fr); gap:24px; }
+ .review-directions>div { grid-template-columns:minmax(0,1fr); gap:8px; }
+ .footer .footer__nav.review-grouped-nav { grid-template-columns:minmax(0,1fr); gap:28px; }
+ .footer .nav-group { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 20px; }
+ .footer .nav-group-title { grid-column:1/-1; }
+ .inner-page main .review-panel h2 { font-size:1.25rem; }
+}
