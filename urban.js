@@ -17,8 +17,21 @@
     toggle?.setAttribute("aria-expanded", "false");
     toggle?.focus({ preventScroll: true });
   };
-  const closeMenu = () => {
-    if (menu?.open) menu.close();
+  let menuClosing = false;
+  const slideMenu = (opening) => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return null;
+    return menu.animate([
+      { transform: opening ? "translateX(100%)" : "translateX(0)" },
+      { transform: opening ? "translateX(0)" : "translateX(100%)" }
+    ], { duration: opening ? 300 : 220, easing: "cubic-bezier(.22,1,.36,1)" });
+  };
+  const closeMenu = async () => {
+    if (!menu?.open || menuClosing) return;
+    menuClosing = true;
+    const animation = slideMenu(false);
+    if (animation) await animation.finished.catch(() => {});
+    menu.close();
+    menuClosing = false;
     unlockPage();
   };
   toggle?.addEventListener("click", () => {
@@ -28,10 +41,16 @@
     root.classList.add("menu-open");
     document.body.classList.add("menu-open");
     menu.showModal();
+    slideMenu(true);
     toggle.setAttribute("aria-expanded", "true");
     closeButton.focus({ preventScroll: true });
   });
   closeButton?.addEventListener("click", closeMenu);
+  menu?.addEventListener("click", event => {
+    if (event.target !== menu) return;
+    const box = menu.getBoundingClientRect();
+    if (event.clientX < box.left || event.clientX > box.right) closeMenu();
+  });
   menu?.addEventListener("close", () => {
     unlockPage();
   });
@@ -40,8 +59,8 @@
     closeMenu();
   });
   menu?.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener("click", () => {
-      closeMenu();
+    link.addEventListener("click", async () => {
+      await closeMenu();
       const target = document.getElementById(link.hash.slice(1));
       if (target) {
         target.setAttribute("tabindex", "-1");
