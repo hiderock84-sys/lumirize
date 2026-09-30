@@ -8,7 +8,7 @@
 .story-film[hidden],.story-choices[hidden],.story-player__error[hidden]{display:none!important}
 .story-film__cover{position:relative;display:block;background:#101316;aspect-ratio:9/16;overflow:hidden}
 .story-film__cover>img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
-.story-film[data-film="family"] .story-film__cover>img{object-position:82% center}
+.story-film[data-film="family"] .story-film__cover>img{object-position:center}
 .story-film__cover::after{content:'';position:absolute;inset:55% 0 0;background:linear-gradient(transparent,#0a1014ba);pointer-events:none}
 .story-film__cover:hover>img{transform:scale(1.025)}
 .story-film__cover:focus-visible{outline-offset:-5px;outline:3px solid #c9e6ef}
