@@ -473,11 +473,25 @@ h3 { font-size: 1.25rem; line-height: 1.65; }
  .header .menu-toggle {
   position:fixed; top:calc(16px + env(safe-area-inset-top,0px));
   right:max(24px,env(safe-area-inset-right,0px)); z-index:100;
-  width:48px; height:48px; padding:13px; margin:0;
-  border:1px solid #ffffff66; border-radius:50%; color:#fff;
-  background:#20262ce6; box-shadow:0 3px 16px #0003;
-  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  width:44px; height:44px; padding:11px; margin:0;
+  border:1px solid #ffffff52; border-radius:15px; color:#fff;
+  background:linear-gradient(145deg,#ffffff20,#ffffff05),#1b242ba8; box-shadow:inset 0 1px 0 #ffffff20,0 4px 18px #0003;
+  -webkit-backdrop-filter:blur(18px) saturate(1.25); backdrop-filter:blur(18px) saturate(1.25);
  }
  .header__actions::after { content:""; display:block; width:48px; flex:0 0 48px; }
  .header .menu-toggle:focus-visible { outline:3px solid #9bd4ff; outline-offset:4px; }
+}
+
+/* Quiet glass navigation controls. */
+@media screen {
+ .header .menu-toggle { align-items:flex-end; gap:6px; transition:background .2s ease,border-color .2s ease; }
+ .header .menu-toggle span { width:20px; height:1.5px; border-radius:2px; }
+ .header .menu-toggle span:last-child { width:14px; }
+ .header .menu-toggle:hover { border-color:#ffffff99; background-color:#36434bd9; }
+ dialog.mobile-menu { background:linear-gradient(150deg,#2a353e,#171f27 70%); border-left:1px solid #ffffff24; }
+ dialog.mobile-menu .menu-head { background:transparent; }
+ dialog.mobile-menu .menu-close { border:1px solid #ffffff30; border-radius:14px; font-size:1.75rem; }
+ dialog.mobile-menu nav a { border-bottom-color:#ffffff18; }
+ dialog.mobile-menu nav a[aria-current="page"] { color:#d2e8f4; border-bottom-color:#b9d6e180; }
+ dialog.mobile-menu .menu-contact { background:#ffffff05; }
 }

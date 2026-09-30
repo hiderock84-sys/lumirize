@@ -32,3 +32,28 @@ body[data-home-lang="ko"]{font-family:Arial,"Noto Sans KR","Malgun Gothic",sans-
  body[data-home-lang]:not([data-home-lang="ja"]) .v2-motion-toggle{font-size:11px;max-width:190px;white-space:normal}
  body[data-home-lang]:not([data-home-lang="ja"]) .mobile-cta .glass-button__label{font-size:12px}
 }
+
+/* Compact language switcher, grouped as one translucent control. */
+.header .home-languages {
+ width:fit-content; max-width:calc(100% - 48px); margin:0 var(--gutter) 12px auto;
+ padding:3px; gap:2px; flex-wrap:nowrap; justify-content:center;
+ border:1px solid #ffffff30; border-radius:13px;
+ background:#17212a66; -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px);
+ box-shadow:inset 0 1px 0 #ffffff14;
+}
+.header .home-languages a {
+ flex:0 1 auto; min-width:0; min-height:32px; padding:5px 9px;
+ border:0; border-radius:9px; font-size:11px; line-height:1.5; font-weight:500;
+ background:transparent; color:#f0f4f6; transition:background .2s ease,color .2s ease;
+}
+.header .home-languages a[aria-current="page"] { color:#172733; background:#e1edf2; box-shadow:0 1px 5px #0002; }
+.header .home-languages a:hover { background:#ffffff20; }
+.header .home-languages a[aria-current="page"]:hover { background:#eff6f9; }
+@media(max-width:760px) {
+ .header .home-languages { margin:0 auto 12px; }
+ .header .home-languages a { padding-inline:7px; }
+}
+@media(max-width:360px) {
+ .header .home-languages { max-width:calc(100% - 32px); }
+ .header .home-languages a { padding-inline:6px; font-size:10.5px; }
+}
