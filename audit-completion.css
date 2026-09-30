@@ -11,7 +11,9 @@
 .official-resources { padding:0; list-style:none; margin:24px 0; }
 .official-resources li { border-bottom:1px solid #d4dade; }
 .official-resources a { display:block; padding:16px 0; line-height:1.7; overflow-wrap:anywhere; }
-.guide-steps { margin:24px 0; }
+.language-guide details>.consultation-language-content { max-width:none; }
+.guide-steps { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:40px; margin:16px 0; }
+.guide-steps>div:last-child { grid-column:1/-1; }
 .guide-steps>div { padding:18px 0; border-bottom:1px solid #d0d7db; }
 .guide-steps dt { font-weight:600; margin-bottom:8px; }
 .guide-steps dd { margin:0; line-height:1.9; overflow-wrap:anywhere; }
@@ -34,6 +36,7 @@
 .footer .nav-group a:hover { color:#fff; }
 .review-panel a:focus-visible,.review-grouped-nav a:focus-visible,.guide-form-link:focus-visible { outline:3px solid #719bb3; outline-offset:4px; }
 @media(max-width:760px){
+ .guide-steps { grid-template-columns:minmax(0,1fr); }
  .review-housing-grid { grid-template-columns:minmax(0,1fr); gap:24px; }
  .review-directions>div { grid-template-columns:minmax(0,1fr); gap:8px; }
  .footer .footer__nav.review-grouped-nav { grid-template-columns:minmax(0,1fr); gap:28px; }
