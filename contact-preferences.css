@@ -1,0 +1,21 @@
+/* Contact preferences are scoped to the common inquiry form. */
+.inner-page main .contact-preferences {
+  min-width:0; margin:32px 0; padding:24px;
+  border:1px solid #bfc8ce; border-radius:12px; background:#f6f8f8;
+  scroll-margin-top:32px;
+}
+.inner-page main .contact-preferences legend { padding:0 8px; font-size:1.125rem; font-weight:600; }
+.inner-page main .contact-preferences > p:first-of-type { margin:0 0 24px; line-height:1.9; }
+.inner-page main .contact-preferences-grid { display:grid; grid-template-columns:minmax(0,1fr); }
+.inner-page main .contact-preferences .form-row { min-width:0; margin:0 0 24px; }
+.inner-page main .contact-preferences :is(input,select) { width:100%; max-width:100%; box-sizing:border-box; font-size:16px; }
+.inner-page main .contact-preferences .field-hint { margin-top:8px; font-size:.8125rem; line-height:1.8; }
+.inner-page main .contact-preferences-summary { margin-top:20px; padding-top:16px; border-top:1px solid #cbd2d5; font-size:.875rem; line-height:1.85; color:#293f4b; }
+.inner-page main #contact-form :is(input,select):disabled { background:#e9edef; color:#626b72; border-color:#cbd2d5; opacity:1; cursor:not-allowed; }
+@media (min-width:1100px) {
+  .inner-page main .contact-preferences-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+}
+@media (max-width:760px) {
+  .inner-page main .contact-preferences { padding:24px 16px; margin-block:32px; }
+  .inner-page main .contact-preferences legend { font-size:1rem; }
+}
