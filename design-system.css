@@ -467,3 +467,17 @@ h3 { font-size: 1.25rem; line-height: 1.65; }
  dialog.mobile-menu .menu-head { padding-block:8px; }
  dialog.mobile-menu .menu-contact { padding-block:12px; }
 }
+
+/* Keep the navigation trigger in the viewport while the page scrolls. */
+@media screen {
+ .header .menu-toggle {
+  position:fixed; top:calc(16px + env(safe-area-inset-top,0px));
+  right:max(24px,env(safe-area-inset-right,0px)); z-index:100;
+  width:48px; height:48px; padding:13px; margin:0;
+  border:1px solid #ffffff66; border-radius:50%; color:#fff;
+  background:#20262ce6; box-shadow:0 3px 16px #0003;
+  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+ }
+ .header__actions::after { content:""; display:block; width:48px; flex:0 0 48px; }
+ .header .menu-toggle:focus-visible { outline:3px solid #9bd4ff; outline-offset:4px; }
+}
