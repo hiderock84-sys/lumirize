@@ -211,26 +211,26 @@
 @media screen and (max-width:760px) {
  body[data-home-lang]:not(.inner-page) { --gutter:24px; }
  body[data-home-lang] #main > .hero { background:#111214; }
- body[data-home-lang] .hero > .hero__image { height:84%; object-position:60% center; }
+ body[data-home-lang] .hero > .hero__image { height:clamp(440px,125vw,560px); object-position:60% center; filter:brightness(1.38) saturate(1.03); -webkit-mask-image:linear-gradient(#000 0%,#000 70%,transparent 100%); mask-image:linear-gradient(#000 0%,#000 70%,transparent 100%); }
  body[data-home-lang] .hero > .hero__shade {
-  background:linear-gradient(90deg,#07090c66,#07090c0d),linear-gradient(180deg,transparent 48%,#11121466 68%,#111214 84%);
+  background:linear-gradient(90deg,#07090c26,transparent 75%);
  }
  body[data-home-lang] .hero__eyebrow { margin-bottom:32px; }
  body[data-home-lang] .hero__lead { margin-top:32px; line-height:2; }
  body[data-home-lang] .hero__actions { margin-top:40px; gap:24px; }
  body[data-home-lang] .hero__bottom { bottom:32px; flex-wrap:wrap; gap:12px; }
  body[data-home-lang] #main > :is(.section,.statement) { padding-block:80px; }
- body[data-home-lang] .home-guide { padding-block:40px; }
+ body[data-home-lang] .home-guide { padding-block:48px; background:#252b31; }
  body[data-home-lang] .home-guide p { margin-bottom:32px; line-height:2; }
  body[data-home-lang] .home-guide nav { gap:16px 24px; }
  body[data-home-lang] .section-label { margin-bottom:40px; padding-bottom:24px; gap:16px; flex-wrap:wrap; }
  body[data-home-lang] .section-heading { gap:32px; margin-bottom:48px; }
  body[data-home-lang] :is(.philosophy__grid,.company__grid,.contact__layout) { gap:40px; }
- body[data-home-lang] .philosophy__body > p + p { margin-top:24px; }
+ body[data-home-lang] .philosophy__body > p + p { margin-top:32px; }
  body[data-home-lang] .philosophy__body .lead { margin-bottom:32px; }
  body[data-home-lang] .philosophy__body > .text-link { margin-top:32px; }
  body[data-home-lang] .principles { margin-top:48px; }
- body[data-home-lang] :is(.principles > div,.service,.support-grid article,.steps li) { padding-block:32px; }
+ body[data-home-lang] :is(.principles > div,.service,.support-grid article,.steps li) { padding-block:40px; }
  body[data-home-lang] :is(.principles h3,.support-grid h3) { margin-block:16px; }
  body[data-home-lang] .service__body { margin-top:24px; }
  body[data-home-lang] .service__body .text-link { margin-top:24px; }
