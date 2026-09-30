@@ -127,7 +127,7 @@
   // white when the floating controls pass over the portrait or dark sections.
   {
     const innerPage = document.body.classList.contains("inner-page");
-    const floatingButtons = [...document.querySelectorAll(".mobile-cta .glass-button")];
+    const floatingButtons = [...document.querySelectorAll(".mobile-cta .glass-button, .menu-toggle")];
     const darkSurfaces = [...document.querySelectorAll(".header, .footer, .contact-emergency, .leader-profile img")];
     const lightSurfaces = [...document.querySelectorAll(".light-section")];
     let toneFrame = 0;
