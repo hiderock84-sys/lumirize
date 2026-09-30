@@ -97,6 +97,8 @@
   body[data-home-lang] :is(.philosophy__grid,.process__layout,.faq-layout,.company__grid,.contact__layout,.support-grid) { grid-template-columns:minmax(0,1fr); gap:32px; }
   body[data-home-lang] .principles { grid-template-columns:minmax(0,1fr); }
   body[data-home-lang] :is(.principles > div,.service,.support-grid article,.steps li) { padding-block:32px; }
+  /* Wider phone framing: less cover scaling reveals more of the original scene. */
+  body[data-home-lang] .hero > .hero__image { height:clamp(280px,85vw,400px); object-position:55% center; -webkit-mask-image:linear-gradient(#000 0%,#000 72%,transparent 100%); mask-image:linear-gradient(#000 0%,#000 72%,transparent 100%); }
   body[data-home-lang] .hero__actions { gap:16px; margin-top:32px; flex-wrap:wrap; }
   body[data-home-lang] .hero__bottom { position:static; transform:none; margin-top:40px; flex-wrap:wrap; gap:12px; }
   body[data-home-lang] .hero { flex-direction:column; align-items:stretch; justify-content:center; padding-bottom:56px; }
