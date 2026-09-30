@@ -206,3 +206,44 @@
 .inner-page main :is(a,button,summary):focus-visible,.home-guide a:focus-visible{outline:3px solid #397493;outline-offset:4px}
 #languages,#access,#house-fees,#conditions{scroll-margin-top:112px}
 @media(max-width:760px){.audit-grid{grid-template-columns:minmax(0,1fr);gap:16px}.audit-grid>article,.audit-panel,.audit-note{padding:22px 18px}.home-guide{padding:24px 0}.home-guide nav{gap:8px 16px}.language-guide details>div{max-width:100%}.inner-page main select{max-width:100%;width:100%;font-size:16px}}
+
+/* Mobile homepage: a wider hero crop and a consistent, generous reading rhythm. */
+@media screen and (max-width:760px) {
+ body[data-home-lang]:not(.inner-page) { --gutter:24px; }
+ body[data-home-lang] #main > .hero { background:#111214; }
+ body[data-home-lang] .hero > .hero__image { height:84%; object-position:60% center; }
+ body[data-home-lang] .hero > .hero__shade {
+  background:linear-gradient(90deg,#07090c66,#07090c0d),linear-gradient(180deg,transparent 48%,#11121466 68%,#111214 84%);
+ }
+ body[data-home-lang] .hero__eyebrow { margin-bottom:32px; }
+ body[data-home-lang] .hero__lead { margin-top:32px; line-height:2; }
+ body[data-home-lang] .hero__actions { margin-top:40px; gap:24px; }
+ body[data-home-lang] .hero__bottom { bottom:32px; flex-wrap:wrap; gap:12px; }
+ body[data-home-lang] #main > :is(.section,.statement) { padding-block:80px; }
+ body[data-home-lang] .home-guide { padding-block:40px; }
+ body[data-home-lang] .home-guide p { margin-bottom:32px; line-height:2; }
+ body[data-home-lang] .home-guide nav { gap:16px 24px; }
+ body[data-home-lang] .section-label { margin-bottom:40px; padding-bottom:24px; gap:16px; flex-wrap:wrap; }
+ body[data-home-lang] .section-heading { gap:32px; margin-bottom:48px; }
+ body[data-home-lang] :is(.philosophy__grid,.company__grid,.contact__layout) { gap:40px; }
+ body[data-home-lang] .philosophy__body > p + p { margin-top:24px; }
+ body[data-home-lang] .philosophy__body .lead { margin-bottom:32px; }
+ body[data-home-lang] .philosophy__body > .text-link { margin-top:32px; }
+ body[data-home-lang] .principles { margin-top:48px; }
+ body[data-home-lang] :is(.principles > div,.service,.support-grid article,.steps li) { padding-block:32px; }
+ body[data-home-lang] :is(.principles h3,.support-grid h3) { margin-block:16px; }
+ body[data-home-lang] .service__body { margin-top:24px; }
+ body[data-home-lang] .service__body .text-link { margin-top:24px; }
+ body[data-home-lang] .business-summary { padding-block:32px; margin-bottom:48px; }
+ body[data-home-lang] .business-summary p { margin-bottom:24px; }
+ body[data-home-lang] .steps h3 { margin-bottom:16px; }
+ body[data-home-lang] .statement p { margin-top:32px; }
+ body[data-home-lang] .statement .text-link { margin-top:32px; }
+ body[data-home-lang] .video-stories__heading { gap:32px; margin-bottom:32px; }
+ body[data-home-lang] .video-stories__hint { margin-bottom:24px; }
+ body[data-home-lang] .story-choices { margin-bottom:32px; gap:12px; }
+ body[data-home-lang] .story-film__copy { padding:32px 24px; }
+ body[data-home-lang] .source-photo-grid { margin-top:40px; gap:32px; }
+ body[data-home-lang] .faq summary { padding-block:24px; }
+ body[data-home-lang] .contact__intro > p { margin-top:24px; }
+}
