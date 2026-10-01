@@ -1,0 +1,276 @@
+/* Shared inner-page design. Original page copy, forms and chart values are retained. */
+body.inner-page{color-scheme:light;background:#efefed;color:#191a1d;--muted:#585b62;--line:#17191d26}
+
+.inner-page .header{position:relative;background:#111214;color:#f8f8f7}
+
+.inner-page .mobile-menu,.inner-page .footer{--muted:#b3b5ba;--line:#ffffff24;color:#f8f8f7}
+
+.inner-page main>.section{padding-block:var(--space-10);background:none;border:0}
+
+.inner-page main>.section+.section{padding-top:var(--space-3)}
+
+.inner-page main .section-heading{display:block;max-width:880px;margin-bottom:var(--space-7)}
+
+.inner-page main .section-heading .eyebrow{text-transform:uppercase;letter-spacing:.17em;margin-bottom:var(--space-3)}
+
+.inner-page main h1{font-size:clamp(2.2rem,4.2vw,4rem);font-weight:500;line-height:1.5;letter-spacing:-.04em;margin:0 0 var(--space-3)}
+
+.inner-page main h2{font-size:1.5rem;font-weight:500;line-height:1.75;margin:0 0 var(--space-2);letter-spacing:-.025em}
+
+.inner-page main h3{font-size:1.25rem;margin:0 0 var(--space-3)}
+
+.inner-page main h4{font-size:1.125rem;margin:0 0 var(--space-2);font-weight:500;line-height:1.7}
+
+.inner-page main .section-heading>p{max-width:800px}
+
+.inner-page main ul{padding-left:var(--space-3);line-height:1.9;color:var(--muted)}
+
+.inner-page main li+li{margin-top:var(--space-1)}
+
+.inner-page main a:not(.btn):not(.profile-banner){text-decoration:underline;text-underline-offset:5px}
+
+.inner-page main p+p{margin-top:var(--space-3)}
+
+.inner-page main strong{font-weight:600}
+
+.inner-page main small{font-size:.8125rem;line-height:1.8}
+
+.inner-page main [class$="-grid"],.inner-page main .stats-dashboard,.inner-page main .policy-benefit-cards,.inner-page main .policy-flow-steps,.inner-page main .policy-graph-layout{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-3)}
+
+.inner-page main :is(.service-card,.support-card,.philosophy-card,.info-item,.chart-card,.compare-card,.summary-card,.policy-benefit-card,.institution-pillar,.policy-compare-card,.policy-flow-step,.assurance-card,.story-card,.contact-card){border-top:1px solid #17191d45;background:#f9f9f8;padding:var(--space-4);min-width:0}
+
+.inner-page main .service-number,.inner-page main .process-number,.inner-page main .policy-flow-num{font-size:.875rem;letter-spacing:.1em;margin-bottom:var(--space-3);color:#76797e}
+
+.inner-page main .service-card h2,.inner-page main .support-card h2{font-size:1.4rem}
+
+.inner-page main .service-grid{gap:var(--space-4)}
+
+.inner-page main .check-list{padding-left:var(--space-3);margin:var(--space-3) 0 0;font-size:.9375rem}
+
+.inner-page main .check-list li::marker{color:#555c63}
+
+.inner-page main .process-cta,.inner-page main .faq-cta{margin-top:var(--space-7);border-top:1px solid var(--line);padding-top:var(--space-4);display:flex;align-items:center;flex-wrap:wrap;gap:var(--space-2)}
+
+.inner-page main .process-cta>p,.inner-page main .faq-cta>p{flex-basis:100%;margin:0 0 var(--space-1)}
+
+.btn{display:inline-flex;justify-content:center;align-items:center;min-height:50px;padding:var(--space-2) var(--space-3);border:1px solid #18191c;font-size:.875rem;border-radius:3px;line-height:1.65;text-align:center}
+
+.btn-primary,.btn-emergency{background:#191a1d;color:#fff}
+
+.btn-secondary{background:transparent;color:#191a1d}
+
+.btn:hover{opacity:.8}
+
+.inner-page main .message-card{padding:var(--space-5);background:#f9f9f8;margin:var(--space-4) 0;border-top:1px solid var(--line)}
+
+.inner-page main .message-theme{font-size:1.35rem;color:#25272b;line-height:1.8;margin-bottom:var(--space-3)}
+
+.inner-page main .container>section,.inner-page main .about-block{margin-top:var(--space-7)}
+
+.inner-page main .about-divider{border:0;border-top:1px solid var(--line);margin:var(--space-5) 0}
+
+.inner-page main .about-anchor-nav{display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-3);border-block:1px solid var(--line);padding:var(--space-3) 0;margin-bottom:var(--space-5)}
+
+.inner-page main .about-anchor-nav a{font-size:.875rem;min-height:44px;display:flex;align-items:center}
+
+.inner-page main .about-tagline{font-size:1.125rem;color:#313338;margin-block:var(--space-3)}
+
+.inner-page main .about-details-note,.inner-page main .support-grid-caption,.inner-page main .story-note{margin-top:var(--space-3);font-size:.875rem}
+
+.inner-page main .profile-banner{display:flex;align-items:center;gap:var(--space-5);background:#1c1d20;color:#fff;margin-block:var(--space-6);padding:var(--space-4)}
+
+.inner-page main .profile-banner-photo{width:150px;aspect-ratio:4/5;object-fit:cover}
+
+.inner-page main .profile-banner-label{font-size:.75rem;letter-spacing:.1em;color:#bbb}
+
+.inner-page main .profile-banner-text{font-size:1.25rem;line-height:1.8;color:#fff}
+
+.inner-page main .leader-profile{display:flex;align-items:center;gap:var(--space-5);margin-bottom:var(--space-5)}
+
+.inner-page main .leader-profile img{width:220px;aspect-ratio:4/5;object-fit:cover}
+
+.inner-page main .leader-name,.inner-page main .leader-role{font-size:1rem;margin-top:var(--space-2)}
+
+.inner-page main .leader-person{font-size:2rem;color:#1a1b1e;margin-top:var(--space-2)}
+
+.inner-page main .leader-closing{font-size:1.5rem;color:#25272c;border-top:1px solid var(--line);padding-top:var(--space-4)}
+
+.inner-page main .leader-closing-en{font-size:.875rem}
+
+.inner-page main .leader-sign{margin-top:var(--space-4);font-size:.875rem}
+
+.inner-page main .leader-sign span{display:block;font-size:1.5rem;color:#191a1d;margin-top:var(--space-1)}
+
+.inner-page main .process-list{list-style:none;padding:0;margin:0}
+
+.inner-page main .process-item{padding:var(--space-4) 0;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2) var(--space-8)}
+
+.inner-page main .process-head{grid-row:span 2}
+
+.inner-page main .process-item>ul{margin-top:0}
+
+.inner-page main .process-item>p{margin:0}
+
+.inner-page main .faq-wrapper{max-width:1000px}
+
+.inner-page main .faq-category-title{margin-top:var(--space-6);border-bottom:1px solid var(--line);padding-bottom:var(--space-2)}
+
+.inner-page main .faq-item{border-bottom:1px solid var(--line)}
+
+.inner-page main .faq-question{display:flex;justify-content:space-between;align-items:center;gap:var(--space-3);width:100%;padding:var(--space-3) 0;border:0;background:none;color:#191a1d;text-align:left;line-height:1.8;font-size:1rem}
+
+.inner-page main .faq-plus{font-size:1.5rem;flex-shrink:0;font-weight:300}
+
+.inner-page main .faq-item.active .faq-plus{transform:rotate(45deg)}
+
+.inner-page main .faq-answer{max-height:0;overflow:hidden}
+
+.inner-page main .faq-answer>*:first-child{margin-top:0}
+
+.inner-page main .faq-answer>*:last-child{margin-bottom:var(--space-4)}
+
+.inner-page main .stats-dashboard{margin-top:var(--space-4)}
+
+.inner-page main .summary-card strong{display:block;font-size:1.3rem;line-height:1.7;margin-block:var(--space-1)}
+
+.inner-page main .summary-card small{display:block;color:#656971}
+
+.inner-page main .bar-list,.inner-page main .policy-bars,.inner-page main .policy-ring-legend{padding:0;list-style:none}
+
+.inner-page main .bar-list li,.inner-page main .policy-bars li{margin-top:var(--space-3)}
+
+.inner-page main .bar-head,.inner-page main .policy-bar-head{display:flex;justify-content:space-between;gap:var(--space-3);font-size:.875rem;align-items:baseline}
+
+.inner-page main .bar-head strong,.inner-page main .policy-bar-head strong{font-size:1.15rem;color:#191a1d;white-space:nowrap}
+
+.inner-page main .bar-track,.inner-page main .policy-track{height:7px;display:block;background:#d5d7da;margin-block:var(--space-2);border-radius:2px;overflow:hidden}
+
+.inner-page main .bar-track>span,.inner-page main .policy-track>span{height:100%;display:block;background:#414c5b}
+
+.inner-page main .chart-note,.inner-page main .policy-bars p{font-size:.8125rem;margin-top:var(--space-2)}
+
+.inner-page main .policy-graph-board{padding:var(--space-5);background:#f9f9f8}
+
+.inner-page main .policy-graph-layout{margin-top:var(--space-4)}
+
+.inner-page main .policy-ring{width:190px;height:190px;border-radius:50%;background:conic-gradient(#39424e 0% 40%,#8b939c 40% 75%,#c9ced4 75% 100%);margin:var(--space-4) auto}
+
+.inner-page main .policy-ring-legend{font-size:.875rem;text-align:center}
+
+.inner-page main .policy-ring-label{text-align:center;font-size:.875rem}
+
+.inner-page main .dot{display:inline-block;width:10px;height:10px;margin-right:var(--space-1);background:#39424e}
+
+.inner-page main .dot-work{background:#8b939c}
+
+.inner-page main .dot-stay{background:#c9ced4}
+
+.inner-page main .compare-table-wrap{max-width:100%;overflow:auto;border:1px solid var(--line);margin-top:var(--space-3)}
+
+.inner-page main table{width:100%;border-collapse:collapse;font-size:.875rem;min-width:620px}
+
+.inner-page main th,.inner-page main td{padding:var(--space-2);text-align:left;border-bottom:1px solid var(--line);line-height:1.8}
+
+.inner-page main th{background:#dddfe1}
+
+.inner-page main blockquote{border-left:2px solid #8e949c;margin:var(--space-3) 0 0;padding-left:var(--space-3);font-size:1rem;line-height:1.9}
+
+.inner-page main .story-subtitle{font-size:.9375rem;color:#22262d}
+
+.inner-page main .emergency{background:#202227;color:#fff}
+
+.inner-page main .emergency p{color:#c5c7cc}
+
+.inner-page main .emergency h1{font-size:1.75rem}
+
+.inner-page main .alert-icon{display:none}
+
+.inner-page main .emergency-inner{display:flex;align-items:center;gap:var(--space-5)}
+
+.inner-page main .emergency .btn{border-color:#aaa;flex-shrink:0}
+
+.inner-page main .contact-grid{grid-template-columns:1fr 1fr}
+
+.inner-page main .contact-card:first-child{grid-column:1/-1}
+
+.inner-page main .contact-card .company-meta{margin:0}
+
+.inner-page main .company-meta>div{display:grid;grid-template-columns:160px 1fr;gap:var(--space-3);padding-block:var(--space-2);border-bottom:1px solid var(--line);line-height:1.8;font-size:.9375rem}
+
+.inner-page main .company-meta dt{color:#646973}
+
+.inner-page main .company-meta dd{margin:0;overflow-wrap:anywhere}
+
+.inner-page main .contact-line{font-size:1.25rem}
+
+.inner-page main .contact-form-wrap{max-width:760px;margin:var(--space-8) auto 0}
+
+.inner-page main .form-row{margin:var(--space-3) 0}
+
+.inner-page main .form-row>label{display:block;font-size:.875rem;margin-bottom:var(--space-1)}
+
+.inner-page main .form-row label span{font-size:.75rem;margin-left:var(--space-1);color:#666}
+
+.inner-page main input:not([type=checkbox]),.inner-page main select,.inner-page main textarea{background:#fafafa;border-color:#a7a9ad;color:#18191c;font-size:1rem}
+
+input[type=hidden]{display:none!important}
+
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0!important}
+
+.inner-page main .checkbox-row{display:flex;align-items:flex-start;gap:var(--space-2)}
+
+.inner-page main .checkbox-row input{width:20px;height:20px;margin:2px 0;flex-shrink:0;accent-color:#222}
+
+.inner-page main .form-status,.inner-page main .form-note{font-size:.875rem;line-height:1.85;margin-top:var(--space-2)}
+
+.inner-page main .invalid{outline:2px solid #b83333!important;outline-offset:3px}
+
+.inner-page main .form-status.error{color:#ae2b2b}
+
+.inner-page .legal-wrap{max-width:1000px;padding:var(--space-9) var(--gutter);margin:auto}
+
+.inner-page .legal-wrap h2{margin-top:var(--space-5)}
+
+.inner-page .legal-back{margin-top:var(--space-5)}
+
+.inner-page .mobile-cta{color-scheme:dark}
+
+@media(max-width:900px){.inner-page main .process-item{grid-template-columns:1fr;gap:var(--space-2)}
+.inner-page main .process-head{grid-row:auto}
+.inner-page main .emergency-inner{flex-direction:column;align-items:flex-start}
+.inner-page main .company-meta>div{grid-template-columns:110px 1fr}
+}
+
+@media(max-width:600px){.inner-page main>.section{padding-block:var(--space-7)}
+.inner-page main h1{font-size:2rem;margin-bottom:var(--space-3)}
+.inner-page main .section-heading{margin-bottom:var(--space-5)}
+.inner-page main .section-heading .eyebrow{font-size:.6875rem;margin-bottom:var(--space-3)}
+.inner-page main h2{font-size:1.3rem;line-height:1.75}
+.inner-page main h3{font-size:1.15rem}
+.inner-page main [class$="-grid"],.inner-page main .stats-dashboard,.inner-page main .policy-benefit-cards,.inner-page main .policy-flow-steps,.inner-page main .policy-graph-layout{grid-template-columns:minmax(0,1fr);gap:var(--space-3)}
+.inner-page main :is(.service-card,.support-card,.philosophy-card,.info-item,.chart-card,.compare-card,.summary-card,.policy-benefit-card,.institution-pillar,.policy-compare-card,.policy-flow-step,.assurance-card,.story-card,.contact-card){padding:var(--space-3) var(--space-3)}
+.inner-page main .service-card h2,.inner-page main .support-card h2{font-size:1.3rem}
+.inner-page main .message-card{padding:var(--space-3) var(--space-3);margin-block:var(--space-4)}
+.inner-page main .message-theme{font-size:1.15rem}
+.inner-page main .process-cta,.inner-page main .faq-cta{margin-top:var(--space-5);gap:var(--space-2)}
+.inner-page main .process-cta .btn,.inner-page main .faq-cta .btn{width:100%}
+.inner-page main .profile-banner{padding:var(--space-3) var(--space-2);gap:var(--space-3)}
+.inner-page main .profile-banner-photo{width:90px}
+.inner-page main .profile-banner-text{font-size:1rem}
+.inner-page main .leader-profile{flex-direction:column;align-items:flex-start;gap:var(--space-3)}
+.inner-page main .leader-profile img{width:100%;max-width:280px}
+.inner-page main .leader-person{font-size:1.75rem}
+.inner-page main .leader-closing{font-size:1.3rem}
+.inner-page main .policy-graph-board{padding:var(--space-3) var(--space-2)}
+.inner-page main .policy-ring{width:165px;height:165px}
+.inner-page main .faq-question{padding-block:var(--space-3);font-size:.9375rem;gap:var(--space-2)}
+.inner-page main .company-meta>div{grid-template-columns:1fr;gap:4px;padding-block:var(--space-2)}
+.inner-page main .company-meta dt{font-size:.8125rem}
+.inner-page main .contact-line{font-size:1.05rem}
+.inner-page main .emergency h1{font-size:1.5rem}
+.inner-page main .emergency .btn{white-space:normal;width:100%;font-size:.8125rem}
+.inner-page main .contact-form-wrap{margin-top:var(--space-5)}
+.inner-page main .contact-form-wrap .btn{width:100%}
+.inner-page .legal-wrap{padding-block:var(--space-7)}
+.inner-page main .container>section,.inner-page main .about-block{margin-top:var(--space-5)}
+}
