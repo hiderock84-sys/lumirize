@@ -13,6 +13,28 @@
   const direct = modal.querySelector('[data-player-direct]');
   const error = modal.querySelector('.story-player__error');
   const subtitleControls = modal.querySelector('[data-player-subtitles]');
+  const fullscreen = modal.querySelector('[data-player-fullscreen]');
+  const fullscreenLabel = fullscreen?.textContent;
+  const exitLabels = {ja:'元の表示へ', en:'Exit fullscreen', ko:'전체 화면 종료', tl:'Bumalik sa dating laki', th:'ออกจากเต็มหน้าจอ'};
+  const resetFullscreen = () => {
+    modal.classList.remove('story-player--fullscreen');
+    if (fullscreen) fullscreen.textContent = fullscreenLabel;
+  };
+  fullscreen?.addEventListener('click', async () => {
+    if (modal.classList.contains('story-player--fullscreen')) {
+      resetFullscreen();
+      return;
+    }
+    try {
+      if (document.fullscreenEnabled && typeof player.requestFullscreen === 'function') await player.requestFullscreen();
+      else if (typeof player.webkitEnterFullscreen === 'function') player.webkitEnterFullscreen();
+      else throw new Error('Native fullscreen unavailable');
+    } catch {
+      // In-app browsers may block native fullscreen. Keep an in-page full-size player available.
+      modal.classList.add('story-player--fullscreen');
+      fullscreen.textContent = exitLabels[document.documentElement.lang] || exitLabels.ja;
+    }
+  });
   let activeFilm = null;
   let playbackRevision = 0;
   let selected = films[0].dataset.film;
@@ -104,6 +126,7 @@
     if (event.target === modal && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) modal.close();
   });
   modal.addEventListener('close', () => {
+    resetFullscreen();
     playbackRevision++;
     activeFilm = null;
     player.pause();

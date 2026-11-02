@@ -41,6 +41,8 @@
     root.classList.add("menu-open");
     document.body.classList.add("menu-open");
     menu.showModal();
+    const scroller = menu.querySelector(".menu-scroll");
+    if (scroller) scroller.scrollTop = 0;
     slideMenu(true);
     toggle.setAttribute("aria-expanded", "true");
     closeButton.focus({ preventScroll: true });
@@ -59,10 +61,13 @@
     closeMenu();
   });
   menu?.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener("click", async () => {
+    link.addEventListener("click", async event => {
+      event.preventDefault();
       await closeMenu();
       const target = document.getElementById(link.hash.slice(1));
       if (target) {
+        history.replaceState(null, "", link.hash);
+        target.scrollIntoView({block: "start", behavior: "auto"});
         target.setAttribute("tabindex", "-1");
         target.focus({ preventScroll: true });
         target.addEventListener("blur", () => target.removeAttribute("tabindex"), { once: true });

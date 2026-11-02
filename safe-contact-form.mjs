@@ -1,4 +1,4 @@
-import {CONTACT_METHODS, contactPermissions, prepareContactData, contactEmailBody} from './contact-preferences.mjs?v=20261001-safe-contact';
+import {CONTACT_METHODS, contactPermissions, prepareContactData, contactEmailBody, missingContactDestination} from './contact-preferences.mjs?v=20261102-contact';
 
 const form = document.getElementById('contact-form');
 const status = document.getElementById('form-status');
@@ -29,16 +29,16 @@ if (form && status) {
     const allowed = contactPermissions(method.value);
     const canReply = allowed.email || allowed.phone;
     email.disabled = !allowed.email;
-    email.required = allowed.email;
+    email.required = method.value === CONTACT_METHODS.email;
     phone.disabled = !allowed.phone;
-    phone.required = allowed.phone;
+    phone.required = method.value === CONTACT_METHODS.phone;
     voicemail.disabled = !allowed.phone;
     if (!allowed.phone) voicemail.value = '留守電を残さない';
     time.disabled = !canReply;
     timeDetails.disabled = !canReply;
     timeDetails.required = canReply && time.value === '下の補足欄で指定';
-    document.getElementById('email-requirement').textContent = allowed.email ? '必須 / Required' : '入力不要 / Not needed';
-    document.getElementById('phone-requirement').textContent = allowed.phone ? '必須 / Required' : '入力不要 / Not needed';
+    document.getElementById('email-requirement').textContent = email.required ? '必須 / Required' : allowed.email ? 'どちらか一方は必須 / At least one contact' : '入力不要 / Not needed';
+    document.getElementById('phone-requirement').textContent = phone.required ? '必須 / Required' : allowed.phone ? 'どちらか一方は必須 / At least one contact' : '入力不要 / Not needed';
     document.getElementById('contact-time-requirement').textContent = timeDetails.required ? '必須 / Required' : '任意 / Optional';
     controls.filter(field => field.disabled || !field.required).forEach(clearError);
     if (!method.value) {
@@ -72,6 +72,13 @@ if (form && status) {
         firstInvalid ||= field;
       }
     });
+    if (missingContactDestination(method.value, email.value, phone.value)) {
+      const field = method.value === CONTACT_METHODS.phone ? phone : email;
+      field.classList.add('invalid');
+      field.setAttribute('aria-invalid', 'true');
+      field.setAttribute('aria-errormessage', status.id);
+      firstInvalid ||= field;
+    }
     if (firstInvalid) {
       message('連絡方法、必要な連絡先、必須項目、個人情報の取り扱いへの同意をご確認ください。 Please check your contact preferences and required fields.', 'error');
       firstInvalid.focus({preventScroll: true});

@@ -53,3 +53,10 @@ export function contactEmailBody(data) {
     '', value('message')
   ].join('\n');
 }
+
+export function missingContactDestination(method, email, phone) {
+  if (method === CONTACT_METHODS.email) return !email.trim();
+  if (method === CONTACT_METHODS.phone) return !phone.trim();
+  if (method === CONTACT_METHODS.both) return !email.trim() && !phone.trim();
+  return false;
+}
