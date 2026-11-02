@@ -2,7 +2,7 @@
 // Return only a fixed diagnostic code; never retain or log the submitted content.
 export async function submitContact(endpoint, data, {
   fetchImpl = fetch,
-  timeoutMs = 20000
+  timeoutMs = 60000
 } = {}) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
