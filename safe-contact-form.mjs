@@ -1,5 +1,5 @@
 import {CONTACT_METHODS, contactPermissions, prepareContactData, contactEmailBody, missingContactDestination} from './contact-preferences.mjs?v=20261102-contact';
-import {submitContact} from './contact-submission.mjs?v=20261103-receipt';
+import {submitContact} from './contact-submission.mjs?v=20261103-response-wait';
 
 const form = document.getElementById('contact-form');
 const status = document.getElementById('form-status');
@@ -89,7 +89,7 @@ if (form && status) {
     sending = true;
     submit.disabled = true;
     form.setAttribute('aria-busy', 'true');
-    message('送信中です。 Sending…', 'pending');
+    message('送信結果を確認しています。確認に最大1分ほどかかる場合があります。同じ内容を重ねて送らず、このままお待ちください。 Sending… Confirmation can take up to a minute. Please wait without sending again.', 'pending');
     status.dataset.submissionState = 'pending';
     delete status.dataset.submissionReason;
     const data = prepareContactData(new FormData(form));

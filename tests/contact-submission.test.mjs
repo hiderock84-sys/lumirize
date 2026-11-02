@@ -70,6 +70,21 @@ test('timeout is an unknown delivery outcome, with one request only', async () =
   assert.equal(calls, 1);
 });
 
+test('accept a response after the former 20-second deadline without resending', async t => {
+  t.mock.timers.enable({apis: ['setTimeout']});
+  let calls = 0;
+  const resultPromise = submitContact(endpoint, data, {fetchImpl: (_url, {signal}) => {
+    calls++;
+    return new Promise((resolve, reject) => {
+      signal.addEventListener('abort', () => reject(new DOMException('aborted', 'AbortError')));
+      setTimeout(() => resolve({ok: true, json: async () => ({success: true})}), 45000);
+    });
+  }});
+  t.mock.timers.tick(45000);
+  assert.deepEqual(await resultPromise, {confirmed: true, reason: 'accepted'});
+  assert.equal(calls, 1);
+});
+
 test('no-reply preference preserves the notification but strips reply destinations', () => {
   const input = new FormData();
   input.set('連絡方法', CONTACT_METHODS.none);
