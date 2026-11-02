@@ -19,3 +19,4 @@
   .inner-page main .contact-preferences { padding:24px 16px; margin-block:32px; }
   .inner-page main .contact-preferences legend { font-size:1rem; }
 }
+.inner-page main .form-status.warning { padding:1rem; background:#fff5d6; color:#674800; border-left:3px solid #947000; }

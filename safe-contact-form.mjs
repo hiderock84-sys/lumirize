@@ -1,4 +1,5 @@
 import {CONTACT_METHODS, contactPermissions, prepareContactData, contactEmailBody, missingContactDestination} from './contact-preferences.mjs?v=20261102-contact';
+import {submitContact} from './contact-submission.mjs?v=20261103-receipt';
 
 const form = document.getElementById('contact-form');
 const status = document.getElementById('form-status');
@@ -89,23 +90,24 @@ if (form && status) {
     submit.disabled = true;
     form.setAttribute('aria-busy', 'true');
     message('送信中です。 Sending…', 'pending');
+    status.dataset.submissionState = 'pending';
+    delete status.dataset.submissionReason;
     const data = prepareContactData(new FormData(form));
     const noReply = method.value === CONTACT_METHODS.none;
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 20000);
     try {
-      const response = await fetch(form.dataset.ajaxAction, {method:'POST', headers:{Accept:'application/json'}, body:data, signal:controller.signal});
-      const result = await response.json();
-      if (!response.ok || !(result.success === true || result.success === 'true')) throw new Error('Submission not confirmed');
+      const result = await submitContact(form.dataset.ajaxAction, data);
+      status.dataset.submissionState = result.confirmed ? 'accepted' : 'unconfirmed';
+      status.dataset.submissionReason = result.reason;
+      if (!result.confirmed) {
+        message('送信結果を確認できませんでした。受付先に届いている場合があります。重複を避けるため、同じ内容をすぐに再送せず、安全に利用できる連絡方法で受付状況をご確認ください。入力内容は残っています。 Delivery could not be confirmed. It may have arrived; avoid duplicate submissions. Your input is retained.', 'warning');
+        return;
+      }
       message(noReply
         ? '返信不要のご希望とともに送信しました。必要なときに、改めてご連絡ください。 Submitted with your no-reply preference.'
         : '連絡方法・留守電・時間のご希望とともに送信しました。ご希望を確認したうえで、受付時間内に対応します。 Submitted with your contact preferences.', 'success');
       form.reset();
       syncPreferences();
-    } catch {
-      message('送信の完了を確認できませんでした。入力内容は残っています。下の「メールアプリから相談する」もご利用いただけます。 Submission could not be confirmed; your input is retained.', 'error');
     } finally {
-      clearTimeout(timeout);
       sending = false;
       submit.disabled = false;
       form.removeAttribute('aria-busy');
