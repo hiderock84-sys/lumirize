@@ -3,6 +3,14 @@ const names = {ja:'日本語', en:'English', ko:'한국어', tl:'Tagalog', th:'�
 const language = document.getElementById('language');
 const requested = new URLSearchParams(location.search).get('lang');
 if (language && Object.hasOwn(names, requested)) language.value = names[requested];
+document.querySelectorAll('.guide-form-link[data-form-language]').forEach(link => {
+  link.addEventListener('click', () => {
+    const code = link.dataset.formLanguage;
+    if (!language || !Object.hasOwn(names, code)) return;
+    language.value = names[code];
+    language.dispatchEvent(new Event('change', {bubbles: true}));
+  });
+});
 const current = () => Object.keys(names).find(key => names[key] === language?.value) || 'ja';
 export const contactText = (key, original) => translations[current()]?.[key] ?? original;
 const originals = new Map();

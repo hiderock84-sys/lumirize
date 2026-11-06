@@ -1,4 +1,4 @@
-import {contactText as t, localizeContactForm} from './contact-i18n.mjs?v=20261103-audit';
+import {contactText as t, localizeContactForm} from './contact-i18n.mjs?v=20261107-language-sync';
 import {CONTACT_METHODS, contactPermissions, prepareContactData, contactEmailBody, missingContactDestination} from './contact-preferences.mjs?v=20261102-contact';
 import {submitContact} from './contact-submission.mjs?v=20261103-response-wait';
 
@@ -17,7 +17,17 @@ if (form && status) {
   const summary = document.getElementById('contact-preferences-summary');
   const fallback = document.getElementById('email-fallback');
   const controls = [...form.querySelectorAll('input:not([type="hidden"]),select,textarea')];
-  const message = (text, type) => { status.textContent = text; status.className = 'form-status ' + type; };
+  let messageState;
+  const renderMessage = () => {
+    if (!messageState) return;
+    const {key, original, type} = messageState;
+    status.textContent = t(key, original);
+    status.className = 'form-status ' + type;
+  };
+  const message = (key, original, type) => {
+    messageState = {key, original, type};
+    renderMessage();
+  };
   const clearError = field => {
     field.classList.remove('invalid');
     field.removeAttribute('aria-invalid');
@@ -52,6 +62,7 @@ if (form && status) {
       summary.textContent = [method.selectedOptions[0].textContent, allowed.phone ? voicemail.selectedOptions[0].textContent : '', time.selectedOptions[0].textContent].filter(Boolean).join(' / ');
     }
     updateFallback();
+    renderMessage();
   };
   controls.forEach(field => {
     field.addEventListener('input', () => { clearError(field); updateFallback(); });
@@ -83,7 +94,9 @@ if (form && status) {
       firstInvalid ||= field;
     }
     if (firstInvalid) {
-      message(t('error', '連絡方法、必要な連絡先、必須項目、個人情報の取り扱いへの同意をご確認ください。 Please check your contact preferences and required fields.'), 'error');
+      message('error', '連絡方法、必要な連絡先、必須項目、個人情報の取り扱いへの同意をご確認ください。 Please check your contact preferences and required fields.', 'error');
+      status.dataset.submissionState = 'invalid';
+      delete status.dataset.submissionReason;
       firstInvalid.focus({preventScroll: true});
       firstInvalid.scrollIntoView({block:'center', behavior:'auto'});
       return;
@@ -91,7 +104,7 @@ if (form && status) {
     sending = true;
     submit.disabled = true;
     form.setAttribute('aria-busy', 'true');
-    message(t('pending', '送信結果を確認しています。確認に最大1分ほどかかる場合があります。同じ内容を重ねて送らず、このままお待ちください。 Sending… Confirmation can take up to a minute. Please wait without sending again.'), 'pending');
+    message('pending', '送信結果を確認しています。確認に最大1分ほどかかる場合があります。同じ内容を重ねて送らず、このままお待ちください。 Sending… Confirmation can take up to a minute. Please wait without sending again.', 'pending');
     status.dataset.submissionState = 'pending';
     delete status.dataset.submissionReason;
     const data = prepareContactData(new FormData(form));
@@ -101,12 +114,12 @@ if (form && status) {
       status.dataset.submissionState = result.confirmed ? 'accepted' : 'unconfirmed';
       status.dataset.submissionReason = result.reason;
       if (!result.confirmed) {
-        message(t('warning', '送信結果を確認できませんでした。受付先に届いている場合があります。重複を避けるため、同じ内容をすぐに再送せず、安全に利用できる連絡方法で受付状況をご確認ください。入力内容は残っています。 Delivery could not be confirmed. It may have arrived; avoid duplicate submissions. Your input is retained.'), 'warning');
+        message('warning', '送信結果を確認できませんでした。受付先に届いている場合があります。重複を避けるため、同じ内容をすぐに再送せず、安全に利用できる連絡方法で受付状況をご確認ください。入力内容は残っています。 Delivery could not be confirmed. It may have arrived; avoid duplicate submissions. Your input is retained.', 'warning');
         return;
       }
-      message(noReply
-        ? t('successNone', '返信不要のご希望とともに送信しました。必要なときに、改めてご連絡ください。 Submitted with your no-reply preference.')
-        : t('success', '連絡方法・留守電・時間のご希望とともに送信しました。ご希望を確認したうえで、受付時間内に対応します。 Submitted with your contact preferences.'), 'success');
+      message(noReply ? 'successNone' : 'success', noReply
+        ? '返信不要のご希望とともに送信しました。必要なときに、改めてご連絡ください。 Submitted with your no-reply preference.'
+        : '連絡方法・留守電・時間のご希望とともに送信しました。ご希望を確認したうえで、受付時間内に対応します。 Submitted with your contact preferences.', 'success');
       const chosenLanguage = document.getElementById('language').value;
       form.reset();
       document.getElementById('language').value = chosenLanguage;
