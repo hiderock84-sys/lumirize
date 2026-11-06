@@ -60,18 +60,27 @@
     event.preventDefault();
     closeMenu();
   });
-  menu?.querySelectorAll('a[href^="#"]').forEach(link => {
+  menu?.querySelectorAll('a[href]').forEach(link => {
     link.addEventListener("click", async event => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const destination = new URL(link.href, window.location.href);
+      if (destination.origin !== location.origin || destination.pathname !== location.pathname ||
+          destination.search !== location.search || !destination.hash) return;
+      let target;
+      try { target = document.getElementById(decodeURIComponent(destination.hash.slice(1))); }
+      catch { return; }
+      if (!target) return;
       event.preventDefault();
       await closeMenu();
-      const target = document.getElementById(link.hash.slice(1));
-      if (target) {
-        history.replaceState(null, "", link.hash);
-        target.scrollIntoView({block: "start", behavior: "auto"});
-        target.setAttribute("tabindex", "-1");
-        target.focus({ preventScroll: true });
-        target.addEventListener("blur", () => target.removeAttribute("tabindex"), { once: true });
-      }
+      history.replaceState(null, "", destination.hash);
+      target.scrollIntoView({block: "start", behavior: "auto"});
+      const previousTabindex = target.getAttribute("tabindex");
+      target.setAttribute("tabindex", "-1");
+      target.focus({ preventScroll: true });
+      target.addEventListener("blur", () => {
+        if (previousTabindex === null) target.removeAttribute("tabindex");
+        else target.setAttribute("tabindex", previousTabindex);
+      }, { once: true });
     });
   });
 

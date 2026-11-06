@@ -34,21 +34,23 @@ if (form && status) {
     field.removeAttribute('aria-errormessage');
   };
   const updateFallback = () => {
+    if (sending) return;
     const data = prepareContactData(new FormData(form));
     fallback.href = 'mailto:info@lumirize.co?subject=' + encodeURIComponent(data.get('_subject')) + '&body=' + encodeURIComponent(contactEmailBody(data));
   };
   const syncPreferences = () => {
+    controls.filter(field => field.id !== 'language').forEach(field => { field.disabled = sending; });
     localizeContactForm();
     const allowed = contactPermissions(method.value);
     const canReply = allowed.email || allowed.phone;
-    email.disabled = !allowed.email;
+    email.disabled = sending || !allowed.email;
     email.required = method.value === CONTACT_METHODS.email;
-    phone.disabled = !allowed.phone;
+    phone.disabled = sending || !allowed.phone;
     phone.required = method.value === CONTACT_METHODS.phone;
-    voicemail.disabled = !allowed.phone;
+    voicemail.disabled = sending || !allowed.phone;
     if (!allowed.phone) voicemail.value = '留守電を残さない';
-    time.disabled = !canReply;
-    timeDetails.disabled = !canReply;
+    time.disabled = sending || !canReply;
+    timeDetails.disabled = sending || !canReply;
     timeDetails.required = canReply && time.value === '下の補足欄で指定';
     document.getElementById('email-requirement').textContent = email.required ? t('required', '必須 / Required') : allowed.email ? t('either', 'どちらか一方は必須 / At least one contact') : t('notNeeded', '入力不要 / Not needed');
     document.getElementById('phone-requirement').textContent = phone.required ? t('required', '必須 / Required') : allowed.phone ? t('either', 'どちらか一方は必須 / At least one contact') : t('notNeeded', '入力不要 / Not needed');
@@ -61,6 +63,7 @@ if (form && status) {
     } else {
       summary.textContent = [method.selectedOptions[0].textContent, allowed.phone ? voicemail.selectedOptions[0].textContent : '', time.selectedOptions[0].textContent].filter(Boolean).join(' / ');
     }
+    fallback.setAttribute('aria-disabled', String(sending));
     updateFallback();
     renderMessage();
   };
@@ -68,6 +71,7 @@ if (form && status) {
     field.addEventListener('input', () => { clearError(field); updateFallback(); });
     field.addEventListener('change', () => clearError(field));
   });
+  fallback.addEventListener('click', event => { if (sending) event.preventDefault(); });
   form.addEventListener('change', syncPreferences);
   syncPreferences();
   submit.disabled = false;
@@ -101,14 +105,16 @@ if (form && status) {
       firstInvalid.scrollIntoView({block:'center', behavior:'auto'});
       return;
     }
+    // Capture the payload before temporarily disabling editing controls.
+    const data = prepareContactData(new FormData(form));
+    const noReply = method.value === CONTACT_METHODS.none;
     sending = true;
     submit.disabled = true;
     form.setAttribute('aria-busy', 'true');
     message('pending', '送信結果を確認しています。確認に最大1分ほどかかる場合があります。同じ内容を重ねて送らず、このままお待ちください。 Sending… Confirmation can take up to a minute. Please wait without sending again.', 'pending');
     status.dataset.submissionState = 'pending';
     delete status.dataset.submissionReason;
-    const data = prepareContactData(new FormData(form));
-    const noReply = method.value === CONTACT_METHODS.none;
+    syncPreferences();
     try {
       const result = await submitContact(form.dataset.ajaxAction, data);
       status.dataset.submissionState = result.confirmed ? 'accepted' : 'unconfirmed';
@@ -128,6 +134,7 @@ if (form && status) {
       sending = false;
       submit.disabled = false;
       form.removeAttribute('aria-busy');
+      syncPreferences();
     }
   });
 }
