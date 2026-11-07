@@ -12,16 +12,10 @@
     faq: "faq.html",
     contact: "contact.html#languages"
   };
-  const sections = [...document.querySelectorAll(".translated-guide > section[id]")];
   const languageLinks = [...document.querySelectorAll(".home-languages a[lang], .menu-languages a[lang]")];
-  const menu = document.getElementById("mobileMenu");
-  const header = document.querySelector(".header");
-  let currentSection = "top";
-  let scrollFrame = 0;
 
   const updateLinks = section => {
     if (!Object.hasOwn(japanesePages, section)) return;
-    currentSection = section;
     languageLinks.forEach(link => {
       const language = link.getAttribute("lang");
       if (language === "ja") link.setAttribute("href", japanesePages[section]);
@@ -30,28 +24,21 @@
       }
     });
   };
-  const updateFromPosition = () => {
-    scrollFrame = 0;
-    // The modal fixes the body; keep the last reading position while it is open.
-    if (menu?.open) return;
-    const readingLine = Math.max(0, header?.getBoundingClientRect().bottom || 0) + 32;
-    let section = "top";
-    for (const element of sections) {
-      if (element.getBoundingClientRect().top <= readingLine) section = element.id;
-      else break;
-    }
-    if (section !== currentSection) updateLinks(section);
-  };
   const updateFromHash = () => {
     const section = window.location.hash.slice(1);
-    if (Object.hasOwn(japanesePages, section)) updateLinks(section);
+    updateLinks(Object.hasOwn(japanesePages, section) ? section : "top");
   };
-  updateLinks("top");
   updateFromHash();
   window.addEventListener("hashchange", updateFromHash);
-  window.addEventListener("scroll", () => {
-    if (!scrollFrame) scrollFrame = requestAnimationFrame(updateFromPosition);
-  }, { passive: true });
-  window.addEventListener("pageshow", () => requestAnimationFrame(updateFromPosition));
-  window.addEventListener("resize", () => requestAnimationFrame(updateFromPosition));
+  window.addEventListener("pageshow", updateFromHash);
+  // Keep the selected topic while the visitor scrolls back to the language
+  // controls. Menu navigation uses replaceState, which does not emit hashchange.
+  document.querySelectorAll('a[href*="#"]').forEach(link => {
+    link.addEventListener("click", event => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const destination = new URL(link.href, window.location.href);
+      if (destination.origin === location.origin && destination.pathname === location.pathname &&
+          destination.search === location.search) updateLinks(destination.hash.slice(1));
+    });
+  });
 })();
