@@ -1,0 +1,62 @@
+/* Consistent copy/photo rows; each card follows its own content height. */
+.inner-page main :is(.service-grid,.support-grid):has(> .support-row) {
+  grid-template-columns: minmax(0,1fr);
+  gap: 32px;
+}
+.inner-page main .support-row {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  align-items: center;
+  gap: clamp(28px,4vw,64px);
+  padding: clamp(28px,3.2vw,48px);
+}
+.support-row-copy { min-width:0; }
+.inner-page main .support-row h2 { margin:0 0 24px; font-size:1.5rem; line-height:1.65; }
+.inner-page main .support-row .service-number { margin:0 0 16px; }
+.inner-page main .support-row p { font-size:1rem; line-height:1.9; }
+.inner-page main .support-row p + p { margin-top:20px; }
+.inner-page main .support-row .check-list { margin:24px 0; padding-left:20px; font-size:1rem; line-height:1.9; }
+.inner-page main .support-row .check-list li + li { margin-top:8px; }
+.inner-page main .support-row > .support-visual {
+  display:block; width:100%; min-width:0; margin:0;
+  scroll-margin-block:112px;
+}
+.inner-page main .support-visual img {
+  display:block; width:100%; max-width:100%; height:auto;
+  object-fit:contain; border-radius:8px;
+}
+.inner-page main .support-row > .support-visual figcaption {
+  display:block; margin:16px 0 0; font-size:.875rem;
+  line-height:1.7; color:#565d63;
+}
+.photo-kind { display:block; margin-top:6px; font-size:.875rem; font-weight:400; line-height:1.7; color:#565d63; }
+.page-policy main .policy-image-note { margin:12px 24px 0; font-size:.875rem; line-height:1.7; color:#565d63; }
+.fee-example { margin-top:32px; padding:28px; background:#fff; border:1px solid #bcc2c7; }
+.inner-page main .fee-example h3 { margin-bottom:8px; }
+.fee-breakdown { margin:20px 0; }
+.fee-breakdown > div { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:16px; padding:16px 0; border-bottom:1px solid #d1d5d8; }
+.fee-breakdown dt { font-weight:400; }
+.fee-breakdown dd { margin:0; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.fee-breakdown .fee-total { border-bottom:0; border-top:2px solid #23272b; padding-top:20px; }
+.fee-total dt,.fee-total dd { font-weight:600; }
+.fee-total dd { font-size:1.5rem; }
+.inner-page main .fee-note { font-size:.875rem; }
+.inner-page main .personal-funds { margin-top:40px; border:1px solid #aebbc4; border-left:4px solid #435b6c; background:#edf1f4; scroll-margin-top:112px; }
+.inner-page main .personal-funds .eyebrow { font-size:.875rem; letter-spacing:.06em; margin-bottom:12px; }
+.inner-page main .personal-funds-amount { font-size:1.125rem; margin:24px 0; }
+.personal-funds-amount strong { font-size:1.75rem; font-variant-numeric:tabular-nums; }
+.funding-example { margin:28px 0; padding-top:24px; border-top:1px solid #aebbc4; }
+.inner-page main .funding-example h3 { font-size:1.125rem; }
+.personal-funds-summary { margin-block:24px; }
+@media(max-width:900px) {
+  .inner-page main .support-row { grid-template-columns:minmax(0,1fr); gap:28px; padding:28px; }
+  .inner-page main .support-row h2 { font-size:1.375rem; }
+  .inner-page main .support-row > .support-visual { max-width:680px; margin-inline:auto; }
+}
+@media(max-width:480px) {
+  .inner-page main .support-row { padding:24px 20px; }
+  .inner-page main :is(.service-grid,.support-grid):has(> .support-row) { gap:24px; }
+  .fee-example { padding:20px 16px; }
+  .fee-breakdown > div { grid-template-columns:minmax(0,1fr); gap:6px; }
+  .fee-breakdown dd { justify-self:end; }
+}
