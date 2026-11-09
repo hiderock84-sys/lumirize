@@ -15,7 +15,7 @@
   const languageLinks = [...document.querySelectorAll(".home-languages a[lang], .menu-languages a[lang]")];
 
   const updateLinks = section => {
-    if (!Object.hasOwn(japanesePages, section)) return;
+    if (!Object.prototype.hasOwnProperty.call(japanesePages, section)) return;
     languageLinks.forEach(link => {
       const language = link.getAttribute("lang");
       if (language === "ja") link.setAttribute("href", japanesePages[section]);
@@ -26,7 +26,7 @@
   };
   const updateFromHash = () => {
     const section = window.location.hash.slice(1);
-    updateLinks(Object.hasOwn(japanesePages, section) ? section : "top");
+    updateLinks(Object.prototype.hasOwnProperty.call(japanesePages, section) ? section : "top");
   };
   updateFromHash();
   window.addEventListener("hashchange", updateFromHash);
@@ -50,11 +50,13 @@
           top.addEventListener("blur", () => top.removeAttribute("tabindex"), { once: true });
         }
         top.focus({ preventScroll: true });
-        window.scrollTo({
-          left: 0,
-          top: 0,
-          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth"
-        });
+        if ("scrollBehavior" in document.documentElement.style) {
+          window.scrollTo({
+            left: 0,
+            top: 0,
+            behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth"
+          });
+        } else window.scrollTo(0, 0);
         return;
       }
       updateLinks(destination.hash.slice(1));
