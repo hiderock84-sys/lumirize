@@ -1,4 +1,12 @@
 /* Shared navigation and viewport corrections, 2026-11-02. */
+/* Explicit closed state also applies when the browser has no dialog support. */
+dialog.mobile-menu:not([open]) { display:none; }
+@media screen {
+ dialog.mobile-menu.menu-fallback { z-index:1001; }
+ .menu-fallback-backdrop { position:fixed; inset:0; z-index:1000; background:#080d1466; }
+ .menu-fallback-backdrop[hidden] { display:none; }
+}
+@media print { .menu-fallback-backdrop { display:none !important; } }
 dialog.mobile-menu[open] { display:flex; flex-direction:column; }
 dialog.mobile-menu .menu-head { flex:0 0 auto; }
 dialog.mobile-menu .menu-scroll { flex:1 1 auto; min-height:0; overflow-y:auto; overscroll-behavior-y:contain; -webkit-overflow-scrolling:touch; padding-bottom:env(safe-area-inset-bottom,0px); }

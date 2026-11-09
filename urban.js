@@ -4,6 +4,17 @@
   const toggle = document.querySelector(".menu-toggle");
   const closeButton = document.querySelector(".menu-close");
   const root = document.documentElement;
+  const fallbackMenu = menu && (typeof menu.showModal !== "function" || typeof menu.close !== "function");
+  const menuIsOpen = () => Boolean(menu?.hasAttribute("open"));
+  let backdrop = null;
+  let hiddenBackground = [];
+  const restoreBackground = () => {
+    hiddenBackground.forEach(([element, previous]) => {
+      if (previous === null) element.removeAttribute("aria-hidden");
+      else element.setAttribute("aria-hidden", previous);
+    });
+    hiddenBackground = [];
+  };
   let menuScrollY = null;
   const unlockPage = () => {
     if (menuScrollY === null) return;
@@ -12,40 +23,110 @@
     document.body.classList.remove("menu-open");
     document.body.style.removeProperty("--menu-scroll-offset");
     // The root keeps smooth scrolling disabled until the saved position is restored.
-    window.scrollTo({ left: 0, top, behavior: "instant" });
-    root.classList.remove("menu-open");
-    toggle?.setAttribute("aria-expanded", "false");
-    toggle?.focus({ preventScroll: true });
+    try {
+      window.scrollTo(0, top);
+    } finally {
+      root.classList.remove("menu-open");
+      toggle?.setAttribute("aria-expanded", "false");
+      toggle?.focus({ preventScroll: true });
+    }
   };
   let menuClosing = false;
   const slideMenu = (opening) => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return null;
-    return menu.animate([
-      { transform: opening ? "translateX(100%)" : "translateX(0)" },
-      { transform: opening ? "translateX(0)" : "translateX(100%)" }
-    ], { duration: opening ? 300 : 220, easing: "cubic-bezier(.22,1,.36,1)" });
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || typeof menu.animate !== "function") return null;
+    try {
+      return menu.animate([
+        { transform: opening ? "translateX(100%)" : "translateX(0)" },
+        { transform: opening ? "translateX(0)" : "translateX(100%)" }
+      ], { duration: opening ? 300 : 220, easing: "cubic-bezier(.22,1,.36,1)" });
+    } catch {
+      return null;
+    }
+  };
+  const finishClose = () => {
+    try {
+      if (fallbackMenu) menu.removeAttribute("open");
+      else if (menuIsOpen()) menu.close();
+    } catch {
+      menu.removeAttribute("open");
+    } finally {
+      if (backdrop) backdrop.hidden = true;
+      restoreBackground();
+      menuClosing = false;
+      unlockPage();
+    }
   };
   const closeMenu = async () => {
-    if (!menu?.open || menuClosing) return;
+    if (menuClosing) return;
+    if (!menuIsOpen()) { unlockPage(); return; }
     menuClosing = true;
-    const animation = slideMenu(false);
-    if (animation) await animation.finished.catch(() => {});
-    menu.close();
-    menuClosing = false;
-    unlockPage();
+    try {
+      const animation = slideMenu(false);
+      if (animation?.finished) await animation.finished.catch(() => {});
+    } finally {
+      finishClose();
+    }
   };
+  // Older Safari has no modal dialog API. Keep navigation and keyboard access
+  // available without changing the native dialog path in newer browsers.
+  if (fallbackMenu) {
+    menu.classList.add("menu-fallback");
+    menu.setAttribute("role", "dialog");
+    menu.setAttribute("aria-modal", "true");
+    menu.setAttribute("tabindex", "-1");
+    backdrop = document.createElement("div");
+    backdrop.className = "menu-fallback-backdrop";
+    backdrop.hidden = true;
+    backdrop.setAttribute("aria-hidden", "true");
+    menu.insertAdjacentElement("afterend", backdrop);
+    backdrop.addEventListener("click", closeMenu);
+    document.addEventListener("keydown", event => {
+      if (!menuIsOpen()) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeMenu();
+      } else if (event.key === "Tab") {
+        const focusable = [...menu.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')]
+          .filter(element => element.tabIndex >= 0 && element.getClientRects().length && getComputedStyle(element).visibility !== "hidden");
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        const active = document.activeElement;
+        if (!first || !menu.contains(active) || active === menu || (event.shiftKey && active === first) || (!event.shiftKey && active === last)) {
+          event.preventDefault();
+          (event.shiftKey ? last || menu : first || menu).focus({ preventScroll: true });
+        }
+      }
+    });
+    document.addEventListener("focusin", event => {
+      if (menuIsOpen() && !menu.contains(event.target)) (closeButton || menu).focus({ preventScroll: true });
+    });
+  }
   toggle?.addEventListener("click", () => {
-    if (!menu || menu.open) return;
+    if (!menu || menuIsOpen()) return;
     menuScrollY = Math.max(0, window.scrollY);
     document.body.style.setProperty("--menu-scroll-offset", -menuScrollY + "px");
     root.classList.add("menu-open");
     document.body.classList.add("menu-open");
-    menu.showModal();
-    const scroller = menu.querySelector(".menu-scroll");
-    if (scroller) scroller.scrollTop = 0;
-    slideMenu(true);
-    toggle.setAttribute("aria-expanded", "true");
-    closeButton.focus({ preventScroll: true });
+    try {
+      if (fallbackMenu) {
+        menu.setAttribute("open", "");
+        backdrop.hidden = false;
+      } else menu.showModal();
+      const scroller = menu.querySelector(".menu-scroll");
+      if (scroller) scroller.scrollTop = 0;
+      slideMenu(true);
+      toggle.setAttribute("aria-expanded", "true");
+      (closeButton || menu).focus({ preventScroll: true });
+      if (fallbackMenu) {
+        hiddenBackground = [...document.body.children]
+          .filter(element => element !== backdrop && !element.contains(menu) && !["SCRIPT", "STYLE", "LINK"].includes(element.tagName))
+          .map(element => [element, element.getAttribute("aria-hidden")]);
+        hiddenBackground.forEach(([element]) => element.setAttribute("aria-hidden", "true"));
+      }
+    } catch (error) {
+      finishClose();
+      console.warn("The site menu could not be opened.", error);
+    }
   });
   closeButton?.addEventListener("click", closeMenu);
   menu?.addEventListener("click", event => {
@@ -94,7 +175,7 @@
   if (currentForm) {
     const languageNames = {ja: '日本語', en: 'English', ko: '한국어', tl: 'Tagalog', th: 'ภาษาไทย'};
     const requestedLanguage = new URLSearchParams(window.location.search).get('lang');
-    if (Object.hasOwn(languageNames, requestedLanguage)) {
+    if (Object.prototype.hasOwnProperty.call(languageNames, requestedLanguage)) {
       const guideLanguage = requestedLanguage === 'tl' ? 'fil' : requestedLanguage;
       const guide = document.querySelector('#languages summary[lang="' + guideLanguage + '"]');
       if (guide) guide.parentElement.open = true;
@@ -166,7 +247,7 @@
     window.addEventListener("load", scheduleGlassTone, { once: true });
     updateGlassTone();
   }
-  window.addEventListener('pageshow', () => { if (menu?.open) closeMenu(); });
+  window.addEventListener('pageshow', () => { if (menuIsOpen()) closeMenu(); });
   const year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());
 })();
