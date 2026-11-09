@@ -37,8 +37,27 @@
     link.addEventListener("click", event => {
       if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const destination = new URL(link.href, window.location.href);
-      if (destination.origin === location.origin && destination.pathname === location.pathname &&
-          destination.search === location.search) updateLinks(destination.hash.slice(1));
+      if (destination.origin !== location.origin || destination.pathname !== location.pathname ||
+          destination.search !== location.search) return;
+      // Returning to the language controls is a scroll action, not a new topic.
+      // Keep the topic in the URL so reload and browser history still restore it.
+      if (destination.hash === "#top" && !event.defaultPrevented) {
+        const top = document.getElementById("top");
+        if (!top) return;
+        event.preventDefault();
+        if (!top.hasAttribute("tabindex")) {
+          top.setAttribute("tabindex", "-1");
+          top.addEventListener("blur", () => top.removeAttribute("tabindex"), { once: true });
+        }
+        top.focus({ preventScroll: true });
+        window.scrollTo({
+          left: 0,
+          top: 0,
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth"
+        });
+        return;
+      }
+      updateLinks(destination.hash.slice(1));
     });
   });
 })();
