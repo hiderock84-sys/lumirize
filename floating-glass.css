@@ -1,0 +1,49 @@
+/* Shared transparent glass for the three persistent navigation controls. */
+@media screen {
+ .header .menu-toggle,
+ .header .menu-toggle:hover,
+ .mobile-cta .glass-button,
+ .mobile-cta .glass-button:last-child {
+  --glass-ink:#fff;
+  --glass-text-shadow:0 1px 4px #0009;
+  isolation:isolate; overflow:hidden;
+  color:var(--glass-ink); border:1px solid #ffffff5c;
+  background:radial-gradient(ellipse at 20% 0%,#ffffff38,transparent 62%),linear-gradient(145deg,#ffffff16,#ffffff05 55%,#ffffff1f);
+  -webkit-backdrop-filter:blur(12px) saturate(180%) brightness(1.08);
+  backdrop-filter:blur(12px) saturate(180%) brightness(1.08);
+  box-shadow:0 6px 24px #0002,inset 0 1px 1px #ffffff8c,inset 0 -1px 1px #ffffff38;
+  text-shadow:var(--glass-text-shadow);
+ }
+ .header .menu-toggle::before,
+ .mobile-cta .glass-button::before {
+  content:""; position:absolute; inset:0; border-radius:inherit;
+  padding:1px; pointer-events:none;
+  background:linear-gradient(135deg,#ffffffb3,#ffffff0d 34%,#ffffff14 65%,#ffffff80);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask-composite:exclude;
+ }
+ .header .menu-toggle::after,
+ .mobile-cta .glass-button::after {
+  content:""; position:absolute; inset:1px; border-radius:inherit;
+  pointer-events:none; background:linear-gradient(180deg,#ffffff12,transparent 48%);
+ }
+ .header .menu-toggle span { position:relative; z-index:1; background:currentColor; box-shadow:var(--glass-text-shadow); }
+ .header .menu-toggle[data-glass-tone="light"],
+ .mobile-cta .glass-button[data-glass-tone="light"] {
+  --glass-ink:#15222b; --glass-text-shadow:0 1px 3px #ffffffb3;
+  border-color:#ffffffb3;
+ }
+ .header .menu-toggle:active { transform:scale(.96); }
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+ .header .menu-toggle,.mobile-cta .glass-button,.mobile-cta .glass-button:last-child { background:#303b44; color:#fff; }
+}
+@media (prefers-reduced-transparency:reduce), (prefers-contrast:more) {
+ .header .menu-toggle,.mobile-cta .glass-button,.mobile-cta .glass-button:last-child {
+  background:#26313a; color:#fff; text-shadow:none;
+  -webkit-backdrop-filter:none; backdrop-filter:none; border-color:#fff;
+ }
+}
+@media (prefers-reduced-motion:reduce) { .header .menu-toggle:active { transform:none; } }

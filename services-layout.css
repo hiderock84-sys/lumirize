@@ -1,0 +1,64 @@
+/* Services follows the typography and spacing of the Support page. */
+.page-services main .service-grid {
+  gap: var(--space-3);
+}
+.page-services main .service-card {
+  min-width: 0;
+  padding: var(--space-4);
+}
+.page-services main .service-card .service-number {
+  margin: 0 0 var(--space-3);
+}
+.page-services main .service-card h2 {
+  margin: 0 0 var(--space-3);
+  font-size: 1.375rem;
+  line-height: 1.65;
+}
+.page-services main .service-card > p:not(.service-number) {
+  font-size: 1rem;
+  line-height: 1.9;
+}
+.page-services main .service-card p + p {
+  margin-top: var(--space-3);
+}
+.page-services main .service-card .check-list {
+  margin-block: var(--space-3);
+  padding-left: var(--space-3);
+  font-size: 1rem;
+  line-height: 1.9;
+}
+.page-services main .service-card .check-list li + li {
+  margin-top: var(--space-1);
+}
+.page-services main .service-card > figure {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: var(--space-3) 0 0;
+  scroll-margin-block: 6rem 7rem;
+}
+.page-services main .service-card > figure img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.page-services main .service-card .service-support-photo img {
+  aspect-ratio: 16 / 9;
+}
+.page-services main .service-card > figure figcaption {
+  margin-top: var(--space-1);
+  font-size: .8125rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+@media (max-width: 760px) {
+  .page-services main .service-grid { grid-template-columns: minmax(0, 1fr); }
+  .page-services main .service-card { padding: var(--space-3); }
+  .page-services main .nightcare-partnership { margin-top: var(--space-6); }
+}
+@media (max-width: 360px) {
+  .page-services main .service-card { padding: var(--space-3) var(--space-2); }
+}

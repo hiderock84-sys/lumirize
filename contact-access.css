@@ -1,0 +1,127 @@
+/* Embedded access map and visit guidance, scoped to the contact page section. */
+.inner-page main #access.access-panel {
+  margin-block: 64px 0;
+  padding: 32px;
+  border: 1px solid #d5d8da;
+  border-radius: 12px;
+  background: #fafafa;
+  scroll-margin-top: 88px;
+}
+#access .access-heading { margin-bottom: 32px; }
+#access .access-heading .eyebrow {
+  margin: 0 0 12px;
+  font-size: .6875rem;
+  line-height: 1.5;
+  letter-spacing: .18em;
+  color: #666c73;
+}
+#access .access-heading h2 {
+  margin: 0;
+  font-size: clamp(1.375rem, 2.1vw, 1.75rem);
+  line-height: 1.65;
+  letter-spacing: -.025em;
+}
+#access .access-layout {
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  grid-template-areas: "address map" "visit map";
+  grid-template-rows: auto 1fr;
+  gap: 28px 36px;
+  align-items: start;
+}
+#access .access-address { grid-area: address; min-width: 0; }
+#access .access-address h3,
+#access .access-visit h3 {
+  margin: 0 0 12px;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  font-weight: 600;
+}
+#access address {
+  font-style: normal;
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: #40464c;
+}
+#access address span { display: block; }
+#access address .access-postcode {
+  margin-bottom: 4px;
+  font-size: .875rem;
+  letter-spacing: .03em;
+  color: #656b71;
+}
+#access .access-map {
+  grid-area: map;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  min-width: 0;
+}
+#access .access-map iframe {
+  display: block;
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: 420px;
+  min-height: 420px;
+  border: 1px solid #d5d8da;
+  border-radius: 8px;
+  background: #e8ece8;
+}
+#access .access-map figcaption {
+  font-size: .75rem;
+  line-height: 1.6;
+  color: #656b71;
+}
+#access .access-visit {
+  grid-area: visit;
+  min-width: 0;
+  padding-top: 24px;
+  border-top: 1px solid #dedfe1;
+}
+#access .access-visit p {
+  margin: 0;
+  font-size: .9375rem;
+  line-height: 1.9;
+  color: #555b61;
+}
+#access .access-actions { display: grid; gap: 12px; margin-top: 24px; }
+#access a.access-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 52px;
+  padding: 14px 20px;
+  border: 1px solid #c5c9cd;
+  border-radius: 8px;
+  color: #20272d;
+  background: #fff;
+  font-size: .9375rem;
+  font-weight: 600;
+  line-height: 1.6;
+  text-decoration: none;
+}
+#access a.access-button--phone { background: #20272d; border-color: #20272d; color: #fff; }
+#access a.access-button:hover { border-color: #697783; }
+#access a.access-button:focus-visible { outline: 3px solid #667f94; outline-offset: 4px; }
+#access a.access-button > span:last-child { flex-shrink: 0; }
+@media (max-width: 800px) {
+  .inner-page main #access.access-panel { padding: 24px; margin-top: 48px; }
+  #access .access-heading { margin-bottom: 24px; }
+  #access .access-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "address" "map" "visit";
+    grid-template-rows: auto;
+    gap: 24px;
+  }
+  #access .access-map iframe { flex: none; height: 340px; min-height: 340px; }
+}
+@media (max-width: 380px) {
+  .inner-page main #access.access-panel { padding: 24px 16px; }
+  #access .access-map iframe { height: 320px; min-height: 320px; }
+  #access a.access-button { padding-inline: 16px; }
+}
