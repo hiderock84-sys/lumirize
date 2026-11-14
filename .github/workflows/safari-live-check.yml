@@ -1,4 +1,4 @@
-name: One-time public site Safari check
+name: One-time macOS Safari check
 on:
   push:
     branches: [qa/safari-live-20261114]
@@ -13,14 +13,6 @@ jobs:
         run: |
           mkdir -p evidence
           sudo /usr/bin/safaridriver --enable
-          xcrun simctl list devices available -j > "$RUNNER_TEMP/devices.json"
-          DEVICE=$(python3 -c 'import json,sys; ds=json.load(open(sys.argv[1]))["devices"]; print(next((d["udid"] for k,v in sorted(ds.items(),reverse=True) if ".iOS-" in k for d in v if d["name"].startswith("iPhone")), ""))' "$RUNNER_TEMP/devices.json")
-          if [ -n "$DEVICE" ]; then
-            echo "IPHONE_UDID=$DEVICE" >> "$GITHUB_ENV"
-            open -a Simulator
-            xcrun simctl boot "$DEVICE" || true
-            xcrun simctl bootstatus "$DEVICE" -b
-          fi
       - name: Test published site using Apple's SafariDriver
         run: |
           /usr/bin/safaridriver -p 4444 > evidence/driver.log 2>&1 &
