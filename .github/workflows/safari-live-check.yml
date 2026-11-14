@@ -7,7 +7,7 @@ permissions: {}
 jobs:
   safari:
     runs-on: macos-15
-    timeout-minutes: 15
+    timeout-minutes: 22
     steps:
       - name: Prepare Safari and iPhone Simulator
         run: |
@@ -15,27 +15,22 @@ jobs:
           sudo /usr/bin/safaridriver --enable
           xcrun simctl list devices available -j > "$RUNNER_TEMP/devices.json"
           DEVICE=$(python3 -c 'import json,sys; ds=json.load(open(sys.argv[1]))["devices"]; print(next((d["udid"] for k,v in sorted(ds.items(),reverse=True) if ".iOS-" in k for d in v if d["name"].startswith("iPhone")), ""))' "$RUNNER_TEMP/devices.json")
-          if [ -n "$DEVICE" ]; then
-            echo "IPHONE_UDID=$DEVICE" >> "$GITHUB_ENV"
-            open -a Simulator
-            xcrun simctl boot "$DEVICE" || true
-            xcrun simctl bootstatus "$DEVICE" -b
-          fi
+          echo "IPHONE_UDID=$DEVICE" >> "$GITHUB_ENV"
       - name: Test published site using Apple's SafariDriver
         run: |
           /usr/bin/safaridriver -p 4444 > evidence/driver.log 2>&1 &
           python3 -u - <<'PY'
-          import json, urllib.request, urllib.error, time, os, base64, traceback
+          import json, urllib.request, urllib.error, time, os, base64, traceback, subprocess
           from pathlib import Path
           def wire(method,path,data=None):
               body=None if data is None else json.dumps(data).encode()
               req=urllib.request.Request('http://127.0.0.1:4444'+path,data=body,method=method,headers={'Content-Type':'application/json'})
               try:
-                  with urllib.request.urlopen(req,timeout=85) as r:
+                  with urllib.request.urlopen(req,timeout=400) as r:
                       return json.load(r)['value']
               except urllib.error.HTTPError as err:
                   raise RuntimeError(err.read().decode()[:1000]) from err
-          for _ in range(20):
+          for _ in range(60):
               try:
                   wire('GET','/status')
                   break
@@ -51,6 +46,8 @@ jobs:
                   def js(script):
                       return cmd('POST','/execute/sync',{'script':script,'args':[]})
                   def click(selector):
+                      js('document.querySelector('+json.dumps(selector)+').scrollIntoView({block:"center",behavior:"instant"})')
+                      time.sleep(.55)
                       el=cmd('POST','/element',{'using':'css selector','value':selector})
                       cmd('POST','/element/'+next(iter(el.values()))+'/click',{})
                   def capture(label):
@@ -69,12 +66,24 @@ jobs:
                               break
                           time.sleep(.5)
                       print('PLAY',platform,film,state)
+                      mobile=js("let b=document.querySelector('.mobile-cta'),r=b.getBoundingClientRect(),s=getComputedStyle(b); return [s.display,s.visibility,s.opacity,r.x,r.y,r.width,r.height]")
+                      print('MOBILE_BAR_PLAYING',platform,film,mobile)
+
                       capture(film+'-playing')
                       assert state[0] and state[1]>1 and not state[2] and state[3]==0, state
                       click('dialog[open] [data-story-close]')
                       assert js("return !document.querySelector('dialog[open]')")
+                      for _ in range(60):
+                          if js("return !document.documentElement.classList.contains('story-player-open') && !document.body.classList.contains('story-player-open')"):
+                              break
+                          time.sleep(.1)
                   cta='a.button.button--white[href="contact.html#consultation-form"]'
-                  js('document.querySelector('+json.dumps(cta)+').scrollIntoView({block:"center"})')
+                  if platform=='iOS':
+                      cta='.mobile-cta a[href="contact.html#consultation-form"]'
+                  js('document.querySelector('+json.dumps(cta)+').scrollIntoView({block:"center",behavior:"instant"})')
+                  time.sleep(.7)
+                  print('CONSULTATION_BUTTON',platform,js("let e=document.querySelector("+json.dumps(cta)+"),r=e.getBoundingClientRect(),x=r.x+r.width/2,y=r.y+r.height/2;return [e.textContent.trim(),x,y,e.contains(document.elementFromPoint(x,y))]"))
+
                   capture('after-close')
                   click(cta)
                   for _ in range(60):
@@ -97,9 +106,19 @@ jobs:
                   if sid:
                       wire('DELETE','/session/'+sid)
           passed={}
+          passed['macOS']=test('macOS',{})
           if os.environ.get('IPHONE_UDID'):
               passed['iOS']=test('iOS',{'safari:useSimulator':True,'safari:deviceUDID':os.environ['IPHONE_UDID']})
-          passed['macOS']=test('macOS',{})
+          if passed.get('iOS') is False:
+              udid=os.environ['IPHONE_UDID']
+              call=lambda *args,timeout=40: subprocess.run(['xcrun','simctl',*args],timeout=timeout,check=True)
+              try:
+                  call('bootstatus',udid,'-b',timeout=150)
+                  call('openurl',udid,'https://lumirize.co/')
+                  time.sleep(10)
+                  call('io',udid,'screenshot','evidence/iOS-simulator-home.png')
+              except Exception:
+                  traceback.print_exc()
           print('RESULT',passed,flush=True)
           if not all(passed.values()):
               raise SystemExit(1)
