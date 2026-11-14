@@ -62,7 +62,11 @@ jobs:
                   assert js("return location.hostname==='lumirize.co' && !!document.querySelector('#film-restart')")
                   capture('home')
                   for film in ['restart','safety','belonging','family']:
-                      click('#film-'+film+' .story-film__cover')
+                      selector='#film-'+film+' .story-film__cover'
+                      if not js('return !!document.querySelector('+json.dumps(selector)+').getClientRects().length'):
+                          click('[data-story-select="'+film+'"]')
+                          time.sleep(.6)
+                      click(selector)
                       for _ in range(55):
                           state=js("let d=document.querySelector('dialog[open]'),v=d?.querySelector('video'); return [!!d,v?.currentTime||0,v?.paused??true,d?.querySelectorAll('a[href*=\x22contact.html\x22]').length??-1]")
                           if state[1]>1 and not state[2]:
@@ -114,19 +118,18 @@ jobs:
           if udid:
               try:
                   subprocess.run(['xcrun','simctl','bootstatus',udid,'-b'],timeout=480,check=True)
-                  for domain,key in [('com.apple.mobilesafari','RemoteAutomationEnabled'),('com.apple.webinspectord','RemoteInspectionEnabled')]:
-                      subprocess.run(['xcrun','simctl','spawn',udid,'defaults','write',domain,key,'-bool','YES'],timeout=80)
-                  start=subprocess.Popen(['xcrun','simctl','openurl',udid,'https://lumirize.co/'])
-                  try:
-                      start.wait(timeout=150)
-                  except subprocess.TimeoutExpired:
-                      print('Simulator is still opening Safari',flush=True)
-                  time.sleep(8)
-                  subprocess.run(['xcrun','simctl','io',udid,'screenshot','evidence/iOS-simulator-home.png'],timeout=90)
+                  time.sleep(15)
                   passed['iOS']=test('iOS',{'safari:useSimulator':True,'safari:deviceUDID':udid})
               except Exception:
                   traceback.print_exc()
                   passed['iOS']=False
+              if not passed.get('iOS'):
+                  try:
+                      subprocess.Popen(['xcrun','simctl','openurl',udid,'https://lumirize.co/'])
+                      time.sleep(25)
+                      subprocess.run(['xcrun','simctl','io',udid,'screenshot','evidence/iOS-simulator-home.png'],timeout=80)
+                  except Exception:
+                      traceback.print_exc()
           print('RESULT',passed,flush=True)
           if not all(passed.values()):
               raise SystemExit(1)
