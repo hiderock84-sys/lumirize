@@ -14,7 +14,8 @@ jobs:
           mkdir -p evidence
           sudo /usr/bin/safaridriver --enable
           xcrun simctl list devices available -j > "$RUNNER_TEMP/devices.json"
-          DEVICE=$(python3 -c 'import json,sys; ds=json.load(open(sys.argv[1]))["devices"]; print(next((d["udid"] for k,v in sorted(ds.items(),reverse=True) if ".iOS-" in k for d in v if d["name"].startswith("iPhone")), ""))' "$RUNNER_TEMP/devices.json")
+          DEVICE=$(python3 -c 'import json,sys; ds=json.load(open(sys.argv[1]))["devices"]; print(next((d["udid"] for k,v in sorted(ds.items(),key=lambda item: (not (".iOS-18-" in item[0]),item[0])) if ".iOS-" in k for d in v if d["name"].startswith("iPhone")), ""))' "$RUNNER_TEMP/devices.json")
+          python3 -c 'import json,sys;ds=json.load(open(sys.argv[1]))["devices"];print([(k,d["name"]) for k,v in ds.items() for d in v if d["udid"]==sys.argv[2]])' "$RUNNER_TEMP/devices.json" "$DEVICE"
           echo "IPHONE_UDID=$DEVICE" >> "$GITHUB_ENV"
       - name: Test published site using Apple's SafariDriver
         run: |
@@ -54,6 +55,8 @@ jobs:
                       raw=cmd('GET','/screenshot')
                       Path('evidence',platform+'-'+label+'.png').write_bytes(base64.b64decode(raw))
                   print('BROWSER',platform,response['capabilities'],flush=True)
+                  if platform=='macOS':
+                      cmd('POST','/window/rect',{'x':0,'y':0,'width':393,'height':850})
                   cmd('POST','/url',{'url':'https://lumirize.co/'})
                   print('HOME',platform,js('return [document.title,location.href,innerWidth,innerHeight,document.documentElement.scrollWidth,navigator.userAgent]'))
                   assert js("return location.hostname==='lumirize.co' && !!document.querySelector('#film-restart')")
@@ -78,7 +81,7 @@ jobs:
                               break
                           time.sleep(.1)
                   cta='a.button.button--white[href="contact.html#consultation-form"]'
-                  if platform=='iOS':
+                  if js("return getComputedStyle(document.querySelector('.mobile-cta')).display!=='none'"):
                       cta='.mobile-cta a[href="contact.html#consultation-form"]'
                   js('document.querySelector('+json.dumps(cta)+').scrollIntoView({block:"center",behavior:"instant"})')
                   time.sleep(.7)
@@ -107,18 +110,23 @@ jobs:
                       wire('DELETE','/session/'+sid)
           passed={}
           passed['macOS']=test('macOS',{})
-          if os.environ.get('IPHONE_UDID'):
-              passed['iOS']=test('iOS',{'safari:useSimulator':True,'safari:deviceUDID':os.environ['IPHONE_UDID']})
-          if passed.get('iOS') is False:
-              udid=os.environ['IPHONE_UDID']
-              call=lambda *args,timeout=40: subprocess.run(['xcrun','simctl',*args],timeout=timeout,check=True)
+          udid=os.environ.get('IPHONE_UDID')
+          if udid:
               try:
-                  call('bootstatus',udid,'-b',timeout=150)
-                  call('openurl',udid,'https://lumirize.co/')
-                  time.sleep(10)
-                  call('io',udid,'screenshot','evidence/iOS-simulator-home.png')
+                  subprocess.run(['xcrun','simctl','bootstatus',udid,'-b'],timeout=480,check=True)
+                  for domain,key in [('com.apple.mobilesafari','RemoteAutomationEnabled'),('com.apple.webinspectord','RemoteInspectionEnabled')]:
+                      subprocess.run(['xcrun','simctl','spawn',udid,'defaults','write',domain,key,'-bool','YES'],timeout=80)
+                  start=subprocess.Popen(['xcrun','simctl','openurl',udid,'https://lumirize.co/'])
+                  try:
+                      start.wait(timeout=150)
+                  except subprocess.TimeoutExpired:
+                      print('Simulator is still opening Safari',flush=True)
+                  time.sleep(8)
+                  subprocess.run(['xcrun','simctl','io',udid,'screenshot','evidence/iOS-simulator-home.png'],timeout=90)
+                  passed['iOS']=test('iOS',{'safari:useSimulator':True,'safari:deviceUDID':udid})
               except Exception:
                   traceback.print_exc()
+                  passed['iOS']=False
           print('RESULT',passed,flush=True)
           if not all(passed.values()):
               raise SystemExit(1)
