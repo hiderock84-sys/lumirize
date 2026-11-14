@@ -1,0 +1,109 @@
+name: One-time public site Safari check
+on:
+  push:
+    branches: [qa/safari-live-20261114]
+    paths: [.github/workflows/safari-live-check.yml]
+permissions: {}
+jobs:
+  safari:
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - name: Prepare Safari and iPhone Simulator
+        run: |
+          mkdir -p evidence
+          sudo /usr/bin/safaridriver --enable
+          xcrun simctl list devices available -j > "$RUNNER_TEMP/devices.json"
+          DEVICE=$(python3 -c 'import json,sys; ds=json.load(open(sys.argv[1]))["devices"]; print(next((d["udid"] for k,v in sorted(ds.items(),reverse=True) if ".iOS-" in k for d in v if d["name"].startswith("iPhone")), ""))' "$RUNNER_TEMP/devices.json")
+          if [ -n "$DEVICE" ]; then
+            echo "IPHONE_UDID=$DEVICE" >> "$GITHUB_ENV"
+            open -a Simulator
+            xcrun simctl boot "$DEVICE" || true
+            xcrun simctl bootstatus "$DEVICE" -b
+          fi
+      - name: Test published site using Apple's SafariDriver
+        run: |
+          /usr/bin/safaridriver -p 4444 > evidence/driver.log 2>&1 &
+          python3 -u - <<'PY'
+          import json, urllib.request, urllib.error, time, os, base64, traceback
+          from pathlib import Path
+          def wire(method,path,data=None):
+              body=None if data is None else json.dumps(data).encode()
+              req=urllib.request.Request('http://127.0.0.1:4444'+path,data=body,method=method,headers={'Content-Type':'application/json'})
+              try:
+                  with urllib.request.urlopen(req,timeout=85) as r:
+                      return json.load(r)['value']
+              except urllib.error.HTTPError as err:
+                  raise RuntimeError(err.read().decode()[:1000]) from err
+          for _ in range(20):
+              try:
+                  wire('GET','/status')
+                  break
+              except OSError:
+                  time.sleep(1)
+          def test(platform,extra):
+              sid=None
+              try:
+                  response=wire('POST','/session',{'capabilities':{'alwaysMatch':dict(browserName='Safari',platformName=platform,**extra)}})
+                  sid=response['sessionId']
+                  def cmd(method,path,data=None):
+                      return wire(method,'/session/'+sid+path,data)
+                  def js(script):
+                      return cmd('POST','/execute/sync',{'script':script,'args':[]})
+                  def click(selector):
+                      el=cmd('POST','/element',{'using':'css selector','value':selector})
+                      cmd('POST','/element/'+next(iter(el.values()))+'/click',{})
+                  def capture(label):
+                      raw=cmd('GET','/screenshot')
+                      Path('evidence',platform+'-'+label+'.png').write_bytes(base64.b64decode(raw))
+                  print('BROWSER',platform,response['capabilities'],flush=True)
+                  cmd('POST','/url',{'url':'https://lumirize.co/'})
+                  print('HOME',platform,js('return [document.title,location.href,innerWidth,innerHeight,document.documentElement.scrollWidth,navigator.userAgent]'))
+                  assert js("return location.hostname==='lumirize.co' && !!document.querySelector('#film-restart')")
+                  capture('home')
+                  for film in ['restart','safety','belonging','family']:
+                      click('#film-'+film+' .story-film__cover')
+                      for _ in range(55):
+                          state=js("let d=document.querySelector('dialog[open]'),v=d?.querySelector('video'); return [!!d,v?.currentTime||0,v?.paused??true,d?.querySelectorAll('a[href*=\x22contact.html\x22]').length??-1]")
+                          if state[1]>1 and not state[2]:
+                              break
+                          time.sleep(.5)
+                      print('PLAY',platform,film,state)
+                      capture(film+'-playing')
+                      assert state[0] and state[1]>1 and not state[2] and state[3]==0, state
+                      click('dialog[open] [data-story-close]')
+                      assert js("return !document.querySelector('dialog[open]')")
+                  cta='a.button.button--white[href="contact.html#consultation-form"]'
+                  js('document.querySelector('+json.dumps(cta)+').scrollIntoView({block:"center"})')
+                  capture('after-close')
+                  click(cta)
+                  print('CONSULTATION',platform,js("return [location.href,document.querySelector('form')!==null]"))
+                  assert js("return location.pathname==='/contact.html' && !!document.querySelector('form')")
+                  capture('consultation')
+                  return True
+              except Exception:
+                  traceback.print_exc()
+                  if sid:
+                      try:
+                          capture('last-screen')
+                      except Exception:
+                          pass
+                  return False
+              finally:
+                  if sid:
+                      wire('DELETE','/session/'+sid)
+          passed={}
+          if os.environ.get('IPHONE_UDID'):
+              passed['iOS']=test('iOS',{'safari:useSimulator':True,'safari:deviceUDID':os.environ['IPHONE_UDID']})
+          passed['macOS']=test('macOS',{})
+          print('RESULT',passed,flush=True)
+          if not all(passed.values()):
+              raise SystemExit(1)
+          PY
+      - name: Save Safari screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: safari-live-evidence
+          path: evidence/
+          retention-days: 7
