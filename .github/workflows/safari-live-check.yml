@@ -12,6 +12,11 @@ jobs:
       - name: Prepare Safari and iPhone Simulator
         run: |
           mkdir -p evidence
+          {
+            xcodebuild -version
+            /usr/bin/safaridriver --version
+            xcrun simctl list runtimes
+          } | tee evidence/versions.txt
           sudo /usr/bin/safaridriver --enable
           xcrun simctl list devices available -j > "$RUNNER_TEMP/devices.json"
           DEVICE=$(python3 -c 'import json,sys; ds=json.load(open(sys.argv[1]))["devices"]; print(next((d["udid"] for k,v in sorted(ds.items(),key=lambda item: (not (".iOS-18-" in item[0]),item[0])) if ".iOS-" in k for d in v if d["name"].startswith("iPhone")), ""))' "$RUNNER_TEMP/devices.json")
@@ -19,7 +24,7 @@ jobs:
           echo "IPHONE_UDID=$DEVICE" >> "$GITHUB_ENV"
       - name: Test published site using Apple's SafariDriver
         run: |
-          /usr/bin/safaridriver -p 4444 > evidence/driver.log 2>&1 &
+          /usr/bin/safaridriver --diagnose -p 4444 > evidence/driver.log 2>&1 &
           python3 -u - <<'PY'
           import json, urllib.request, urllib.error, time, os, base64, traceback, subprocess
           from pathlib import Path
@@ -40,6 +45,7 @@ jobs:
           def test(platform,extra):
               sid=None
               try:
+                  print('SESSION_REQUEST', platform, extra, flush=True)
                   response=wire('POST','/session',{'capabilities':{'alwaysMatch':dict(browserName='Safari',platformName=platform,**extra)}})
                   sid=response['sessionId']
                   def cmd(method,path,data=None):
@@ -78,6 +84,9 @@ jobs:
 
                       capture(film+'-playing')
                       assert state[0] and state[1]>1 and not state[2] and state[3]==0, state
+                      display, visibility, opacity, _, _, width, height = mobile
+                      assert (display == 'none' or visibility in ('hidden', 'collapse')
+                              or float(opacity) == 0 or width == 0 or height == 0), (film, mobile)
                       click('dialog[open] [data-story-close]')
                       assert js("return !document.querySelector('dialog[open]')")
                       for _ in range(60):
@@ -118,7 +127,19 @@ jobs:
           if udid:
               try:
                   subprocess.run(['xcrun','simctl','bootstatus',udid,'-b'],timeout=480,check=True)
-                  time.sleep(15)
+                  started = time.monotonic()
+                  print('MOBILE_SAFARI_LAUNCH', udid, flush=True)
+                  try:
+                      launch = subprocess.run(
+                          ['xcrun', 'simctl', 'launch', udid, 'com.apple.mobilesafari'],
+                          timeout=180, check=False,
+                      )
+                  except subprocess.TimeoutExpired:
+                      print('MOBILE_SAFARI_LAUNCH timeout after', round(time.monotonic() - started, 1), 'seconds')
+                      raise
+                  print('MOBILE_SAFARI_LAUNCH exit', launch.returncode,
+                        'after', round(time.monotonic() - started, 1), 'seconds', flush=True)
+                  launch.check_returncode()
                   passed['iOS']=test('iOS',{'safari:useSimulator':True,'safari:deviceUDID':udid})
               except Exception:
                   traceback.print_exc()
@@ -130,11 +151,28 @@ jobs:
                       subprocess.run(['xcrun','simctl','io',udid,'screenshot','evidence/iOS-simulator-home.png'],timeout=80)
                   except Exception:
                       traceback.print_exc()
+          else:
+              print('No available iPhone Simulator was selected.')
+              passed['iOS'] = False
           print('RESULT',passed,flush=True)
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              for platform, ok in passed.items():
+                  label = 'iPhone Simulator' if platform == 'iOS' else 'macOS Safari'
+                  print(f"- {label}: {'PASS' if ok else 'FAIL'}", file=summary)
           if not all(passed.values()):
               raise SystemExit(1)
           PY
-      - name: Save Safari screenshots
+      - name: Collect SafariDriver diagnostics
+        if: always()
+        run: |
+          diagnostics="$HOME/Library/Logs/com.apple.WebDriver"
+          if [ -d "$diagnostics" ]; then
+            mkdir -p evidence/webdriver
+            cp -R "$diagnostics/." evidence/webdriver/
+          else
+            echo "SafariDriver did not produce a diagnostics directory."
+          fi
+      - name: Save Safari screenshots and diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
