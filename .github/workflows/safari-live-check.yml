@@ -53,10 +53,48 @@ jobs:
                   def js(script):
                       return cmd('POST','/execute/sync',{'script':script,'args':[]})
                   def click(selector):
+                      if platform == 'iOS':
+                          tap(selector)
+                          return
                       js('document.querySelector('+json.dumps(selector)+').scrollIntoView({block:"center",behavior:"instant"})')
                       time.sleep(.55)
                       el=cmd('POST','/element',{'using':'css selector','value':selector})
                       cmd('POST','/element/'+next(iter(el.values()))+'/click',{})
+                  def tap(selector):
+                      # Target the visible play label when the control is a full-height poster.
+                      target = selector + ' .story-film__play' if selector.endswith('.story-film__cover') else selector
+                      def inspect_target(script):
+                          return cmd('POST', '/execute/sync', {'script': script, 'args': [target, selector]})
+                      inspect_target("""
+                          document.querySelector(arguments[0]).scrollIntoView({block:'center', behavior:'instant'});
+                      """)
+                      time.sleep(.55)
+                      point = inspect_target("""
+                          const target = document.querySelector(arguments[0]);
+                          const control = document.querySelector(arguments[1]);
+                          const rect = target.getBoundingClientRect();
+                          const x = Math.floor((Math.max(0, rect.left) + Math.min(innerWidth, rect.right)) / 2);
+                          const y = Math.floor((Math.max(0, rect.top) + Math.min(innerHeight, rect.bottom)) / 2);
+                          const hit = document.elementFromPoint(x, y);
+                          sessionStorage.setItem('safari-qa-tap', '[]');
+                          return {x, y, hit: hit?.outerHTML.slice(0, 220), onControl: control.contains(hit)};
+                      """)
+                      print('TAP_TARGET', selector, point, flush=True)
+                      assert point['onControl'], ('Tap target is covered', selector, point)
+                      finger = {
+                          'type': 'pointer', 'id': 'finger', 'parameters': {'pointerType': 'touch'},
+                          'actions': [
+                              {'type': 'pointerMove', 'origin': 'viewport', 'duration': 0, 'x': point['x'], 'y': point['y']},
+                              {'type': 'pointerDown', 'button': 0},
+                              {'type': 'pause', 'duration': 100},
+                              {'type': 'pointerUp', 'button': 0},
+                          ],
+                      }
+                      try:
+                          cmd('POST', '/actions', {'actions': [finger]})
+                      finally:
+                          events = js("return sessionStorage.getItem('safari-qa-tap')")
+                          print('TAP_EVENTS', selector, events, flush=True)
                   def capture(label):
                       raw=cmd('GET','/screenshot')
                       Path('evidence',platform+'-'+label+'.png').write_bytes(base64.b64decode(raw))
@@ -67,6 +105,27 @@ jobs:
                   print('HOME',platform,js('return [document.title,location.href,innerWidth,innerHeight,document.documentElement.scrollWidth,navigator.userAgent]'))
                   assert js("return location.hostname==='lumirize.co' && !!document.querySelector('#film-restart')")
                   capture('home')
+                  if platform == 'iOS':
+                      js("""
+                          const key = 'safari-qa-tap';
+                          function record(entry) {
+                              const rows = JSON.parse(sessionStorage.getItem(key) || '[]');
+                              rows.push(entry);
+                              sessionStorage.setItem(key, JSON.stringify(rows.slice(-24)));
+                          }
+                          function observe(event) {
+                              const target = event.target;
+                              const control = target.closest?.('a,button');
+                              record({event:event.type, trusted:event.isTrusted, pointer:event.pointerType,
+                                  tag:target.tagName, control:control?.getAttribute('aria-label') || control?.textContent.trim().slice(0,60),
+                                  open:!!document.querySelector('dialog[open]')});
+                          }
+                          for (const name of ['pointerdown','touchstart','pointerup','touchend','touchcancel','click'])
+                              document.addEventListener(name, observe, {capture:true, passive:true});
+                          for (const dialog of document.querySelectorAll('dialog'))
+                              new MutationObserver(() => record({event:'dialog', open:dialog.open}))
+                                  .observe(dialog, {attributes:true, attributeFilter:['open']});
+                      """)
                   for film in ['restart','safety','belonging','family']:
                       selector='#film-'+film+' .story-film__cover'
                       if not js('return !!document.querySelector('+json.dumps(selector)+').getClientRects().length'):
@@ -78,11 +137,13 @@ jobs:
                           if state[1]>1 and not state[2]:
                               break
                           time.sleep(.5)
+                      if platform == 'iOS':
+                          print('PLAY_TAP_EVENTS', film, js("return sessionStorage.getItem('safari-qa-tap')"))
                       print('PLAY',platform,film,state)
                       mobile=js("let b=document.querySelector('.mobile-cta'),r=b.getBoundingClientRect(),s=getComputedStyle(b); return [s.display,s.visibility,s.opacity,r.x,r.y,r.width,r.height]")
                       print('MOBILE_BAR_PLAYING',platform,film,mobile)
 
-                      capture(film+'-playing')
+                      capture(film + ('-playing' if state[0] and state[1] > 1 and not state[2] else '-after-input'))
                       assert state[0] and state[1]>1 and not state[2] and state[3]==0, state
                       display, visibility, opacity, _, _, width, height = mobile
                       assert (display == 'none' or visibility in ('hidden', 'collapse')
