@@ -32,7 +32,8 @@
     padding:104px 0 24px;
   }
   /* Keep the existing text position while removing unused space below the links. */
-  body[data-home-lang] #main > .section.philosophy { padding-top:24px; }
+  body[data-home-lang] #main > .section.philosophy,
+  body[data-home-lang].home-guidance #main > .home-paths { padding-top:24px; }
   body[data-home-lang] .hero > .hero__image { display:none; }
   body[data-home-lang] .hero > .hero__mobile-image {
     display:block; position:absolute; inset:0; z-index:-2;
