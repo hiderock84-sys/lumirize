@@ -1,0 +1,89 @@
+name: Issue 26 page and Safari verification
+on:
+  push:
+    branches: [qa/issue-26-layout-check]
+    paths: ['.github/workflows/issue-26-qa.yml']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: macos-15
+    timeout-minutes: 24
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Test all pages and five languages in Safari
+        run: |
+          mkdir -p evidence
+          sudo safaridriver --enable
+          python3 -m venv "$RUNNER_TEMP/qa26"
+          source "$RUNNER_TEMP/qa26/bin/activate"
+          pip install -q selenium
+          python3 -m http.server 8765 --bind 127.0.0.1 > "$RUNNER_TEMP/site.log" 2>&1 &
+          python3 -u - <<'PY' | tee evidence/check.log
+          from selenium import webdriver
+          from selenium.webdriver.common.by import By
+          from selenium.webdriver.support.ui import WebDriverWait
+          import time, json, os
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          
+          driver = webdriver.Safari()
+          wait = WebDriverWait(driver, 15)
+          js = driver.execute_script
+          origin = 'http://localhost:8765/'
+          pages = [(n.text.split('lumirize.co/')[-1] or 'index.html') for n in ET.parse('sitemap.xml').iter() if n.tag.endswith('}loc')] + ['404.html','philosophy.html','support-details.html','simple/index.html']
+          problems = []
+          def click(selector):
+              e = driver.find_element(By.CSS_SELECTOR, selector)
+              js('arguments[0].scrollIntoView({block:"center",behavior:"instant"})', e)
+              time.sleep(.45)
+              e.click()
+          def snap(name):
+              driver.save_screenshot('evidence/'+name+'.png')
+          try:
+              print('SAFARI',driver.capabilities,flush=True)
+              for width,height in [(1440,900),(390,844)]:
+                  driver.set_window_rect(x=0,y=0,width=width,height=height)
+                  for page in pages:
+                      driver.get(origin+page)
+                      metrics=js('return [innerWidth,innerHeight,document.documentElement.scrollHeight,document.documentElement.scrollWidth,document.querySelector("h1")?.innerText,document.body.innerText.length]')
+                      if metrics[3] > metrics[0]+1 or metrics[5] < 10: problems.append([page,width,metrics])
+                      print('PAGE',page,width,metrics[:4],flush=True)
+                      if page=='index.html' or page in ['services.html','fees.html','contact.html']:snap(str(width)+'-'+page)
+                  for lang in ['ja','en','ko','tl','th']:
+                      page='index.html' if lang=='ja' else 'home-'+lang+'.html'
+                      try:
+                          driver.get(origin+page)
+                          click('.menu-toggle')
+                          wait.until(lambda d: js('return !!document.querySelector("#mobileMenu[open]")'))
+                          close=driver.find_element(By.CSS_SELECTOR,'#mobileMenu button')
+                          close.click()
+                          wait.until(lambda d:js('return !document.querySelector("#mobileMenu[open]")'))
+                          for film in ['restart','safety','belonging','family']:
+                              sel='#film-'+film+' .story-film__cover'
+                              if not driver.find_element(By.CSS_SELECTOR,sel).is_displayed():click('[data-story-select="'+film+'"]')
+                              click(sel)
+                              wait.until(lambda d:js('let v=document.querySelector("dialog[open] video");return v && !v.paused && v.currentTime>0.6'))
+                              assert js('return !document.querySelector("dialog[open] a[href*=contact]") && !document.querySelector(".mobile-cta").getClientRects().length')
+                              if lang=='ja' and film=='restart':snap(str(width)+'-playing')
+                              click('dialog[open] [data-story-close]')
+                              wait.until(lambda d:js('return !document.documentElement.classList.contains("story-player-open")'))
+                          if width==390:assert driver.find_element(By.CSS_SELECTOR,'.mobile-cta').is_displayed()
+                          click('.home-next__panel .button')
+                          wait.until(lambda d:js('return location.hash==="#consultation-form" && !!document.querySelector("form")'))
+                          if lang!='ja': assert js('return document.querySelector("#contact-form").lang')==('fil' if lang=='tl' else lang)
+                          print('FLOW_OK',width,lang,flush=True)
+                      except Exception as exc:
+                          snap(str(width)+'-'+lang+'-error');problems.append([width,lang,str(exc)[:500]])
+          finally:
+              print('PROBLEMS',json.dumps(problems,ensure_ascii=False),flush=True)
+              driver.quit()
+          assert not problems, problems
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: safari-page-check
+          path: evidence/
