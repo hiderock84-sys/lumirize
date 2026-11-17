@@ -65,11 +65,13 @@ jobs:
                       if metrics[3] > metrics[0]+1 or metrics[5] < 10: problems.append([page,width,metrics])
                       print('PAGE',page,width,metrics[:4],flush=True)
                       if page=='index.html' or page in ['services.html','fees.html','contact.html']:snap(str(width)+'-'+page)
+                  driver.switch_to.new_window('tab')
                   for lang in ['ja','en','ko','tl','th']:
                       page='index.html' if lang=='ja' else 'home-'+lang+'.html'
                       try:
                           driver.get(origin+page)
                           wait.until(lambda d: d.find_element(By.CSS_SELECTOR,'.home-next__panel').is_displayed())
+                          time.sleep(1)
                           click('.menu-toggle')
                           wait.until(lambda d: js('return !!document.querySelector("#mobileMenu[open]")'))
                           close=driver.find_element(By.CSS_SELECTOR,'#mobileMenu button')
@@ -90,6 +92,8 @@ jobs:
                           if lang!='ja': assert js('return document.querySelector("#contact-form").lang')==('fil' if lang=='tl' else lang)
                           print('FLOW_OK',width,lang,flush=True)
                       except Exception as exc:
+                          import traceback
+                          traceback.print_exc()
                           snap(str(width)+'-'+lang+'-error');problems.append([width,lang,str(exc)[:500]])
           finally:
               print('PROBLEMS',json.dumps(problems,ensure_ascii=False),flush=True)
