@@ -1,0 +1,31 @@
+/* DV support: readable conditions and safe-contact preferences. */
+.dv-support-card { scroll-margin-block: 96px 128px; }
+.inner-page main .dv-support-card .dv-lead { font-weight: 600; color: #20272d; }
+.inner-page main .dv-support-card .dv-note { margin-block: 24px; padding: 18px 20px; background: #eef1f2; border-left: 3px solid #72818b; font-size: .9375rem; line-height: 1.9; }
+.dv-contact-link { font-size: .9375rem; line-height: 2; }
+.dv-specialist-panel { margin-block: 32px; padding: 28px 32px; border: 1px solid #cfd7da; border-radius: 10px; background: #f7f9f9; scroll-margin-block: 96px 128px; }
+.inner-page main .dv-specialist-panel h2 { margin: 0 0 16px; font-size: 1.375rem; line-height: 1.6; }
+.dv-specialist-panel .eyebrow { margin: 0 0 10px; font-size: .6875rem; letter-spacing: .12em; }
+.dv-specialist-panel p { margin: 12px 0; line-height: 1.9; }
+.dv-specialist-contact { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-block: 24px 12px; padding-block: 20px; border-block: 1px solid #d6dfe2; }
+.dv-specialist-contact h3 { margin: 0; font-size: 1.125rem; }
+.dv-specialist-contact p { margin: 6px 0 0; font-size: .875rem; }
+.dv-specialist-panel .dv-phone-link { display: block; min-width: 220px; padding: 16px 22px; border-radius: 8px; background: #25323a; color: white; text-align: center; text-decoration: none; font-size: 1.4rem; font-weight: 600; white-space: nowrap; }
+.dv-phone-link span { display: block; margin-top: 4px; font-size: .75rem; font-weight: 400; }
+.dv-source-link { font-size: .8125rem; }
+.safe-contact-options { margin-block: 28px; padding: 20px; border: 1px solid #bcc8cd; border-radius: 8px; background: #f4f7f7; scroll-margin-block: 96px 150px; }
+.safe-contact-options > summary { cursor: pointer; font-size: 1rem; font-weight: 600; line-height: 1.8; }
+.safe-contact-options > summary span { font-size: .75rem; font-weight: 400; color: #505c65; }
+.safe-contact-options > p { margin: 16px 0; font-size: .875rem; line-height: 1.8; }
+.safe-contact-grid { display: grid; grid-template-columns: minmax(0,1fr); gap: 0; }
+.inner-page main .safe-contact-options .form-row { margin: 12px 0; min-width: 0; }
+.safe-contact-options :is(input,select) { width: 100%; min-width: 0; max-width: 100%; }
+.safe-contact-options :is(input,select,summary):focus-visible,.dv-specialist-panel a:focus-visible { outline: 3px solid #53788d; outline-offset: 4px; }
+@media(max-width:600px) {
+ .dv-specialist-panel { padding: 24px 20px; }
+ .dv-specialist-contact { align-items: stretch; flex-direction: column; gap: 16px; }
+ .dv-specialist-panel .dv-phone-link { min-width: 0; }
+ .safe-contact-options { padding: 16px; }
+ .safe-contact-options > summary span { display: block; }
+ .inner-page main .dv-support-card .dv-note { padding: 16px; }
+}

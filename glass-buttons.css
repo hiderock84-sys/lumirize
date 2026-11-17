@@ -1,0 +1,141 @@
+/* Clear glass consultation controls. A light tint and short blur retain
+   the colours and shapes of content moving behind the buttons. */
+.hero__actions .glass-button,
+.mobile-cta .glass-button,
+.mobile-cta .glass-button:last-child {
+  --glass-x: 26%;
+  --glass-y: 0%;
+  position: relative;
+  isolation: isolate;
+  min-height: 3.5rem;
+  border: 1px solid rgba(255, 255, 255, .34);
+  border-radius: 999px;
+  color: var(--glass-ink, #fff);
+  background:
+    radial-gradient(ellipse at var(--glass-x) var(--glass-y), rgba(255,255,255,.07), transparent 68%),
+    linear-gradient(155deg, rgba(255,255,255,.055), rgba(255,255,255,.008) 48%, rgba(255,255,255,.035)),
+    rgba(22, 25, 30, .10);
+  -webkit-backdrop-filter: blur(3px) saturate(135%);
+  backdrop-filter: blur(3px) saturate(135%);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, .12),
+    0 1px 3px rgba(0, 0, 0, .10),
+    inset 0 1px 0 rgba(255, 255, 255, .34),
+    inset 0 -1px 0 rgba(255, 255, 255, .12);
+  font-weight: 600;
+  text-shadow: var(--glass-text-shadow, 0 1px 3px rgba(0,0,0,.5));
+  transform: translateY(0) scale(1);
+  transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms ease;
+}
+.hero__actions .glass-button { padding-inline: 1.5rem; gap: 1.5rem; }
+.glass-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255,255,255,.76), rgba(255,255,255,.08) 36%, rgba(255,255,255,.14) 66%, rgba(255,255,255,.48));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+}
+.glass-button::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,.025), transparent 55%);
+}
+/* Keep only the label contrast adaptive; the glass stays transparent. */
+.inner-page .mobile-cta .glass-button {
+  --glass-ink: #17191d;
+  --glass-text-shadow: 0 1px 3px rgba(255,255,255,.8);
+}
+.inner-page .mobile-cta .glass-button[data-glass-tone="dark"] {
+  --glass-ink: #fff;
+  --glass-text-shadow: 0 1px 3px rgba(0,0,0,.65);
+}
+.glass-button > span { position: relative; z-index: 1; color: inherit; }
+.hero__actions .glass-button > .glass-button__label,
+.mobile-cta .glass-button > .glass-button__label { font-size: inherit; }
+.hero__actions .glass-button:active,
+.mobile-cta .glass-button:active {
+  transform: scale(.965);
+  box-shadow: 0 3px 10px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.45);
+}
+.glass-button:focus-visible { outline: 2px solid #a7dfef; outline-offset: 5px; }
+@media (hover: hover) and (pointer: fine) {
+  .hero__actions .glass-button:hover,
+  .mobile-cta .glass-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.45);
+  }
+  .hero__actions .glass-button:active { transform: translateY(0) scale(.965); }
+}
+@media (max-width: 600px) {
+  .mobile-cta {
+    /* Each button samples the page itself; no opaque bar behind the glass. */
+    border-top: 0;
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    padding-block: .75rem calc(.75rem + env(safe-area-inset-bottom));
+  }
+  .mobile-cta .glass-button { gap: .75rem; padding-inline: .75rem; }
+}
+@media (max-width: 360px) {
+  .mobile-cta .glass-button { gap: .5rem; padding-inline: .375rem; }
+  .hero__actions .glass-button { padding-inline: 1.25rem; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .hero__actions .glass-button,
+  .mobile-cta .glass-button,
+  .mobile-cta .glass-button:last-child { background: #30343a; color: #fff; text-shadow: none; }
+}
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .hero__actions .glass-button,
+  .mobile-cta .glass-button,
+  .mobile-cta .glass-button:last-child {
+    background: #26292e;
+    color: #fff;
+    text-shadow: none;
+    border-color: #e7e8ea;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__actions .glass-button,
+  .mobile-cta .glass-button { transition: none; transform: none; }
+  .hero__actions .glass-button:hover,
+  .hero__actions .glass-button:active,
+  .mobile-cta .glass-button:hover,
+  .mobile-cta .glass-button:active { transform: none; }
+}
+/* The homepage also alternates between light and dark sections. */
+.mobile-cta .glass-button[data-glass-tone="light"] {
+  --glass-ink: #17191d;
+  --glass-text-shadow: 0 1px 3px rgba(255,255,255,.8);
+}
+.mobile-cta .glass-button[data-glass-tone="dark"] {
+  --glass-ink: #fff;
+  --glass-text-shadow: 0 1px 3px rgba(0,0,0,.65);
+}
+/* Keep the fixed dock usable when reading text is enlarged. Page zoom remains
+   available; the controls must not become tall columns covering the article. */
+@media (max-width: 600px) {
+  .mobile-cta { gap: 12px; padding-left: max(20px, env(safe-area-inset-left)); padding-right: max(20px, env(safe-area-inset-right)); }
+  .mobile-cta .glass-button,
+  .mobile-cta .glass-button:last-child {
+    min-height: 56px;
+    padding: 14px 8px;
+    gap: 6px;
+    font-size: clamp(13px, 3.5vw, 16px);
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+  .mobile-cta .glass-button > [aria-hidden="true"] { font-size: 18px; flex-shrink: 0; }
+}

@@ -1,0 +1,151 @@
+/* Shared phone layout. Loaded last so every page uses the same narrow-screen
+   spacing. Desktop layout, service terms and media sources are unchanged. */
+@media screen and (max-width: 760px) {
+  :root, body.inner-page, body[data-home-lang]:not(.inner-page) { --gutter:20px; --section-space:64px; --column-gap:24px; }
+  html { scroll-padding-block:24px calc(104px + env(safe-area-inset-bottom,0px)); }
+  body { min-width:0; }
+  main :is(section,article,figure,fieldset,dl,div), .footer .nav-group { min-width:0; }
+  main :is(h1,h2,h3,h4,p,li,dt,dd,a), .footer a { overflow-wrap:anywhere; }
+  main :is(h1,h2,h3,h4) { word-break:normal; line-break:strict; }
+  main :is(img,video,svg,iframe) { max-width:100%; }
+  .section-label span:last-child { white-space:normal; }
+  .section-heading { align-items:flex-start; }
+  .inner-page main > .section { padding-block:32px 64px; }
+  .inner-page main > .section + .section { padding-top:0; }
+  .inner-page main .section-heading { margin-bottom:32px; }
+  .inner-page main .breadcrumb { margin-bottom:24px; gap:8px 12px; }
+  .inner-page main h1 { font-size:clamp(1.875rem,7.8vw,2.25rem); line-height:1.5; letter-spacing:-.025em; }
+  .inner-page main h2 { font-size:1.375rem; line-height:1.65; margin-bottom:20px; }
+  .inner-page main h3 { font-size:1.125rem; line-height:1.7; }
+  .inner-page main :is(p,li,dd) { line-height:1.85; }
+  .inner-page main p + p { margin-top:20px; }
+  .inner-page main :is(.container > section,.about-block) { margin-top:48px; }
+  .inner-page main :is(.info-grid,.philosophy-grid,.service-grid,.support-grid,.stats-dashboard,.stats-summary-grid,.story-grid,.institution-pillar-grid,.policy-compare-grid,.assurance-grid,.audit-grid,.review-housing-grid) {
+    display:grid; grid-template-columns:minmax(0,1fr); gap:24px;
+  }
+  .inner-page main :is(.service-card,.support-card,.philosophy-card,.info-item,.chart-card,.compare-card,.summary-card,.institution-pillar,.policy-compare-card,.assurance-card,.story-card,.contact-card,.message-card,.audit-panel,.review-panel),
+  .inner-page main .audit-grid > article { padding:24px 20px; }
+  .inner-page main .support-row { grid-template-columns:minmax(0,1fr); gap:24px; padding:24px 20px; }
+  .inner-page main .support-row :is(h2,.check-list) { margin-bottom:20px; }
+  .inner-page main .support-row .check-list { margin-top:20px; padding-left:20px; }
+  .inner-page main .support-row > .support-visual { width:100%; margin:0; }
+  .inner-page main .support-row > .support-visual figcaption,
+  main .sourced-photo figcaption { margin-top:12px; font-size:.8125rem; line-height:1.8; }
+  .inner-page main .source-photo-grid { grid-template-columns:minmax(0,1fr); gap:24px; }
+  .inner-page main .source-photo-grid img { height:auto; aspect-ratio:auto; object-fit:contain; }
+  .inner-page main .photo-kind { font-size:.8125rem; line-height:1.8; }
+  .inner-page main :is(.process-cta,.faq-cta) { gap:12px; margin-top:32px; padding-top:24px; }
+  .inner-page main :is(.process-cta,.faq-cta) .btn { width:100%; }
+  .inner-page main .btn, main .button { min-width:0; max-width:100%; min-height:52px; white-space:normal; }
+  .inner-page main .about-anchor-nav { display:grid; grid-template-columns:minmax(0,1fr); gap:12px; }
+  .inner-page main .about-anchor-nav .btn { width:100%; }
+  .inner-page main :is(.rules-data,.company-meta) > div { grid-template-columns:minmax(0,1fr); gap:8px; padding:18px 0; }
+  .inner-page main .leader-profile { flex-direction:column; align-items:flex-start; gap:24px; }
+  .inner-page main .leader-profile img { width:min(100%,280px); height:auto; }
+  .inner-page main .profile-banner { gap:20px; padding:24px 20px; }
+  .inner-page main .process-item { grid-template-columns:minmax(0,1fr); gap:12px; padding-block:28px; }
+  .inner-page main .process-head { grid-row:auto; }
+  .inner-page main .faq-question { min-height:56px; font-size:1rem; line-height:1.75; padding-block:20px; gap:16px; }
+  .inner-page main .faq-plus { flex:0 0 auto; }
+  .inner-page main .faq-answer { overflow-wrap:anywhere; }
+  .inner-page main .faq-category-title { margin-top:40px; }
+  .inner-page main:is(.legal-wrap,.rules-document) { width:100%; max-width:100%; padding:32px max(20px,env(safe-area-inset-right,0px)) 64px max(20px,env(safe-area-inset-left,0px)); }
+  .rules-scope,.rules-toc { grid-template-columns:minmax(0,1fr); }
+  .rules-scope section { padding:24px 20px; }
+  .rules-toc a { min-height:48px; padding:16px 0; }
+  .rules-document [id] { scroll-margin-top:24px; }
+  .inner-page main .fee-example { padding:20px 16px; }
+  .fee-breakdown > div { grid-template-columns:minmax(0,1fr) auto; gap:12px; }
+  .fee-breakdown dt { overflow-wrap:anywhere; }
+  .fee-breakdown dd { justify-self:end; }
+  .inner-page main .personal-funds-amount { display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 10px; }
+  .inner-page main .policy-scene-copy { padding:24px 20px; }
+  .inner-page main .policy-image-note { margin:12px 20px 0; }
+  .inner-page main .policy-graph-board { padding:0; }
+  .inner-page main :is(.policy-support-scenes,.policy-assurance-scenes) { grid-template-columns:minmax(0,1fr); gap:24px; }
+  .inner-page main .review-panel { margin-block:40px; }
+  .inner-page main .review-panel h2 { font-size:1.375rem; }
+
+  /* Consultation: full-width controls and no nested two-column labels. */
+  .consultation-layout { grid-template-columns:minmax(0,1fr); gap:32px; }
+  .inner-page main :is(.consultation-guide,.contact-hours-panel,.dv-specialist-panel,.contact-emergency) { padding:24px 20px; margin-block:32px; }
+  .inner-page main .contact-emergency .emergency-inner { align-items:stretch; flex-direction:column; }
+  .inner-page main .contact-emergency .btn { width:100%; min-width:0; }
+  .dv-specialist-contact { flex-direction:column; align-items:stretch; gap:16px; }
+  .dv-specialist-panel .dv-phone-link { min-width:0; width:100%; font-size:1.25rem; padding:16px 12px; }
+  .inner-page main .contact-preferences { padding:20px 16px; margin-block:28px; }
+  .inner-page main .contact-preferences legend { max-width:100%; line-height:1.65; padding-inline:4px; }
+  .inner-page main .contact-preferences-grid { grid-template-columns:minmax(0,1fr); }
+  .inner-page main :is(input:not([type=checkbox]):not([type=hidden]),select,textarea) { width:100%; min-width:0; max-width:100%; font-size:16px; padding:14px 12px; }
+  .inner-page main .form-row > label { line-height:1.75; }
+  .inner-page main .checkbox-row { gap:12px; }
+  .inner-page main .guide-steps { grid-template-columns:minmax(0,1fr); margin-block:8px 16px; }
+  .inner-page main .guide-steps > div { padding-block:16px; }
+  .inner-page main .guide-steps dd { line-height:1.85; }
+  .guide-form-link { display:flex; justify-content:center; min-height:48px; align-items:center; text-align:center; }
+  .inner-page main #access.access-panel { padding:24px 20px; margin-top:48px; scroll-margin-top:24px; }
+  #access .access-layout { grid-template-columns:minmax(0,1fr); grid-template-areas:"address" "map" "visit"; grid-template-rows:auto; gap:24px; }
+  #access .access-map iframe { flex:none; height:300px; min-height:300px; border-radius:8px; }
+  #access .access-visit { padding-top:24px; }
+  #access .review-directions > div { grid-template-columns:minmax(0,1fr); gap:8px; }
+  #access a.access-button { padding:14px 16px; min-height:52px; }
+
+  /* Home pages retain the same content and all four full-frame videos. */
+  body[data-home-lang] #main > :is(.section,.statement) { padding-block:64px; }
+  body[data-home-lang] .section-label { margin-bottom:32px; padding-bottom:20px; }
+  body[data-home-lang] .section-heading { margin-bottom:32px; gap:24px; }
+  body[data-home-lang] :is(.philosophy__grid,.process__layout,.faq-layout,.company__grid,.contact__layout,.support-grid) { grid-template-columns:minmax(0,1fr); gap:32px; }
+  body[data-home-lang] .principles { grid-template-columns:minmax(0,1fr); }
+  body[data-home-lang] :is(.principles > div,.service,.support-grid article,.steps li) { padding-block:32px; }
+  /* Wider phone framing: less cover scaling reveals more of the original scene. */
+  body[data-home-lang] .hero > .hero__image { height:clamp(280px,85vw,400px); object-position:55% center; -webkit-mask-image:linear-gradient(#000 0%,#000 72%,transparent 100%); mask-image:linear-gradient(#000 0%,#000 72%,transparent 100%); }
+  body[data-home-lang] .hero__actions { gap:16px; margin-top:32px; flex-wrap:wrap; }
+  body[data-home-lang] .hero__bottom { position:static; transform:none; margin-top:40px; flex-wrap:wrap; gap:12px; }
+  body[data-home-lang] .hero { flex-direction:column; align-items:stretch; justify-content:center; padding-bottom:56px; }
+  body[data-home-lang] .hero__bottom > span { min-width:0; max-width:100%; overflow-wrap:anywhere; }
+  .header .home-languages { max-width:calc(100% - 32px); }
+  .header .home-languages a { min-height:44px; padding:8px 7px; font-size:11px; }
+  body[data-home-lang] .company-info > div { grid-template-columns:minmax(0,1fr); gap:8px; }
+  body[data-home-lang] .story-film__copy { padding:24px 20px; }
+  body[data-home-lang] .story-film h3 { min-height:0; }
+  .story-player { padding:16px; width:calc(100% - 24px); max-height:calc(100dvh - 24px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px)); }
+  .story-player__head { align-items:flex-start; gap:12px; }
+  .story-player__close { min-width:44px; min-height:44px; }
+  .story-player video { object-fit:contain; }
+  .nightcare-gallery { grid-template-columns:minmax(0,1fr); }
+  .nightcare-card figcaption { padding:20px; }
+
+  /* A reachable menu, safe bottom inset, and room for translated labels. */
+  .header .menu-toggle { right:max(16px,env(safe-area-inset-right,0px)); }
+  dialog.mobile-menu .menu-head { padding-inline:max(20px,env(safe-area-inset-left,0px)) max(20px,env(safe-area-inset-right,0px)); gap:16px; }
+  dialog.mobile-menu nav { padding-inline:20px; }
+  dialog.mobile-menu nav a { min-height:52px; gap:12px; overflow-wrap:anywhere; }
+  dialog.mobile-menu .menu-contact { padding:16px 20px calc(16px + env(safe-area-inset-bottom,0px)); }
+  dialog.mobile-menu .menu-contact a { min-height:44px; margin:0; display:flex; align-items:center; flex-wrap:wrap; }
+  .mobile-cta { position:fixed; inset:auto 0 0; z-index:30; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; border:0; background:transparent; pointer-events:none; padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px)); }
+  .mobile-cta a { pointer-events:auto; }
+  .mobile-cta .glass-button,.mobile-cta .glass-button:last-child { min-width:0; min-height:56px; padding:12px 10px; font-size:14px; line-height:1.4; gap:6px; white-space:normal; }
+  body[data-home-lang]:not([data-home-lang="ja"]) .mobile-cta .glass-button__label { font-size:13px; }
+  .mobile-cta .glass-button__label { min-width:0; overflow-wrap:anywhere; text-align:center; }
+  body.editing-form .mobile-cta,body.story-player-open .mobile-cta { display:none; }
+  .footer { padding-bottom:calc(120px + env(safe-area-inset-bottom,0px)); }
+  .footer .footer__nav.review-grouped-nav { grid-template-columns:minmax(0,1fr); gap:28px; }
+  .footer .nav-group { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 16px; }
+  .footer .nav-group-title { grid-column:1/-1; margin-bottom:8px; }
+  .footer .nav-group a { min-height:44px; padding-block:10px; line-height:1.65; }
+}
+@media screen and (max-width:360px) {
+  :root,body.inner-page,body[data-home-lang]:not(.inner-page) { --gutter:16px; }
+  .inner-page main .support-row,.inner-page main :is(.audit-panel,.review-panel,.message-card) { padding-inline:16px; }
+  .inner-page main #access.access-panel { padding-inline:16px; }
+  .inner-page main h1 { font-size:1.75rem; }
+  .mobile-cta .glass-button,.mobile-cta .glass-button:last-child { font-size:13px; padding-inline:8px; }
+  .header .home-languages a { padding-inline:5px; font-size:10.5px; }
+  .fee-breakdown > div { grid-template-columns:minmax(0,1fr); gap:6px; }
+  .footer .nav-group { grid-template-columns:minmax(0,1fr); }
+}
+@media screen and (max-width:960px) and (max-height:500px) and (orientation:landscape) {
+  .mobile-cta { display:none; }
+  .header .menu-toggle { top:8px; }
+  .story-player { max-height:calc(100dvh - 16px); }
+}
