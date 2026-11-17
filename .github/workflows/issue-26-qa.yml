@@ -60,7 +60,8 @@ jobs:
                       driver.get(origin+page)
                       if page in ['philosophy.html','support-details.html','simple/index.html']:
                           wait.until(lambda d:not d.current_url.endswith('/'+page))
-                      if page=='index.html':time.sleep(1.3)
+                      wait.until(lambda d: js("return document.readyState==='complete'"))
+                      time.sleep(1.3 if page=='index.html' else .35)
                       metrics=js('return [innerWidth,innerHeight,document.documentElement.scrollHeight,document.documentElement.scrollWidth,document.querySelector("h1")?.innerText,document.body.innerText.length]')
                       if metrics[3] > metrics[0]+1 or metrics[5] < 10: problems.append([page,width,metrics])
                       print('PAGE',page,width,metrics[:4],flush=True)
@@ -89,7 +90,7 @@ jobs:
                           if width==390:assert driver.find_element(By.CSS_SELECTOR,'.mobile-cta').is_displayed()
                           click('.home-next__panel .button')
                           wait.until(lambda d:js('return location.hash==="#consultation-form" && !!document.querySelector("form")'))
-                          if lang!='ja': assert js('return document.querySelector("#contact-form").lang')==('fil' if lang=='tl' else lang)
+                          if lang!='ja': wait.until(lambda d: js('return document.querySelector("#contact-form").lang')==('fil' if lang=='tl' else lang))
                           print('FLOW_OK',width,lang,flush=True)
                       except Exception as exc:
                           import traceback
