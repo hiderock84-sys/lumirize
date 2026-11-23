@@ -7,6 +7,32 @@ body[data-home-lang].home-guidance {
   --guide-panel-soft: #22282e;
 }
 
+/* Desktop hero: keep type measure clear and leave the building visible on the right. */
+@media screen and (min-width: 761px) {
+  body[data-home-lang].home-guidance .hero > .hero__content {
+    max-width: 640px;
+    padding-top: clamp(28px, 4vw, 48px);
+  }
+  body[data-home-lang].home-guidance #main .hero h1 {
+    font-size: clamp(64px, 6.2vw, 88px);
+    line-height: 1.22;
+    letter-spacing: -.04em;
+  }
+  body[data-home-lang].home-guidance #main .hero__lead {
+    margin-top: 22px;
+    max-width: 34em;
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+  body[data-home-lang].home-guidance .home-guide > .container {
+    max-width: 640px;
+  }
+  body[data-home-lang].home-guidance .home-guide p {
+    font-size: 1rem;
+    line-height: 1.85;
+  }
+}
+
 body.home-guidance #main > .home-paths,
 body.home-guidance #main > .home-focus,
 body.home-guidance #main > .home-next {
