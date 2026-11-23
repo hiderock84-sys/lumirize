@@ -80,6 +80,7 @@
 
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .header .menu-toggle,
+  .header .menu-toggle:hover,
   .header .menu-toggle[data-glass-tone="light"],
   .mobile-cta .glass-button,
   .mobile-cta .glass-button[data-glass-tone="light"],
@@ -156,6 +157,7 @@
 
 @media (prefers-reduced-transparency: reduce) and (prefers-contrast: more) {
   .header .menu-toggle,
+  .header .menu-toggle:hover,
   .header .menu-toggle[data-glass-tone="light"],
   .mobile-cta .glass-button,
   .mobile-cta .glass-button[data-glass-tone="light"],
