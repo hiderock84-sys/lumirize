@@ -61,13 +61,16 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
-    /* Cover photo without a full-viewport empty band under the copy. */
-    min-height: clamp(520px, 72svh, 740px);
-    padding: 72px clamp(16px, 5.5vw, 24px) calc(28px + env(safe-area-inset-bottom, 0px));
+    /* Height follows the copy; avoid a tall empty photo band under the links. */
+    min-height: 0;
+    padding: 72px clamp(16px, 5.5vw, 24px) 24px;
   }
-  body[data-home-lang] #main > .section.philosophy,
-  body[data-home-lang].home-guidance #main > .home-paths {
+  body[data-home-lang] #main > .section.philosophy {
     padding-top: 28px;
+  }
+  body[data-home-lang].home-guidance #main > .home-paths {
+    padding-top: 32px;
+    padding-bottom: calc(48px + 88px + env(safe-area-inset-bottom, 0px));
   }
   body[data-home-lang] .hero > .hero__image { display: none; }
   body[data-home-lang] .hero > .hero__mobile-image {
