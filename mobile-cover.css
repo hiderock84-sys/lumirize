@@ -58,8 +58,9 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
-    min-height: calc(100svh - env(safe-area-inset-bottom, 0px));
-    padding: 72px clamp(16px, 5.5vw, 24px) calc(108px + env(safe-area-inset-bottom, 0px));
+    /* Cover photo without a full-viewport empty band under the copy. */
+    min-height: clamp(520px, 72svh, 740px);
+    padding: 72px clamp(16px, 5.5vw, 24px) calc(28px + env(safe-area-inset-bottom, 0px));
   }
   body[data-home-lang] #main > .section.philosophy,
   body[data-home-lang].home-guidance #main > .home-paths {
@@ -90,7 +91,9 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
-    background: linear-gradient(180deg, #11121455 0%, #11121433 22%, #11121466 48%, #111214a8 78%, #111214cc 100%);
+    background:
+      linear-gradient(90deg, #111214c4 0%, #1112148a 42%, #11121433 72%, #11121414 100%),
+      linear-gradient(180deg, #11121466 0%, #11121440 18%, #11121473 48%, #111214d0 100%);
   }
   body[data-home-lang] .hero > .hero__bottom { display: none; }
   body[data-home-lang] .hero > .hero__content {
@@ -139,13 +142,19 @@
     font-size: 14.5px;
     line-height: 1.8;
     font-weight: 400;
-    text-shadow: 0 1px 8px #0009;
+    color: #f5f7f8;
+    text-shadow: 0 1px 2px #000c, 0 2px 14px #0008;
   }
   body[data-home-lang] .hero__guide p.home-language-note {
     font-size: 13px;
-    opacity: .9;
+    color: #e8ecef;
+    opacity: .95;
   }
   body[data-home-lang] .hero__guide strong { font-weight: 600; }
+  body[data-home-lang] #main .hero__lead {
+    color: #f5f7f8;
+    text-shadow: 0 1px 2px #000c, 0 2px 14px #0008;
+  }
   body[data-home-lang] .hero__guide nav {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

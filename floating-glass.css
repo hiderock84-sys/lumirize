@@ -1,4 +1,7 @@
-/* Persistent floating controls: one border, one shadow, one translucent layer. */
+/* Persistent floating controls.
+   Visual glass only — do not set position/inset on .header .menu-toggle
+   (design-system keeps that trigger fixed in the viewport). */
+
 @media screen {
   .header .menu-toggle,
   .header .menu-toggle:hover,
@@ -6,7 +9,6 @@
   .mobile-cta .glass-button:last-child {
     --glass-ink: #fff;
     --glass-text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
-    position: relative;
     isolation: isolate;
     overflow: hidden;
     color: var(--glass-ink);
@@ -16,6 +18,12 @@
     backdrop-filter: blur(16px) saturate(170%);
     box-shadow: 0 10px 24px rgba(0, 0, 0, .2);
     text-shadow: var(--glass-text-shadow);
+  }
+
+  /* Positioning belongs only to the fixed dock buttons. */
+  .mobile-cta .glass-button,
+  .mobile-cta .glass-button:last-child {
+    position: relative;
   }
 
   .header .menu-toggle:hover {
@@ -67,7 +75,6 @@
   }
 }
 
-/* Transparency preference: readable solid fallback, still a single border. */
 @media (prefers-reduced-transparency: reduce) {
   .header .menu-toggle,
   .header .menu-toggle:hover,
@@ -90,7 +97,6 @@
   }
 }
 
-/* High contrast: stronger ink/border without forcing a fully opaque slab. */
 @media (prefers-contrast: more) {
   .header .menu-toggle,
   .header .menu-toggle:hover,
