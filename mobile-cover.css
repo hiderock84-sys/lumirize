@@ -20,7 +20,10 @@
     font-size: 20px;
     letter-spacing: .12em;
   }
-  body[data-home-lang] .header .menu-toggle { top: 12px; }
+  body[data-home-lang] .header .menu-toggle {
+    top: 12px;
+    right: max(20px, env(safe-area-inset-right, 0px));
+  }
   body[data-home-lang] .header .home-languages { display: none; }
 
   body[data-home-lang] .mobile-menu nav.menu-languages {
