@@ -56,7 +56,8 @@
     box-shadow: none;
   }
 
-  /* Same specificity for left/right/menu light tone (attr + class count). */
+  /* Same specificity for left/right/menu light tone (attr + class count).
+     Set both background and background-color so later background-color rules cannot leave the default fill. */
   .header .menu-toggle[data-glass-tone="light"],
   .mobile-cta .glass-button[data-glass-tone="light"],
   .mobile-cta .glass-button:last-child[data-glass-tone="light"] {
@@ -67,6 +68,7 @@
     color: var(--glass-ink);
     border-color: var(--glass-border);
     background: var(--glass-bg);
+    background-color: var(--glass-bg);
     text-shadow: var(--glass-text-shadow);
   }
 
@@ -106,6 +108,7 @@
     --glass-text-shadow: none;
     --glass-border: rgba(255, 255, 255, .75);
     background: var(--glass-bg);
+    background-color: var(--glass-bg);
     color: var(--glass-ink);
     border-color: var(--glass-border);
     text-shadow: none;
@@ -137,6 +140,7 @@
     color: var(--glass-ink);
     border-color: var(--glass-border);
     background: var(--glass-bg);
+    background-color: var(--glass-bg);
     text-shadow: none;
     box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
   }

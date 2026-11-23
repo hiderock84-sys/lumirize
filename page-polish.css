@@ -198,13 +198,18 @@ body[data-guide-lang] main li {
   gap: 10px 12px;
   margin-bottom: 28px;
 }
-@media screen and (min-width: 1181px) and (max-width: 1360px) {
-  .desktop-nav { gap: 14px; }
+@media screen and (min-width: 1281px) and (max-width: 1440px) {
+  .desktop-nav { gap: 12px; }
   .desktop-nav a { font-size: 14px; white-space: nowrap; }
-  .header__inner { gap: 14px; }
+  .header__inner { gap: 12px; }
   .header__contact { font-size: 13px; white-space: nowrap; }
 }
-@media screen and (min-width: 901px) and (max-width: 1180px) {
+/* Desktop nav visible: hide the fixed hamburger and its spacer. */
+@media screen and (min-width: 1281px) {
+  .header .menu-toggle { display: none; }
+  .header__actions::after { content: none; display: none; width: 0; flex: 0 0 0; }
+}
+@media screen and (min-width: 901px) and (max-width: 1280px) {
   .desktop-nav { display: none; }
   .header .menu-toggle { display: flex; }
   .header__contact { display: flex; font-size: 13px; white-space: nowrap; }

@@ -20,8 +20,11 @@ body[data-home-lang]:not([data-home-lang="ja"]) .v2-scene-copy>p:last-child{font
 body[data-home-lang="th"]{font-family:Arial,"Noto Sans Thai",Tahoma,sans-serif}
 body[data-home-lang="ko"]{font-family:Arial,"Noto Sans KR","Malgun Gothic",sans-serif}
 /* Align foreign desktop/nav toggle with the shared page-polish breakpoint. */
-@media (max-width: 1180px) {
+@media (max-width: 1280px) {
   body[data-home-lang]:not([data-home-lang="ja"]) .desktop-nav { display: none; }
+}
+@media (min-width: 1281px) {
+  body[data-home-lang]:not([data-home-lang="ja"]) .header .menu-toggle { display: none; }
 }
 @media(max-width:760px){
  .home-languages{justify-content:center;gap:4px;padding:0 12px 8px}
