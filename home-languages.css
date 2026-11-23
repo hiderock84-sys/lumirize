@@ -36,7 +36,11 @@ body[data-home-lang="ko"]{font-family:Arial,"Noto Sans KR","Malgun Gothic",sans-
  body[data-home-lang]:not([data-home-lang="ja"]) .header__contact{font-size:12px}
  body[data-home-lang]:not([data-home-lang="ja"]) .v2-story-controls{flex-wrap:wrap;gap:4px}
  body[data-home-lang]:not([data-home-lang="ja"]) .v2-motion-toggle{font-size:11px;max-width:190px;white-space:normal}
- body[data-home-lang]:not([data-home-lang="ja"]) .mobile-cta .glass-button__label{font-size:12px}
+ body[data-home-lang]:not([data-home-lang="ja"]) .mobile-cta .glass-button__label{
+  font-size:13px;
+  line-height:1.3;
+  white-space:normal;
+ }
 }
 
 /* Compact language switcher, grouped as one translucent control. */

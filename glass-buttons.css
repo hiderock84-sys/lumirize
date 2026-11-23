@@ -73,16 +73,21 @@
   .mobile-cta .glass-button,
   .mobile-cta .glass-button:last-child {
     min-height: 56px;
-    padding: 14px 8px;
+    padding: 12px 8px;
     gap: 6px;
     font-size: clamp(13px, 3.5vw, 16px);
-    line-height: 1.4;
-    white-space: nowrap;
+    line-height: 1.35;
+    white-space: normal;
+  }
+  .mobile-cta .glass-button__label {
+    min-width: 0;
+    text-align: center;
+    overflow-wrap: anywhere;
   }
   .mobile-cta .glass-button > [aria-hidden="true"] { font-size: 18px; flex-shrink: 0; }
 }
 @media (max-width: 360px) {
-  .mobile-cta .glass-button { gap: .5rem; padding-inline: .375rem; }
+  .mobile-cta .glass-button { gap: .4rem; padding-inline: .5rem; }
   .hero__actions .glass-button { padding-inline: 1.25rem; }
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
