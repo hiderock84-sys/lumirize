@@ -163,3 +163,23 @@ body[data-guide-lang] main p,
 body[data-guide-lang] main li {
   max-width: 42rem;
 }
+
+
+/* Navigation additions: keep company details and consultation available. */
+.desktop-nav .nav-company-link { white-space: nowrap; }
+.company-related-links { display:flex; flex-wrap:wrap; gap:10px 20px; margin:16px 0 24px; padding-bottom:18px; border-bottom:1px solid #9ba4ae55; }
+.company-related-links a { text-decoration:underline; text-underline-offset:4px; min-height:44px; display:inline-flex; align-items:center; }
+@media screen and (min-width:901px) and (max-width:1280px) {
+ .desktop-nav { gap:clamp(8px,1.1vw,16px); }
+ .desktop-nav a { font-size:clamp(11px,1vw,14px); white-space:nowrap; }
+ .header__inner { gap:12px; }
+ .header__contact { font-size:12px; white-space:nowrap; }
+}
+@media screen and (min-width:901px) and (max-width:1150px) {
+ .header__contact { display:flex; }
+}
+@media screen and (max-width:1050px) {
+ .desktop-nav { display:none; }
+ .header .menu-toggle { display:flex; }
+}
+#company, #consultation-form { scroll-margin-top:110px; }
