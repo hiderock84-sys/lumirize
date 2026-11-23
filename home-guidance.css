@@ -7,27 +7,29 @@ body[data-home-lang].home-guidance {
   --guide-panel-soft: #22282e;
 }
 
-/* Desktop hero: keep type measure clear and leave the building visible on the right. */
+/* Desktop hero: limit reading measure only — keep .container left-aligned in the gutter. */
 @media screen and (min-width: 761px) {
   body[data-home-lang].home-guidance .hero > .hero__content {
-    max-width: 640px;
+    max-width: none;
     padding-top: clamp(28px, 4vw, 48px);
   }
   body[data-home-lang].home-guidance #main .hero h1 {
+    max-width: 11em;
     font-size: clamp(64px, 6.2vw, 88px);
     line-height: 1.22;
     letter-spacing: -.04em;
   }
   body[data-home-lang].home-guidance #main .hero__lead {
     margin-top: 22px;
-    max-width: 34em;
+    max-width: 36em;
     font-size: 1.05rem;
     line-height: 1.75;
   }
   body[data-home-lang].home-guidance .home-guide > .container {
-    max-width: 640px;
+    max-width: none;
   }
   body[data-home-lang].home-guidance .home-guide p {
+    max-width: 40em;
     font-size: 1rem;
     line-height: 1.85;
   }
