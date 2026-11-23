@@ -120,8 +120,8 @@
     font-size: 16px;
     line-height: 1.7;
     font-weight: 400;
-    color: #f0f1f2;
-    text-shadow: 0 1px 8px #0009;
+    color: #f5f7f8;
+    text-shadow: 0 1px 2px #000c, 0 2px 14px #0008;
   }
 
   body[data-home-lang] #main > .home-guide { display: none; }
@@ -151,10 +151,6 @@
     opacity: .95;
   }
   body[data-home-lang] .hero__guide strong { font-weight: 600; }
-  body[data-home-lang] #main .hero__lead {
-    color: #f5f7f8;
-    text-shadow: 0 1px 2px #000c, 0 2px 14px #0008;
-  }
   body[data-home-lang] .hero__guide nav {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
