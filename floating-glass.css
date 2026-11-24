@@ -1,0 +1,172 @@
+/* Persistent floating controls.
+   Visual glass only — do not set position/inset on .header .menu-toggle
+   (design-system keeps that trigger fixed in the viewport).
+   Prefer CSS variables so light-tone and preference modes share equal specificity. */
+
+@media screen {
+  .header .menu-toggle,
+  .header .menu-toggle:hover,
+  .mobile-cta .glass-button,
+  .mobile-cta .glass-button:last-child {
+    --glass-ink: #fff;
+    --glass-text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+    --glass-border: rgba(255, 255, 255, .62);
+    --glass-bg: rgba(255, 255, 255, .16);
+    isolation: isolate;
+    overflow: hidden;
+    color: var(--glass-ink);
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(16px) saturate(170%);
+    backdrop-filter: blur(16px) saturate(170%);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .2);
+    text-shadow: var(--glass-text-shadow);
+  }
+
+  /* Positioning belongs only to the fixed dock buttons. */
+  .mobile-cta .glass-button,
+  .mobile-cta .glass-button:last-child {
+    position: relative;
+  }
+
+  .header .menu-toggle:hover {
+    --glass-bg: rgba(255, 255, 255, .22);
+    --glass-border: rgba(255, 255, 255, .78);
+    background: var(--glass-bg);
+    border-color: var(--glass-border);
+  }
+
+  /* Cancel layered chrome from earlier glass styles (mask ring + gloss). */
+  .header .menu-toggle::before,
+  .header .menu-toggle::after,
+  .mobile-cta .glass-button::before,
+  .mobile-cta .glass-button::after {
+    content: none !important;
+    display: none !important;
+    background: none !important;
+    -webkit-mask: none !important;
+    mask: none !important;
+    box-shadow: none !important;
+  }
+
+  .header .menu-toggle span {
+    position: relative;
+    z-index: 1;
+    background: currentColor;
+    box-shadow: none;
+  }
+
+  /* Same specificity for left/right/menu light tone (attr + class count).
+     Set both background and background-color so later background-color rules cannot leave the default fill. */
+  .header .menu-toggle[data-glass-tone="light"],
+  .mobile-cta .glass-button[data-glass-tone="light"],
+  .mobile-cta .glass-button:last-child[data-glass-tone="light"] {
+    --glass-ink: #15222b;
+    --glass-text-shadow: 0 1px 2px rgba(255, 255, 255, .55);
+    --glass-border: rgba(255, 255, 255, .8);
+    --glass-bg: rgba(255, 255, 255, .55);
+    color: var(--glass-ink);
+    border-color: var(--glass-border);
+    background: var(--glass-bg);
+    background-color: var(--glass-bg);
+    text-shadow: var(--glass-text-shadow);
+  }
+
+  .header .menu-toggle:active,
+  .mobile-cta .glass-button:active {
+    opacity: .92;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .header .menu-toggle,
+  .header .menu-toggle:hover,
+  .header .menu-toggle[data-glass-tone="light"],
+  .mobile-cta .glass-button,
+  .mobile-cta .glass-button[data-glass-tone="light"],
+  .mobile-cta .glass-button:last-child,
+  .mobile-cta .glass-button:last-child[data-glass-tone="light"] {
+    --glass-bg: rgba(36, 44, 52, .92);
+    --glass-ink: #fff;
+    --glass-text-shadow: none;
+    background: var(--glass-bg);
+    color: var(--glass-ink);
+    text-shadow: none;
+  }
+}
+
+/* Include light-tone selectors at the same specificity so preference modes win. */
+@media (prefers-reduced-transparency: reduce) {
+  .header .menu-toggle,
+  .header .menu-toggle:hover,
+  .header .menu-toggle[data-glass-tone="light"],
+  .mobile-cta .glass-button,
+  .mobile-cta .glass-button[data-glass-tone="light"],
+  .mobile-cta .glass-button:last-child,
+  .mobile-cta .glass-button:last-child[data-glass-tone="light"] {
+    --glass-bg: rgba(38, 49, 58, .94);
+    --glass-ink: #fff;
+    --glass-text-shadow: none;
+    --glass-border: rgba(255, 255, 255, .75);
+    background: var(--glass-bg);
+    background-color: var(--glass-bg);
+    color: var(--glass-ink);
+    border-color: var(--glass-border);
+    text-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .header .menu-toggle::before,
+  .header .menu-toggle::after,
+  .mobile-cta .glass-button::before,
+  .mobile-cta .glass-button::after {
+    content: none !important;
+    display: none !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .header .menu-toggle,
+  .header .menu-toggle:hover,
+  .header .menu-toggle[data-glass-tone="light"],
+  .mobile-cta .glass-button,
+  .mobile-cta .glass-button[data-glass-tone="light"],
+  .mobile-cta .glass-button:last-child,
+  .mobile-cta .glass-button:last-child[data-glass-tone="light"] {
+    --glass-bg: rgba(18, 24, 30, .68);
+    --glass-ink: #fff;
+    --glass-text-shadow: none;
+    --glass-border: #fff;
+    color: var(--glass-ink);
+    border-color: var(--glass-border);
+    background: var(--glass-bg);
+    background-color: var(--glass-bg);
+    text-shadow: none;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
+  }
+
+  .header .menu-toggle::before,
+  .header .menu-toggle::after,
+  .mobile-cta .glass-button::before,
+  .mobile-cta .glass-button::after {
+    content: none !important;
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) and (prefers-contrast: more) {
+  .header .menu-toggle,
+  .header .menu-toggle:hover,
+  .header .menu-toggle[data-glass-tone="light"],
+  .mobile-cta .glass-button,
+  .mobile-cta .glass-button[data-glass-tone="light"],
+  .mobile-cta .glass-button:last-child,
+  .mobile-cta .glass-button:last-child[data-glass-tone="light"] {
+    --glass-bg: #1c252d;
+    --glass-border: #fff;
+    background: var(--glass-bg);
+    border-color: var(--glass-border);
+    color: #fff;
+  }
+}

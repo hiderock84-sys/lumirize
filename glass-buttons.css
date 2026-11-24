@@ -1,0 +1,125 @@
+/* Hero glass CTAs keep a light tint. Fixed mobile-cta chrome is owned by floating-glass.css. */
+.hero__actions .glass-button {
+  --glass-x: 26%;
+  --glass-y: 0%;
+  position: relative;
+  isolation: isolate;
+  min-height: 3.5rem;
+  border: 1px solid rgba(255, 255, 255, .4);
+  border-radius: 999px;
+  color: var(--glass-ink, #fff);
+  background: rgba(22, 25, 30, .28);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  backdrop-filter: blur(10px) saturate(150%);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .18);
+  font-weight: 600;
+  text-shadow: var(--glass-text-shadow, 0 1px 3px rgba(0,0,0,.5));
+  transition: opacity 180ms ease, box-shadow 180ms ease;
+  padding-inline: 1.5rem;
+  gap: 1.5rem;
+}
+.hero__actions .glass-button::before,
+.hero__actions .glass-button::after {
+  content: none;
+  display: none;
+}
+.mobile-cta .glass-button,
+.mobile-cta .glass-button:last-child {
+  position: relative;
+  isolation: isolate;
+  min-height: 3.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.mobile-cta .glass-button::before,
+.mobile-cta .glass-button::after {
+  content: none;
+  display: none;
+}
+.inner-page .mobile-cta .glass-button {
+  --glass-ink: #17191d;
+  --glass-text-shadow: 0 1px 2px rgba(255,255,255,.65);
+}
+.inner-page .mobile-cta .glass-button[data-glass-tone="dark"] {
+  --glass-ink: #fff;
+  --glass-text-shadow: 0 1px 3px rgba(0,0,0,.55);
+}
+.glass-button > span { position: relative; z-index: 1; color: inherit; }
+.hero__actions .glass-button > .glass-button__label,
+.mobile-cta .glass-button > .glass-button__label { font-size: inherit; }
+.hero__actions .glass-button:active {
+  opacity: .9;
+}
+.mobile-cta .glass-button:active {
+  opacity: .92;
+}
+.glass-button:focus-visible { outline: 2px solid #a7dfef; outline-offset: 5px; }
+@media (hover: hover) and (pointer: fine) {
+  .hero__actions .glass-button:hover {
+    box-shadow: 0 10px 26px rgba(0,0,0,.2);
+  }
+}
+@media (max-width: 600px) {
+  .mobile-cta {
+    border-top: 0;
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    padding-block: .75rem calc(.75rem + env(safe-area-inset-bottom));
+    gap: 12px;
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+  }
+  .mobile-cta .glass-button,
+  .mobile-cta .glass-button:last-child {
+    min-height: 56px;
+    padding: 12px 8px;
+    gap: 6px;
+    font-size: clamp(13px, 3.5vw, 16px);
+    line-height: 1.35;
+    white-space: normal;
+  }
+  .mobile-cta .glass-button__label {
+    min-width: 0;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+  .mobile-cta .glass-button > [aria-hidden="true"] { font-size: 18px; flex-shrink: 0; }
+}
+@media (max-width: 360px) {
+  .mobile-cta .glass-button { gap: .4rem; padding-inline: .5rem; }
+  .hero__actions .glass-button { padding-inline: 1.25rem; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .hero__actions .glass-button { background: #30343a; color: #fff; text-shadow: none; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .hero__actions .glass-button {
+    background: rgba(38, 41, 46, .94);
+    color: #fff;
+    text-shadow: none;
+    border-color: rgba(255, 255, 255, .7);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+@media (prefers-contrast: more) {
+  .hero__actions .glass-button {
+    color: #fff;
+    border-color: #fff;
+    background: rgba(20, 24, 28, .72);
+    text-shadow: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__actions .glass-button,
+  .mobile-cta .glass-button { transition: none; }
+}
+.mobile-cta .glass-button[data-glass-tone="light"] {
+  --glass-ink: #17191d;
+  --glass-text-shadow: 0 1px 2px rgba(255,255,255,.65);
+}
+.mobile-cta .glass-button[data-glass-tone="dark"] {
+  --glass-ink: #fff;
+  --glass-text-shadow: 0 1px 3px rgba(0,0,0,.55);
+}

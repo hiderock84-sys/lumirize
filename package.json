@@ -1,0 +1,10 @@
+{
+  "name": "lumirize-site-checks",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/contact-submission.test.mjs tests/navigation-compat.test.cjs"
+  },
+  "devDependencies": {
+    "jsdom": "26.1.0"
+  }
+}
