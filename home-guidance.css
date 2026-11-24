@@ -263,6 +263,11 @@ body.home-guidance #main > .home-next {
   max-width: min(22em, 100%);
 }
 
+.home-focus__phrase {
+  display: inline-block;
+  white-space: nowrap;
+}
+
 .home-focus__aside .eyebrow {
   color: rgba(245, 247, 248, .78);
   margin-bottom: 8px;
