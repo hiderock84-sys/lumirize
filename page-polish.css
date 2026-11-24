@@ -163,3 +163,63 @@ body[data-guide-lang] main p,
 body[data-guide-lang] main li {
   max-width: 42rem;
 }
+
+
+/* Navigation: company + consultation without shrinking type below 14px. */
+.desktop-nav .nav-company-link { white-space: nowrap; }
+.company-related-links,
+.about-related-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  margin: 16px 0 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #9ba4ae55;
+}
+.company-related-links a,
+.about-related-links a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+.about-toc-label,
+.about-related-label {
+  margin: 0 0 10px;
+  font-size: .8rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #5c6067;
+}
+.about-anchor-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  margin-bottom: 28px;
+}
+@media screen and (min-width: 1281px) and (max-width: 1440px) {
+  .desktop-nav { gap: 12px; }
+  .desktop-nav a { font-size: 14px; white-space: nowrap; }
+  .header__inner { gap: 12px; }
+  .header__contact { font-size: 13px; white-space: nowrap; }
+}
+/* Desktop nav visible: hide the fixed hamburger and its spacer. */
+@media screen and (min-width: 1281px) {
+  .header .menu-toggle { display: none; }
+  .header__actions::after { content: none; display: none; width: 0; flex: 0 0 0; }
+}
+@media screen and (min-width: 901px) and (max-width: 1280px) {
+  .desktop-nav { display: none; }
+  .header .menu-toggle { display: flex; }
+  .header__contact { display: flex; font-size: 13px; white-space: nowrap; }
+}
+@media screen and (max-width: 900px) {
+  .desktop-nav { display: none; }
+  .header .menu-toggle { display: flex; }
+}
+#company,
+#consultation-form,
+#languages {
+  scroll-margin-top: 110px;
+}
